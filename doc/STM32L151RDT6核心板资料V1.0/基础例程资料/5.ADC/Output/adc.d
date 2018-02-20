@@ -1,0 +1,11 @@
+..\output\adc.o: ..\Driver\adc\adc.c
+..\output\adc.o: ..\Driver\adc\adc.h
+..\output\adc.o: ..\main\general_type.h
+..\output\adc.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_adc.h
+..\output\adc.o: ..\main\stm32l1xx.h
+..\output\adc.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cm3.h
+..\output\adc.o: D:\SoftwareInstallation\MDK\ARM\ARMCC\bin\..\include\stdint.h
+..\output\adc.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cmInstr.h
+..\output\adc.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cmFunc.h
+..\output\adc.o: D:\SoftwareInstallation\MDK\ARM\Inc\ST\STM32L1xx\system_stm32l1xx.h
+..\output\adc.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_conf.h

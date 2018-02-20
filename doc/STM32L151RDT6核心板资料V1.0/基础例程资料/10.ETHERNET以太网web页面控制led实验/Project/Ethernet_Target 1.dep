@@ -1,0 +1,2 @@
+Dependencies for Project 'Ethernet', Target 'Target 1': (DO NOT MODIFY !)
+F (.\startup_stm32l1xx_md.s)(0x51C7AF80)(--cpu Cortex-M3 -g --apcs=interwork -I D:\SoftwareInstallation\MDK\ARM\RV31\INC-I D:\SoftwareInstallation\MDK\ARM\CMSIS\Include-I D:\SoftwareInstallation\MDK\ARM\Inc\ST\STM32L1xx--list .\startup_stm32l1xx_md.lst --xref -o .\startup_stm32l1xx_md.o --depend .\startup_stm32l1xx_md.d)

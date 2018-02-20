@@ -1,0 +1,13 @@
+..\output\spi.o: ..\Driver\spi\spi.c
+..\output\spi.o: ..\Driver\spi\spi.h
+..\output\spi.o: ..\main\stm32l1xx.h
+..\output\spi.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cm3.h
+..\output\spi.o: D:\SoftwareInstallation\MDK\ARM\ARMCC\bin\..\include\stdint.h
+..\output\spi.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cmInstr.h
+..\output\spi.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cmFunc.h
+..\output\spi.o: D:\SoftwareInstallation\MDK\ARM\Inc\ST\STM32L1xx\system_stm32l1xx.h
+..\output\spi.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_conf.h
+..\output\spi.o: ..\main\general_type.h
+..\output\spi.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_gpio.h
+..\output\spi.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_spi.h
+..\output\spi.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_rcc.h

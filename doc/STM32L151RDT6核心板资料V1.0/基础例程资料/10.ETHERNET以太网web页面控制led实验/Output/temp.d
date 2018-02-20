@@ -1,0 +1,12 @@
+..\output\temp.o: ..\Driver\temp\TEMP.C
+..\output\temp.o: ..\Driver\temp\temp.h
+..\output\temp.o: ..\main\general_type.h
+..\output\temp.o: ..\main\stm32l1xx.h
+..\output\temp.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm3.h
+..\output\temp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\temp.o: ..\Driver\led\core_cmInstr.h
+..\output\temp.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h
+..\output\temp.o: ..\main\system_stm32l1xx.h
+..\output\temp.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_conf.h
+..\output\temp.o: ..\Driver\adc\adc.h
+..\output\temp.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_adc.h

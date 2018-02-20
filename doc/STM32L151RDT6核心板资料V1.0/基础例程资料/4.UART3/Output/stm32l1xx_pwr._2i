@@ -1,0 +1,5 @@
+-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I..\Driver -I..\main -I..\STM32L1xx_StdPeriph_Driver\inc -I..\STM32L1xx_StdPeriph_Driver\src -I..\Driver\enc28j60 -I..\Driver\led -I..\Driver\net -I..\Driver\spi -I..\Driver\adc -I..\Driver\temp -I..\Driver\system\delay -I..\Driver\system\sys
+-I C:\Keil\ARM\RV31\INC
+-I C:\Keil\ARM\CMSIS\Include
+-I C:\Keil\ARM\Inc\ST\STM32L1xx
+-o ..\output\stm32l1xx_pwr.o --omf_browse ..\output\stm32l1xx_pwr.crf --depend ..\output\stm32l1xx_pwr.d --feedback "..\Output\Ethernet.fed" "..\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_pwr.c"

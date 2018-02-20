@@ -1,0 +1,3 @@
+Record=TopLevelDocument|FileName=main.SchDoc
+Record=SheetSymbol|SourceDocument=main.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=TB906_HW V1.SchDoc|SymbolType=Normal|RawFileName=TB906_HW V1.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=main.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=STM32L151.SchDoc|SymbolType=Normal|RawFileName=STM32L151.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 

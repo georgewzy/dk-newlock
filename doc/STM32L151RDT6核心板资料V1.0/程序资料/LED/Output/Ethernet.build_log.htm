@@ -1,0 +1,56 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.24.2.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: cdgvf Microsoft, Microsoft, LIC=Q7GVE-5FBY8-9ZVWW-Q0N0J-CBLK7-2CERA
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.24.1
+Toolchain Path:  D:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 5 (build 528)
+Assembler:       Armasm.exe V5.06 update 5 (build 528)
+Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
+Library Manager: ArmAr.exe V5.06 update 5 (build 528)
+Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
+CPU DLL:         SARMCM3.DLL V5.24.1
+Dialog DLL:      DCM.DLL V1.16.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.1.0
+Dialog DLL:      TCM.DLL V1.32.0.0
+ 
+<h2>Project:</h2>
+F:\easyMule\STM32L151RDT6核心板资料V1.0新\STM32L151RDT6核心板资料V1.0\程序资料\LED\Project\UART.uvprojx
+Project File Date:  01/22/2018
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'UART'
+compiling main.c...
+..\Driver\system\sys\sys.h(6): warning:  #47-D: incompatible redefinition of macro "NVIC_VectTab_RAM"  (declared at line 107 of "..\STM32L1xx_StdPeriph_Driver\inc\misc.h")
+  #define NVIC_VectTab_RAM             ((u32)0x20000000)
+..\Driver\system\sys\sys.h(7): warning:  #47-D: incompatible redefinition of macro "NVIC_VectTab_FLASH"  (declared at line 108 of "..\STM32L1xx_StdPeriph_Driver\inc\misc.h")
+  #define NVIC_VectTab_FLASH           ((u32)0x08000000)
+..\main\main.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=7376 RO-data=276 RW-data=68 ZI-data=1028  
+FromELF: creating hex file...
+"..\Output\Ethernet.axf" - 0 Error(s), 2 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32L1xx_DFP.1.2.0.pack
+                Keil.STM32L1xx_DFP.1.2.0
+                STMicroelectronics STM32L1 Series Device Support and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_UART
+  D:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:30
+</pre>
+</body>
+</html>

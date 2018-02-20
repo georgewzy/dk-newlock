@@ -1,0 +1,15 @@
+..\output\enc28j60.o: ..\Driver\enc28j60\ENC28J60.C
+..\output\enc28j60.o: ..\Driver\enc28j60\enc28j60.h
+..\output\enc28j60.o: ..\main\stm32l1xx.h
+..\output\enc28j60.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cm3.h
+..\output\enc28j60.o: D:\SoftwareInstallation\MDK\ARM\ARMCC\bin\..\include\stdint.h
+..\output\enc28j60.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cmInstr.h
+..\output\enc28j60.o: D:\SoftwareInstallation\MDK\ARM\RV31\INC\core_cmFunc.h
+..\output\enc28j60.o: D:\SoftwareInstallation\MDK\ARM\Inc\ST\STM32L1xx\system_stm32l1xx.h
+..\output\enc28j60.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_conf.h
+..\output\enc28j60.o: ..\main\general_type.h
+..\output\enc28j60.o: ..\Driver\spi\spi.h
+..\output\enc28j60.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_gpio.h
+..\output\enc28j60.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_spi.h
+..\output\enc28j60.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_rcc.h
+..\output\enc28j60.o: D:\SoftwareInstallation\MDK\ARM\ARMCC\bin\..\include\stdio.h

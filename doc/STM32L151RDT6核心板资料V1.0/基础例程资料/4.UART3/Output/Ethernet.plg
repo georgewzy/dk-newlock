@@ -1,0 +1,21 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+E:\资料\STM32L151_hard\stm32l151c8t6开发板\UART\Project\UART.uvproj
+Project File Date:  08/19/2016
+
+<h2>Output:</h2>
+compiling main.c...
+"..\main\main.c" - 0 Errors, 0 Warning(s).
+compiling main.c...
+"..\main\main.c" - 0 Errors, 0 Warning(s).
+Build target 'UART'
+linking...
+Program Size: Code=2748 RO-data=276 RW-data=32 ZI-data=1024  
+"..\Output\Ethernet.axf" - 0 Errors, 0 Warning(s).
+Build target 'UART'
+linking...
+Program Size: Code=2748 RO-data=276 RW-data=32 ZI-data=1024  
+"..\Output\Ethernet.axf" - 0 Errors, 0 Warning(s).

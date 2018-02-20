@@ -1,0 +1,11 @@
+..\output\adc.o: ..\Driver\adc\adc.c
+..\output\adc.o: ..\Driver\adc\adc.h
+..\output\adc.o: ..\main\general_type.h
+..\output\adc.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_adc.h
+..\output\adc.o: ..\main\stm32l1xx.h
+..\output\adc.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm3.h
+..\output\adc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\output\adc.o: ..\Driver\led\core_cmInstr.h
+..\output\adc.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h
+..\output\adc.o: ..\main\system_stm32l1xx.h
+..\output\adc.o: ..\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_conf.h
