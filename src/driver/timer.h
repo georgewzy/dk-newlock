@@ -11,7 +11,7 @@
 enum timer
 {
     tim1_cnt,
-    tim2_cnt,
+    timer_batt,
 	timer_gps_cycle,
 	tiemr_gps_location,
 	timer_close_lock,

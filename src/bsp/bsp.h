@@ -37,17 +37,13 @@
 
 #define SDA_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)
 
+
+
 #define BUTTON1_READ()			GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6)		//按键
 
 
 #define LOCK_ON_READ()			GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_4)
 #define LOCK_OFF_READ()			GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_5)
-
-
-
-//#define HAND()  				GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_6)//手动输入
-//#define ALARM_LOCK_ON()  		GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_4)//关锁报警
-//#define ALARM_LOCK_OFF()   		GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_5)//开锁报警
 
 
 
@@ -58,22 +54,22 @@
 #define MOTOB_LOW() 			GPIO_ResetBits(GPIOC, GPIO_Pin_1)
 
 
-#define BEEP_ON() 			GPIO_SetBits(GPIOC, GPIO_Pin_3)	
+#define BEEP_ON() 				GPIO_SetBits(GPIOC, GPIO_Pin_3)	
 #define BEEP_OFF() 				GPIO_ResetBits(GPIOC, GPIO_Pin_3)
 
-#define GPS_POW_HIGH()			GPIO_SetBits(GPIOC, GPIO_Pin_4)	
-#define GPS_POW_LOW()			GPIO_ResetBits(GPIOC, GPIO_Pin_4)	
+
 
 
 //#define NVIC_VECTOR_ADDR			0x1C00
 
 //#define NVIC_VECTOR_ADDR			0x0000
 
+
+
+
 void iwatchdog_clear(void);
 void gprs_config(void);
 void bsp_init(void);
-
-
 
 
 #endif

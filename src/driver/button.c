@@ -125,7 +125,6 @@ button_state_e button_get_state(uint8_t button_name, uint32_t long_time)
 			{
 				button_info[button_name].butt_state == button_long_press;
 			}
-		
 		}
 	}
 	

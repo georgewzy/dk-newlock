@@ -41,8 +41,8 @@ extern uint8_t usart2_rx_status;
 
 
 
-uint8_t gprs_err_cnt = 0; 	//GPRS´íÎó¼ÆÊýÆ÷
-uint8_t gprs_status = 0;	//GPRSµÄ×´Ì¬
+uint8_t gprs_err_cnt = 0; 		//GPRS´íÎó¼ÆÊýÆ÷
+uint8_t gprs_status = 0;		//GPRSµÄ×´Ì¬
 
 uint8_t gprs_rx_buf[512];
 uint16_t gprs_rx_cnt = 0;
@@ -52,8 +52,8 @@ uint8_t gprs_rx_flag = 0;
 
 
 
-uint8_t PARK_LOCK_Buffer[17] = {0};
-extern uint8_t lock_id[16];
+uint8_t lock_id[17] = {0};
+
 uint8_t topic_id = 0;
 
 /*
@@ -282,8 +282,8 @@ void gprs_config(void)
 			{
 				USART_OUT(USART1, ret);
 				str = strstr((const char*)ret, (const char*)"+CLIENTID: ");
-				memcpy(PARK_LOCK_Buffer, str+12, 16);	//¶Á³öËøid	
-				USART_OUT(USART1, "lock_id=%s\r\n", PARK_LOCK_Buffer);
+				memcpy(lock_id, str+12, 16);	//¶Á³öËøid	
+				USART_OUT(USART1, "lock_id=%s\r\n", lock_id);
 				gprs_status++;
 				gprs_err_cnt = 0;
 			}
@@ -315,7 +315,7 @@ void gprs_config(void)
 		break;
 			
 		case 7:
-			sprintf((char*)buff, "%s%s%s", "AT+SUBSCRIBE=bell/", PARK_LOCK_Buffer, ",2\r\n");
+			sprintf((char*)buff, "%s%s%s", "AT+SUBSCRIBE=bell/", lock_id, ",2\r\n");
 			USART_OUT(USART1, "lock_id=%s\r\n", buff);
 			ret = gprs_send_at(buff, "OK", 800, 2000);
 			if (ret != NULL)
@@ -334,7 +334,7 @@ void gprs_config(void)
 		break;
 			
 		case 8:
-			sprintf((char*)buff, "%s%s%s", "AT+SUBSCRIBE=lock/", PARK_LOCK_Buffer, ",2\r\n");
+			sprintf((char*)buff, "%s%s%s", "AT+SUBSCRIBE=lock/", lock_id, ",2\r\n");
 			USART_OUT(USART1, "lock=%s\r\n", buff);
 			ret = gprs_send_at(buff, "OK", 800, 2000);
 			if (ret != NULL)
@@ -363,8 +363,6 @@ void gprs_config(void)
 	}
 	
 	
-	
-	
 }
 
 
@@ -390,8 +388,7 @@ void gprs_config(void)
 */
 static void gprs_init_task_fun(void *p_arg)
 {
-//	OS_ERR err;
-//	OS_MSG_SIZE size = 0;
+
 	uint8_t *msg;
 	uint8_t size1;
 	uint8_t *ret;

@@ -9,8 +9,9 @@
 void motor_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;
-		//button
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
+	
+	//MOTO D+ MOTO D-
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
   	GPIO_Init(GPIOC, &gpio_init_structure);
@@ -36,6 +37,13 @@ void lock_stop(void)
 	MOTOA_LOW();
 	MOTOB_LOW();
 }
+
+
+
+
+
+
+
 
 uint8_t lock_on_status_get(void)
 {

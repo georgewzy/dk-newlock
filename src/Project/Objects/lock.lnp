@@ -2,6 +2,7 @@
 ".\objects\main.o"
 ".\objects\stm32l1xx_it.o"
 ".\objects\system_stm32l1xx.o"
+".\objects\protocol.o"
 ".\objects\adc.o"
 ".\objects\button.o"
 ".\objects\gprs.o"
@@ -13,6 +14,7 @@
 ".\objects\bsp.o"
 ".\objects\app_md5.o"
 ".\objects\aes.o"
+".\objects\common.o"
 ".\objects\misc.o"
 ".\objects\stm32l1xx_adc.o"
 ".\objects\stm32l1xx_aes.o"
@@ -42,6 +44,6 @@
 ".\objects\stm32l1xx_wwdg.o"
 ".\objects\startup_stm32l1xx_hd.o"
 --strict --scatter ".\Objects\lock.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\lock.map" -o .\Objects\lock.axf

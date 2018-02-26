@@ -28,7 +28,7 @@ DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
 FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
-OutputPath=Project Outputs for newlock
+OutputPath=
 LogFolderPath=
 ManagedProjectGUID=
 LinkedManagedProjectGUID=
@@ -805,23 +805,6 @@ GenerateClassCluster=0
 DocumentUniqueId=WYTBMQVB
 
 [Document46]
-DocumentPath=SCHPCB\DK_RS485.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=6
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=BPTUUFRY
-
-[Document47]
 DocumentPath=SCH_LIB\TPS62120.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -838,7 +821,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QMIJFCAK
 
-[Document48]
+[Document47]
 DocumentPath=SCH_LIB\RT7272B.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -855,7 +838,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QKAPADBG
 
-[Document49]
+[Document48]
 DocumentPath=SCHPCB\DK_MOTO.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -872,7 +855,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=XQNBEBXV
 
-[Document50]
+[Document49]
 DocumentPath=SCH_LIB\MOTO.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -889,7 +872,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=URXLJSQV
 
-[Document51]
+[Document50]
 DocumentPath=SCHPCB\lock.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -906,7 +889,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=DGMMNJKH
 
-[Document52]
+[Document51]
 DocumentPath=newlock.OutJob
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -970,7 +953,7 @@ SCH_HasExpandLogicalToPhysicalSheets=-1
 SaveSettingsToOutJob=-1
 
 [Generic_EDE]
-OutputDir=Project Outputs for newlock
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs

@@ -29,8 +29,6 @@ typedef struct
 
 
 
-
-
 #define BUTTON_VALID_CNT			10
 #define BUTTON_SUM					1
 
