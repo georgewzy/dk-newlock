@@ -38,3 +38,4 @@
 .\objects\bsp.o: ..\driver\usart.h
 .\objects\bsp.o: ..\driver\pwm.h
 .\objects\bsp.o: ..\driver\adc.h
+.\objects\bsp.o: ..\driver\button.h

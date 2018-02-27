@@ -11,6 +11,7 @@
 enum timer
 {
     tim1_cnt,
+	timer_test,
     timer_batt,
 	timer_gps_cycle,
 	tiemr_gps_location,

@@ -242,10 +242,8 @@ void USART1_IRQHandler(void)
 		{
 			
 			if (usart1_cnt < USART_BUFF_LENGHT)
-			{
-				
+			{	
 				usart1_buff[usart1_cnt++] = ch;
-//				USART_SendData(USART1, ch);	 
 				usart1_rx_status = 1;
 			}
 			else
@@ -271,7 +269,7 @@ void usart1_recv_data(void)
 	if(timer_is_timeout_1ms(timer_uart1, 40) == 0)	//40ms没接收到数据认为接收数据完成		
 	{
 
-		USART_OUT(USART2, usart1_buff);
+//		USART_OUT(USART2, usart1_buff);
 		USART_OUT(USART1, usart1_buff);
 		
 		memset(usart1_buff, 0, 512);	

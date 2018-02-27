@@ -11,6 +11,7 @@
 ".\objects\pwm.o"
 ".\objects\timer.o"
 ".\objects\usart.o"
+".\objects\gu906.o"
 ".\objects\bsp.o"
 ".\objects\app_md5.o"
 ".\objects\aes.o"

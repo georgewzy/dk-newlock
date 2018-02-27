@@ -39,22 +39,7 @@ void delay(uint32_t count)
 }
 
 
-/*
-*Function: system_reset      
-*Description: system reset  
-*Calls: 无  
-*Data Accessed: 无  
-*Data Updated: 无    
-*Input: 无
-*Output: 无
-*Return: 无     
-*Others: 无    
-*/
-void system_reset(void) 
-{ 
-	__set_FAULTMASK(1); 
-	NVIC_SystemReset();  
-} 
+
 
 /*
 *Function: system_reset      

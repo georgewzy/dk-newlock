@@ -1,20 +1,8 @@
+
+
 #include "timer.h"
 #include "usart.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//Mini STM32开发板
-//通用定时器 驱动代码			   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//修改日期:2010/12/03
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 正点原子 2009-2019
-//All rights reserved
-////////////////////////////////////////////////////////////////////////////////// 	  
- 
-
-
+#include "button.h"
 
 
 
@@ -41,7 +29,7 @@ void timer2_init(uint16_t arr, uint16_t psc)
 	TIM_DeInit(TIM2); 
     tim_init_structure.TIM_CounterMode = TIM_CounterMode_Up;
     tim_init_structure.TIM_ClockDivision = TIM_CKD_DIV1;
-    tim_init_structure.TIM_Period = arr;			//??????=(TIM_Prescaler+1)* (TIM_Period+1)/FLK
+    tim_init_structure.TIM_Period = arr;			//??????=(TIM_Prescaler+1) * (TIM_Period+1)/FLK
     tim_init_structure.TIM_Prescaler = psc; 	// 
     TIM_TimeBaseInit(TIM2, &tim_init_structure);
 
@@ -82,7 +70,7 @@ void TIM2_IRQHandler(void)
             g_timer_cnt[i]++;
         }	
 
-//		button_timer_ms();		//???????
+		button_timer_ms();		//???????
     }
 }
 

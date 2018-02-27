@@ -11,6 +11,9 @@
 #include "aes.h"
 #include "aes128.h"
 #include "app_md5.h"
+#include "button.h"
+
+
 
 
 uint8_t receiveText[24];
@@ -83,15 +86,44 @@ int main(void)
 	uint8_t upload=0; 
 	uint8_t *ret;
 	uint8_t status = 0;
-	static uint8_t gps_send_flag = 0;
 
+	button_info_s bbb;
 	
 	bsp_init();
 	
                          
 	USART_OUT(USART1, "uart1 is ok\r\n");
 
+	
+	
 	while(1)
+	{
+		LED0_LOW();
+		
+		if(button_get_state(SW1 ,1000) == BUTTON_CLICK)
+		{
+			USART_OUT(USART1, "BUTTON_CLICK\r\n");
+//			bsp_system_reset();
+		}
+		else if(button_get_state(SW1 ,1000) == BUTTON_PRESS)
+		{
+			USART_OUT(USART1, "BUTTON_PRESS\r\n");
+		}
+//		else if(button_get_state(SW1 ,1000) == BUTTON_DOWN)
+//		{
+//			USART_OUT(USART1, "BUTTON_DOWN\r\n");
+//		}
+		
+		if(timer_is_timeout_1ms(timer_test, 1000) == 0)
+		{
+//			USART_OUT(USART1, "george\r\n");
+		}
+//		bsp_rcc_clock_fre();
+		usart1_recv_data();
+		LED0_HIGH();
+	}
+	
+	while(0)
 	{	 
 
 		while(1)
@@ -347,7 +379,7 @@ int main(void)
 			}		
 		}
 		//°´¼ü
-		if(button_get_value() == 0)
+		if(button_get_state(SW1 ,1000) == BUTTON_CLICK)
 		{
 			USART_OUT(USART1, "button_get_value\r\n");
 			timer_is_timeout_1ms(timer_close_lock, 0);

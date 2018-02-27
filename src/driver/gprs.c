@@ -56,6 +56,29 @@ uint8_t lock_id[17] = {0};
 
 uint8_t topic_id = 0;
 
+
+
+
+
+
+
+void gprs_gpio_init(void)
+{
+	GPIO_InitTypeDef gpio_init_structure;
+	
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
+  	GPIO_Init(GPIOA, &gpio_init_structure);
+	
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_7;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
+  	GPIO_Init(GPIOA, &gpio_init_structure);
+
+}
+
+
 /*
 *********************************************************************************************************
 *                                          gprs_power_on()
@@ -73,22 +96,11 @@ uint8_t topic_id = 0;
 */
 void gprs_power_on(void)
 {
-//	OS_ERR err;
-//	
-//	GPIO_SetBits(GPIOC, GPIO_Pin_1);				//GPRS_PWR
-//	GPIO_ResetBits(GPIOB, GPIO_Pin_12);
-////	OSTimeDlyHMSM(0,0,0,500,OS_OPT_TIME_HMSM_STRICT,&err);
 
-//	
-//	GPIO_ResetBits(GPIOA, GPIO_Pin_7);
-////	OSTimeDlyHMSM(0,0,0,20,OS_OPT_TIME_HMSM_STRICT,&err);
-//	GPIO_SetBits(GPIOA, GPIO_Pin_7);				//GPRS_RESET
-////	OSTimeDlyHMSM(0,0,0,50,OS_OPT_TIME_HMSM_STRICT,&err);
-
-//	
-//	GPIO_ResetBits(GPIOB, GPIO_Pin_12);
-////	OSTimeDlyHMSM(0,0,1,100,OS_OPT_TIME_HMSM_STRICT,&err);
+	GPIO_SetBits(GPIOA, GPIO_Pin_6);				//GPRS_PW
 	
+	GPIO_ResetBits(GPIOA, GPIO_Pin_7);				//GPRS_PW
+	timer_delay_1ms(1200);
 }
 
 
@@ -400,8 +412,7 @@ static void gprs_init_task_fun(void *p_arg)
 		switch(gprs_status)
 		{
 			case 0:
-//				gprs_power_on();
-//				OSTimeDlyHMSM(0,0,3,0,OS_OPT_TIME_HMSM_STRICT,&err);
+				gprs_power_on();
 				gprs_status = 1;
 				gprs_err_cnt = 0;
 			break;

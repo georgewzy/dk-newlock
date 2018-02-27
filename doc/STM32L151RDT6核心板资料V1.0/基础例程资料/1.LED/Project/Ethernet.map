@@ -1,4 +1,4 @@
-Component: ARM Compiler 5.05 update 1 (build 106) Tool: armlink [4d0efa]
+Component: ARM Compiler 5.06 update 1 (build 61) Tool: armlink [4d35a8]
 
 ==============================================================================
 
@@ -528,9 +528,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000f5
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001de0, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001de0, Max: 0x00060000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00001d9c, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00001d9c, Max: 0x00060000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -563,7 +563,7 @@ Memory Map of the image
     0x08001d7c   0x00000020   Data   RO          674    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000448, Max: 0x00002800, ABSOLUTE)
+    Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000448, Max: 0x0000c000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -586,21 +586,21 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       176          8          0          4          0       1075   delay.o
-       388         16          0          1          0        974   led.o
-       344          8          0          0          0       3911   main.o
+       176          8          0          4          0       1119   delay.o
+       388         16          0          1          0        990   led.o
+       344          8          0          0          0       3951   main.o
        224         20          0          0          0     182665   misc.o
-        36          8        244          0       1024        812   startup_stm32l1xx_md.o
-         0          0          0          0          0       9136   stm32l1xx_adc.o
-       572         32          0          0          0       9597   stm32l1xx_gpio.o
-       124          8          0          4          0       1875   stm32l1xx_it.o
-      1168         40          0         25          0       9525   stm32l1xx_rcc.o
-      2572         32          0          0          0      37564   stm32l1xx_tim.o
-      1016         20          0          0          0      13560   stm32l1xx_usart.o
-       596         46          0         29          0       1795   system_stm32l1xx.o
+        36          8        244          0       1024        828   startup_stm32l1xx_md.o
+         0          0          0          0          0       9152   stm32l1xx_adc.o
+       572         32          0          0          0       9701   stm32l1xx_gpio.o
+       124          8          0          4          0       1899   stm32l1xx_it.o
+      1168         40          0         25          0       9649   stm32l1xx_rcc.o
+      2572         32          0          0          0      38284   stm32l1xx_tim.o
+      1016         20          0          0          0      13692   stm32l1xx_usart.o
+       596         46          0         29          0       1839   system_stm32l1xx.o
 
     ----------------------------------------------------------------------
-      7216        238        276         68       1028     272489   Object Totals
+      7216        238        276         68       1028     273769   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          5          4          0   (incl. Padding)
 
@@ -639,8 +639,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7304        254        276         68       1028     271773   Grand Totals
-      7304        254        276         68       1028     271773   ELF Image Totals
+      7304        254        276         68       1028     273053   Grand Totals
+      7304        254        276         68       1028     273053   ELF Image Totals
       7304        254        276         68          0          0   ROM Totals
 
 ==============================================================================

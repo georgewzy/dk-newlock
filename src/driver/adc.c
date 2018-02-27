@@ -59,7 +59,6 @@ uint16_t adc_get_average(uint8_t ch, uint8_t times)
 		timer_delay_1ms(2);
 	}
 	
-	
 	return temp_val/times;
 } 	 
 

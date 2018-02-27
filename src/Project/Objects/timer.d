@@ -35,3 +35,4 @@
 .\objects\timer.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\timer.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
 .\objects\timer.o: ..\driver\usart.h
+.\objects\timer.o: ..\driver\button.h

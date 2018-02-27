@@ -7,10 +7,11 @@
 
 typedef enum
 {
-	buuton_null,
-	button_up,
-	button_click,
-	button_long_press
+	BUTTON_NULL,
+	BUTTON_UP,
+	BUTTON_CLICK,
+	BUTTON_DOWN,
+	BUTTON_PRESS
 	
 } button_state_e;
 
@@ -29,12 +30,16 @@ typedef struct
 
 
 
-#define BUTTON_VALID_CNT			10
+#define BUTTON_VALID_CNT			20
 #define BUTTON_SUM					1
+#define BUTTON_UP_CNT				0
+#define BUTTON_DOWN_CNT				5
 
 
 
-uint8_t button_get_value(void);
+
+
+void button_gpio_init(void);
 void button_timer_ms(void);
 button_state_e button_get_state(uint8_t button_name, uint32_t long_time);
 

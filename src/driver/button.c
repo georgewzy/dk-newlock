@@ -7,47 +7,19 @@
 button_info_s button_info[BUTTON_SUM];
 
 
-
-
 void button_gpio_init(void)
 {
-	GPIO_InitTypeDef gpio_init_structure;
+	GPIO_InitTypeDef gpio_init_structure;	
 	
 	//button
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOC, &gpio_init_structure);
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_12;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
+  	GPIO_Init(GPIOB, &gpio_init_structure);
+	
 }
 
 
-uint8_t button_get_value(void)
-{
-	uint8_t val = 0;
-	uint8_t i = 0;
-	uint8_t button_cnt = 0;
-	
-	for(i=0; i<30; i++)
-	{
-		if(BUTTON1_READ() == 0)
-		{
-			button_cnt++;
-		}
-		else
-		{
-			button_cnt = 0;
-		}
-	}
-	
-	if(button_cnt >= 30)
-	{
-		return 0;
-	}
-	else
-	{
-		return 1;
-	}
-}
 
 
 
@@ -76,7 +48,7 @@ button_state_e button_get_state(uint8_t button_name, uint32_t long_time)
 	
 	for(i=0; i<BUTTON_VALID_CNT; i++)
 	{
-		if(BUTTON1_READ() == 0)
+		if(bsp_get_port_value(button_name) == 0)
 		{
 			button_cnt++;
 		}
@@ -98,45 +70,55 @@ button_state_e button_get_state(uint8_t button_name, uint32_t long_time)
 	if(0 == button_state)
 	{
 		button_info[button_name].butt_en = ENABLE;
-		if(button_info[button_name].butt_cnt < 5)
+		if(button_info[button_name].butt_cnt < BUTTON_DOWN_CNT)
 		{
 			button_info[button_name].butt_cnt++;
 		}
 	}
 	else
 	{
+		button_info[button_name].butt_en = DISABLE;
 		button_info[button_name].butt_cnt = 0;
 		button_info[button_name].butt_long_press_timer = long_time;
 	}
 	
-	if(button_info[button_name].butt_cnt <= 0)
+
+	if(button_info[button_name].butt_cnt <= BUTTON_UP_CNT)  //有效次数小于等于弹起次数判断，则判断为弹起状态
 	{
-		button_info[button_name].butt_state = button_up;
+		button_info[button_name].butt_state = BUTTON_UP;
 	}
-	else if(button_info[button_name].butt_cnt <= 5)
+	else if(button_info[button_name].butt_cnt <= BUTTON_DOWN_CNT)	//有效次数大于等于按下次数判断
 	{
-		if(button_info[button_name].butt_state == button_up)
+		if(BUTTON_UP == button_info[button_name].butt_state) //先前为弹起，则判断为单击
 		{
-			button_info[button_name].butt_state == button_click;
+			button_info[button_name].butt_state = BUTTON_CLICK;
 		}
-		else if(button_click == button_info[button_name].butt_state)
+		else if(BUTTON_CLICK == button_info[button_name].butt_state)
+		{
+			button_info[button_name].butt_state = BUTTON_DOWN;
+		}
+		else if(BUTTON_DOWN == button_info[button_name].butt_state)
 		{
 			if(0 == button_info[button_name].butt_long_press_timer)
 			{
-				button_info[button_name].butt_state == button_long_press;
+				button_info[button_name].butt_state = BUTTON_PRESS;
 			}
 		}
 	}
 	
-	
-	return button_info[button_name].butt_state;
+	button_state = button_info[button_name].butt_state;
+	return button_state;
 }
 
 
 
 
+void button_scan(void)
+{
+	uint8_t i = 0;
 
-
+	
+}
 
 
 

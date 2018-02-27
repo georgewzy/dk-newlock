@@ -19,17 +19,25 @@
 #include "usart.h"
 #include "pwm.h"
 #include "adc.h"
+#include "button.h"
+
+
+
 
 /*
-*Function: rcc_config      
-*Description: 系统时钟初始化  
-*Calls: 无  
-*Data Accessed: 无  
-*Data Updated: 无    
-*Input: 无
-*Output: 无
-*Return: 无     
-*Others: 无    
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
 */
 void bsp_rcc_init(void)
 {
@@ -45,14 +53,15 @@ void bsp_rcc_init(void)
         /* HCLK = SYSCLK */
         RCC_HCLKConfig(RCC_SYSCLK_Div1); 
         
+		 /* PCLK1 = HCLK */
+        RCC_PCLK1Config(RCC_HCLK_Div1);
+		
         /* PCLK2 = HCLK */
         RCC_PCLK2Config(RCC_HCLK_Div1); 
         
-        /* PCLK1 = HCLK */
-        RCC_PCLK1Config(RCC_HCLK_Div1);
-        
         /* PLLCLK = 8MHz * 4 = 32 MHz */
-        RCC_PLLConfig(RCC_PLLSource_HSE, RCC_PLLDiv_2, RCC_PLLMul_4);
+        RCC_PLLConfig(RCC_PLLSource_HSE, RCC_PLLMul_8, RCC_PLLDiv_2);
+		
         /* Enable PLL */ 
         RCC_PLLCmd(ENABLE);
 	
@@ -61,20 +70,21 @@ void bsp_rcc_init(void)
 		RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
         
         /* Wait till PLL is used as system clock source */
-        while(RCC_GetSYSCLKSource() != 0x08);
+        while(RCC_GetSYSCLKSource() != 0x0C);
 	}
 
 
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 	
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA , ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB , ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC , ENABLE);
-
 	
+	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);	
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);	
+
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	
 }
@@ -82,15 +92,44 @@ void bsp_rcc_init(void)
 
 
 /*
-*Function: iwatchdog_config      
-*Description: 独立看门狗初始化 
-*Calls: 无  
-*Data Accessed: 无  
-*Data Updated: 无    
-*Input: 无
-*Output: 无
-*Return: 无     
-*Others: 无    
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+void bsp_rcc_clock_fre(void)
+{
+	RCC_ClocksTypeDef get_rcc_clock;
+	
+	RCC_GetClocksFreq(&get_rcc_clock);
+	
+	
+	USART_OUT(USART1, "SYSCLK=%d\r\n", get_rcc_clock.SYSCLK_Frequency);
+}
+
+/*
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
 */
 void iwatchdog_config(void)
 {
@@ -102,20 +141,48 @@ void iwatchdog_config(void)
 }
 
 /*
-*Function: iwatchdog_clear      
-*Description: 独立看门狗 清狗 
-*Calls: 无  
-*Data Accessed: 无  
-*Data Updated: 无    
-*Input: 无
-*Output: 无
-*Return: 无     
-*Others: 无    
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
 */
 void iwatchdog_clear(void)
 {
 	IWDG_ReloadCounter();
 }
+
+
+/*
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+void bsp_system_reset(void) 
+{ 
+	__set_FAULTMASK(1); 
+	NVIC_SystemReset();  
+} 
+
+
 
 /*
 *Function: gpio_config      
@@ -128,7 +195,7 @@ void iwatchdog_clear(void)
 *Return: 无     
 *Others: 无    
 */
-void gpio_init(void)
+void bsp_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;
 	
@@ -138,44 +205,49 @@ void gpio_init(void)
 //  	gpio_init_structure.GPIO_Speed = GPIO_Speed_50MHz;
 //  	GPIO_Init(GPIOB, &gpio_init_structure);	
 
+	//LED0
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_0;				// UART1 TX				    
+  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
+  	GPIO_Init(GPIOC, &gpio_init_structure);
+	
 	
 	// UART1
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_9;				// UART1 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
+  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;	
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
   	GPIO_Init(GPIOA, &gpio_init_structure);
+	
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
 	
 	// UART2
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_2;				// UART2 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
+  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_3;				
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
   	GPIO_Init(GPIOA, &gpio_init_structure);
 
 
 	// UART3
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				// UART3 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
+  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
   	GPIO_Init(GPIOB, &gpio_init_structure);
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;				
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
   	GPIO_Init(GPIOB, &gpio_init_structure);
 	
 	
-
-	
 	//button
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;  
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
   	GPIO_Init(GPIOC, &gpio_init_structure);
 	
 	
@@ -207,10 +279,29 @@ void gpio_init(void)
 
 
 
+
+
+uint8_t bsp_get_port_value(uint8_t port_name)
+{
+	uint8_t value;
+	
+	switch(port_name)
+	{
+		case SW1:
+			value = SW1_READ();
+		break;
+	
+	}
+
+	return value;
+}
+
+
+
+
 void bsp_nvic_init(void)
 {
 	NVIC_InitTypeDef nvic_init_structure;
-
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
 
@@ -261,13 +352,14 @@ void bsp_init(void)
 {
 	bsp_rcc_init();
 	bsp_nvic_init();
-	gpio_init();
+	bsp_gpio_init();
+	button_gpio_init();
 //	pwm_gpio_init();
 //	iwatchdog_config();
 	usart1_init(115200, 8, 0, 1);
 	usart2_init(115200);
 
-	timer2_init(200, 41);
+	timer2_init(99, 319);
 //	pwm_timer3_init(9999, 143);
 //	pwm3_init(30);
  

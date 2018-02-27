@@ -39,7 +39,12 @@
 
 
 
-#define BUTTON1_READ()			GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_6)		//°´¼ü
+#define LED0_HIGH()				GPIO_SetBits(GPIOC, GPIO_Pin_0)
+#define LED0_LOW()				GPIO_ResetBits(GPIOC, GPIO_Pin_0)
+
+
+
+#define SW1_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_12)		//°´¼ü
 
 
 #define LOCK_ON_READ()			GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_4)
@@ -65,10 +70,17 @@
 //#define NVIC_VECTOR_ADDR			0x0000
 
 
+typedef enum
+{
+	SW1
+} bsp_get_port_e;
 
 
+
+uint8_t bsp_get_port_value(uint8_t port_name);
+void bsp_rcc_clock_fre(void);
 void iwatchdog_clear(void);
-void gprs_config(void);
+void bsp_system_reset(void);
 void bsp_init(void);
 
 
