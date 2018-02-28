@@ -170,8 +170,6 @@ uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t ti
 		{
 			res = 0;				//监测到正确的应答数据
 			usart2_rx_status = 0;	//数据处理完 开始接收数据
-//			USART_OUT(USART1, "usart2_buff222=%s", usart2_buff);
-//			strncpy((char*)buff, (const char*)usart2_buff, 512);
 			memcpy(buff, usart2_buff, 512);
 			USART_OUT(USART1,  buff);
 			memset(usart2_buff, 0, 512); 	//清理usart接收缓冲区
@@ -404,6 +402,7 @@ static void gprs_init_task_fun(void *p_arg)
 	uint8_t *msg;
 	uint8_t size1;
 	uint8_t *ret;
+	char *p;
 	static uint8_t gprs_init_flag = true;		//
 		
 	while(1)
@@ -419,7 +418,7 @@ static void gprs_init_task_fun(void *p_arg)
 					
 			case 1:
 				ret = gprs_send_at("\r\nAT\r\n", "OK", 800,10000);
-				if (ret == 0)
+				if (ret != NULL)
 				{
 					gprs_status++;
 					gprs_err_cnt = 0;
@@ -435,11 +434,18 @@ static void gprs_init_task_fun(void *p_arg)
 			break;
 			
 			case 2:
-				ret = gprs_send_at("\r\nATI\r\n", "OK", 800, 10000);
-				if (ret == 0)
+				ret = gprs_send_at("\r\AT+ESIMS?\r\n\r\n", "OK", 800, 10000);
+				if (ret != NULL)
 				{
-					gprs_status++;
-					gprs_err_cnt = 0;
+					if((p = strstr(ret, "+ESIMS: ")) != 0)
+					{
+						p += 8;
+						if(1 == (*p -'0'))
+						{
+							gprs_status++;
+							gprs_err_cnt = 0;
+						}
+					}
 				}
 				else
 				{
@@ -453,7 +459,7 @@ static void gprs_init_task_fun(void *p_arg)
 			
 			case 3:			
 				ret = gprs_send_at("\r\nAT+CPIN?\r\n", "OK", 800, 10000);
-				if (ret == 0)
+				if (ret != NULL)
 				{
 					gprs_status++;
 					gprs_err_cnt = 0;
@@ -470,7 +476,7 @@ static void gprs_init_task_fun(void *p_arg)
 			
 			case 4:
 				ret = gprs_send_at("\r\nAT+CREG=1\r\n", "OK", 800, 10000);
-				if (ret == 0)
+				if (ret != NULL)
 				{
 					gprs_status++;
 					gprs_err_cnt = 0;
@@ -503,7 +509,7 @@ static void gprs_init_task_fun(void *p_arg)
 			
 			case 6:
 				ret = gprs_send_at("\r\nAT+CREG?\r\n", "OK", 800, 10000);
-				if (ret == 0)
+				if (ret != NULL)
 				{
 					gprs_status++;
 					gprs_err_cnt = 0;
@@ -519,7 +525,7 @@ static void gprs_init_task_fun(void *p_arg)
 			break;
 			
 			case 7:
-				ret = gprs_send_at("\r\nAT^SICS=0,conType,GPRS0\r\n", "OK", 800, 10000);//?¨á￠á??óProfile éè??conType
+				ret = gprs_send_at("\r\nAT+CIICR\r\n\r\n", "OK", 800, 10000);//
 				if (ret == 0)
 				{
 					gprs_status++;

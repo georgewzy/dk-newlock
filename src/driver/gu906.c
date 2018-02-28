@@ -6,62 +6,23 @@
 //#include "config.h"
 //#include "usart4.h"
 #include "gu906.h"
+#include "usart.h"
 
-#define DEBUG_EN  1
 
+extern uint8_t gprs_err_cnt; 		//GPRS错误计数器
+extern uint8_t gprs_status;			//GPRS的状态
+extern usart_buff_t *gprs_buff;		//GPRS 接收缓冲区
 
-#define MAXRECVBUFF  USART4_BUFF
-
-#define AT                  "AT\r\n"                                        //测试命令
-#define ATE(x)              ((x)?("ATE1\r\n"):("ATE0\r\n"))                 //开回显、关回显
-#define ATESIM              "AT+ESIMS?\r\n"                                 //检查卡是否存在
-#define ATCNMI              "AT+CNMI=2,1\r\n"                               //设置这组参数来了新信息存储起来 
-
-#define ATCMGD              "AT+CMGD=1,4\r\n"                               //删除当前存储器中的信息
-#define ATCMGF              "AT+CMGF=1\r\n"                                 //0设置短消息为PDU模式，1设置短消息为
-
-#define ATCSMP              "AT+CSMP=17,167,2,25\r\n"                       //?????????
-#define ATUCS2              "AT+CSCS=\"UCS2\"\r\n"                          //??? UCS2 ?????
-#define ATGB2312            "AT+CSCS=\"GB2312\"\r\n"                        //??GB2312??
-#define ATATD               "ATD%s;\r\n"                                    //???????
-#define ATATH               "ATH\r\n"                                       //??
-#define ATGSM               "AT+CSCS=\"GSM\"\r\n"                           //??GSM???  
-#define ATCPMS              "AT+CPMS=\"SM\",\"SM\",\"SM\"\r\n"              //?????????SIM? 
-#define ATCSQ               "AT+CSQ\r\n"                                    //??????
-#define ATCREG              "AT+CREG?\r\n"                                  //?????????GSM??
-#define ATCIICR             "AT+CIICR\r\n"                                  //????? GPRS ??,??????? TCP ??????????       
-#define ATCIPSTARTOK        "AT+CIPSTART?\r\n"                              //???????????
-#define ATCIPCLOSE          "AT+CIPCLOSE=0\r\n"                             //??????
-#define ATCIPSCONT(x)       ((x)?("AT+CIPSCONT=0,\"%s\",\"%s\",%d,2")\
-                                :("AT+CIPSCONT\r\n"))                       //????     
-#define ATCIPSTART          "AT+CIPSTART=\"%s\",\"%s\",%d\r\n"              //??TCP???IP???
-#define ATCIPMUX            "AT+CIPMUX=0\r\n"                               //?????
-#define ATCIPMODE(x)        ((x)?("AT+CIPMODE=1,0\r\n")\
-                                :("AT+CIPMODE=0,0\r\n"))                    //???????????
-#define ATCIPCFG(x)         ((x)?("AT+CIPCFG=1,50,0\r\n")\
-                                :("AT+CIPCFG=0,50,0\r\n"))                  //????????                      
-#define ATCIPPACK(x)        ((x)?("AT+CIPPACK=1,\"4C4F47494E3A31303031\"\r\n")\
-                                :("AT+CIPPACK=0,\"0102A0\"\r\n"))           //???????????
-#define ATCIPSEND(x)        ((x)?("AT+CIPSEND=%d\r\n")\
-                                :("AT+CIPSEND\r\n"))                        //?????????
-#define ATCGMR              "AT+CGMR\r\n"                                   //??????          
-#define ATCMGS              "AT+CMGS=\"%s\"\r\n"                            //????????????
-#define ATCMGR              "AT+CMGR=%s\r\n"                                //???????????
-#define ATCSTT              "AT+CSTT=\"CMNET\"\r\n"                         //????
-#define ATCIPSCONT_C        "AT+CIPSCONT?\r\n"                              //????????            
-#define GPRSSEND            0x1A                                 
-#define CLOSEDTU            "+++"                                            //????
-#define OPENDTU             "ATO0\r\n"                                      //??????
 
 enum order{
-    //??????
+    //与命令对应
     _AT = 1,_ATE,_ATESIM,_ATCNMI,_ATCMGD,_ATCMGF,_ATCSMP,_ATUCS2,
     _ATGB2312,_ATATD,_ATATH,_ATGSM,_ATCPMS,_ATCSQ,_ATCREG,
     _ATCIICR,_ATCIPSTARTOK,_ATCIPCLOSE,_ATCIPSCONT,_ATCIPSTART,
     _ATCIPMUX,_ATCIPMODE,_ATCIPCFG,_ATCIPPACK,_ATCIPSEND,_ATCGMR,
     _ATCMGS,_ATCMGR,_GPRSSEND,_ATCSTT,_ATCIPSCONT_C,_CLOSEDTU,_OPENDTU,
     
-    //???????
+    //额外的数据类型
     _GSMSEND,_GSMSENDEND
 };
 
@@ -71,15 +32,19 @@ struct GprsData{
     enum order type;    
 };
 
-//GPRS??????
+//GPRS数据保存位置
 static char GPRS_Data[MAXRECVBUFF]={0};
 static int  GPRS_Dlen = 0;
 static u8   GPRS_Dtu_ConLock = 0;
 
-u8 RestartGprs = 0; //??GPRS??
+u8 RestartGprs = 0; //重启GPRS标志
+
+
+
+
 
 #if GU906GSM_EN
-//?????SIM?????
+//短信信息在SIM卡中的位置
 static char SIMDataID[5]=""; 
 struct user_simdata sim;
 #endif
@@ -91,7 +56,7 @@ struct user_simdata sim;
   * @output    None
   * @return    
   ********************************************************/
-static int GPRS_ascii_to_hex(u8 *asc_data, u8 *hex_data, int len)
+static int gprs_ascii_to_hex(u8 *asc_data, u8 *hex_data, int len)
 {
     int i;
     u8 tmp_dat;
@@ -157,12 +122,12 @@ static void FreeStr(char *str, int strsiz, int head, int len)
 
     OK
   ********************************************************/
-static int GU906_ParsingSIM(char *pinput)
+static int gu906_parsing_SIM(char *pinput)
 {
     char *p = pinput;
     int i;
     #if DEBUG_EN
-    printf("\n?????\n");
+//    printf("\n?????\n");
     #endif
     if((p = strstr(p,"\",\"")) == 0)
         return -1;
@@ -173,8 +138,8 @@ static int GU906_ParsingSIM(char *pinput)
     }
     sim.phone[i] = '\0';
     #if DEBUG_EN
-    printf("sms.phone[%s]\r\n",sim.phone);
-    printf("\n??????\n");
+//    printf("sms.phone[%s]\r\n",sim.phone);
+//    printf("\n??????\n");
     #endif
     
     p +=2;
@@ -183,8 +148,8 @@ static int GU906_ParsingSIM(char *pinput)
         sim.dev[i] = *p;
     }
     #if DEBUG_EN
-    printf("sms.dev[%s]\r\n",sim.dev);
-    printf("\n????\n");
+//    printf("sms.dev[%s]\r\n",sim.dev);
+//    printf("\n????\n");
     #endif
     
     p += 2;
@@ -193,8 +158,8 @@ static int GU906_ParsingSIM(char *pinput)
         sim.date[i] = *p;
     }
     #if DEBUG_EN
-    printf("sms.date[%s]\r\n",sim.date);
-    printf("\n????\n");
+//    printf("sms.date[%s]\r\n",sim.date);
+//    printf("\n????\n");
     #endif
     
     p++;
@@ -205,22 +170,23 @@ static int GU906_ParsingSIM(char *pinput)
     }
     sim.data[i] = '\0';
     #if DEBUG_EN
-    printf("sms.data:[%s]\r\n",sim.data );
+//    printf("sms.data:[%s]\r\n",sim.data );
     #endif
     return 0;
 }
 #endif
 
 /*********************************************************
-  * @function  GetRecvData
-  * @role      ??????????????,??????????,
-               ???????,???,??????????????????
-               ?????????,??????,???CPU?
+  * @function  gu906_GetRecvData
+  * @role       提取字符串中跟命令无关的数据,有时在进行命令操作时，
+               会突然收到短信，什么的，这里要做的就是处理并过滤掉这些数据。
+               还有模块突然复位了，这里也做判断，并复位CPU。
+  * @input     数据和数据长度
   * @input     ???????
   * @output    None
   * @return    None
   ********************************************************/
-static void GetRecvData(char *pBuff, int *pLen)
+static void gu906_GetRecvData(char *pBuff, int *pLen)
 {
     int rlen = 0;
 	char buff[5]="";
@@ -252,7 +218,7 @@ static void GetRecvData(char *pBuff, int *pLen)
 		else
 			*pLen -=rlen;
         #if DEBUG_EN
-        printf("B[%d][%s]\r\n",*pLen, pBuff);
+//        printf("B[%d][%s]\r\n",*pLen, pBuff);
         #endif
     }
     #if GU906GSM_EN
@@ -266,49 +232,36 @@ static void GetRecvData(char *pBuff, int *pLen)
         SIMDataID[rlen] = '\0'; 
     }
     else if ((p1 = strstr(pBuff, "+CMGR:")) != 0){ //??????
-        GU906_ParsingSIM(p1);
+        gu906_parsing_SIM(p1);
     }
     #endif
     else if(strstr(pBuff,"[0000]") || strstr(pBuff,"Build Time")) 
     {
         #if (DEBUG_EN == 1)
-        printf("restart...\r\n\r\n");
+//        printf("restart...\r\n\r\n");
         #endif
         RestartGprs = 1;
     }
 }
 
-/*********************************************************
-  * @function  GetFreeBuff
-  * @role      ???????????,???????200ms???,
-               ??????????10ms,????num=20,
-               GU906????????,??GU906????????,??????
-  * @input     None
-  * @output    None
-  * @return    None
-  ********************************************************/
+
 static void GetFreeBuff(int num)
 {
     char buff[MAXRECVBUFF] = {0};
     int siz = 0;
     while(num--)
     {
-        siz = usart4_Receive(buff,MAXRECVBUFF);
-        if(siz)
+		usart2_recv_data();
+
+        if(gprs_buff->index)
         {
-            GetRecvData(buff, &siz);    
+            gu906_GetRecvData(buff, &siz);    
         }
     }
 }
 
     
-/*********************************************************
-  * @function  SendAT
-  * @role      ??AT?????
-  * @input     gprs:??????
-  * @output    out:?????
-  * @return    ????:_ATOK,????:_ATERROR
-  ********************************************************/
+
 static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 {
     int siz = 0;
@@ -317,20 +270,13 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
     u8 dat[2];
     u8 csq = 0;
     s8 ret = _ATERROR;
-    char buff[MAXRECVBUFF] = {0};
-    RestartGprs = 0;
-
-#if (DEBUG_EN == 1)
-    printf("\r\n------------------------------\r\n");
-    printf("len[%d]\r\n", gprs->olen);
-    for(i = 0; i< gprs->olen; i++,++p)
-        printf("%c", *p);
-    printf("\r\n");
-#endif
+    RestartGprs = 0;	
     i = 0;
     p = NULL;
-    GetFreeBuff(10);
-    usart4_Send(gprs->order,gprs->olen);
+ 
+	
+	usart_send(USART2, gprs->order, gprs->olen);
+	
     if((gprs->type == _GSMSEND) || (gprs->type == _ATATD)) 
     {
         ret = _ATOK;
@@ -339,24 +285,12 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 
     while(1)
     {
-        for(i = 0;i<sizeof(buff);i++) 
-			buff[i]=0;
-        siz = 0; i = 0;
-        while(siz == 0)
+       
+		memset(gprs_buff, 0, sizeof(usart_buff_t));
+		
+        while(gprs_buff->index == 0)
         {
-            siz = usart4_Receive(buff,MAXRECVBUFF);
-            if(siz){
-				#if (DEBUG_EN == 1)
-				printf("\r\nrecv:\r\n");
-				printf("[%s]\r\n",buff);
-				#endif
-                GetRecvData(buff, &siz);
-            }
-            if(i++ > Delay) 
-            {
-                ret = _ATOTIME;
-                goto GU906_SENDATRET;
-            }
+			usart2_recv_data();
         }
         
         if(RestartGprs){
@@ -382,32 +316,37 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
             case _ATCIPSCONT:
 			case _OPENDTU:
             case _CLOSEDTU:
-            case _ATGB2312:
-                if(strstr(buff, "OK")){
+            case _ATGB2312: //
+                if(strstr(gprs_buff->pdata, "OK"))
+				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
-                }else if(strstr(buff, "ERROR") || strstr(buff,"NO CARRIER")) {
+                }
+				else if(strstr(gprs_buff->pdata, "ERROR") || strstr(gprs_buff->pdata,"NO CARRIER")) 
+				{
                     GetFreeBuff(100);
                     ret = _ATERROR;
                     goto GU906_SENDATRET;
                 }
             break;
                 
-            case _ATCPMS:
-				if(strstr(buff, "OK") && strstr(buff, "+CPMS:")){
+            case _ATCPMS:	//优选消息存储器
+				if(strstr(gprs_buff->pdata, "OK") && strstr(gprs_buff->pdata, "+CPMS:"))
+				{
 					 ret = _ATOK;
                      goto GU906_SENDATRET;
-				}else if(strstr(buff, "ERROR")){
+				}else if(strstr(gprs_buff->pdata, "ERROR"))
+				{
 					ret = _ATERROR;
                     goto GU906_SENDATRET;
 				}
 				break;
 				
-            case _ATESIM:
+            case _ATESIM://测试SIM卡是否存在
 				ret = _ATERROR;
-				if(strstr(buff, "OK"))
+				if(strstr(gprs_buff->pdata, "OK"))
 				{
-					if((p = strstr(buff, "+ESIMS: ")) != 0)
+					if((p = strstr(gprs_buff->pdata, "+ESIMS: ")) != 0)
 					{
 						p += 8;
 						if(1 == (*p -'0'))
@@ -417,58 +356,63 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				}
 				break;
             
-            case _ATCMGS:
-                if(strstr(buff, ">")){
+            case _ATCMGS: //发送消息
+                if(strstr(gprs_buff->pdata, ">"))
+				{
                     GetFreeBuff(1);
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
 				break;
 
-            case _ATCSQ:
-				if(strstr(buff, "OK"))
+            case _ATCSQ://查询信号质量
+				if(strstr(gprs_buff->pdata, "OK"))
 				{
-					if((p = strstr(buff, "+CSQ:")) != 0)
+					if((p = strstr(gprs_buff->pdata, "+CSQ:")) != 0)
 					{
-						GPRS_ascii_to_hex((u8 *)(p+6), dat, 2);
+						gprs_ascii_to_hex((u8 *)(p+6), dat, 2);
 						csq = dat[0]*10 + dat[1];
-						#if DEBUG_EN
-						printf("??:[%d]\r\n", csq);
-						#endif	
-						if (csq < 99 && csq >= GPRSCSQ){ //???????GPRSCSQ(18)
+
+						if (csq < 99 && csq >= GPRSCSQ)//网络信号要大于GPRSCSQ(18)
+						{ 
 							ret = _ATOK;
 							goto GU906_SENDATRET;
-						} else {
+						} 
+						else 
+						{
 							ret = _ATERROR;
 							goto GU906_SENDATRET;
 						}	
 					}
 				}
-				else{
+				else
+				{
 					ret = _ATERROR;
 					goto GU906_SENDATRET;
 				}
 				break;
 
-            case _ATCIPSTARTOK:
-				if(strstr(buff, "OK"))
+            case _ATCIPSTARTOK:	//查询当前模块是否有网络连接 
+				if(strstr(gprs_buff->pdata, "OK"))
 				{
-					if (strstr(buff, "+CIPSTART:")) {
+					if (strstr(gprs_buff->pdata, "+CIPSTART:")) 
+					{
 						ret = _ATOK;
 						goto GU906_SENDATRET;
 					}	
 					ret = _ATERROR;
 					goto GU906_SENDATRET;					
-				}else if(strstr(buff, "ERROR")) {
+				}else if(strstr(gprs_buff->pdata, "ERROR")) 
+				{
 					ret = _ATERROR;
                     goto GU906_SENDATRET;
 				}
 				break;				
 			
-            case _ATCREG:
-				if(strstr(buff, "OK"))
+            case _ATCREG://查询网络注册信息
+				if(strstr(gprs_buff->pdata, "OK"))
 				{
-					if ((p = strstr(buff, "+CREG: ")) != 0)
+					if ((p = strstr(gprs_buff->pdata, "+CREG: ")) != 0)
 					{
 						p += 7;
 						if(('0' == *p) || ('5' == *p)) 
@@ -479,85 +423,97 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 					}	
 					ret = _ATERROR;
 					goto GU906_SENDATRET;					
-				}else if(strstr(buff, "ERROR")) {
+				}
+				else if(strstr(gprs_buff->pdata, "ERROR")) 
+				{
 					ret = _ATERROR;
                     goto GU906_SENDATRET;
 				}
 				break;
 
-            case _ATCIPSEND:
-                if (strstr(buff, ">")) {
+            case _ATCIPSEND://发送数据命令
+                if (strstr(gprs_buff->pdata, ">")) 
+				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-                else if (strstr(buff, "ERROR")){
+                else if (strstr(gprs_buff->pdata, "ERROR")){
                     ret = _ATERROR;
                     goto GU906_SENDATRET;
                 }
             break;
 
-            case _ATCIPMUX:
-                if(strstr(buff, "+CIPMUX: 0") && strstr(buff, "OK")) {
+            case _ATCIPMUX://设置多链接命令
+                if(strstr(gprs_buff->pdata, "+CIPMUX: 0") && strstr(gprs_buff->pdata, "OK")) 
+				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
-                }else if (strstr(buff, "ERROR")){
+                }
+				else if (strstr(gprs_buff->pdata, "ERROR"))
+				{
                     ret = _ATERROR;
                     goto GU906_SENDATRET;
                 }
 				break;
 
-            case _ATCIPMODE:
-                if(strstr(buff, "+CIPMODE: ") && strstr(buff, "OK")) {
+            case _ATCIPMODE://设置数据透传模式
+                if(strstr(gprs_buff->pdata, "+CIPMODE: ") && strstr(gprs_buff->pdata, "OK")) 
+				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
-                }else if (strstr(buff, "ERROR")){
+                }else if (strstr(gprs_buff->pdata, "ERROR"))
+				{
                     ret = _ATERROR;
                     goto GU906_SENDATRET;
                 }
 				break;
 
             case _GPRSSEND:
-                if(strstr(buff, "SEND OK")) {
+                if(strstr(gprs_buff->pdata, "SEND OK")) 
+				{
                    ret = _ATOK;
                    goto GU906_SENDATRET;
                 }
             break;
 
-            case _ATCMGR:
-                GetRecvData(buff, &siz);
+            case _ATCMGR://读出消息
+                gu906_GetRecvData(gprs_buff->pdata, &siz);
                 ret = _ATOK;
                 goto GU906_SENDATRET;
             //break; 
 
-            case _ATCIPCLOSE:
-                if (strstr(buff, "CLOSE OK") || strstr(buff, "+CME ERROR:")) {
+            case _ATCIPCLOSE://关闭链接命令
+                if (strstr(gprs_buff->pdata, "CLOSE OK") || strstr(gprs_buff->pdata, "+CME ERROR:")) 
+				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-                else if(strstr(buff, "ERROR")){
+                else if(strstr(gprs_buff->pdata, "ERROR")){
                     ret = _ATERROR;
                     goto GU906_SENDATRET;   
                 }
             break;
 
-            case _ATCIPSTART:
+            case _ATCIPSTART://打开TCP或者UDP链接命令
                 if(!GPRS_Dtu_ConLock)
                 {
-                    if(strstr(buff, "CONNECT OK")){
+                    if(strstr(gprs_buff->pdata, "CONNECT OK"))
+					{
                         ret = _ATOK;
                         goto GU906_SENDATRET;
                     }
-                    else if(strstr(buff, "RECONNECTING") || strstr(buff, "ERROR") || strstr(buff, "CONNECT FAIL")){
+                    else if(strstr(gprs_buff->pdata, "RECONNECTING") || strstr(gprs_buff->pdata, "ERROR") || strstr(gprs_buff->pdata, "CONNECT FAIL"))
+					{
                         GetFreeBuff(100);
                         ret = _ATERROR;
                         goto GU906_SENDATRET;
                     }                    
                 }
-                else if(strstr(buff, "OK")){
+                else if(strstr(gprs_buff->pdata, "OK")){
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-				else if(strstr(buff, "ERROR")){
+				else if(strstr(gprs_buff->pdata, "ERROR")){
                     ret = _ATERROR;
                     goto GU906_SENDATRET;   
                 }
@@ -567,32 +523,22 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
                 GetFreeBuff(100);
                 ret = _ATOK;
                 goto GU906_SENDATRET; //??????
-                /*
-                if(strstr(buff, "+CMGS:")) {
-                    if(strstr(buff, "OK"))
-                        return _ATOK;
-                    lock = 1;
-                }
-                else if(lock && strstr(buff, "OK")) {
-                    return _ATOK;
-                }else return _ATOK; //??????
-                break;
-                */
+			
 			case _ATCIPSCONT_C:
-				if(strstr(buff,"OK"))
+				if(strstr(gprs_buff->pdata, "OK"))
 				{
-					printf("Line:%d\r\n",__LINE__);
-					if(0 != (p = strstr(buff,"+CIPMODE: ")))
+//					printf("Line:%d\r\n",__LINE__);
+					if(0 != (p = strstr(gprs_buff->pdata, "+CIPMODE: ")))
 					{
 						p += 10;
 						printf("Line:%d\r\n",__LINE__);
 						if(1 == (*p -'0'))
 						{
 							printf("Line:%d\r\n",__LINE__);
-							if(0 != (p = strstr(buff,"+CIPSTART: ")))
+							if(0 != (p = strstr(gprs_buff->pdata, "+CIPSTART: ")))
 							{
 								printf("Line:%d\r\n",__LINE__);
-								if(strstr(buff,"218.66.59.201") && strstr(buff,"8888"))
+								if(strstr(gprs_buff->pdata,"218.66.59.201") && strstr(gprs_buff->pdata,"8888"))
 								{
 									printf("DTU OK\r\n");
 									GPRS_Dtu_ConLock = 1;
@@ -605,7 +551,9 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 					GPRS_Dtu_ConLock = 0;
 					ret = _ATOK;
 					goto GU906_SENDATRET;
-				}else if(strstr(buff, "ERROR")){
+				}
+				else if(strstr(gprs_buff->pdata, "ERROR"))
+				{
                     ret = _ATERROR;
                     goto GU906_SENDATRET;   
                 }
@@ -620,10 +568,10 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 
 /*********************************************************
   * @function  GU906_ExecuteOrder
-  * @role      ????
+  * @role      执行命令
   * @input     None
   * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
+  * @return    成功返回：_ATOK，失败返回：_ATERROR，超时返回：_ATOTIME
   ********************************************************/
 static s8 GU906_ExecuteOrder(char *Order, u32 len, enum order type, u32 num)
 {
@@ -642,10 +590,17 @@ static s8 GU906_ExecuteOrder(char *Order, u32 len, enum order type, u32 num)
     gprs.type = type;
 	while((ret = SendAT(&gprs, NULL, delay_time)) != _ATOK)
 	{
-		if(ret == _ATERROR) {
-			if(++i >= num) return _ATERROR;
-			delay_s(1);
-		}else return _ATOTIME;
+		if(ret == _ATERROR) 
+		{
+			if(++i >= num)
+			{
+				return _ATERROR;
+			}
+		}
+		else 
+		{
+			return _ATOTIME;
+		}
 	}
 	return _ATOK;
 }
@@ -657,37 +612,19 @@ static s8 GU906_ExecuteOrder(char *Order, u32 len, enum order type, u32 num)
   * @output    None
   * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
   ********************************************************/
-s8 GU906_init(void)
+s8 gu906_init(void)
 {
 	s8 ret = _ATOTIME;
 
-    // ???:ATE1 ???:ATE0
+    // 开回显:ATE1 关回显:ATE0
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATE(0), strlen(ATE(0)), _ATE, 2)))
 		return ret;
 	
-	// ???????
+	// 查询卡是否存在
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATESIM, strlen(ATESIM), _ATESIM, 10))) 
 		return ret;
-
-#if GU906GSM_EN
-    // ???????text??
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATCMGF, strlen(ATCMGF), _ATCMGF, 2))) 
-		return ret;
-
-    // ?????????SIM?
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATCPMS, strlen(ATCPMS), _ATCPMS, 2))) 
-		return ret;
-
-    // ???????????????
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATCNMI, strlen(ATCNMI), _ATCNMI, 2))) 
-		return ret;
-#endif
     
-    //??SIM???????
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATCMGD, strlen(ATCMGD), _ATCMGD, 2))) 
-		return ret;
-
-    //?????? ????????18??
+    //查询信号强度 信号强度大于等于18才行
 	while(_ATOK != (ret = GU906_ExecuteOrder(ATCSQ, strlen(ATCSQ), _ATCSQ, 60)))
 	{
 		if(ret == _ATOTIME) return ret;
@@ -697,10 +634,10 @@ s8 GU906_init(void)
 
 /*********************************************************
   * @function  GU906_Module_State
-  * @role      ??GU906???
+  * @role      判断GU906的状态
   * @input     None
   * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
+  * @return    成功返回：_ATOK，失败返回：_ATERROR，超时返回：_ATOTIME
   ********************************************************/
 s8 GU906_Module_State(void)
 {
@@ -709,10 +646,10 @@ s8 GU906_Module_State(void)
 
 /*********************************************************
   * @function  GU906_TCP_Socket
-  * @role      ??TCP??
-  * @input     IP?????
+  * @role      进行TCP连接
+  * @input     IP地址与端口
   * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
+  * @return    成功返回：_ATOK，失败返回：_ATERROR，超时返回：_ATOTIME
   ********************************************************/
 s8 GU906_TCP_Socket(struct Gprs_Config *GprsCon)
 {
@@ -722,58 +659,55 @@ s8 GU906_TCP_Socket(struct Gprs_Config *GprsCon)
     if(GprsCon->server_ip == NULL || !GprsCon->server_port) return ret;
     if(!strlen((char *)GprsCon->server_ip)) return ret;
 	
-    //?????????GSM??
+    //确保模块以及注册到GSM网络
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATCREG, strlen(ATCREG), _ATCREG, 2))) 
 		return ret;
 
-    //????? GPRS ??,??????? TCP ??????????
+    //让模块激活 GPRS 网络，在需要反复建立 TCP 链接的场合可提高速度
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATCIICR, strlen(ATCIICR), _ATCIICR, 2))) 
 		return ret;
 	
-    //???????????
+    //查询当前是否有网络连接
 	while(_ATOK == GU906_ExecuteOrder(ATCIPSTARTOK, strlen(ATCIPSTARTOK), _ATCIPSTARTOK, 0)) 
 	{
-		//??????
+		//关闭网络连接
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPCLOSE, strlen(ATCIPCLOSE), _ATCIPCLOSE, 2))) 
 			return ret;
 		
-		//????
+		//保存设置
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPSCONT(0), strlen(ATCIPSCONT(0)), _ATCIPSCONT, 2))) 
 			return ret;
 	}
  
-    //?????
+    //单链接模式
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPMUX, strlen(ATCIPMUX), _ATCIPMUX, 2))) 
 		return ret;
 
-    //????????
+    //非数据透传输模式
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPMODE(0), strlen(ATCIPMODE(0)), _ATCIPMODE, 2))) 
 		return ret;
 
-    //????????
+    //自动启动连接命令
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPCFG(0), strlen(ATCIPCFG(0)), _ATCIPCFG, 2))) 
 		return ret;
 
-    //?????
+    //心跳包设置
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPPACK(0), strlen(ATCIPPACK(0)), _ATCIPPACK, 2))) 
 		return ret;
 	
-    //??????
-    //cipstart=(char *)mymalloc(100); 
-    //if(cipstart==NULL) return -1; 
+    //连接到服务器
     sprintf(cipstart, ATCIPSTART,"TCP", GprsCon->server_ip, GprsCon->server_port);
 	ret = GU906_ExecuteOrder(cipstart, strlen(cipstart), _ATCIPSTART, 3);
 	
-    //myfree(cipstart);
     return ret;
 }
 
 /*********************************************************
   * @function  GU906_DTU_Socket
-  * @role      ??????
-  * @input     IP?????
+  * @role      设置透传模式
+  * @input     IP地址与端口
   * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
+  * @return    成功返回：_ATOK，失败返回：_ATERROR，超时返回：_ATOTIME
   ********************************************************/
 s8 GU906_DTU_Socket(struct Gprs_Config *GprsCon)
 {
@@ -783,40 +717,37 @@ s8 GU906_DTU_Socket(struct Gprs_Config *GprsCon)
     if(GprsCon->server_ip == NULL || !GprsCon->server_port) return ret;
     if(!strlen((char *)GprsCon->server_ip)) return ret;
     
-    //atorder=(char *)mymalloc(100); 
-    //if(atorder==NULL) return -1; 
-    
-    //?????????
+    //查询数据透设置情况
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPSCONT_C, strlen(ATCIPSCONT_C), _ATCIPSCONT_C, 2))) 
 		goto GU906_DTU_SOCKETEND;
  
     if(!GPRS_Dtu_ConLock)
 	{
-		//????
+		//账号配置
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCSTT, strlen(ATCSTT), _ATCSTT, 2))) 
 			goto GU906_DTU_SOCKETEND;
 		
-		//??????
+		//透传参数设置
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPCFG(1), strlen(ATCIPCFG(1)), _ATCIPCFG, 2))) 
 			goto GU906_DTU_SOCKETEND;
 		
-		//????
+		//设置心跳
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPPACK(0), strlen(ATCIPPACK(0)), _ATCIPPACK, 2))) 
 			goto GU906_DTU_SOCKETEND;
 		
-		//???????
+		//设置设备注册包
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPPACK(1), strlen(ATCIPPACK(1)), _ATCIPPACK, 2))) 
 			goto GU906_DTU_SOCKETEND;
 		
-		//?????
+		//单链接模式
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPMUX, strlen(ATCIPMUX), _ATCIPMUX, 2))) 
 			goto GU906_DTU_SOCKETEND;
 
-		//???????
+		//数据透传输模式
 		if(_ATOK != (ret = GU906_ExecuteOrder(ATCIPMODE(1), strlen(ATCIPMODE(1)), _ATCIPMODE, 2))) 
 			goto GU906_DTU_SOCKETEND;
 
-		//????
+		//保存设置
 		sprintf(atorder, ATCIPSCONT(1),"TCP", GprsCon->server_ip, GprsCon->server_port);
 		if(_ATOK != (ret = GU906_ExecuteOrder(atorder, strlen(atorder), _ATCIPSCONT, 2))) 
 			goto GU906_DTU_SOCKETEND;
@@ -824,32 +755,31 @@ s8 GU906_DTU_Socket(struct Gprs_Config *GprsCon)
 		GPRS_Dtu_ConLock = 1;
 	}
 
-    //???????
+    //建立数据透连接
     sprintf(atorder, ATCIPSTART, "TCP", GprsCon->server_ip, GprsCon->server_port);
 	if(_ATOK != (ret = GU906_ExecuteOrder(atorder, strlen(atorder), _ATCIPSTART, 2))) 
 		goto GU906_DTU_SOCKETEND;
 
     GU906_DTU_SOCKETEND:
-    //myfree(atorder);
+
     return ret;
 }
 
 /*********************************************************
   * @function  GU906_DtuOrAT
-  * @role      ?????AT????
+  * @role      透传模式与AT模式转换
   * @input     None
   * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
+  * @return    成功返回：_ATOK，失败返回：_ATERROR，超时返回：_ATOTIME
   ********************************************************/
-s8 GU906_DtuOrAT(u8 type)
+s8 gu906_DtuOrAT(u8 type)
 {
     s8 ret = _ATERROR;
 	if(type)
 	{
 		while(!GPRS_Dtu_ConLock)
 		{
-			//????
-			delay_s(2);
+			//打开透传
 			if(_ATOK != (ret = GU906_ExecuteOrder(OPENDTU, strlen(OPENDTU), _OPENDTU, 0))) 
 				goto GU906_DTUOFFONEND;
 			GPRS_Dtu_ConLock = 1;
@@ -859,11 +789,9 @@ s8 GU906_DtuOrAT(u8 type)
 	{
 		while(GPRS_Dtu_ConLock)
 		{
-			//????
-			delay_s(2);
+			//关闭透传
 			if(_ATOK != (ret = GU906_ExecuteOrder(CLOSEDTU, strlen(CLOSEDTU), _CLOSEDTU, 0)))
 			{
-				delay_s(1);
 				if(_ATOK != (GU906_Module_State()))
 					goto GU906_DTUOFFONEND;	
 			}
@@ -876,64 +804,66 @@ s8 GU906_DtuOrAT(u8 type)
 }
 /*********************************************************
   * @function  GU906_GPRS_write
-  * @role      gprs????
-  * @input     ???????????
+  * @role      gprs发送数据
+  * @input     要发送的数据与数据长度
   * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
+  * @return    成功返回：_ATOK，失败返回：_ATERROR，超时返回：_ATOTIME
   ********************************************************/
-s8 GU906_GPRS_write(char* pdat, int len)
+s8 gu906_gprs_write(char* pdat, int len)
 {
     char atorder[20] = "";
     s8 ret = -1;
     if(strlen(pdat) == 0) return 0;
 	
-    //atorder = (char *)mymalloc(20); 
-    //if(atorder == NULL) return -1; 
-	
-	if(!GPRS_Dtu_ConLock)//??????
+ 
+	if(!GPRS_Dtu_ConLock)//非数据透模式
 	{
-		//??????
+		//设置数据长度
 		sprintf(atorder, ATCIPSEND(1), len);
 		if(_ATOK != (ret = GU906_ExecuteOrder(atorder, strlen(atorder), _ATCIPSEND, 0))) 
 			goto GU906_GPRS_WRITERET;
 		
-		//????
+		//发送数据
 		if(_ATOK != (ret = GU906_ExecuteOrder(pdat, len, _GPRSSEND, 0))) 
 			goto GU906_GPRS_WRITERET;
 	}
-	else
+	else		//数据透传模式
 	{
-		//????
-		usart4_Send(pdat, len);
+		//发送数据
+		usart_send(USART2, pdat, len);
 		ret = _ATOK;
 	}
+	
     GU906_GPRS_WRITERET:
-    //myfree(atorder);
     return ret;
 }
 
 /*********************************************************
   * @function  GU906_GPRS_read
-  * @role      ?????????
-  * @input     ??????
-  * @output    ??????
-  * @return    ????????
+  * @role      查询是否接收到数据
+  * @input     输出缓存大小
+  * @output    接收到的数据
+  * @return    接收到的数据长度
   ********************************************************/
-u32 GU906_GPRS_read(char *pout, int len)
+u32 gu906_gprs_read(char *pout, int len)
 {
     int i = 0;
 	
 	if(!GPRS_Dtu_ConLock)
 	{
 		GPRSREAD:
-		if(GPRS_Dlen){
-			for(i = 0;(i < GPRS_Dlen) && (i < (len -1)); i++){
+		if(GPRS_Dlen)
+		{
+			for(i = 0;(i < GPRS_Dlen) && (i < (len -1)); i++)
+			{
 				pout[i] = GPRS_Data[i];
 			}
 			memset(GPRS_Data, 0, sizeof(GPRS_Data));
 			GPRS_Dlen = 0;
 			return i;
-		}else{
+		}
+		else
+		{
 			GetFreeBuff(1);
 			if(GPRS_Dlen)
 				goto GPRSREAD;
@@ -941,170 +871,147 @@ u32 GU906_GPRS_read(char *pout, int len)
 	}
 	else
 	{
-		return usart4_Receive(pout,len);
+		
+		usart2_recv_data();
 	}
     return 0;
 }
 
-/*********************************************************
-  * @function  GU906_make_phone
-  * @role      ????????
-  * @input     ???
-  * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
-  ********************************************************/
-s8 GU906_make_phone(char *phone)
-{
-    char mphone[20]="";
-    sprintf(mphone, ATATD, phone);  
-    return GU906_ExecuteOrder(mphone, strlen(mphone), _ATATD, 0);
-}
 
-/*********************************************************
-  * @function  GU906_Answer_Phone
-  * @role      ???????
-  * @input     ???
-  * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
-  ********************************************************/
-s8 GU906_Answer_Phone(u32 Delay)
+static void gprs_init_task_fun(struct Gprs_Config *GprsCon)
 {
-	int siz = 0;
-	u32 i = 0;
-	char buff[MAXRECVBUFF] = "";
+
+	u8 atorder[100] = {0};
+	s8 ret;
 	
-	i = 0;
+	static uint8_t gprs_init_flag = true;		//
+		
 	while(1)
 	{
-		siz = 0;
-		siz = usart4_Receive(buff,MAXRECVBUFF);
-		if(siz){
-			GetRecvData(buff, &siz);
-			if(strstr(buff, "+COLP:") && strstr(buff, "OK")){
-				return _ATOK;
-			}else if(strstr(buff, "NO CARRIER") || strstr(buff, "+CREG: 1") || strstr(buff, "ERROR")){
-				return _ATERROR;
-			}
-		}
-		if(i++ > Delay) 
+		
+		switch(gprs_status)
 		{
-			return _ATOTIME;
-		}
-	}
-}		
-/*********************************************************
-  * @function  GU906_end_phone
-  * @role      ??
-  * @input     None
-  * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
-  ********************************************************/
-s8 GU906_end_phone(void)
-{
-    return GU906_ExecuteOrder(ATATH, strlen(ATATH), _ATATH, 0);
+			case 0:
+				gprs_power_on();
+				gprs_status = 1;
+				gprs_err_cnt = 0;
+			break;
+					
+			case 1://查询数据透设置情况
+				ret = GU906_ExecuteOrder(ATCIPSCONT_C, strlen(ATCIPSCONT_C), _ATCIPSCONT_C, 2);
+				if (ret == _ATOK)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+			
+			case 2://账号配置
+				ret = ret = GU906_ExecuteOrder(ATCSTT, strlen(ATCSTT), _ATCSTT, 2);
+				if(ret == _ATOK)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+			
+			case 3:	//透传参数设置	
+				ret = GU906_ExecuteOrder(ATCIPCFG(1), strlen(ATCIPCFG(1)), _ATCIPCFG, 2);
+				if (ret == _ATOK)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+			
+			case 4://单链接模式
+				ret = GU906_ExecuteOrder(ATCIPMUX, strlen(ATCIPMUX), _ATCIPMUX, 2);
+				if (ret == _ATOK)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+			
+			case 5://数据透传输模式				
+				ret = GU906_ExecuteOrder(ATCIPMODE(1), strlen(ATCIPMODE(1)), _ATCIPMODE, 2); 
+				if (ret == _ATOK)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+			
+			case 6://建立数据透传连接
+				sprintf(atorder, ATCIPSTART, "TCP", GprsCon->server_ip, GprsCon->server_port);
+				ret = GU906_ExecuteOrder(atorder, strlen(atorder), _ATCIPSTART, 2);
+
+				if (ret == _ATOK)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+			
+			case 7: //GPRS初始化成功
+				gprs_status = 255;	
+			break;
+				
+			default:
+			break;		
+		}	//switch end			
+	} // while end
+	
+		
 }
 
-#if GU906GSM_EN
-/*********************************************************
-  * @function  GU906_Chinese_text
-  * @role      ????????????
-  * @input     phone ?????,pmsg ?????
-  * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME
-  ********************************************************/
-s8 GU906_Chinese_text(char *phone,char* pmsg)
-{
-	s8 ret = _ATOTIME;
-    char atphone[50] = "";
-    char end[]={0x1A,0x00};
-	
-    if(strlen(phone) != 11)  return _ATERROR;
-    //atphone = (char *)mymalloc(50); 
-    //if(atphone == NULL) return -1; 
-	
-    //??????txet??
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATCMGF, strlen(ATCMGF), _ATCMGF, 2))) 
-		goto GU906_CHINESE_TEXTEND;
-    
-    //??GB2312??
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATGB2312, strlen(ATGB2312), _ATGB2312, 2))) 
-		goto GU906_CHINESE_TEXTEND;
-	
-    //??????????????? 
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATCNMI, strlen(ATCNMI), _ATCNMI, 2))) 
-		goto GU906_CHINESE_TEXTEND;
-	
-    //???????
-	sprintf(atphone,ATCMGS,phone);
-	if(_ATOK != (ret = GU906_ExecuteOrder(atphone, strlen(atphone), _ATCMGS, 2))) 
-		goto GU906_CHINESE_TEXTEND;
-	
-    //????
-	if(_ATOK == (ret = GU906_ExecuteOrder(pmsg, strlen(pmsg), _GSMSEND, 0))) 
-	{
-		ret = GU906_ExecuteOrder(end, 1, _GSMSENDEND, 0);
-	}
-	GU906_CHINESE_TEXTEND:
-	//myfree(atphone);
-    return ret;
-}
 
-/*********************************************************
-  * @function  GU906_Read_SIM
-  * @role      ??????
-  * @input     ???SIM?????
-  * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME 
-  ********************************************************/
-static s8 GU906_Read_SIM(char *pnum)
-{
-	s8 ret = _ATOTIME;
-    char cmgr[20]="";
-    //??????????GB2312
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATGB2312, strlen(ATGB2312), _ATGB2312, 2))) 
-		return ret;
-	
-    //?????
-    sprintf(cmgr,ATCMGR,pnum);
-    return GU906_ExecuteOrder(cmgr, strlen(cmgr), _ATCMGR, 2);
-}
 
-/*********************************************************
-  * @function  GU906_DeleteSms
-  * @role      ??SIM???????
-  * @input     None
-  * @output    None
-  * @return    ????:_ATOK,????:_ATERROR,????:_ATOTIME 
-  ********************************************************/
-static int GU906_DeleteSms(void)
-{
-    return GU906_ExecuteOrder(ATCMGD, strlen(ATCMGD), _ATCMGD, 2);
-}
-
-/*********************************************************
-  * @function  GU906_Read_UserSMS
-  * @role      ?????????
-  * @input     None
-  * @output    None
-  * @return    0,??????,-1,???????
-  ********************************************************/
-s8 GU906_Read_UserSMS(void)
-{
-    SMSREAD:
-    if(strlen(SIMDataID)){
-        #if DEBUG_EN
-        printf("SIMDataID[%s]\r\n",SIMDataID);
-        #endif
-        GU906_Read_SIM(SIMDataID);
-        GU906_DeleteSms();
-        memset(SIMDataID,0,sizeof(SIMDataID));
-        return 0;
-    }else{
-        GetFreeBuff(1);
-        if(strlen(SIMDataID))
-            goto SMSREAD;
-    }
-    return -1;
-}
-#endif
 

@@ -37,3 +37,5 @@
 .\objects\gu906.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\gu906.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\gu906.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
+.\objects\gu906.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\gu906.o: ..\driver\usart.h
