@@ -12,7 +12,7 @@
 #include "aes128.h"
 #include "app_md5.h"
 #include "button.h"
-
+#include "gu906.h"
 
 
 
@@ -94,7 +94,7 @@ int main(void)
                          
 	USART_OUT(USART1, "uart1 is ok\r\n");
 
-	
+	gu906_init();
 	
 	while(1)
 	{

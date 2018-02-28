@@ -2,9 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "stdio.h"
-//#include "delay.h"
-//#include "config.h"
-//#include "usart4.h"
 #include "gu906.h"
 #include "usart.h"
 
@@ -275,7 +272,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
     p = NULL;
  
 	
-	usart_send(USART2, gprs->order, gprs->olen);
+	usart_send(USART1, gprs->order, gprs->olen);
 	
     if((gprs->type == _GSMSEND) || (gprs->type == _ATATD)) 
     {
@@ -290,7 +287,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 		
         while(gprs_buff->index == 0)
         {
-			usart2_recv_data();
+			usart1_recv_data();
         }
         
         if(RestartGprs){
@@ -359,7 +356,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
             case _ATCMGS: //发送消息
                 if(strstr(gprs_buff->pdata, ">"))
 				{
-                    GetFreeBuff(1);
+//                    GetFreeBuff(1);
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
@@ -522,25 +519,23 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
             case _GSMSENDEND: 
                 GetFreeBuff(100);
                 ret = _ATOK;
-                goto GU906_SENDATRET; //??????
+                goto GU906_SENDATRET; //
 			
 			case _ATCIPSCONT_C:
 				if(strstr(gprs_buff->pdata, "OK"))
 				{
-//					printf("Line:%d\r\n",__LINE__);
 					if(0 != (p = strstr(gprs_buff->pdata, "+CIPMODE: ")))
 					{
 						p += 10;
-						printf("Line:%d\r\n",__LINE__);
+
 						if(1 == (*p -'0'))
 						{
-							printf("Line:%d\r\n",__LINE__);
+
 							if(0 != (p = strstr(gprs_buff->pdata, "+CIPSTART: ")))
 							{
-								printf("Line:%d\r\n",__LINE__);
+
 								if(strstr(gprs_buff->pdata,"218.66.59.201") && strstr(gprs_buff->pdata,"8888"))
-								{
-									printf("DTU OK\r\n");
+								{								
 									GPRS_Dtu_ConLock = 1;
 									ret = _ATOK;
 									goto GU906_SENDATRET;
@@ -592,10 +587,10 @@ static s8 GU906_ExecuteOrder(char *Order, u32 len, enum order type, u32 num)
 	{
 		if(ret == _ATERROR) 
 		{
-			if(++i >= num)
-			{
-				return _ATERROR;
-			}
+//			if(++i >= num)
+//			{
+//				return _ATERROR;
+//			}
 		}
 		else 
 		{
@@ -619,16 +614,16 @@ s8 gu906_init(void)
     // 开回显:ATE1 关回显:ATE0
 	if(_ATOK != (ret = GU906_ExecuteOrder(ATE(0), strlen(ATE(0)), _ATE, 2)))
 		return ret;
-	
-	// 查询卡是否存在
-	if(_ATOK != (ret = GU906_ExecuteOrder(ATESIM, strlen(ATESIM), _ATESIM, 10))) 
-		return ret;
-    
-    //查询信号强度 信号强度大于等于18才行
-	while(_ATOK != (ret = GU906_ExecuteOrder(ATCSQ, strlen(ATCSQ), _ATCSQ, 60)))
-	{
-		if(ret == _ATOTIME) return ret;
-	}
+//	
+//	// 查询卡是否存在
+//	if(_ATOK != (ret = GU906_ExecuteOrder(ATESIM, strlen(ATESIM), _ATESIM, 10))) 
+//		return ret;
+//    
+//    //查询信号强度 信号强度大于等于18才行
+//	while(_ATOK != (ret = GU906_ExecuteOrder(ATCSQ, strlen(ATCSQ), _ATCSQ, 60)))
+//	{
+//		if(ret == _ATOTIME) return ret;
+//	}
     return _ATOK;  
 }
 

@@ -90,17 +90,12 @@ s8 GU906_Read_UserSMS(void);
 s8 GU906_Chinese_text(char *phone,char* pmsg);
 #endif
 
-s8  GU906_init(void);
-s8  GU906_Module_State(void);
-s8  GU906_TCP_Socket(struct Gprs_Config *GprsCon);
-s8  GU906_DTU_Socket(struct Gprs_Config *GprsCon);
-s8  GU906_GPRS_write(char* pdat, int len);
-uint32_t GU906_GPRS_read(char *pout, int len);
-
-s8  GU906_make_phone(char *phone);
-s8  GU906_Answer_Phone(uint32_t Delay);
-s8  GU906_end_phone(void);
-s8  GU906_DtuOrAT(uint8_t type);
+s8  gu906_init(void);
+s8  gu906_Module_State(void);
+s8  gu906_TCP_Socket(struct Gprs_Config *GprsCon);
+s8  gu906_DTU_Socket(struct Gprs_Config *GprsCon);
+s8  gu906_GPRS_write(char* pdat, int len);
+uint32_t gu906_GPRS_read(char *pout, int len);
 
 
 #endif

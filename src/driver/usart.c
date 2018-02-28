@@ -270,8 +270,9 @@ void usart1_recv_data(void)
 //		USART_OUT(USART2, usart1_buff);
 		USART_OUT(USART1, usart1_rx_buff->pdata);
 		
+		memcpy(gprs_buff, usart2_rx_buff->pdata, 512);
+		
 		memset(usart1_rx_buff, 0, sizeof(usart_buff_t));
-
 	}
 
 }
