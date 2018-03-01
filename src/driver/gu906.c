@@ -314,12 +314,12 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 			case _OPENDTU:
             case _CLOSEDTU:
             case _ATGB2312: //
-                if(strstr(gprs_buff->pdata, "OK"))
+                if(strstr((char*)gprs_buff->pdata, "OK"))
 				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-				else if(strstr(gprs_buff->pdata, "ERROR") || strstr(gprs_buff->pdata,"NO CARRIER")) 
+				else if(strstr((char*)gprs_buff->pdata, "ERROR") || strstr((char*)gprs_buff->pdata,"NO CARRIER")) 
 				{
                     GetFreeBuff(100);
                     ret = _ATERROR;
@@ -328,11 +328,11 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
             break;
                 
             case _ATCPMS:	//优选消息存储器
-				if(strstr(gprs_buff->pdata, "OK") && strstr(gprs_buff->pdata, "+CPMS:"))
+				if(strstr((char*)gprs_buff->pdata, "OK") && strstr((char*)gprs_buff->pdata, "+CPMS:"))
 				{
 					 ret = _ATOK;
                      goto GU906_SENDATRET;
-				}else if(strstr(gprs_buff->pdata, "ERROR"))
+				}else if(strstr((char*)gprs_buff->pdata, "ERROR"))
 				{
 					ret = _ATERROR;
                     goto GU906_SENDATRET;
@@ -341,9 +341,9 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				
             case _ATESIM://测试SIM卡是否存在
 				ret = _ATERROR;
-				if(strstr(gprs_buff->pdata, "OK"))
+				if(strstr((char*)gprs_buff->pdata, "OK"))
 				{
-					if((p = strstr(gprs_buff->pdata, "+ESIMS: ")) != 0)
+					if((p = strstr((char*)gprs_buff->pdata, "+ESIMS: ")) != 0)
 					{
 						p += 8;
 						if(1 == (*p -'0'))
@@ -354,7 +354,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				break;
             
             case _ATCMGS: //发送消息
-                if(strstr(gprs_buff->pdata, ">"))
+                if(strstr((char*)gprs_buff->pdata, ">"))
 				{
 //                    GetFreeBuff(1);
                     ret = _ATOK;
@@ -363,9 +363,9 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				break;
 
             case _ATCSQ://查询信号质量
-				if(strstr(gprs_buff->pdata, "OK"))
+				if(strstr((char*)gprs_buff->pdata, "OK"))
 				{
-					if((p = strstr(gprs_buff->pdata, "+CSQ:")) != 0)
+					if((p = strstr((char*)gprs_buff->pdata, "+CSQ:")) != 0)
 					{
 						gprs_ascii_to_hex((u8 *)(p+6), dat, 2);
 						csq = dat[0]*10 + dat[1];
@@ -390,16 +390,16 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				break;
 
             case _ATCIPSTARTOK:	//查询当前模块是否有网络连接 
-				if(strstr(gprs_buff->pdata, "OK"))
+				if(strstr((char*)gprs_buff->pdata, "OK"))
 				{
-					if (strstr(gprs_buff->pdata, "+CIPSTART:")) 
+					if (strstr((char*)gprs_buff->pdata, "+CIPSTART:")) 
 					{
 						ret = _ATOK;
 						goto GU906_SENDATRET;
 					}	
 					ret = _ATERROR;
 					goto GU906_SENDATRET;					
-				}else if(strstr(gprs_buff->pdata, "ERROR")) 
+				}else if(strstr((char*)gprs_buff->pdata, "ERROR")) 
 				{
 					ret = _ATERROR;
                     goto GU906_SENDATRET;
@@ -407,9 +407,9 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				break;				
 			
             case _ATCREG://查询网络注册信息
-				if(strstr(gprs_buff->pdata, "OK"))
+				if(strstr((char*)gprs_buff->pdata, "OK"))
 				{
-					if ((p = strstr(gprs_buff->pdata, "+CREG: ")) != 0)
+					if ((p = strstr((char*)gprs_buff->pdata, "+CREG: ")) != 0)
 					{
 						p += 7;
 						if(('0' == *p) || ('5' == *p)) 
@@ -421,7 +421,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 					ret = _ATERROR;
 					goto GU906_SENDATRET;					
 				}
-				else if(strstr(gprs_buff->pdata, "ERROR")) 
+				else if(strstr((char*)gprs_buff->pdata, "ERROR")) 
 				{
 					ret = _ATERROR;
                     goto GU906_SENDATRET;
@@ -429,24 +429,24 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				break;
 
             case _ATCIPSEND://发送数据命令
-                if (strstr(gprs_buff->pdata, ">")) 
+                if (strstr((char*)gprs_buff->pdata, ">")) 
 				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-                else if (strstr(gprs_buff->pdata, "ERROR")){
+                else if (strstr((char*)gprs_buff->pdata, "ERROR")){
                     ret = _ATERROR;
                     goto GU906_SENDATRET;
                 }
             break;
 
             case _ATCIPMUX://设置多链接命令
-                if(strstr(gprs_buff->pdata, "+CIPMUX: 0") && strstr(gprs_buff->pdata, "OK")) 
+                if(strstr((char*)gprs_buff->pdata, "+CIPMUX: 0") && strstr(gprs_buff->pdata, "OK")) 
 				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-				else if (strstr(gprs_buff->pdata, "ERROR"))
+				else if (strstr((char*)gprs_buff->pdata, "ERROR"))
 				{
                     ret = _ATERROR;
                     goto GU906_SENDATRET;
@@ -454,11 +454,11 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				break;
 
             case _ATCIPMODE://设置数据透传模式
-                if(strstr(gprs_buff->pdata, "+CIPMODE: ") && strstr(gprs_buff->pdata, "OK")) 
+                if(strstr((char*)gprs_buff->pdata, "+CIPMODE: ") && strstr((char*)gprs_buff->pdata, "OK")) 
 				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
-                }else if (strstr(gprs_buff->pdata, "ERROR"))
+                }else if (strstr((char*)gprs_buff->pdata, "ERROR"))
 				{
                     ret = _ATERROR;
                     goto GU906_SENDATRET;
@@ -466,7 +466,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 				break;
 
             case _GPRSSEND:
-                if(strstr(gprs_buff->pdata, "SEND OK")) 
+                if(strstr((char*)gprs_buff->pdata, "SEND OK")) 
 				{
                    ret = _ATOK;
                    goto GU906_SENDATRET;
@@ -474,18 +474,18 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
             break;
 
             case _ATCMGR://读出消息
-                gu906_GetRecvData(gprs_buff->pdata, &siz);
+                gu906_GetRecvData((char*)gprs_buff->pdata, &siz);
                 ret = _ATOK;
                 goto GU906_SENDATRET;
             //break; 
 
             case _ATCIPCLOSE://关闭链接命令
-                if (strstr(gprs_buff->pdata, "CLOSE OK") || strstr(gprs_buff->pdata, "+CME ERROR:")) 
+                if (strstr((char*)gprs_buff->pdata, "CLOSE OK") || strstr((char*)gprs_buff->pdata, "+CME ERROR:")) 
 				{
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-                else if(strstr(gprs_buff->pdata, "ERROR")){
+                else if(strstr((char*)gprs_buff->pdata, "ERROR")){
                     ret = _ATERROR;
                     goto GU906_SENDATRET;   
                 }
@@ -494,23 +494,23 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
             case _ATCIPSTART://打开TCP或者UDP链接命令
                 if(!GPRS_Dtu_ConLock)
                 {
-                    if(strstr(gprs_buff->pdata, "CONNECT OK"))
+                    if(strstr((char*)gprs_buff->pdata, "CONNECT OK"))
 					{
                         ret = _ATOK;
                         goto GU906_SENDATRET;
                     }
-                    else if(strstr(gprs_buff->pdata, "RECONNECTING") || strstr(gprs_buff->pdata, "ERROR") || strstr(gprs_buff->pdata, "CONNECT FAIL"))
+                    else if(strstr((char*)gprs_buff->pdata, "RECONNECTING") || strstr(gprs_buff->pdata, "ERROR") || strstr(gprs_buff->pdata, "CONNECT FAIL"))
 					{
                         GetFreeBuff(100);
                         ret = _ATERROR;
                         goto GU906_SENDATRET;
                     }                    
                 }
-                else if(strstr(gprs_buff->pdata, "OK")){
+                else if(strstr((char*)gprs_buff->pdata, "OK")){
                     ret = _ATOK;
                     goto GU906_SENDATRET;
                 }
-				else if(strstr(gprs_buff->pdata, "ERROR")){
+				else if(strstr((char*)gprs_buff->pdata, "ERROR")){
                     ret = _ATERROR;
                     goto GU906_SENDATRET;   
                 }
@@ -522,19 +522,19 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
                 goto GU906_SENDATRET; //
 			
 			case _ATCIPSCONT_C:
-				if(strstr(gprs_buff->pdata, "OK"))
+				if(strstr((char*)gprs_buff->pdata, "OK"))
 				{
-					if(0 != (p = strstr(gprs_buff->pdata, "+CIPMODE: ")))
+					if(0 != (p = strstr((char*)gprs_buff->pdata, "+CIPMODE: ")))
 					{
 						p += 10;
 
 						if(1 == (*p -'0'))
 						{
 
-							if(0 != (p = strstr(gprs_buff->pdata, "+CIPSTART: ")))
+							if(0 != (p = strstr((char*)gprs_buff->pdata, "+CIPSTART: ")))
 							{
 
-								if(strstr(gprs_buff->pdata,"218.66.59.201") && strstr(gprs_buff->pdata,"8888"))
+								if(strstr((char*)gprs_buff->pdata,"218.66.59.201") && strstr((char*)gprs_buff->pdata,"8888"))
 								{								
 									GPRS_Dtu_ConLock = 1;
 									ret = _ATOK;
@@ -547,7 +547,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
 					ret = _ATOK;
 					goto GU906_SENDATRET;
 				}
-				else if(strstr(gprs_buff->pdata, "ERROR"))
+				else if(strstr((char*)gprs_buff->pdata, "ERROR"))
 				{
                     ret = _ATERROR;
                     goto GU906_SENDATRET;   

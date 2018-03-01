@@ -480,9 +480,11 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=..\output\startup_stm32l1xx_md.d -o..\output\startup_stm32l1xx_md.
-o -IC:\Keil_v5\ARM\RV31\INC -IC:\Keil_v5\ARM\CMSIS\Include -IC:\Keil_v5\ARM\Inc
-\ST\STM32L1xx --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SE
-TA 514" --list=.\startup_stm32l1xx_md.lst startup_stm32l1xx_md.s
+o -IE:\github\dk-newlock\doc\STM32L151RDT6核心板资料V1.0\基础例程资料\5.ADC\Pro
+ject\RTE -ID:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include -ID:\Keil_v5\ARM\P
+ACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include --predefine="__MICROLIB SETA 1" --p
+redefine="__UVISION_VERSION SETA 518" --predefine="_RTE_ SETA 1" --predefine="S
+TM32L151xB SETA 1" --list=.\startup_stm32l1xx_md.lst startup_stm32l1xx_md.s
 
 
 
@@ -1207,4 +1209,4 @@ Symbol: __main
       At line 143 in file startup_stm32l1xx_md.s
 Comment: __main used once
 2 symbols
-406 symbols in table
+408 symbols in table

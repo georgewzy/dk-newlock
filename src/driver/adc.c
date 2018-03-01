@@ -5,6 +5,20 @@
 #include "timer.h"
 
 
+
+
+void adc_gpio_init(void)
+{
+	GPIO_InitTypeDef gpio_init_structure;
+	
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_0;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOB, &gpio_init_structure);
+	
+}
+
+
 															   
 void  adc_init(void)
 { 	
@@ -38,7 +52,7 @@ void  adc_init(void)
 uint16_t adc_get_value(uint8_t ch)   
 {
 	
-	ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_192Cycles);
+	ADC_RegularChannelConfig(ADC1, ch, 1, ADC_SampleTime_96Cycles);
 	
 	ADC_SoftwareStartConv(ADC1);		//使能指定的ADC1的软件转换启动功能	
 	
@@ -51,8 +65,9 @@ uint16_t adc_get_value(uint8_t ch)
 
 uint16_t adc_get_average(uint8_t ch, uint8_t times)
 {
-	uint32_t temp_val=0;
-	uint8_t i;
+	uint32_t temp_val = 0;
+	uint8_t i = 0;
+	
 	for(i=0; i<times; i++)
 	{
 		temp_val += adc_get_value(ch);
