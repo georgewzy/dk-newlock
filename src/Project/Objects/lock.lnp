@@ -44,6 +44,17 @@
 ".\objects\stm32l1xx_usart.o"
 ".\objects\stm32l1xx_wwdg.o"
 ".\objects\startup_stm32l1xx_hd.o"
+".\objects\mqttconnectclient.o"
+".\objects\mqttconnectserver.o"
+".\objects\mqttdeserializepublish.o"
+".\objects\mqttformat.o"
+".\objects\mqttpacket.o"
+".\objects\mqttserializepublish.o"
+".\objects\mqttsubscribeclient.o"
+".\objects\mqttsubscribeserver.o"
+".\objects\mqttunsubscribeclient.o"
+".\objects\mqttunsubscribeserver.o"
+".\objects\transport.o"
 --strict --scatter ".\Objects\lock.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

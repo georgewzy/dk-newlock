@@ -416,7 +416,7 @@ static void gprs_init_task_fun(void *p_arg)
 				gprs_err_cnt = 0;
 			break;
 					
-			case 1:
+			case 1:	//串口测试指令
 				ret = gprs_send_at("\r\nAT\r\n", "OK", 800,10000);
 				if (ret != NULL)
 				{
@@ -433,7 +433,7 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 			
-			case 2:
+			case 2://查询卡是否存在
 				ret = gprs_send_at("\r\AT+ESIMS?\r\n\r\n", "OK", 800, 10000);
 				if (ret != NULL)
 				{
@@ -457,7 +457,7 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 			
-			case 3:			
+			case 3:	//查询PIN	
 				ret = gprs_send_at("\r\nAT+CPIN?\r\n", "OK", 800, 10000);
 				if (ret != NULL)
 				{
@@ -474,24 +474,7 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 			
-			case 4:
-				ret = gprs_send_at("\r\nAT+CREG=1\r\n", "OK", 800, 10000);
-				if (ret != NULL)
-				{
-					gprs_status++;
-					gprs_err_cnt = 0;
-				}
-				else
-				{
-					gprs_err_cnt++;
-					if (gprs_err_cnt > 5)
-					{
-						gprs_status = 0;
-					}
-				}
-			break;
-			
-			case 5:
+			case 4://查询信号质量
 				ret = gprs_send_at("\r\nAT+CSQ\r\n", "OK", 800, 10000);
 				if (ret == 0)
 				{
@@ -507,7 +490,25 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 			
-			case 6:
+			case 5://设置网络注册信息
+				gprs_status++;
+//				ret = gprs_send_at("\r\nAT+CREG=1\r\n", "OK", 800, 10000);
+//				if (ret != NULL)
+//				{
+//					gprs_status++;
+//					gprs_err_cnt = 0;
+//				}
+//				else
+//				{
+//					gprs_err_cnt++;
+//					if (gprs_err_cnt > 5)
+//					{
+//						gprs_status = 0;
+//					}
+//				}
+			break;
+			
+			case 6://查询网络注册信息
 				ret = gprs_send_at("\r\nAT+CREG?\r\n", "OK", 800, 10000);
 				if (ret != NULL)
 				{
@@ -524,7 +525,7 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 			
-			case 7:
+			case 7:	//激活无线网络
 				ret = gprs_send_at("\r\nAT+CIICR\r\n\r\n", "OK", 800, 10000);//
 				if (ret == 0)
 				{
@@ -540,9 +541,77 @@ static void gprs_init_task_fun(void *p_arg)
 					}
 				}
 			break;
-			
-			case 8:
-				ret = gprs_send_at("\r\nAT^SICS=0,APN,CMNET\r\n", "OK", 800, 10000);//
+
+			case 8:	//透传参数设置
+				ret = gprs_send_at("\r\nAT+CIPCFG=1,50,0\r\n", "OK", 800, 10000);//
+				if (ret == 0)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+				
+			case 9:	//心跳包
+				ret = gprs_send_at("\r\nAT+CIPPACK=1,\"4C4F47494E3A31303031\"\r\n", "OK", 800, 10000);//
+				if (ret == 0)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;	
+				
+			case 10://注册包
+				ret = gprs_send_at("\r\nAT+CIPPACK=0,\"0102A0\\r\n", "OK", 800, 10000);//
+				if (ret == 0)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+				
+			case 11://账户配置
+				ret = gprs_send_at("\r\AT+CSTT=\"CMNET\"\r\n", "OK", 800, 10000);//
+				if (ret == 0)
+				{
+					gprs_status++;
+					gprs_err_cnt = 0;
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;
+				
+			case 12:	//单链接
+				ret = gprs_send_at("\r\nAT+CIPMUX=0\r\n", "OK", 800, 10000);//
 				if (ret == 0)
 				{
 					gprs_status++;
@@ -558,8 +627,8 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 			
-			case 9:
-				ret = gprs_send_at("\r\nAT^SISS=0,srvType,Socket\r\n", "OK", 800, 10000);//
+			case 13:	//设置透传模式
+				ret = gprs_send_at("\r\nAT+CIPMODE=1, 0\r\n", "OK", 800, 10000);//
 				if (ret == 0)
 				{
 					gprs_status++;
@@ -575,15 +644,15 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 			
-			case 10:
-				ret = gprs_send_at("\r\nAT^SISS=0,conId,0\r\n", "OK", 800, 10000);//
+			case 14: //
+				ret = gprs_send_at("\r\nAT+CIPSTART=\"TCP\",\"118.31.69.148\",1883\r\n", "OK", 800, 10000);//
 				if (ret == 0)
 				{
-					gprs_status++;
+					gprs_status = 255;
 					gprs_err_cnt = 0;
 				}
 				else
-				{
+				{ 
 					gprs_err_cnt++;
 					if (gprs_err_cnt > 5)
 					{
@@ -592,75 +661,8 @@ static void gprs_init_task_fun(void *p_arg)
 				}
 			break;
 					
-			case 11:
-				ret = gprs_send_at("\r\nAT^SISS=0,address,\"socktcp://180.169.14.34:16650\"\r\n", "OK", 800, 10000);//
-				if (ret == 0)
-				{
-					gprs_status++;
-					gprs_err_cnt = 0;
-				}
-				else
-				{
-					gprs_err_cnt++;
-					if (gprs_err_cnt > 5)
-					{
-						gprs_status = 0;
-					}
-				}
-			break;
 			
-			case 12:
-				ret = gprs_send_at("\r\nAT^SISO=0\r\n", "OK", 5000, 20000);//
-				if (ret == 0)
-				{
-					gprs_status++;
-					gprs_err_cnt = 0;
-				}
-				else
-				{
-					gprs_err_cnt++;
-					if (gprs_err_cnt > 5)
-					{
-						gprs_status = 0;
-					}
-				}
-
-			break;
-			
-			case 13:
-				ret = gprs_send_at("\r\nAT^IPCFL=5,20\r\n", "OK", 800, 10000);//
-				if (ret == 0)
-				{
-					gprs_status++;
-					gprs_err_cnt = 0;
-				}
-				else
-				{
-					gprs_err_cnt++;
-					if (gprs_err_cnt > 5)
-					{
-						gprs_status = 0;
-					}
-				}
-
-			break;
-			
-			case 14:
-				ret = gprs_send_at("\r\nAT^IPENTRANS=0\r\n", "OK", 800, 10000);//
-				if (ret == 0)
-				{
-					gprs_status = 255;
-					gprs_init_flag = false;
-				}
-				else
-				{
-					gprs_err_cnt++;
-					if (gprs_err_cnt > 5)
-					{
-						gprs_status = 0;
-					}
-				}		
-			break;
+		
 				
 			case 255:	//gprs 初始化完成后进行数据传输
 				

@@ -13,6 +13,10 @@
 #include "app_md5.h"
 #include "button.h"
 #include "gu906.h"
+#include "transport.h"
+
+
+extern usart_buff_t *gprs_buff;
 
 
 
@@ -86,7 +90,8 @@ int main(void)
 	uint8_t upload=0; 
 	uint8_t *ret;
 	uint8_t status = 0;
-
+	uint8_t data[512];
+	uint32_t data_len;
 	button_info_s bbb;
 	
 	bsp_init();
@@ -99,6 +104,13 @@ int main(void)
 	while(1)
 	{
 		LED0_LOW();
+		
+		
+		transport_getdata(data, data_len);
+		
+		USART_OUT(USART1, data);
+		memset(data, 0, 512);
+
 		
 		if(button_get_state(SW1 ,1000) == BUTTON_CLICK)
 		{
@@ -118,8 +130,9 @@ int main(void)
 		{
 //			USART_OUT(USART1, "george\r\n");
 		}
-//		bsp_rcc_clock_fre();
-		usart1_recv_data();
+
+		
+//		usart1_recv_data();
 		LED0_HIGH();
 	}
 	

@@ -226,7 +226,6 @@ void usart3_init(uint32_t band_rate)
 */
 void USART1_IRQHandler(void)
 {
-
 	uint8_t ch = 0;	
 	
    	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
@@ -243,7 +242,7 @@ void USART1_IRQHandler(void)
 			if (usart1_rx_buff->index < USART_BUFF_LENGHT)
 			{	
 				usart1_rx_buff->pdata[usart1_rx_buff->index++] = ch;
-				usart1_rx_status = 1;
+//				usart1_rx_status = 1;
 			}
 			else
 			{
@@ -264,15 +263,15 @@ void USART1_IRQHandler(void)
 void usart1_recv_data(void)
 {
 
-	if(timer_is_timeout_1ms(timer_uart1, 40) == 0)	//40ms没接收到数据认为接收数据完成		
+	if(timer_is_timeout_1ms(timer_uart1, 20) == 0)	//40ms没接收到数据认为接收数据完成		
 	{
 
 //		USART_OUT(USART2, usart1_buff);
 //		USART_OUT(USART1, usart1_rx_buff->pdata);
 		
-		memcpy(gprs_buff, usart2_rx_buff, sizeof(usart_buff_t));
+		memcpy(gprs_buff, usart1_rx_buff, sizeof(usart_buff_t));
 		
-		USART_OUT(USART1, gprs_buff->pdata);
+//		USART_OUT(USART1, gprs_buff->pdata);
 		
 		memset(usart1_rx_buff, 0, sizeof(usart_buff_t));
 	}
@@ -331,7 +330,7 @@ void USART2_IRQHandler(void)
 
 void usart2_recv_data(void)
 {		
-	if(timer_is_timeout_1ms(timer_uart2, 40) == 0)	//40ms没接收到数据认为接收数据完成		
+	if(timer_is_timeout_1ms(timer_uart2, 20) == 0)	//40ms没接收到数据认为接收数据完成		
 	{
 		
 //		USART_OUT(USART1, usart2_buff);
@@ -411,7 +410,7 @@ void USART3_IRQHandler(void)
 void usart3_recv_data(void)
 {
 	
-	if(timer_is_timeout_1ms(timer_uart3, 50)==0)	//40ms没接收到数据认为接收数据完成		
+	if(timer_is_timeout_1ms(timer_uart3, 20)==0)	//40ms没接收到数据认为接收数据完成		
 	{
 
 		USART_OUT(USART1, usart3_buff);

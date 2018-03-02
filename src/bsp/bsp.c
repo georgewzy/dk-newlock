@@ -235,6 +235,9 @@ void bsp_gpio_init(void)
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
   	GPIO_Init(GPIOA, &gpio_init_structure);
 
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
+
 
 	// UART3
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				// UART3 TX				    
