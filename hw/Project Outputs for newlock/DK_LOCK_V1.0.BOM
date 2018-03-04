@@ -1,0 +1,47 @@
+Bill of Material for 
+On 2018/3/3 at 13:58:24
+
+ Comment             Pattern     Quantity  Components
+------------------------------------------------------------------------------
+ 32.768M             R38              1    Y2                           Crystal Oscillator   
+ 8M                  SMT-OSC          1    Y1                           Crystal Oscillator   
+ BATT                HDR1X2           1    P8                           Header, 2-Pin        
+ BELL                HDR1X2           1    P12                          Header, 2-Pin        
+ BOOT0               HDR1X3           1    P1                           Header, 3-Pin        
+ BOOT1               HDR1X3           1    P2                           Header, 3-Pin        
+ BUTTON              HDR1X2           1    P13                          Header, 2-Pin        
+ Cap                 0603            32    C1, C2, C3, C4, C5, C6, C7   Capacitor            
+                                           C8, C9, C10, C11, C16, C17
+                                           C18, C19, C20, C21, C22, C23
+                                           C24, C25, C26, C27, C100
+                                           C101, C102, C103, C104, C105
+                                           C106, C107, C108
+ Diode               SMC              1    D4                           Default Diode        
+ GU900E              SIM900-68P       1    U10                                               
+ Header 2            HDR1X2           1    P7                           Header, 2-Pin        
+ Header 3            HDR1X3           1    P6                           Header, 3-Pin        
+ Inductor            0630             1    L2                           Inductor             
+ L_OFF               HDR1X2           1    P10                          Header, 2-Pin        
+ L_ON                HDR1X2           1    P11                          Header, 2-Pin        
+ LED GREEN           LED0603          1    D10                          Typical RED, GREEN, YELLOW, AMBER GaAs LED 
+ LED0                LED0603          2    D1, D2                       Typical INFRARED GaAs LED 
+ MOSFET-N            SOT-23A          1    Q1                           N-Channel Power MOSFET 
+ MOSFET-P            SOT-23A          1    Q2                           P-Channel Power MOSFET 
+ MOTO                moto             1    U5                                                
+ MOTOR               HDR1X2           1    P9                           Header, 2-Pin        
+ NC                  0603             3    C12, R15, R17                Capacitor            
+ NPN                 SOT-23A          1    Q3                           NPN Bipolar Transistor 
+ Res2                0603            25    R1, R2, R3, R4, R5, R8, R9   Resistor             
+                                           R10, R11, R12, R13, R14, R16
+                                           R18, R19, R20, R21, R22, R23
+                                           R24, R25, R26, R27, R28, R100
+ RT7272B             RT7272B          1    U4                                                
+ SIM_BLOCK           SIM_BLOCK        1    CN2                                               
+ SMB                 SMB_V-RJ45       1    ANT2                         SMB Straight Connector 
+ STM32L151RCT6       LQFP64           1    U1                           ARM Cortex-M3 32-bit MCU, 256 KB Flash, 32 KB Internal RAM, 51 I/Os, 64-pin LQFP, -40 to 85 degC, Tray 
+ SW DIP-2            SW-2*4           1    SW2                          DIP Switch, 2 Position, SPST 
+ SWD                 HDR1X4           1    P3                           Header, 4-Pin        
+ SW-PB               3*6*4.3          1    SW1                          Switch               
+ TPS62120            TPS62120         1    U3                                                
+ UART1               HDR1X4           1    P4                           Header, 4-Pin        
+ UART3               HDR1X4           1    P5                           Header, 4-Pin        

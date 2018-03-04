@@ -1,0 +1,9 @@
+Change Component Footprint: Designator=C100 Old Footprint=RAD-0.3 New Footprint=0603
+Change Component Footprint: Designator=C103 Old Footprint=RAD-0.3 New Footprint=0603
+Change Component Footprint: Designator=C104 Old Footprint=RAD-0.3 New Footprint=0603
+Change Component Footprint: Designator=C105 Old Footprint=RAD-0.3 New Footprint=0603
+Change Component Footprint: Designator=C106 Old Footprint=RAD-0.3 New Footprint=0603
+Added Room: Name=U_DK_GU600E_V10
+Added Room: Name=U_DK_MOTO
+Added Room: Name=U_DK_POWER
+Added Room: Name=U_DK_STM32L151
