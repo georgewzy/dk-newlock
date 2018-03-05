@@ -100,6 +100,7 @@ int main(void)
 	USART_OUT(USART1, "uart1 is ok\r\n");
 
 //	gu906_init();
+	mqtt_test();
 	
 	while(1)
 	{

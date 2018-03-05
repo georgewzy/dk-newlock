@@ -47,5 +47,4 @@
 .\objects\transport.o: ..\MQTT\MQTTUnsubscribe.h
 .\objects\transport.o: ..\MQTT\MQTTFormat.h
 .\objects\transport.o: ..\MQTT\StackTrace.h
-.\objects\transport.o: ..\MQTT\transport.h
 .\objects\transport.o: ..\driver\timer.h

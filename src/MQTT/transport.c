@@ -88,7 +88,7 @@ int transport_getdatanb(void *sck, unsigned char* buf, int count)
 
 int toStop = 0;
 
-void mqtt_aaa()
+void mqtt_test(void)
 {
 	
 	
