@@ -2,9 +2,9 @@
 Version=1.0
 
 [PublishSettings]
-OutputFilePath2=C:\Users\George\Documents\Tencent Files\89436838\FileRecv\hw20180303最终打包资料\hw20180303最终打包资料\hw20180303更新\hw\.PDF
+OutputFilePath2=E:\github\dk-newlock\hw\.PDF
 ReleaseManaged2=0
-OutputBasePath2=C:\Users\George\Documents\Tencent Files\89436838\FileRecv\hw20180303最终打包资料\hw20180303最终打包资料\hw20180303更新\hw\
+OutputBasePath2=E:\github\dk-newlock\hw\
 OutputPathMedia2=
 OutputPathMediaValue2=
 OutputPathOutputer2=[Output Type]
@@ -81,7 +81,7 @@ WmvVideoCodecName4=Windows Media Video V7
 WmvQuality4=80
 
 [GeneratedFilesSettings]
-RelativeOutputPath2=C:\Users\George\Documents\Tencent Files\89436838\FileRecv\hw20180303最终打包资料\hw20180303最终打包资料\hw20180303更新\hw\.PDF
+RelativeOutputPath2=E:\github\dk-newlock\hw\.PDF
 OpenOutputs2=1
 RelativeOutputPath3=
 OpenOutputs3=1
@@ -175,5 +175,5 @@ PageOptions3=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintS
 Configuration3_Name1=ColumnNameFormat
 Configuration3_Item1=CaptionAsName
 Configuration3_Name2=General
-Configuration3_Item2=TemplateFilename=
+Configuration3_Item2=TemplateFilename=Board Stack Report.XLT
 

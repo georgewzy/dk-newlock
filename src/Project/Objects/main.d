@@ -1,6 +1,8 @@
 .\objects\main.o: ..\app\main.c
-.\objects\main.o: ..\driver\gps.h
-.\objects\main.o: ..\bsp\bsp.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: ..\driver\adc.h
+.\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_adc.h
 .\objects\main.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\main.o: ..\Libraries\CMSIS\Include\core_cm3.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -9,8 +11,8 @@
 .\objects\main.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\system_stm32l1xx.h
 .\objects\main.o: ..\app\stm32l1xx_conf.h
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_adc.h
-.\objects\main.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_aes.h
+.\objects\main.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_comp.h
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_crc.h
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_dac.h
@@ -34,9 +36,7 @@
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\main.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
-.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\main.o: ..\driver\adc.h
+.\objects\main.o: ..\bsp\bsp.h
 .\objects\main.o: ..\driver\timer.h
 .\objects\main.o: ..\driver\gprs.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

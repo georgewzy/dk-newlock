@@ -1,0 +1,35 @@
+﻿Field=#~Integer~#~50|Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=Footprint~String~Footprint~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~newlock.PrjPcb|ReportField=ProjectFullPath~E:\github\dk-newlock\hw\newlock.PrjPcb|ReportField=Title~Bill of Materials For Project [newlock.PrjPcb] (No PCB Document Selected)|ReportField=TotalQuantity~93|ReportField=ReportTime~11:14:19|ReportField=ReportDate~2018-03-08|ReportField=ReportDateTime~2018-03-08 11:14:19|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=Application_BuildNumber~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~2018-03-08|ReportField=CurrentTime~11:14:07|ReportField=Date~|ReportField=DocumentFullPathAndName~E:\github\dk-newlock\hw\SCHPCB\main.SchDoc|ReportField=DocumentName~main.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~2018-03-05|ReportField=Organization~|ReportField=ProjectName~newlock.PrjPcb|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~newlock.PrjPcb|ReportField=DataSourceFullPath~E:\github\dk-newlock\hw\newlock.PrjPcb|ReportField=PCBConfigurationName~Default Configuration|ReportField=Item~|ReportField=ItemRevision~|ReportField=ItemAndRevision~|ReportField=ItemRevisionBase~|ReportField=ItemRevisionLevel1~|ReportField=ItemRevisionLevel2~|ReportField=ItemRevisionLevel1AndBase~|ReportField=ItemRevisionLevel2AndLevel1~
+1|SMB|SMB Straight Connector|ANT2|SMB_V-RJ45|SMB|1
+2|Cap|Capacitor|C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25, C26, C27, C100, C101, C102, C103, C104, C105, C106, C107, C108|0603|Cap|32
+3|NC|Capacitor, Resistor, Resistor|C12, R15, R17|0603|Cap, Res2, Res2|3
+4|SIM_BLOCK||CN2|SIM_BLOCK|SIM_BLOCK_2|1
+5|LED0|Typical INFRARED GaAs LED|D1, D2|LED0603|LED0|2
+6|Diode|Default Diode|D4|SMC|Diode|1
+7|LED GREEN|Typical RED, GREEN, YELLOW, AMBER GaAs LED|D10|LED0603|LED2|1
+8|Inductor|Inductor|L1, L2|0630|Inductor|2
+9|BOOT0|Header, 3-Pin|P1|HDR1X3|Header 3|1
+10|BOOT1|Header, 3-Pin|P2|HDR1X3|Header 3|1
+11|SWD|Header, 4-Pin|P3|HDR1X4|Header 4|1
+12|UART1|Header, 4-Pin|P4|HDR1X4|Header 4|1
+13|UART3|Header, 4-Pin|P5|HDR1X4|Header 4|1
+14|Header 3|Header, 3-Pin|P6|HDR1X3|Header 3|1
+15|Header 2|Header, 2-Pin|P7|HDR1X2|Header 2|1
+16|BATT|Header, 2-Pin|P8|HDR1X2|Header 2|1
+17|MOTOR|Header, 2-Pin|P9|HDR1X2|Header 2|1
+18|L_OFF|Header, 2-Pin|P10|HDR1X2|Header 2|1
+19|L_ON|Header, 2-Pin|P11|HDR1X2|Header 2|1
+20|BELL|Header, 2-Pin|P12|HDR1X2|Header 2|1
+21|BUTTON|Header, 2-Pin|P13|HDR1X2|Header 2|1
+22|MOSFET-N|N-Channel Power MOSFET|Q1|SOT-23A|NMOS-2|1
+23|MOSFET-P|P-Channel Power MOSFET|Q2|SOT-23A|PMOS-2|1
+24|NPN|NPN Bipolar Transistor|Q3|SOT-23A|NPN|1
+25|Res2|Resistor|R1, R2, R3, R4, R5, R8, R9, R10, R11, R12, R13, R14, R16, R18, R19, R20, R21, R22, R23, R24, R25, R26, R27, R28, R100|0603|Res2|25
+26|SW-PB|Switch|SW1|3*6*4.3|SW-PB|1
+27|SW DIP-2|DIP Switch, 2 Position, SPST|SW2|SW-2*4|SW DIP-2|1
+28|STM32L151RCT6|ARM Cortex-M3 32-bit MCU, 256 KB Flash, 32 KB Internal RAM, 51 I/Os, 64-pin LQFP, -40 to 85 degC, Tray|U1|LQFP64|STM32L151RCT6|1
+29|TPS62120||U3|TPS62120|TPS62120|1
+30|RT7272B||U4|RT7272B|RT7272B|1
+31|MOTO||U5|moto|MOTO|1
+32|GU900E||U10|SIM900-68P|GU900E|1
+33|8M|Crystal Oscillator|Y1|SMT-OSC|XTAL|1
+34|32.768M|Crystal Oscillator|Y2|R38|XTAL|1
