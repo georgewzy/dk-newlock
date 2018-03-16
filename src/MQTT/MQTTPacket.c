@@ -17,9 +17,11 @@
 
 #include "StackTrace.h"
 #include "MQTTPacket.h"
-
+#include "usart.h"
 #include <string.h>
 
+extern usart_buff_t mqtt_buff;
+extern int mqtt_buff_len;
 /**
  * Encodes the message length according to the MQTT algorithm
  * @param buf the buffer into which the encoded data is written
@@ -296,7 +298,9 @@ int MQTTPacket_read(unsigned char* buf, int buflen, int (*getfn)(unsigned char*,
 
 	/* 1. read the header byte.  This has the packet type in it */
 	if ((*getfn)(buf, 1) != 1)
+	{
 		goto exit;
+	}
 
 	len = 1;
 	/* 2. read the remaining length.  This is variable in itself */
@@ -311,6 +315,8 @@ int MQTTPacket_read(unsigned char* buf, int buflen, int (*getfn)(unsigned char*,
 
 	header.byte = buf[0];
 	rc = header.bits.type;
+	memset(&mqtt_buff, 0, sizeof(usart_buff_t));
+	mqtt_buff_len = 0;
 exit:
 	return rc;
 }

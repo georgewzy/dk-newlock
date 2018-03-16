@@ -36,6 +36,8 @@
 .\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\usart.o: ..\driver\usart.h
 .\objects\usart.o: ..\bsp\bsp.h
 .\objects\usart.o: ..\driver\timer.h
+.\objects\usart.o: ..\system\common.h

@@ -13,17 +13,17 @@ typedef enum
 	BUTTON_DOWN,
 	BUTTON_PRESS
 	
-} button_state_e;
+} BUTTON_STATE;
 
 
 typedef struct
 {
-	button_state_e  	butt_state;
+	BUTTON_STATE  		butt_state;
 	uint8_t 			butt_en;
 	uint8_t				butt_cnt;
 	uint32_t			butt_long_press_timer;
 
-} button_info_s;
+} BUTTON_INFO;
 
 
 
@@ -41,7 +41,7 @@ typedef struct
 
 void button_gpio_init(void);
 void button_timer_ms(void);
-button_state_e button_get_state(uint8_t button_name, uint32_t long_time);
+BUTTON_STATE button_get_state(uint8_t button_name, uint32_t long_time);
 
 
 #endif

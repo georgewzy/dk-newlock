@@ -4,7 +4,7 @@
 
 
 
-button_info_s button_info[BUTTON_SUM];
+BUTTON_INFO button_info[BUTTON_SUM];
 
 
 void button_gpio_init(void)
@@ -12,7 +12,7 @@ void button_gpio_init(void)
 	GPIO_InitTypeDef gpio_init_structure;	
 	
 	//button
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_12;
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
 	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
   	GPIO_Init(GPIOB, &gpio_init_structure);
@@ -38,7 +38,7 @@ void button_timer_ms(void)
 
 
 
-button_state_e button_get_state(uint8_t button_name, uint32_t long_time)
+BUTTON_STATE button_get_state(uint8_t button_name, uint32_t long_time)
 {
 	
 	uint8_t i = 0;

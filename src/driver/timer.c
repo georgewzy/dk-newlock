@@ -1,8 +1,6 @@
-
-
 #include "timer.h"
 #include "usart.h"
-#include "button.h"
+
 
 
 
@@ -20,7 +18,7 @@ volatile uint32_t g_timeout_cnt = 0;
 *Return: ?     
 *Others: ?    
 */
-void timer2_init(uint16_t arr, uint16_t psc)
+void timer2_init(u16 arr, u16 psc)
 {
 
 	TIM_TimeBaseInitTypeDef tim_init_structure;
@@ -29,7 +27,7 @@ void timer2_init(uint16_t arr, uint16_t psc)
 	TIM_DeInit(TIM2); 
     tim_init_structure.TIM_CounterMode = TIM_CounterMode_Up;
     tim_init_structure.TIM_ClockDivision = TIM_CKD_DIV1;
-    tim_init_structure.TIM_Period = arr;			//??????=(TIM_Prescaler+1) * (TIM_Period+1)/FLK
+    tim_init_structure.TIM_Period = arr;			//??????=(TIM_Prescaler+1)* (TIM_Period+1)/FLK
     tim_init_structure.TIM_Prescaler = psc; 	// 
     TIM_TimeBaseInit(TIM2, &tim_init_structure);
 
@@ -63,14 +61,13 @@ void TIM2_IRQHandler(void)
 		{
 			g_timeout_cnt--;
 		}
-		
-		
+			
         for (i = 0; i<(uint8_t)timer_max; i++)
         {
             g_timer_cnt[i]++;
         }	
 
-		button_timer_ms();		//???????
+//		button_timer_ms();		//???????
     }
 }
 
@@ -115,7 +112,7 @@ void timer_delay_1ms(uint32_t ms)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-uint8_t timer_is_timeout_1ms(uint8_t type, uint32_t count)
+u8 timer_is_timeout_1ms(uint8_t type, uint32_t count)
 {
 	int status = 0;
 	

@@ -21,15 +21,13 @@
 
 int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen);
 int transport_getdata(unsigned char* buf, int count);
-int transport_getdatanb(void *sck, unsigned char* buf, int count);
-int transport_open(char* host, int port);
-int transport_close(int sock);
-void mqtt_test(void);
 
 
 
-
-
-
+int mqtt_connect(void);
+int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, int qos, unsigned short packetid);
+void mqtt_subscribe(unsigned char* topic, unsigned char* payload, int payloadlen);
+int mqtt_subscribe_msg(unsigned char* topic, int req_qos, unsigned short packetid);
+int mqtt_keep_alive(void);
 
 #endif

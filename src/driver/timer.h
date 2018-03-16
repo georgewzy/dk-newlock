@@ -1,8 +1,9 @@
-#ifndef __TIMER_H_
-#define __TIMER_H_
-
+#ifndef __TIMER_H
+#define __TIMER_H
+//#include "sys.h"
 #include "bsp.h"  
-
+extern  u8 Lock_Open_Tim5s;
+extern u8 Lock_Close_Tim5s;
 
 
 
@@ -11,8 +12,10 @@
 enum timer
 {
     tim1_cnt,
-	timer_test,
+	timer_connect,
+	timer_keep_alive,
     timer_batt,
+	timer_mqtt_keep_alive,
 	timer_gps_cycle,
 	tiemr_gps_location,
 	timer_close_lock,
@@ -24,8 +27,10 @@ enum timer
 	timer_uart1,
 	timer_uart2,
 	timer_uart3,
+	timer_uart4,
 	timer_gprs,
 	timer_at,
+	timer_at_data,
 	timer_max
 };
 
@@ -40,8 +45,8 @@ enum timer
 
 extern volatile uint32_t g_timer_cnt[(uint8_t)timer_max];
 
-void timer2_init(uint16_t arr, uint16_t psc);
-uint8_t timer_is_timeout_1ms(uint8_t type, uint32_t count);
+void timer2_init(u16 arr, u16 psc);
+u8 timer_is_timeout_1ms(uint8_t type, uint32_t count);
 void timer_delay_1ms(uint32_t ms);
 
 

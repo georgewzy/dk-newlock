@@ -44,6 +44,5 @@
 .\objects\main.o: ..\tplib\aes.h
 .\objects\main.o: ..\tplib\aes128.h
 .\objects\main.o: ..\tplib\app_md5.h
-.\objects\main.o: ..\driver\button.h
-.\objects\main.o: ..\driver\gu906.h
 .\objects\main.o: ..\MQTT\transport.h
+.\objects\main.o: ..\driver\button.h

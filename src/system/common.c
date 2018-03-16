@@ -52,10 +52,10 @@ void delay(uint32_t count)
 *Return: 无     
 *Others: 无    
 */
-uint8_t *str_picked(uint8_t *src_str, uint8_t *sub_str1, uint8_t *sub_str2, uint8_t *dst_str)
+char *str_picked(char *src_str, char *sub_str1, char *sub_str2, char *dst_str)
 {
-	uint8_t *tmp1 = NULL, *tmp2 = NULL, *str = src_str;
-	uint8_t i = 0; 
+	char *tmp1 = NULL, *tmp2 = NULL, *str = src_str;
+	int i = 0; 
 	int index = 0;
 				
 	tmp1 = (uint8_t*)strstr((char*)str, (char*)sub_str1);
@@ -225,7 +225,14 @@ char *itoa(int value, char *string, int radix)
 } 
 
 
+char *memcat(void *dest, size_t dest_len, const char *src, size_t src_len)
+{
 
+//	memcpy(dest+dest_len, src, src_len);
+
+//	return dest;
+
+}
 
 
 

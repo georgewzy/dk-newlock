@@ -17,7 +17,6 @@
 
 #include "MQTTPacket.h"
 #include "StackTrace.h"
-
 #include <string.h>
 
 
@@ -141,6 +140,18 @@ int MQTTSerialize_puback(unsigned char* buf, int buflen, unsigned short packetid
 
 
 /**
+  * Serializes a puback packet into the supplied buffer.
+  * @param buf the buffer into which the packet will be serialized
+  * @param buflen the length in bytes of the supplied buffer
+  * @param packetid integer - the MQTT packet identifier
+  * @return serialized length, or error if 0
+  */
+int MQTTSerialize_pubrec(unsigned char* buf, int buflen, unsigned short packetid)
+{
+	return MQTTSerialize_ack(buf, buflen, PUBREC, 0, packetid);
+}
+
+/**wzy
   * Serializes a pubrel packet into the supplied buffer.
   * @param buf the buffer into which the packet will be serialized
   * @param buflen the length in bytes of the supplied buffer

@@ -44,23 +44,23 @@
 
 
 
-#define SW1_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_12)		//°´¼ü
+#define SW1_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6)		//°´¼ü
 
 
-#define LOCK_ON_READ()			GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_4)
-#define LOCK_OFF_READ()			GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_5)
+#define LOCK_ON_READ()			GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_4)
+#define LOCK_OFF_READ()			GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5)
 
 
 
-#define MOTOA_HIGH() 			GPIO_SetBits(GPIOC, GPIO_Pin_0)	
-#define MOTOA_LOW() 			GPIO_ResetBits(GPIOC, GPIO_Pin_0)
+#define MOTOA_HIGH() 			GPIO_SetBits(GPIOB, GPIO_Pin_14)	
+#define MOTOA_LOW() 			GPIO_ResetBits(GPIOB, GPIO_Pin_14)
 
-#define MOTOB_HIGH() 			GPIO_SetBits(GPIOC, GPIO_Pin_1)	
-#define MOTOB_LOW() 			GPIO_ResetBits(GPIOC, GPIO_Pin_1)
+#define MOTOB_HIGH() 			GPIO_SetBits(GPIOB, GPIO_Pin_15)	
+#define MOTOB_LOW() 			GPIO_ResetBits(GPIOB, GPIO_Pin_15)
 
 
-#define BEEP_ON() 				GPIO_SetBits(GPIOC, GPIO_Pin_3)	
-#define BEEP_OFF() 				GPIO_ResetBits(GPIOC, GPIO_Pin_3)
+#define BEEP_ON() 				GPIO_SetBits(GPIOB, GPIO_Pin_11)	
+#define BEEP_OFF() 				GPIO_ResetBits(GPIOB, GPIO_Pin_11)
 
 
 
@@ -72,8 +72,11 @@
 
 typedef enum
 {
-	SW1
-} bsp_get_port_e;
+	SW1,
+	LOCK_ON,
+	LOCK_OFF
+	
+} bsp_get_port;
 
 
 

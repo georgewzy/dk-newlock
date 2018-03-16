@@ -23,33 +23,36 @@
 #include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "usart.h"
 #include "timer.h"
+#include "common.h"
+
+
+extern u8 protocol_buff[512];
 
 
 
-extern uint8_t protocol_buff[512];
 
 
-static usart_buff_t sb = SerialBuffDefault();
+usart_buff_t sb = SerialBuffDefault();
+usart_buff_t usart1_rx_buff = SerialBuffDefault();
+usart_buff_t usart2_rx_buff = SerialBuffDefault();
+usart_buff_t usart3_rx_buff = SerialBuffDefault();
+usart_buff_t mqtt_buff = SerialBuffDefault();
 
+//u8 usart1_buff[USART_BUFF_LENGHT] = {0};
+//u8 usart2_buff[USART_BUFF_LENGHT] = {0};
+//u8 usart3_buff[USART_BUFF_LENGHT] = {0};
+//u16 usart1_cnt = 0;
+//u16 usart2_cnt = 0;
+//u16 usart3_cnt = 0;
 
-usart_buff_t *gprs_buff = &sb;			//GPRS 接收缓冲区
-usart_buff_t *usart1_rx_buff = &sb;
-usart_buff_t *usart2_rx_buff = &sb;
-usart_buff_t *usart3_rx_buff = &sb;
+u8 usart1_rx_status = 0;
+u8 usart2_rx_status = 0;
+u8 usart3_rx_status = 0;
+u8 usart4_rx_status = 0;
 
-
-uint8_t usart1_buff[USART_BUFF_LENGHT] = {0};
-uint8_t usart2_buff[USART_BUFF_LENGHT] = {0};
-uint8_t usart3_buff[USART_BUFF_LENGHT] = {0};
-uint16_t usart1_cnt = 0;
-uint16_t usart2_cnt = 0;
-uint16_t usart3_cnt = 0;
-
-uint8_t usart1_rx_status = 0;
-uint8_t usart2_rx_status = 0;
-uint8_t usart3_rx_status = 0;
 
 
 
@@ -63,35 +66,28 @@ void usart_gpio_init(void)
 	
 		// UART1
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_9;				// UART1 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
+  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;	
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
   	GPIO_Init(GPIOA, &gpio_init_structure);
+	
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
+	
 	
 	// UART2
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_2;				// UART2 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
+  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_3;				
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
   	GPIO_Init(GPIOA, &gpio_init_structure);
 
-
-	// UART3
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				// UART3 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;				
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
 
 }
 
@@ -115,7 +111,7 @@ void usart_gpio_init(void)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void usart1_init(uint32_t band_rate, uint8_t word_length, uint8_t parity, uint8_t stop_bit)
+void usart1_init(u32 band_rate, u8 word_length, u8 parity, u8 stop_bit)
 {
 	
 	USART_InitTypeDef usart_init_structre;
@@ -153,7 +149,7 @@ void usart1_init(uint32_t band_rate, uint8_t word_length, uint8_t parity, uint8_
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void usart2_init(uint32_t band_rate)
+void usart2_init(u32 band_rate)
 {
 	USART_InitTypeDef usart_init_structre;
 	
@@ -189,7 +185,7 @@ void usart2_init(uint32_t band_rate)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void usart3_init(uint32_t band_rate)
+void usart4_init(u32 band_rate)
 {
 	USART_InitTypeDef usart_init_structre;
 	
@@ -199,11 +195,11 @@ void usart3_init(uint32_t band_rate)
 	usart_init_structre.USART_Parity = USART_Parity_No;
 	usart_init_structre.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	usart_init_structre.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-	USART_Init(USART3, &usart_init_structre);
+	USART_Init(UART4, &usart_init_structre);
 		
-	USART_ITConfig(USART3, USART_IT_RXNE, ENABLE);
+	USART_ITConfig(UART4, USART_IT_RXNE, ENABLE);
 	
-	USART_Cmd(USART3, ENABLE);
+	USART_Cmd(UART4, ENABLE);
 	
 }
 
@@ -226,7 +222,7 @@ void usart3_init(uint32_t band_rate)
 */
 void USART1_IRQHandler(void)
 {
-	uint8_t ch = 0;	
+	u8 ch = 0;	
 	
    	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
     {   
@@ -238,16 +234,13 @@ void USART1_IRQHandler(void)
 		
 //		if(usart1_rx_status == 0)
 		{
-			
-			if (usart1_rx_buff->index < USART_BUFF_LENGHT)
+			if (usart1_rx_buff.index < USART_BUFF_LENGHT)
 			{	
-				usart1_rx_buff->pdata[usart1_rx_buff->index++] = ch;
-//				usart1_rx_status = 1;
+				usart1_rx_buff.pdata[usart1_rx_buff.index++] = ch;
 			}
 			else
 			{
-				memset(usart1_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区
-					
+				memset(&usart1_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区		
 			}
 		}
 	}
@@ -255,25 +248,19 @@ void USART1_IRQHandler(void)
 	if(USART_GetITStatus(USART1, USART_IT_TXE) != RESET)                  
   	{ 
      	USART_ITConfig(USART1, USART_IT_TXE, DISABLE);					   
-  	}	
-	
+  	}		
 
 }
 
 void usart1_recv_data(void)
 {
-
+	
 	if(timer_is_timeout_1ms(timer_uart1, 20) == 0)	//40ms没接收到数据认为接收数据完成		
 	{
-
-//		USART_OUT(USART2, usart1_buff);
-//		USART_OUT(USART1, usart1_rx_buff->pdata);
 		
-		memcpy(gprs_buff, usart1_rx_buff, sizeof(usart_buff_t));
+		usart_send(USART1, usart1_rx_buff.pdata, usart1_rx_buff.index);
 		
-//		USART_OUT(USART1, gprs_buff->pdata);
-		
-		memset(usart1_rx_buff, 0, sizeof(usart_buff_t));
+		memset(&usart1_rx_buff, 0, sizeof(usart_buff_t));
 	}
 
 }
@@ -295,129 +282,64 @@ void usart1_recv_data(void)
 */
 void USART2_IRQHandler(void)
 {
-	uint8_t ch = 0;	
+	u8 ch = 0;	
 
    	if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
     {   
 	    USART_ClearITPendingBit(USART2, USART_IT_RXNE);	
 		
-		timer_is_timeout_1ms(timer_uart2, 0);		//定时器清零
-		
-		if(usart2_rx_status == 0)
+		timer_is_timeout_1ms(timer_uart2, 0);		//定时器清零		
+//		if(usart2_rx_status == 0)
 		{
 			ch = USART_ReceiveData(USART2);	 
 			
-			if (usart2_rx_buff->index < USART_BUFF_LENGHT)
+			if (usart2_rx_buff.index < USART_BUFF_LENGHT)
 			{			
-				usart2_rx_buff->pdata[usart2_rx_buff->index++] = ch;;
+				usart2_rx_buff.pdata[usart2_rx_buff.index++] = ch;
 
 			}
 			else
 			{
-				memset(usart2_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区			
+				memset(&usart2_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区
 			}
 		}
-
 	}
 	
 	if(USART_GetITStatus(USART2, USART_IT_TXE) != RESET)                  
   	{ 
      	USART_ITConfig(USART2, USART_IT_TXE, DISABLE);					   
   	}	
-	 	
+ 	
 }
 
 
 void usart2_recv_data(void)
 {		
-	if(timer_is_timeout_1ms(timer_uart2, 20) == 0)	//40ms没接收到数据认为接收数据完成		
+	char *p1 = NULL;
+	char *p2 = NULL;
+	char *p3 = NULL;
+	u8 tmp_str[20] = {0};
+	int data_len = 0;
+	
+	if(timer_is_timeout_1ms(timer_uart2, 20) == 0)	//20ms没接收到数据认为接收数据完成		
 	{
-		
-//		USART_OUT(USART1, usart2_buff);
-//		memcpy(protocol_buff, usart2_buff, 512);	
-		memcpy(gprs_buff, usart2_rx_buff->pdata, 512);
-		
-		memset(usart2_rx_buff, 0, sizeof(usart_buff_t));
-		
-	}	
-}
-
-
-
-/*
-*********************************************************************************************************
-*                                          USART3_IRQHandler()
-*
-* Description : Create application kernel objects tasks.
-*
-* Argument(s) : none
-*
-* Return(s)   : none
-*
-* Caller(s)   : AppTaskStart()
-*
-* Note(s)     : none.
-*********************************************************************************************************
-*/
-void USART3_IRQHandler(void)
-{
-	uint8_t ch = 0;	
-
-   	if (USART_GetITStatus(USART3, USART_IT_RXNE) != RESET)
-    {   
-	    USART_ClearITPendingBit(USART3, USART_IT_RXNE);	
-		timer_is_timeout_1ms(timer_uart3, 0);
-		
-//		if(usart3_rx_status == 0)
-		{	
-			ch = USART_ReceiveData(USART3);	 
-
-			if (usart3_cnt < USART_BUFF_LENGHT)
+		p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
+		if(p1 != NULL)
+		{
+			p2 = str_picked(p1, ",", ":", (char*)tmp_str);
+			if(p2 != NULL)
 			{
-				usart3_buff[usart3_cnt++] = ch;	
-				usart3_rx_status = 1;				
+				data_len = atoi((char*)tmp_str);
 			}
-			else
-			{
-				memset(usart3_buff, 0, USART_BUFF_LENGHT);
-				usart3_cnt = 0;
-			}
-		}	
-	}
-	
-	if(USART_GetITStatus(USART3, USART_IT_TXE) != RESET)                  
-  	{ 
-     	USART_ITConfig(USART3, USART_IT_TXE, DISABLE);					   
-  	}	
-	
-}
-
-/*
-*********************************************************************************************************
-*                                          usart3_recv_data()
-*
-* Description : Create application kernel objects tasks.
-*
-* Argument(s) : none
-*
-* Return(s)   : none
-*
-* Caller(s)   : AppTaskStart()
-*
-* Note(s)     : none.
-*********************************************************************************************************
-*/
-void usart3_recv_data(void)
-{
-	
-	if(timer_is_timeout_1ms(timer_uart3, 20)==0)	//40ms没接收到数据认为接收数据完成		
-	{
-
-		USART_OUT(USART1, usart3_buff);
-//		memcpy(gps_buff, usart3_buff, 512);
+			
+			p3 = strstr((const char*)usart2_rx_buff.pdata, ":");
+			memcpy(mqtt_buff.pdata, p3+1, data_len);
+			mqtt_buff.index = data_len;
+			
+			usart_send(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);	
+		}		
 		
-		memset(usart3_buff, 0, 512);	
-		usart3_cnt = 0;	
+		memset(&usart2_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区
 	}	
 }
 
@@ -556,7 +478,7 @@ void usart_send(USART_TypeDef* USARTx, uint8_t *data, uint16_t data_size,...)
                 	break;
             	case 'd':										 
                 	d = __va_arg(ap, int);
-					
+
 					sprintf(buf, "%d", d);
                 	for (s = buf; *s; s++) 
 					{
@@ -574,6 +496,7 @@ void usart_send(USART_TypeDef* USARTx, uint8_t *data, uint16_t data_size,...)
 			USART_SendData(USARTx, *data++);
 		while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
 	}
+	
 }
 
 

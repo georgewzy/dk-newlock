@@ -82,8 +82,6 @@ void bsp_rcc_init(void)
 	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);	
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);	
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
@@ -113,7 +111,6 @@ void bsp_rcc_clock_fre(void)
 	RCC_ClocksTypeDef get_rcc_clock;
 	
 	RCC_GetClocksFreq(&get_rcc_clock);
-	
 	
 	USART_OUT(USART1, "SYSCLK=%d\r\n", get_rcc_clock.SYSCLK_Frequency);
 }
@@ -207,12 +204,6 @@ void bsp_gpio_init(void)
 //  	gpio_init_structure.GPIO_Speed = GPIO_Speed_50MHz;
 //  	GPIO_Init(GPIOB, &gpio_init_structure);	
 
-	//LED0
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_0;				// UART1 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
-  	GPIO_Init(GPIOC, &gpio_init_structure);
-	
 	
 	// UART1
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_9;				// UART1 TX				    
@@ -237,49 +228,51 @@ void bsp_gpio_init(void)
 
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
-
-
-	// UART3
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				// UART3 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;				
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	
 	
 	//button
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;  
 	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
-  	GPIO_Init(GPIOC, &gpio_init_structure);
+  	GPIO_Init(GPIOB, &gpio_init_structure);
 	
 	
 	//LOCK ON   OFF
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;          
+  	GPIO_Init(GPIOB, &gpio_init_structure);
+	
+	//MOTO D+ MOTO D-
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_14 | GPIO_Pin_15;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
+  	GPIO_Init(GPIOB, &gpio_init_structure);
+	
+	//BELL
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
+  	GPIO_Init(GPIOB, &gpio_init_structure);
+	
+	
+	//GPRS POWER EN
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	
-	//MOTO D+ MOTO D-
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
+	//GPRS PWON
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_7;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOC, &gpio_init_structure);
+  	GPIO_Init(GPIOA, &gpio_init_structure);
 	
-	//BELL
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_3;
+	//GPRS DTR
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOC, &gpio_init_structure);
+  	GPIO_Init(GPIOA, &gpio_init_structure);
 	
-	
-	//GPS power enable
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_4;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOC, &gpio_init_structure);
 }
 
 
@@ -295,7 +288,17 @@ uint8_t bsp_get_port_value(uint8_t port_name)
 		case SW1:
 			value = SW1_READ();
 		break;
-	
+		
+		case LOCK_ON:
+			value = SW1_READ();
+		break;
+		
+		case LOCK_OFF:
+			value = SW1_READ();
+		break;
+		
+		default:
+		break;
 	}
 
 	return value;
@@ -317,12 +320,12 @@ void bsp_nvic_init(void)
     nvic_init_structure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&nvic_init_structure);
 	
-		// TIM3
-	nvic_init_structure.NVIC_IRQChannel = TIM3_IRQn;
-    nvic_init_structure.NVIC_IRQChannelPreemptionPriority = 0;    //
-    nvic_init_structure.NVIC_IRQChannelSubPriority = 3;
-    nvic_init_structure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&nvic_init_structure);
+//		// TIM3
+//	nvic_init_structure.NVIC_IRQChannel = TIM3_IRQn;
+//    nvic_init_structure.NVIC_IRQChannelPreemptionPriority = 0;    //
+//    nvic_init_structure.NVIC_IRQChannelSubPriority = 3;
+//    nvic_init_structure.NVIC_IRQChannelCmd = ENABLE;
+//    NVIC_Init(&nvic_init_structure);
 
 	
 	// USART1

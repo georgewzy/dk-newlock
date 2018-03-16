@@ -39,3 +39,4 @@
 .\objects\gprs.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\gprs.o: ..\driver\usart.h
 .\objects\gprs.o: ..\driver\timer.h
+.\objects\gprs.o: ..\MQTT\transport.h

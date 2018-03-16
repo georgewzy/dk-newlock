@@ -22,11 +22,16 @@
 *********************************************************************************************************
 */
 #include  "bsp.h"
-#include <stm32l1xx.h>
+#include "stm32l1xx.h"
 #include <stdbool.h>
 
 
 
+typedef struct
+{
+	uint8_t *server_ip;	
+	uint32_t server_port;
+}GPRS_CONFIG;
 
 
 
@@ -37,33 +42,18 @@
 
 
 
-#define GPRS_STATUS_0						0
-#define GPRS_STATUS_1						1
-#define GPRS_STATUS_2						2
-#define GPRS_STATUS_3						3
-#define GPRS_STATUS_4						4
-#define GPRS_STATUS_5						5
-#define GPRS_STATUS_6						6
-#define GPRS_STATUS_7						7
-#define GPRS_STATUS_8						8
-#define GPRS_STATUS_9						9
-#define GPRS_STATUS_10						10
-#define GPRS_STATUS_11						11
 
 
 
 void gprs_power_on(void);
-
-
-
-uint8_t *gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout);
-uint8_t send_at_cmd(uint8_t *cmd, uint8_t *str, uint32_t timeout);
+u8 *gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout);
+int gprs_send_data(u8 *data, u16 data_len, u8 *ack, u16 waittime);
 uint8_t gprs_init(void);
-void gprs_task_create(void);
 void gprs_config(void);
+void gprs_init_task(void);
+int gprs_sleep(void);
+int gprs_wakeup(uint8_t mode);
 
-static void gprs_init_task_fun(void *p_arg);
-static void gprs_recv_task_fun(void *p_arg);
 
 #endif
 
