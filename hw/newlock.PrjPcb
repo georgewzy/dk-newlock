@@ -377,9 +377,26 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=EELMNPKW
+DocumentUniqueId=UIFHHQXP
 
 [Document21]
+DocumentPath=PCB_LIB\wzy.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=JXTWIIJU
+
+[Document22]
 DocumentPath=PCB_LIB\6128驱动器.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -396,7 +413,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=SJOVGJME
 
-[Document22]
+[Document23]
 DocumentPath=PCB_LIB\Battery1220.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -413,7 +430,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QNCKFUAW
 
-[Document23]
+[Document24]
 DocumentPath=PCB_LIB\BKC.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -430,7 +447,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ABLLUDBO
 
-[Document24]
+[Document25]
 DocumentPath=PCB_LIB\BTS428L2.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -447,7 +464,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ULDGRHPJ
 
-[Document25]
+[Document26]
 DocumentPath=PCB_LIB\DYS080_V5.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -464,7 +481,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VSSTHNLS
 
-[Document26]
+[Document27]
 DocumentPath=PCB_LIB\LED ARRAY.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -481,7 +498,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=CXMEUJXN
 
-[Document27]
+[Document28]
 DocumentPath=PCB_LIB\PCB-TINYSDK2-1148.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -498,7 +515,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=GMFAJJUB
 
-[Document28]
+[Document29]
 DocumentPath=PCB_LIB\Putal_GPRS.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -515,7 +532,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FONLNEQM
 
-[Document29]
+[Document30]
 DocumentPath=PCB_LIB\RC500Module.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -532,7 +549,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JVRSLLJT
 
-[Document30]
+[Document31]
 DocumentPath=PCB_LIB\RC500封装.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -549,7 +566,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=MYPPBBQW
 
-[Document31]
+[Document32]
 DocumentPath=PCB_LIB\RC522-HVQFN32.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -566,7 +583,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EJSDVUNR
 
-[Document32]
+[Document33]
 DocumentPath=PCB_LIB\Res Pack.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -583,7 +600,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QQIFBJYW
 
-[Document33]
+[Document34]
 DocumentPath=PCB_LIB\Rly80A.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -600,7 +617,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ILIXHSEW
 
-[Document34]
+[Document35]
 DocumentPath=PCB_LIB\RSM485Pcb.lib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -617,7 +634,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=EHUGCQEH
 
-[Document35]
+[Document36]
 DocumentPath=PCB_LIB\sk33.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -634,7 +651,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=LBOALSJL
 
-[Document36]
+[Document37]
 DocumentPath=PCB_LIB\TLE6282G.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -651,7 +668,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TKRAIEES
 
-[Document37]
+[Document38]
 DocumentPath=PCB_LIB\TLP202A.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -668,7 +685,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TJYNTVMA
 
-[Document38]
+[Document39]
 DocumentPath=PCB_LIB\TO263-5L.PCBLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -685,7 +702,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=SQCIBKJA
 
-[Document39]
+[Document40]
 DocumentPath=PCB_LIB\数码管0.4x2.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -702,7 +719,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PRETHQKR
 
-[Document40]
+[Document41]
 DocumentPath=SCH_LIB\TB906.SCHLIB
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -719,7 +736,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=WGNXEPHO
 
-[Document41]
+[Document42]
 DocumentPath=PCB_LIB\TB906_HW_V1.01.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -736,7 +753,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=LBDEBEHT
 
-[Document42]
+[Document43]
 DocumentPath=SCHPCB\main.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -753,7 +770,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VXUUKGHL
 
-[Document43]
+[Document44]
 DocumentPath=SCHPCB\DK_STM32L151.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -770,7 +787,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YTYGSLTA
 
-[Document44]
+[Document45]
 DocumentPath=SCHPCB\DK_POWER.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -787,7 +804,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=WYTBMQVB
 
-[Document45]
+[Document46]
 DocumentPath=SCH_LIB\TPS62120.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -804,7 +821,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QMIJFCAK
 
-[Document46]
+[Document47]
 DocumentPath=SCH_LIB\RT7272B.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -821,7 +838,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QKAPADBG
 
-[Document47]
+[Document48]
 DocumentPath=SCHPCB\DK_MOTO.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -838,7 +855,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=XQNBEBXV
 
-[Document48]
+[Document49]
 DocumentPath=SCH_LIB\MOTO.SchLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -855,7 +872,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=URXLJSQV
 
-[Document49]
+[Document50]
 DocumentPath=newlock.OutJob
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -872,7 +889,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document50]
+[Document51]
 DocumentPath=PCB_LIB\MOTO.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -889,7 +906,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QHYIWHDS
 
-[Document51]
+[Document52]
 DocumentPath=PCB_LIB\HFY_GU900_PCB封装椭圆.lib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -906,14 +923,14 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=MMQQYLUF
 
-[Document52]
+[Document53]
 DocumentPath=SCHPCB\DK_GU600E_V10.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
 AnnotateSuffix=
 AnnotateScope=All
-AnnotateOrder=-1
+AnnotateOrder=8
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 ClassGenCCAutoEnabled=1
@@ -923,7 +940,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=WHELTCIV
 
-[Document53]
+[Document54]
 DocumentPath=SCHPCB\DK_LOCK_V1.0.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -939,6 +956,23 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HUECLMFP
+
+[Document55]
+DocumentPath=SCHPCB\DK_LOCK_V1.0.PcbLib
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=JPFCFSWE
 
 [GeneratedDocument1]
 DocumentPath=Project Outputs for newlock\Design Rule Check - DK_LOCK_V1.html

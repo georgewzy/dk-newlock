@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=NetR25_1 Pin=U1-30
+Removed Member From Class: ClassName=U_DK_MOTO Member=R20
+Removed Member From Class: ClassName=U_DK_MOTO Member=R21
+Removed Member From Class: ClassName=U_DK_GU600E_V10 Member=R25
+Removed Member From Class: ClassName=U_DK_MOTO Member=U2
+Added Pin To Net: NetName=NetR25_1 Pin=U1-59
+Added Member To Class: ClassName=U_DK_MOTO Member=Component R22 Res2
+Added Member To Class: ClassName=U_DK_MOTO Member=Component R23 Res2
+Added Member To Class: ClassName=U_DK_GU600E_V10 Member=Component R27 Res2
+Added Member To Class: ClassName=U_DK_MOTO Member=Component U4 MOTO

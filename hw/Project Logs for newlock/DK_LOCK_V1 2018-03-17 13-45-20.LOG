@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=LED0 Pin=D1-2
+Removed Pin From Net: NetName=V3.3 Pin=R3-2
+Removed Member From Class: ClassName=U_DK_STM32L151 Member=D1
+Removed Member From Class: ClassName=U_DK_STM32L151 Member=R3
+Added Member To Class: ClassName=U_DK_MOTO Member=Component C25 Cap

@@ -1,0 +1,10 @@
+Remove Pin=R2-2 From Net=BOOT0
+Remove Pin=R4-2 From Net=BOOT1
+Change Component Designator: OldDesignator=P1 NewDesignator=P3
+Change Component Designator: OldDesignator=P2 NewDesignator=P4
+Change Component Designator: OldDesignator=P3 NewDesignator=P6
+Change Component Designator: OldDesignator=R3 NewDesignator=R2
+Change Component Designator: OldDesignator=R5 NewDesignator=R4
+Change Component Designator: OldDesignator=R6 NewDesignator=R5
+Change Pin Designator/Name:  Old Designator=Q3-1 Old Name=C New Designator =B New Name=2
+Change Pin Designator/Name:  Old Designator=Q3-2 Old Name=B New Designator =C New Name=1
