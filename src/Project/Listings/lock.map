@@ -1836,6 +1836,7 @@ Removing Unused input sections from the image.
     Removing transport.o(.revsh_text), (4 bytes).
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     Removing transport.o(i.mqtt_publist), (232 bytes).
     Removing transport.o(i.mqtt_qos0), (644 bytes).
 
@@ -1854,6 +1855,12 @@ Removing Unused input sections from the image.
 >>>>>>> parent of 59d2934... c
 =======
 >>>>>>> parent of 59d2934... c
+=======
+    Removing transport.o(i.mqtt_publist), (224 bytes).
+    Removing transport.o(i.mqtt_qos0), (644 bytes).
+
+709 unused section(s) (total 40754 bytes) removed from the image.
+>>>>>>> parent of e82d9ad... c
 
 ==============================================================================
 
@@ -2491,32 +2498,32 @@ Image Symbol Table
     i.main                                   0x080025e4   Section        0  main.o(i.main)
     i.mqtt_connect                           0x080026ec   Section        0  transport.o(i.mqtt_connect)
     i.mqtt_keep_alive                        0x080027e8   Section        0  transport.o(i.mqtt_keep_alive)
-    i.mqtt_subscribe                         0x08002898   Section        0  transport.o(i.mqtt_subscribe)
-    i.mqtt_subscribe_msg                     0x08002a04   Section        0  transport.o(i.mqtt_subscribe_msg)
-    i.readChar                               0x08002ad4   Section        0  mqttpacket.o(i.readChar)
-    i.readInt                                0x08002ae2   Section        0  mqttpacket.o(i.readInt)
-    i.readMQTTLenString                      0x08002afc   Section        0  mqttpacket.o(i.readMQTTLenString)
-    i.str_picked                             0x08002b36   Section        0  common.o(i.str_picked)
-    i.timer2_init                            0x08002ba4   Section        0  timer.o(i.timer2_init)
-    i.timer_delay_1ms                        0x08002bf0   Section        0  timer.o(i.timer_delay_1ms)
-    i.timer_is_timeout_1ms                   0x08002c04   Section        0  timer.o(i.timer_is_timeout_1ms)
-    i.transport_getdata                      0x08002c28   Section        0  transport.o(i.transport_getdata)
-    i.transport_sendPacketBuffer             0x08002c64   Section        0  transport.o(i.transport_sendPacketBuffer)
-    i.usart1_init                            0x08002d14   Section        0  usart.o(i.usart1_init)
-    i.usart1_recv_data                       0x08002d60   Section        0  usart.o(i.usart1_recv_data)
-    i.usart2_init                            0x08002d8c   Section        0  usart.o(i.usart2_init)
-    i.usart2_recv_data                       0x08002dcc   Section        0  usart.o(i.usart2_recv_data)
-    i.usart_send                             0x08002e64   Section        0  usart.o(i.usart_send)
-    i.writeCString                           0x08002f7c   Section        0  mqttpacket.o(i.writeCString)
-    i.writeChar                              0x08002fa4   Section        0  mqttpacket.o(i.writeChar)
-    i.writeInt                               0x08002fb0   Section        0  mqttpacket.o(i.writeInt)
-    i.writeMQTTString                        0x08002fe0   Section        0  mqttpacket.o(i.writeMQTTString)
-    locale$$code                             0x08003020   Section       44  lc_ctype_c.o(locale$$code)
-    .constdata                               0x0800304c   Section      176  transport.o(.constdata)
-    locale$$data                             0x0800311c   Section      272  lc_ctype_c.o(locale$$data)
-    __lcctype_c_name                         0x08003120   Data           2  lc_ctype_c.o(locale$$data)
-    __lcctype_c_start                        0x08003128   Data           0  lc_ctype_c.o(locale$$data)
-    __lcctype_c_end                          0x0800322c   Data           0  lc_ctype_c.o(locale$$data)
+    i.mqtt_subscribe                         0x08002890   Section        0  transport.o(i.mqtt_subscribe)
+    i.mqtt_subscribe_msg                     0x080029fc   Section        0  transport.o(i.mqtt_subscribe_msg)
+    i.readChar                               0x08002acc   Section        0  mqttpacket.o(i.readChar)
+    i.readInt                                0x08002ada   Section        0  mqttpacket.o(i.readInt)
+    i.readMQTTLenString                      0x08002af4   Section        0  mqttpacket.o(i.readMQTTLenString)
+    i.str_picked                             0x08002b2e   Section        0  common.o(i.str_picked)
+    i.timer2_init                            0x08002b9c   Section        0  timer.o(i.timer2_init)
+    i.timer_delay_1ms                        0x08002be8   Section        0  timer.o(i.timer_delay_1ms)
+    i.timer_is_timeout_1ms                   0x08002bfc   Section        0  timer.o(i.timer_is_timeout_1ms)
+    i.transport_getdata                      0x08002c20   Section        0  transport.o(i.transport_getdata)
+    i.transport_sendPacketBuffer             0x08002c5c   Section        0  transport.o(i.transport_sendPacketBuffer)
+    i.usart1_init                            0x08002d0c   Section        0  usart.o(i.usart1_init)
+    i.usart1_recv_data                       0x08002d58   Section        0  usart.o(i.usart1_recv_data)
+    i.usart2_init                            0x08002d84   Section        0  usart.o(i.usart2_init)
+    i.usart2_recv_data                       0x08002dc4   Section        0  usart.o(i.usart2_recv_data)
+    i.usart_send                             0x08002e5c   Section        0  usart.o(i.usart_send)
+    i.writeCString                           0x08002f74   Section        0  mqttpacket.o(i.writeCString)
+    i.writeChar                              0x08002f9c   Section        0  mqttpacket.o(i.writeChar)
+    i.writeInt                               0x08002fa8   Section        0  mqttpacket.o(i.writeInt)
+    i.writeMQTTString                        0x08002fd8   Section        0  mqttpacket.o(i.writeMQTTString)
+    locale$$code                             0x08003018   Section       44  lc_ctype_c.o(locale$$code)
+    .constdata                               0x08003044   Section      176  transport.o(.constdata)
+    locale$$data                             0x08003114   Section      272  lc_ctype_c.o(locale$$data)
+    __lcctype_c_name                         0x08003118   Data           2  lc_ctype_c.o(locale$$data)
+    __lcctype_c_start                        0x08003120   Data           0  lc_ctype_c.o(locale$$data)
+    __lcctype_c_end                          0x08003224   Data           0  lc_ctype_c.o(locale$$data)
     .data                                    0x20000000   Section       37  main.o(.data)
     .data                                    0x20000028   Section        8  button.o(.data)
     .data                                    0x20000030   Section        8  gprs.o(.data)
@@ -2986,31 +2993,31 @@ Image Symbol Table
     gprs_send_at                             0x08002531   Thumb Code   164  gprs.o(i.gprs_send_at)
     main                                     0x080025e5   Thumb Code   182  main.o(i.main)
     mqtt_connect                             0x080026ed   Thumb Code   200  transport.o(i.mqtt_connect)
-    mqtt_keep_alive                          0x080027e9   Thumb Code   142  transport.o(i.mqtt_keep_alive)
-    mqtt_subscribe                           0x08002899   Thumb Code   298  transport.o(i.mqtt_subscribe)
-    mqtt_subscribe_msg                       0x08002a05   Thumb Code   178  transport.o(i.mqtt_subscribe_msg)
-    readChar                                 0x08002ad5   Thumb Code    14  mqttpacket.o(i.readChar)
-    readInt                                  0x08002ae3   Thumb Code    26  mqttpacket.o(i.readInt)
-    readMQTTLenString                        0x08002afd   Thumb Code    58  mqttpacket.o(i.readMQTTLenString)
-    str_picked                               0x08002b37   Thumb Code   110  common.o(i.str_picked)
-    timer2_init                              0x08002ba5   Thumb Code    76  timer.o(i.timer2_init)
-    timer_delay_1ms                          0x08002bf1   Thumb Code    16  timer.o(i.timer_delay_1ms)
-    timer_is_timeout_1ms                     0x08002c05   Thumb Code    32  timer.o(i.timer_is_timeout_1ms)
-    transport_getdata                        0x08002c29   Thumb Code    50  transport.o(i.transport_getdata)
-    transport_sendPacketBuffer               0x08002c65   Thumb Code   132  transport.o(i.transport_sendPacketBuffer)
-    usart1_init                              0x08002d15   Thumb Code    70  usart.o(i.usart1_init)
-    usart1_recv_data                         0x08002d61   Thumb Code    36  usart.o(i.usart1_recv_data)
-    usart2_init                              0x08002d8d   Thumb Code    60  usart.o(i.usart2_init)
-    usart2_recv_data                         0x08002dcd   Thumb Code   124  usart.o(i.usart2_recv_data)
-    usart_send                               0x08002e65   Thumb Code   274  usart.o(i.usart_send)
-    writeCString                             0x08002f7d   Thumb Code    40  mqttpacket.o(i.writeCString)
-    writeChar                                0x08002fa5   Thumb Code    12  mqttpacket.o(i.writeChar)
-    writeInt                                 0x08002fb1   Thumb Code    48  mqttpacket.o(i.writeInt)
-    writeMQTTString                          0x08002fe1   Thumb Code    62  mqttpacket.o(i.writeMQTTString)
-    _get_lc_ctype                            0x08003021   Thumb Code    44  lc_ctype_c.o(locale$$code)
-    Region$$Table$$Base                      0x080030fc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x0800311c   Number         0  anon$$obj.o(Region$$Table)
-    __ctype                                  0x08003129   Data           0  lc_ctype_c.o(locale$$data)
+    mqtt_keep_alive                          0x080027e9   Thumb Code   134  transport.o(i.mqtt_keep_alive)
+    mqtt_subscribe                           0x08002891   Thumb Code   298  transport.o(i.mqtt_subscribe)
+    mqtt_subscribe_msg                       0x080029fd   Thumb Code   178  transport.o(i.mqtt_subscribe_msg)
+    readChar                                 0x08002acd   Thumb Code    14  mqttpacket.o(i.readChar)
+    readInt                                  0x08002adb   Thumb Code    26  mqttpacket.o(i.readInt)
+    readMQTTLenString                        0x08002af5   Thumb Code    58  mqttpacket.o(i.readMQTTLenString)
+    str_picked                               0x08002b2f   Thumb Code   110  common.o(i.str_picked)
+    timer2_init                              0x08002b9d   Thumb Code    76  timer.o(i.timer2_init)
+    timer_delay_1ms                          0x08002be9   Thumb Code    16  timer.o(i.timer_delay_1ms)
+    timer_is_timeout_1ms                     0x08002bfd   Thumb Code    32  timer.o(i.timer_is_timeout_1ms)
+    transport_getdata                        0x08002c21   Thumb Code    50  transport.o(i.transport_getdata)
+    transport_sendPacketBuffer               0x08002c5d   Thumb Code   132  transport.o(i.transport_sendPacketBuffer)
+    usart1_init                              0x08002d0d   Thumb Code    70  usart.o(i.usart1_init)
+    usart1_recv_data                         0x08002d59   Thumb Code    36  usart.o(i.usart1_recv_data)
+    usart2_init                              0x08002d85   Thumb Code    60  usart.o(i.usart2_init)
+    usart2_recv_data                         0x08002dc5   Thumb Code   124  usart.o(i.usart2_recv_data)
+    usart_send                               0x08002e5d   Thumb Code   274  usart.o(i.usart_send)
+    writeCString                             0x08002f75   Thumb Code    40  mqttpacket.o(i.writeCString)
+    writeChar                                0x08002f9d   Thumb Code    12  mqttpacket.o(i.writeChar)
+    writeInt                                 0x08002fa9   Thumb Code    48  mqttpacket.o(i.writeInt)
+    writeMQTTString                          0x08002fd9   Thumb Code    62  mqttpacket.o(i.writeMQTTString)
+    _get_lc_ctype                            0x08003019   Thumb Code    44  lc_ctype_c.o(locale$$code)
+    Region$$Table$$Base                      0x080030f4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08003114   Number         0  anon$$obj.o(Region$$Table)
+    __ctype                                  0x08003121   Data           0  lc_ctype_c.o(locale$$data)
     bell_flag                                0x20000000   Data           1  main.o(.data)
     Shaking                                  0x20000001   Data           1  main.o(.data)
     Shaking_Alarm_Flag                       0x20000002   Data           1  main.o(.data)
@@ -3315,9 +3322,13 @@ Memory Map of the image
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000032a0, Max: 0x00040000, ABSOLUTE)
+=======
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003298, Max: 0x00040000, ABSOLUTE)
+>>>>>>> parent of e82d9ad... c
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000322c, Max: 0x00040000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00003224, Max: 0x00040000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3508,32 +3519,32 @@ Memory Map of the image
     0x08002530   0x000000b4   Code   RO          400    i.gprs_send_at      gprs.o
     0x080025e4   0x00000108   Code   RO            3    i.main              main.o
     0x080026ec   0x000000fc   Code   RO         5241    i.mqtt_connect      transport.o
-    0x080027e8   0x000000b0   Code   RO         5242    i.mqtt_keep_alive   transport.o
-    0x08002898   0x0000016c   Code   RO         5245    i.mqtt_subscribe    transport.o
-    0x08002a04   0x000000d0   Code   RO         5246    i.mqtt_subscribe_msg  transport.o
-    0x08002ad4   0x0000000e   Code   RO         4996    i.readChar          mqttpacket.o
-    0x08002ae2   0x0000001a   Code   RO         4997    i.readInt           mqttpacket.o
-    0x08002afc   0x0000003a   Code   RO         4998    i.readMQTTLenString  mqttpacket.o
-    0x08002b36   0x0000006e   Code   RO         1074    i.str_picked        common.o
-    0x08002ba4   0x0000004c   Code   RO          541    i.timer2_init       timer.o
-    0x08002bf0   0x00000014   Code   RO          542    i.timer_delay_1ms   timer.o
-    0x08002c04   0x00000024   Code   RO          543    i.timer_is_timeout_1ms  timer.o
-    0x08002c28   0x0000003c   Code   RO         5247    i.transport_getdata  transport.o
-    0x08002c64   0x000000b0   Code   RO         5248    i.transport_sendPacketBuffer  transport.o
-    0x08002d14   0x0000004c   Code   RO          589    i.usart1_init       usart.o
-    0x08002d60   0x0000002c   Code   RO          590    i.usart1_recv_data  usart.o
-    0x08002d8c   0x00000040   Code   RO          591    i.usart2_init       usart.o
-    0x08002dcc   0x00000098   Code   RO          592    i.usart2_recv_data  usart.o
-    0x08002e64   0x00000118   Code   RO          595    i.usart_send        usart.o
-    0x08002f7c   0x00000028   Code   RO         4999    i.writeCString      mqttpacket.o
-    0x08002fa4   0x0000000c   Code   RO         5000    i.writeChar         mqttpacket.o
-    0x08002fb0   0x00000030   Code   RO         5001    i.writeInt          mqttpacket.o
-    0x08002fe0   0x0000003e   Code   RO         5002    i.writeMQTTString   mqttpacket.o
-    0x0800301e   0x00000002   PAD
-    0x08003020   0x0000002c   Code   RO         5640    locale$$code        c_w.l(lc_ctype_c.o)
-    0x0800304c   0x000000b0   Data   RO         5249    .constdata          transport.o
-    0x080030fc   0x00000020   Data   RO         5720    Region$$Table       anon$$obj.o
-    0x0800311c   0x00000110   Data   RO         5639    locale$$data        c_w.l(lc_ctype_c.o)
+    0x080027e8   0x000000a8   Code   RO         5242    i.mqtt_keep_alive   transport.o
+    0x08002890   0x0000016c   Code   RO         5245    i.mqtt_subscribe    transport.o
+    0x080029fc   0x000000d0   Code   RO         5246    i.mqtt_subscribe_msg  transport.o
+    0x08002acc   0x0000000e   Code   RO         4996    i.readChar          mqttpacket.o
+    0x08002ada   0x0000001a   Code   RO         4997    i.readInt           mqttpacket.o
+    0x08002af4   0x0000003a   Code   RO         4998    i.readMQTTLenString  mqttpacket.o
+    0x08002b2e   0x0000006e   Code   RO         1074    i.str_picked        common.o
+    0x08002b9c   0x0000004c   Code   RO          541    i.timer2_init       timer.o
+    0x08002be8   0x00000014   Code   RO          542    i.timer_delay_1ms   timer.o
+    0x08002bfc   0x00000024   Code   RO          543    i.timer_is_timeout_1ms  timer.o
+    0x08002c20   0x0000003c   Code   RO         5247    i.transport_getdata  transport.o
+    0x08002c5c   0x000000b0   Code   RO         5248    i.transport_sendPacketBuffer  transport.o
+    0x08002d0c   0x0000004c   Code   RO          589    i.usart1_init       usart.o
+    0x08002d58   0x0000002c   Code   RO          590    i.usart1_recv_data  usart.o
+    0x08002d84   0x00000040   Code   RO          591    i.usart2_init       usart.o
+    0x08002dc4   0x00000098   Code   RO          592    i.usart2_recv_data  usart.o
+    0x08002e5c   0x00000118   Code   RO          595    i.usart_send        usart.o
+    0x08002f74   0x00000028   Code   RO         4999    i.writeCString      mqttpacket.o
+    0x08002f9c   0x0000000c   Code   RO         5000    i.writeChar         mqttpacket.o
+    0x08002fa8   0x00000030   Code   RO         5001    i.writeInt          mqttpacket.o
+    0x08002fd8   0x0000003e   Code   RO         5002    i.writeMQTTString   mqttpacket.o
+    0x08003016   0x00000002   PAD
+    0x08003018   0x0000002c   Code   RO         5640    locale$$code        c_w.l(lc_ctype_c.o)
+    0x08003044   0x000000b0   Data   RO         5249    .constdata          transport.o
+    0x080030f4   0x00000020   Data   RO         5720    Region$$Table       anon$$obj.o
+    0x08003114   0x00000110   Data   RO         5639    locale$$data        c_w.l(lc_ctype_c.o)
 
 
     Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00001a68, Max: 0x00008000, ABSOLUTE)
@@ -3956,11 +3967,11 @@ Image component sizes
        376         30          0          0          0       1365   system_stm32l1xx.o
 <<<<<<< HEAD
        208         16          0          4         84       2597   timer.o
-      1236        236        176         20          0       5870   transport.o
+      1228        236        176         20          0       5866   transport.o
       1124         78          0          4       2570       6671   usart.o
 
     ----------------------------------------------------------------------
-     10066       1042        500        116       6544     331951   Object Totals
+     10058       1042        500        116       6544     331947   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         16          0          0          6          4          0   (incl. Padding)
 =======
@@ -4106,14 +4117,21 @@ Image component sizes
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
      12072       1108        772        116       6644     327231   Grand Totals
      12072       1108        772        116       6644     327231   ELF Image Totals
      12072       1108        772        116          0          0   ROM Totals
+=======
+     12064       1108        772        116       6644     327227   Grand Totals
+     12064       1108        772        116       6644     327227   ELF Image Totals
+     12064       1108        772        116          0          0   ROM Totals
+>>>>>>> parent of e82d9ad... c
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                12844 (  12.54kB)
+    Total RO  Size (Code + RO Data)                12836 (  12.54kB)
     Total RW  Size (RW Data + ZI Data)              6760 (   6.60kB)
+<<<<<<< HEAD
     Total ROM Size (Code + RO Data + RW Data)      12960 (  12.66kB)
 =======
 =======
@@ -4131,6 +4149,9 @@ Image component sizes
 >>>>>>> parent of 59d2934... c
 =======
 >>>>>>> parent of 59d2934... c
+=======
+    Total ROM Size (Code + RO Data + RW Data)      12952 (  12.65kB)
+>>>>>>> parent of e82d9ad... c
 
 ==============================================================================
 

@@ -1,5 +1,9 @@
 Dependencies for Project 'lock', Target 'Target 1': (DO NOT MODIFY !)
+<<<<<<< HEAD
 F (..\app\main.c)(0x5AAFA31B)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork --split_sections -I ..\app -I ..\Libraries\STM32L1xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I ..\Libraries\CMSIS\Include -I ..\driver -I ..\bsp -I ..\system -I ..\tplib -I ..\MQTT-I E:\github\dk-newlock\src\Project\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32L151xC -DUSE_STDPERIPH_DRIVER -DSTM32L1XX_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+=======
+F (..\app\main.c)(0x5AAF915F)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork --split_sections -I ..\app -I ..\Libraries\STM32L1xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I ..\Libraries\CMSIS\Include -I ..\driver -I ..\bsp -I ..\system -I ..\tplib -I ..\MQTT-I E:\github\dk-newlock\src\Project\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32L151xC -DUSE_STDPERIPH_DRIVER -DSTM32L1XX_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+>>>>>>> parent of e82d9ad... c
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x569DEA3A)
 I (..\driver\adc.h)(0x5AAF8E0A)
@@ -451,7 +455,7 @@ I (..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h)(0x5A8F8337)
 I (..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h)(0x5A8F8337)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x569DEA3A)
 I (..\driver\usart.h)(0x5AAA070E)
-F (..\bsp\bsp.c)(0x5AAF91C8)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork --split_sections -I ..\app -I ..\Libraries\STM32L1xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I ..\Libraries\CMSIS\Include -I ..\driver -I ..\bsp -I ..\system -I ..\tplib -I ..\MQTT-I E:\github\dk-newlock\src\Project\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32L151xC -DUSE_STDPERIPH_DRIVER -DSTM32L1XX_MD-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
+F (..\bsp\bsp.c)(0x5AAF91B2)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork --split_sections -I ..\app -I ..\Libraries\STM32L1xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I ..\Libraries\CMSIS\Include -I ..\driver -I ..\bsp -I ..\system -I ..\tplib -I ..\MQTT-I E:\github\dk-newlock\src\Project\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32L151xC -DUSE_STDPERIPH_DRIVER -DSTM32L1XX_MD-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
 I (..\bsp\bsp.h)(0x5AAB8CD2)
 I (..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h)(0x5A953232)
 I (..\Libraries\CMSIS\Include\core_cm3.h)(0x5A8F8337)
@@ -1634,8 +1638,13 @@ I (..\MQTT\MQTTFormat.h)(0x5AA76E65)
 I (..\MQTT\StackTrace.h)(0x5AA76E66)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x569DEA3A)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)
+<<<<<<< HEAD
 F (..\MQTT\transport.c)(0x5AAFA31C)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork --split_sections -I ..\app -I ..\Libraries\STM32L1xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I ..\Libraries\CMSIS\Include -I ..\driver -I ..\bsp -I ..\system -I ..\tplib -I ..\MQTT-I E:\github\dk-newlock\src\Project\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32L151xC -DUSE_STDPERIPH_DRIVER -DSTM32L1XX_MD-o .\objects\transport.o --omf_browse .\objects\transport.crf --depend .\objects\transport.d)
 I (..\MQTT\transport.h)(0x5AAFA31C)
+=======
+F (..\MQTT\transport.c)(0x5AAF88D4)(--c99 -c --cpu Cortex-M3 -g -W -O0 --apcs=interwork --split_sections -I ..\app -I ..\Libraries\STM32L1xx_StdPeriph_Driver\inc -I ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include -I ..\Libraries\CMSIS\Include -I ..\driver -I ..\bsp -I ..\system -I ..\tplib -I ..\MQTT-I E:\github\dk-newlock\src\Project\RTE-I D:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.2.0\Device\Include-I D:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="518" -DSTM32L151xC -DUSE_STDPERIPH_DRIVER -DSTM32L1XX_MD-o .\objects\transport.o --omf_browse .\objects\transport.crf --depend .\objects\transport.d)
+I (..\MQTT\transport.h)(0x5AAB3876)
+>>>>>>> parent of e82d9ad... c
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x569DEA3A)
 I (D:\Keil_v5\ARM\ARMCC\include\errno.h)(0x569DEA38)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x569DEA3A)

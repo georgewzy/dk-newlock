@@ -318,7 +318,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				if (MQTTPacket_read(buf, buflen, transport_getdata) == PUBCOMP)
 				{
 					ret = 1;
-					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
+					
 				}	
 			break;
 				
@@ -495,7 +495,6 @@ int mqtt_keep_alive(void)
 //				USART_OUT(USART1, "gprs_sleep\r\n");
 //			}
 			ret = 1;
-			timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
 		}
 
 		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
