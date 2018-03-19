@@ -33,7 +33,7 @@
 
 extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
-
+extern uint16_t mqtt_publist_msgid;
 
 extern u8 usart2_rx_status;
 
@@ -57,7 +57,7 @@ uint8_t gprs_rx_flag = 0;
 
 
 u8 PARK_LOCK_Buffer[17] = {0};
-extern u8 lock_id[16];
+
 u8 topic_id = 0;
 
 /*
@@ -78,9 +78,13 @@ u8 topic_id = 0;
 void gprs_power_on(void)
 {
 
-	GPIO_SetBits(GPIOA, GPIO_Pin_7);				//GPRS_PWR
+	
+	GPIO_SetBits(GPIOB, GPIO_Pin_6);				//GPRS POWER EN
 	timer_delay_1ms(10);
-	GPIO_ResetBits(GPIOA, GPIO_Pin_7);
+	
+	GPIO_SetBits(GPIOA, GPIO_Pin_7);				//GPRS_PWON
+	timer_delay_1ms(10);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_7);				//GPRS_PWON
 	timer_delay_1ms(1200);
 	
 }
@@ -354,7 +358,7 @@ void gprs_init_task(void)
 				
 				
 			case 10:
-				mqtt_rc = mqtt_subscribe_msg("test", 2, 1);
+				mqtt_rc = mqtt_subscribe_msg("test", 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
@@ -363,7 +367,7 @@ void gprs_init_task(void)
 			break;
 				
 			case 11:
-				mqtt_rc = mqtt_subscribe_msg("test1", 0, 2);
+				mqtt_rc = mqtt_subscribe_msg("test1", 0, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
 					gprs_status = 255;

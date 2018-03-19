@@ -41,7 +41,7 @@ u8 subscribe_status = PUBLISH;
 int mqtt_buff_len = 0;
 
 u32 packet_id = 0;
-uint16_t mqtt_publist_packetid = 0;				//发布消息id
+uint16_t mqtt_publist_msgid = 0;				//发布消息id
 uint16_t mqtt_subscribe_msgid = 0;			//订阅消息id
 
 /**
@@ -61,7 +61,6 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 	int len = 0;
 	u8 cmd[30] = {0};
 //	u8 end_char[2] = {0};
-
 //	end_char[0] = 0x1A;//结束字符
 //	end_char[1] = '\0';
 	
@@ -76,9 +75,16 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 //		memcpy((char *)send_buff+buflen, (char*)end_char, sizeof(end_char));
 		usart_send(USART2, send_buff, buflen);	
 //		gprs_send_data(send_buff, buflen+3, "SEND OK", 100);
+		
+		mqtt_publist_msgid++;
+		if(mqtt_publist_msgid >= 65535)
+		{
+			mqtt_publist_msgid = 0;
+		}
+		
+		rc = buflen;
 	}
 	
-	rc = buflen+3;
 	return rc;
 }
 
@@ -223,12 +229,12 @@ int mqtt_connect(void)
 	len = MQTTSerialize_connect(buf, buflen, &data);		
 	rc = transport_sendPacketBuffer(mysock, buf, len);
 	
-	timer_is_timeout_1ms(timer_connect, 0);
+	timer_is_timeout_1ms(timer_mqtt_resend, 0);
 	while(!ret)
 	{ 
 		usart2_recv_data();
 
-		if(timer_is_timeout_1ms(timer_connect, 2000) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_resend, 2000) == 0)
 		{
 			len = MQTTSerialize_connect(buf, buflen, &data);		
 			rc = transport_sendPacketBuffer(mysock, buf, len);
@@ -245,10 +251,14 @@ int mqtt_connect(void)
 			else
 			{
 				ret = 1;
-				break;
+				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
 			}
 		}
 		
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		{
+			
+		}
 		
 	}
 	
@@ -300,12 +310,18 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				if (MQTTPacket_read(buf, buflen, transport_getdata) == PUBCOMP)
 				{
 					ret = 1;
+					
 				}	
 			break;
 				
 			default:
 			break;	
-		}	
+		}
+
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		{
+			
+		}
 	}
 	
 	return ret;
@@ -368,13 +384,14 @@ void mqtt_subscribe(unsigned char* topic, unsigned char* payload, int payloadlen
 		case PUBCOMP:
 			len = MQTTSerialize_pubcomp(buf, buflen, mqtt_subscribe_msgid);
 			rc = transport_sendPacketBuffer(mysock, buf, len);
+			
+			timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
 			subscribe_status = PUBLISH;
 		break;
 			
 		default:
 		break;	
 	}	
-	
 	
 }
 
@@ -414,7 +431,7 @@ int mqtt_subscribe_msg(unsigned char* topic, int req_qos, unsigned short packeti
 					int granted_qos;
 
 					rc = MQTTDeserialize_suback(&submsgid, 1, &subcount, &granted_qos, buf, buflen);
-					USART_OUT(USART1, "granted qos =%d\n", granted_qos);	
+					USART_OUT(USART1, "granted qos %d=%d\n", granted_qos, submsgid);	
 					ret = 1;
 				}
 			break;
@@ -423,6 +440,12 @@ int mqtt_subscribe_msg(unsigned char* topic, int req_qos, unsigned short packeti
 			break;	
 			
 		}
+		
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		{
+			
+		}
+		
 	}
 	
 	return ret;
@@ -444,17 +467,17 @@ int mqtt_keep_alive(void)
 	len = MQTTSerialize_pingreq(buf, buflen);
 	rc = transport_sendPacketBuffer(mysock, buf, len);
 	
-	timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
+	timer_is_timeout_1ms(timer_mqtt_resend, 0);
 	while(!ret)
 	{
 		usart2_recv_data();	
-		if(timer_is_timeout_1ms(timer_mqtt_keep_alive, 2000) == 0)
+		
+		if(timer_is_timeout_1ms(timer_mqtt_resend, 2000) == 0)
 		{
 //			gprs_wakeup(1);
 			len = MQTTSerialize_pingreq(buf, buflen);
 			rc = transport_sendPacketBuffer(mysock, buf, len);
 		}
-
 
 		if(MQTTPacket_read(buf, buflen, transport_getdata) == PINGRESP)
 		{
@@ -464,7 +487,12 @@ int mqtt_keep_alive(void)
 //				USART_OUT(USART1, "gprs_sleep\r\n");
 //			}
 			ret = 1;
-		}	
+		}
+
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		{
+			
+		}
 	}
 	
 	return ret;
@@ -475,55 +503,6 @@ int mqtt_keep_alive(void)
 
 
 
-
-void mqtt_pub_qos0(void)
-{
-	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
-	int rc = 0;
-	char buf[200];
-	int buflen = sizeof(buf);
-	int mysock = 0;
-	MQTTString topicString = MQTTString_initializer;
-	char* payload = "mypayload";
-	int payloadlen = strlen(payload);
-	int len = 0;
-	char *host = "m2m.eclipse.org";
-	int port = 1883;
-
-//	if (argc > 1)
-//		host = argv[1];
-
-//	if (argc > 2)
-//		port = atoi(argv[2]);
-
-//	mysock = transport_open(host,port);
-//	if(mysock < 0)
-//		return mysock;
-
-
-	USART_OUT(USART1, "Sending to hostname %s port %d\n", host, port);
-	
-	data.clientID.cstring = "me";
-	data.keepAliveInterval = 20;
-	data.cleansession = 1;
-	data.username.cstring = "testuser";
-	data.password.cstring = "testpassword";
-	data.MQTTVersion = 4;
-
-	len = MQTTSerialize_connect((unsigned char *)buf, buflen, &data);
-
-	topicString.cstring = "mytopic";
-	len += MQTTSerialize_publish((unsigned char *)(buf + len), buflen - len, 0, 0, 0, 0, topicString, (unsigned char *)payload, payloadlen);
-
-	len += MQTTSerialize_disconnect((unsigned char *)(buf + len), buflen - len);
-
-	rc = transport_sendPacketBuffer(mysock, (unsigned char*)buf, len);
-	if (rc == len)
-		USART_OUT(USART1, "Successfully published\n");
-	else
-		USART_OUT(USART1, "Publish failed\n");
-
-}
 
 
 

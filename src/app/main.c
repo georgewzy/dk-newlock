@@ -147,7 +147,7 @@ static void test_encrypt_ecb(void)
 int main(void)
 { 
 	u16 j,i,rxlen;
-
+	u16 aa = 0;
 	u8 upload=0; 
 	u8 *ret;
 	uint8_t status = 0;
@@ -164,11 +164,13 @@ int main(void)
 	{
 	
 		gprs_init_task();
-
 	
 		usart1_recv_data();
 		usart2_recv_data();
 		mqtt_subscribe(topic, payload, payloadlen);
+		
+		
+		
 		
 		if(timer_is_timeout_1ms(timer_batt, 1000*20) == 0)
 		{
@@ -187,17 +189,19 @@ int main(void)
 			BEEP_ON();
 			timer_delay_1ms(200);
 			BEEP_OFF();
+//			aa = adc_get_value(14);
+//			USART_OUT(USART1, "aa = %d\r\n", aa);
 		}
 		
+	
 		
-		if(timer_is_timeout_1ms(timer_keep_alive, 1000*60) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_keep_alive, 1000*60) == 0)
 		{
 			mqtt_keep_alive();	
 		}
 
+		
 
-		
-		
 		p1 = strstr((char*)mqtt_buff.pdata, "CLOSE");
 		if(p1 !=NULL)
 		{

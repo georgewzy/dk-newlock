@@ -12,9 +12,10 @@ extern u8 Lock_Close_Tim5s;
 enum timer
 {
     tim1_cnt,
+	timer_batt,
 	timer_connect,
-	timer_keep_alive,
-    timer_batt,
+	timer_mqtt_resend,
+    timer_mqtt_timeout,
 	timer_mqtt_keep_alive,
 	timer_gps_cycle,
 	tiemr_gps_location,

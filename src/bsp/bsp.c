@@ -184,15 +184,19 @@ void bsp_system_reset(void)
 
 
 /*
-*Function: gpio_config      
-*Description: GPIO初始化
-*Calls: 无  
-*Data Accessed: 无  
-*Data Updated: 无    
-*Input: 无
-*Output: 无
-*Return: 无     
-*Others: 无    
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
 */
 void bsp_gpio_init(void)
 {
@@ -278,7 +282,21 @@ void bsp_gpio_init(void)
 
 
 
-
+/*
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
 uint8_t bsp_get_port_value(uint8_t port_name)
 {
 	uint8_t value;
@@ -306,7 +324,21 @@ uint8_t bsp_get_port_value(uint8_t port_name)
 
 
 
-
+/*
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
 void bsp_nvic_init(void)
 {
 	NVIC_InitTypeDef nvic_init_structure;
@@ -346,15 +378,19 @@ void bsp_nvic_init(void)
 
 
 /*
-*Function: bsp_init      
-*Description: 底层初始化主函数  
-*Calls: 无  
-*Data Accessed: 无  
-*Data Updated: 无    
-*Input: 无
-*Output: 无
-*Return: 无     
-*Others: 无    
+*********************************************************************************************************
+*                                          gprs_power_on()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
 */
 void bsp_init(void)
 {
@@ -362,6 +398,7 @@ void bsp_init(void)
 	bsp_nvic_init();
 	bsp_gpio_init();
 	button_gpio_init();
+	adc_gpio_init();
 //	pwm_gpio_init();
 //	iwatchdog_config();
 	usart1_init(115200, 8, 0, 1);

@@ -11,10 +11,10 @@ void adc_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;
 	
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_0;
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_4;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;
 	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_Init(GPIOB, &gpio_init_structure);
+	GPIO_Init(GPIOC, &gpio_init_structure);
 	
 }
 
