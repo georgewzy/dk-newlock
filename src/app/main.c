@@ -160,6 +160,11 @@ int main(void)
                          
 	USART_OUT(USART1, "uart1 is ok\r\n");
 
+<<<<<<< HEAD
+=======
+//	gu906_init();
+	
+>>>>>>> parent of 59d2934... c
 	while(1)
 	{
 	
