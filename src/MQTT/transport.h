@@ -18,6 +18,7 @@
 int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen);
 int transport_getdata(unsigned char* buf, int count);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -28,6 +29,11 @@ int mqtt_subscribe_msg(unsigned char* topic, int req_qos, unsigned short packeti
 int mqtt_keep_alive(void);
 
 #endif
+=======
+int transport_getdatanb(void *sck, unsigned char* buf, int count);
+int transport_open(char* host, int port);
+int transport_close(int sock);
+>>>>>>> parent of 59d2934... c
 =======
 int transport_getdatanb(void *sck, unsigned char* buf, int count);
 int transport_open(char* host, int port);

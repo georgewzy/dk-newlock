@@ -107,9 +107,13 @@ int transport_getdata(unsigned char* buf, int count)
 int toStop = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 void mqtt_qos0(void)
+=======
+void mqtt_aaa()
+>>>>>>> parent of 59d2934... c
 =======
 void mqtt_aaa()
 >>>>>>> parent of 59d2934... c
