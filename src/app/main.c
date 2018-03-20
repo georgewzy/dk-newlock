@@ -13,12 +13,12 @@
 #include "app_md5.h"
 #include "transport.h"
 #include "button.h"
-
-
+#include "usart.h"
+#include "flash.h"
 
 
 extern usart_buff_t mqtt_buff;
-
+extern uint16_t mqtt_publist_msgid;
 
 
 u8 receiveText[24];
@@ -78,12 +78,12 @@ u8 lockbuff[16];
 
 u8 gps_flag = 0;
 
-u8 send_buff[100] = {0};
+
 
 u8 protocol_buff[512] = {0};
 u8 gps_buff[512] = {0};
 
-extern u8 PARK_LOCK_Buffer[17];
+
 
 extern uint8_t gprs_status;
 
@@ -101,8 +101,9 @@ u8 gps_err_cnt = 0;
 
 u8 tmp[20];
 u8 heartbeat_buff[2] = {0};
-
-
+u8 PARK_LOCK_Buffer[17] = {0};
+u8 topic_buff[100] = {0};
+u8 send_buff[100] = {0};
 
 static void test_encrypt_ecb(void)
 {
@@ -152,30 +153,107 @@ int main(void)
 	u8 *ret;
 	uint8_t status = 0;
 	uint8_t topic[50] = {0};
-	uint8_t payload[200] = {0};
+	uint8_t payload[100];
 	int payloadlen = 0;
 	int mqtt_pub;
-	
+	u32 id = 0;
 	bsp_init();
                          
 	USART_OUT(USART1, "uart1 is ok\r\n");
 
-<<<<<<< HEAD
-=======
-//	gu906_init();
-	
->>>>>>> parent of 59d2934... c
+	eeprom_read_data(0x08080000, PARK_LOCK_Buffer, 16);
+
+	USART_OUT(USART1, "PARK_LOCK_Buffer=%s\r\n", PARK_LOCK_Buffer);
 	while(1)
 	{
+		usart1_recv_data();
+		p1 = strstr((u8*)protocol_buff, "lockid=");
+		if(p1 != NULL)
+		{
+			memcpy((char*)PARK_LOCK_Buffer ,(char *)(p1+7), 16);		
+			eeprom_write_data(0x08080000, PARK_LOCK_Buffer, 16);
+			eeprom_read_data(0x08080000, PARK_LOCK_Buffer, 16);
+			MakeFile_MD5_Checksum(PARK_LOCK_Buffer, 16);
+			USART_OUT(USART1, "wang11=%s\r\n", PARK_LOCK_Buffer);
+			sprintf((char *)expressText, "{%c%s%c:%s}",'"',"battery",'"',"20");
+			
+			USART_OUT(USART1, "expressText=%s\r\n", expressText);
+			break;
+		}	
+	}
 	
+	while(1)
+	{
+		
 		gprs_init_task();
 	
 		usart1_recv_data();
 		usart2_recv_data();
-		mqtt_subscribe(topic, payload, payloadlen);
+		mqtt_subscribe(topic, payload, &payloadlen);
+		if(payloadlen > 0)
+		{
+			USART_OUT(USART1, "%s===%s\r\n", payload, topic);
+			payloadlen = 0;
+		}
+
+		
+		if(strncmp((char *)topic, (char *)"lock/", 5)==0)
+		{
+			
+			if(LOCK_ON_READ()==0 || LOCK_OFF_READ()==0)
+			{
+			timer_is_timeout_1ms(timer_heartbeat, 0);
+			USART_OUT(USART1, "lock data\r\n");
+			memset(receiveText ,0 , 512);
+			memset(expressText ,0 , 512);
+			
+			strcpy((char*)receiveText ,(char *)(p1+33));
+			USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
+			AES_Decrypt(expressText, receiveText, aesKey);
+			if(*expressText==0x31)
+			{
+//				if(LOCK_ON_READ() == 0)
+//				if(lock_on_status_get() == 0)
+				if(LOCK_ON_READ()==0 && LOCK_OFF_READ()==1)
+				{
+					timer_is_timeout_1ms(timer_open_lock, 0);
+					Shaking=1;
+					Lock_Open=1;
+					USART_OUT(USART1, "Lock_Open11111\r\n");
+				}
+				else
+				{
+					Lock_Open=0;
+				}
+			}
+			else if(*expressText==0x32)
+			{
+//				if(LOCK_OFF_READ() == 0)
+//				if(lock_off_status_get() == 0)
+				if(LOCK_ON_READ()==1 && LOCK_OFF_READ()==0)	
+				{
+					timer_is_timeout_1ms(timer_close_lock, 0);
+					Shaking=1;
+					Lock_Close=1;
+					USART_OUT(USART1, "Lock_Close11111\r\n");
+				}
+				else
+				{
+					Lock_Close=0;
+				}
+			
+			}
+			else if(*expressText == 0x30)
+			{
+				lock_stop();	//停止运行;
+			}
+			
+			memset(protocol_buff, 0, 512);					
+		}
+	}
 		
 		
-		
+	
 		
 		if(timer_is_timeout_1ms(timer_batt, 1000*20) == 0)
 		{
@@ -187,6 +265,40 @@ int main(void)
 		
 		}
 		
+		
+		if(timer_is_timeout_1ms(timer_batt, 1000*60*60) == 0)
+		{	
+			
+			Bat_V =adc_get_average(ADC_Channel_0,10);
+			Bat_V=Bat_V*3300/4096;
+			Bat_V=Bat_V*88/20;
+			Bat_Pre=(Bat_V-5000)*100/2400;
+		
+			memset(topic_buff, 0, 100);	
+			sprintf((char *)topic_buff,"%s%s", "lockdata/",PARK_LOCK_Buffer);
+	
+			memset(expressText, 0 ,512);
+			memset(cipherText, 0 ,512);		
+			sprintf((char *)expressText, "{%c%s%c:%s}",'"',"battery",'"',"20");
+			
+			USART_OUT(USART1, "expressText=%s\r\n", expressText);
+			AES_Encrypt((char *)expressText, cipherText, aesKey);
+				
+			USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
+			USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
+			
+			mqtt_pub = mqtt_publist(topic_buff, expressText, 24, 2, mqtt_publist_msgid);
+			if(mqtt_pub == 1)
+			{
+				USART_OUT(USART1, "mqtt_publist ok\r\n");
+			}		
+		}
+		
+		
+		
+		
+		
+
 		if(BUTTON_CLICK == button_get_state(SW1, 2000))
 		{
 			USART_OUT(USART1, "BUTTON_CLICK\r\n");
@@ -194,8 +306,7 @@ int main(void)
 			BEEP_ON();
 			timer_delay_1ms(200);
 			BEEP_OFF();
-//			aa = adc_get_value(14);
-//			USART_OUT(USART1, "aa = %d\r\n", aa);
+
 		}
 		
 	
@@ -245,6 +356,12 @@ int main(void)
 //		if(Bat_Pre<20&&Bat_Pre>10&&Bat_Pre_Flag==0)
 		if(timer_is_timeout_1ms(timer_batt, 1000*60*60) == 0)
 		{	
+			
+			Bat_V =Get_Adc_Average(ADC_Channel_0,10);
+			Bat_V=Bat_V*3300/4096;
+			Bat_V=Bat_V*88/20;
+			Bat_Pre=(Bat_V-5000)*100/2400;
+		
 			Bat_Pre_Flag =  1;
 			memset(send_buff, 0, 100);	
 			sprintf((char *)send_buff,"%s%s%s","AT+PUBLISH=lockdata/",PARK_LOCK_Buffer,",24,2\r\n");
@@ -268,9 +385,7 @@ int main(void)
 					timer_is_timeout_1ms(timer_heartbeat, 0);
 				}			
 			}
-			else
-			{
-			}
+		
 
 		}
 //		//接收锁数据

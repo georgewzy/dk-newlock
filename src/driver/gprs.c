@@ -34,9 +34,8 @@
 extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
 extern uint16_t mqtt_publist_msgid;
-
 extern u8 usart2_rx_status;
-
+extern u8 PARK_LOCK_Buffer[17];
 
 
 
@@ -56,7 +55,7 @@ uint8_t gprs_rx_flag = 0;
 
 
 
-u8 PARK_LOCK_Buffer[17] = {0};
+
 
 u8 topic_id = 0;
 
@@ -196,6 +195,7 @@ void gprs_init_task(void)
 	int mqtt_rc = 0;
 
 	u8 *ret;
+	u8 buff[100] = {0};
 	static u8 gprs_init_flag = true;		//
 		
 	while(1)
@@ -204,7 +204,7 @@ void gprs_init_task(void)
 		{
 			case 0:
 				gprs_power_on();
-			
+				USART_OUT(USART1, "gprs_power_on\r\n");
 				gprs_status = 1;
 				gprs_err_cnt = 0;
 			
@@ -353,25 +353,35 @@ void gprs_init_task(void)
 				{
 					gprs_status++;
 					USART_OUT(USART1, "mqtt_connect ok\r\n");
-				}	
-			break;
-				
+				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+					}
+				}
+			break;				
 				
 			case 10:
-				mqtt_rc = mqtt_subscribe_msg("test", 2, mqtt_publist_msgid);
+				sprintf((char*)buff, "%s%s", "bell/", PARK_LOCK_Buffer);
+				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
-					USART_OUT(USART1, "mqtt_subscribe_msg 1 ok\r\n");
+					USART_OUT(USART1, "mqtt_subscribe_topic 1 ok=%s\r\n", buff);
 				}
+				
 			break;
 				
 			case 11:
-				mqtt_rc = mqtt_subscribe_msg("test1", 0, mqtt_publist_msgid);
+				sprintf((char*)buff, "%s%s", "lock/", PARK_LOCK_Buffer);
+				mqtt_rc = mqtt_subscribe_topic(buff, 0, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
 					gprs_status = 255;
-					USART_OUT(USART1, "mqtt_subscribe_msg 2 ok\r\n");
+					USART_OUT(USART1, "mqtt_subscribe_topic 2 ok=%s\r\n", buff);
 				}
 			break;
 			

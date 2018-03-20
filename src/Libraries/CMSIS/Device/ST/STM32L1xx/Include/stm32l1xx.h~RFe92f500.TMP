@@ -320,7 +320,7 @@ typedef enum IRQn
 /** @addtogroup Exported_types
   * @{
   */  
-//typedef enum {FALSE = 0, TRUE = !FALSE} bool;
+
 typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
 
 typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;

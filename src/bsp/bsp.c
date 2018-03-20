@@ -49,7 +49,14 @@ void bsp_rcc_init(void)
 	err_status = RCC_WaitForHSEStartUp();
 
 	if (err_status == SUCCESS)
-	{        
+	{    
+
+		/* Enable Prefetch Buffer */
+        FLASH_PrefetchBufferCmd(ENABLE);
+        
+        /* Flash 2 wait state */
+        FLASH_SetLatency(FLASH_Latency_1);
+		
         /* HCLK = SYSCLK */
         RCC_HCLKConfig(RCC_SYSCLK_Div1); 
         

@@ -46,3 +46,4 @@
 .\objects\main.o: ..\tplib\app_md5.h
 .\objects\main.o: ..\MQTT\transport.h
 .\objects\main.o: ..\driver\button.h
+.\objects\main.o: ..\driver\flash.h
