@@ -240,12 +240,16 @@ void bsp_gpio_init(void)
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
 	
-	//button
+	//SW1
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;  
 	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
   	GPIO_Init(GPIOB, &gpio_init_structure);
-	
+	//SW2
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
+  	GPIO_Init(GPIOC, &gpio_init_structure);
 	
 	//LOCK ON   OFF
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5;
@@ -315,12 +319,21 @@ uint8_t bsp_get_port_value(uint8_t port_name)
 		break;
 		
 		case LOCK_ON:
-			value = SW1_READ();
+			value = LOCK_ON_READ();
 		break;
 		
 		case LOCK_OFF:
-			value = SW1_READ();
+			value = LOCK_OFF_READ();
 		break;
+		
+		case SW2A:
+			value = SW2A_READ();
+		break;
+		
+		case SW2B:
+			value = SW2B_READ();
+		break;
+		
 		
 		default:
 		break;

@@ -47,3 +47,4 @@
 .\objects\main.o: ..\MQTT\transport.h
 .\objects\main.o: ..\driver\button.h
 .\objects\main.o: ..\driver\flash.h
+.\objects\main.o: ..\driver\motor.h

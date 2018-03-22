@@ -13,7 +13,8 @@ enum timer
 {
     tim1_cnt,
 	timer_batt,
-	timer_connect,
+	timer_mqtt_subscribe_topic,
+	timer_mqtt_connect,
 	timer_mqtt_resend,
     timer_mqtt_timeout,
 	timer_mqtt_keep_alive,
@@ -49,7 +50,7 @@ extern volatile uint32_t g_timer_cnt[(uint8_t)timer_max];
 void timer2_init(u16 arr, u16 psc);
 u8 timer_is_timeout_1ms(uint8_t type, uint32_t count);
 void timer_delay_1ms(uint32_t ms);
-
+void timer_delay(uint32_t count);
 
  
 #endif

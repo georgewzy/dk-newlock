@@ -1,7 +1,7 @@
 
 #include "button.h"
 #include "bsp.h"
-
+#include "timer.h"
 
 
 BUTTON_INFO button_info[BUTTON_SUM];
@@ -16,6 +16,13 @@ void button_gpio_init(void)
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
 	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
   	GPIO_Init(GPIOB, &gpio_init_structure);
+	
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
+  	GPIO_Init(GPIOC, &gpio_init_structure);
+	
+	
 	
 }
 
@@ -113,11 +120,42 @@ BUTTON_STATE button_get_state(uint8_t button_name, uint32_t long_time)
 
 
 
-void button_scan(void)
+u8 button_scan(uint8_t button_name)
 {
-	uint8_t i = 0;
-
 	
+	uint8_t i = 0;
+	uint8_t ret = 0;
+	uint8_t button_cnt1 = 0;
+	uint8_t button_cnt2 = 0;
+	uint8_t button_state = 0;
+	
+	
+	while(!ret)
+	{
+		if(bsp_get_port_value(button_name) == 0)
+		{
+			button_cnt2 = 0;
+			button_cnt1++;
+			if(button_cnt1 > 10)
+			{
+				button_state = 0;
+				ret = 1;
+			}
+		}
+		else
+		{	
+			button_cnt1 = 0;
+			button_cnt2++;
+			if(button_cnt2 > 10)
+			{
+				button_state = 1;
+				ret = 1;
+			}
+		}
+		timer_delay(10);
+	}
+	
+	return button_state;
 }
 
 

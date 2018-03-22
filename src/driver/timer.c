@@ -67,9 +67,17 @@ void TIM2_IRQHandler(void)
             g_timer_cnt[i]++;
         }	
 
-//		button_timer_ms();		//???????
+		button_timer_ms();		//???????
     }
 }
+
+
+void timer_delay(uint32_t count)
+{ 
+	while(count--);					//
+}
+
+
 
 
 /*

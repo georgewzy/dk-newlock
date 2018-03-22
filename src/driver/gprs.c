@@ -52,13 +52,6 @@ uint8_t gprs_rx_flag = 0;
 
 
 
-
-
-
-
-
-u8 topic_id = 0;
-
 /*
 *********************************************************************************************************
 *                                          gprs_power_on()
@@ -77,7 +70,8 @@ u8 topic_id = 0;
 void gprs_power_on(void)
 {
 
-	
+	GPIO_SetBits(GPIOA, GPIO_Pin_6);
+	timer_delay_1ms(1);
 	GPIO_SetBits(GPIOB, GPIO_Pin_6);				//GPRS POWER EN
 	timer_delay_1ms(10);
 	
@@ -313,7 +307,7 @@ void gprs_init_task(void)
 			
 			case 7:
 //				gprs_status++;
-				ret = gprs_send_at("AT+CIPCLOSE\r\n", "ERROR", 800, 10000);//
+				ret = gprs_send_at("AT+CIPCLOSE=0\r\n", "ERROR", 800, 10000);//
 				if (ret != NULL)
 				{
 					gprs_status++;
@@ -331,7 +325,7 @@ void gprs_init_task(void)
 			
 			case 8:
 //				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"103.46.128.47\",14947\r\n", "CONNECT OK", 1500, 20000);//
-				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"118.31.69.148\",1883\r\n", "CONNECT OK", 1000, 20000);
+				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"118.31.69.148\",1883\r\n", "CONNECT OK", 1500, 10000);
 				if (ret != NULL)
 				{
 					gprs_status++;
@@ -360,6 +354,7 @@ void gprs_init_task(void)
 					if (gprs_err_cnt > 5)
 					{
 						gprs_status = 0;
+						USART_OUT(USART1, "mqtt_connect error\r\n");
 					}
 				}
 			break;				
@@ -372,17 +367,42 @@ void gprs_init_task(void)
 					gprs_status++;
 					USART_OUT(USART1, "mqtt_subscribe_topic 1 ok=%s\r\n", buff);
 				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+						USART_OUT(USART1, "mqtt_subscribe_topic bell error\r\n");
+					}
+				}
 				
 			break;
 				
 			case 11:
 				sprintf((char*)buff, "%s%s", "lock/", PARK_LOCK_Buffer);
-				mqtt_rc = mqtt_subscribe_topic(buff, 0, mqtt_publist_msgid);
+				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
-					gprs_status = 255;
+					gprs_status++;
 					USART_OUT(USART1, "mqtt_subscribe_topic 2 ok=%s\r\n", buff);
 				}
+				else
+				{
+					gprs_err_cnt++;
+					if (gprs_err_cnt > 5)
+					{
+						gprs_status = 0;
+						USART_OUT(USART1, "mqtt_subscribe_topic lock error\r\n");
+					}
+				}
+				
+			break;
+				
+			case 12:
+				
+				gprs_status = 255;
+			
 			break;
 			
 			case 255:	//gprs 初始化完成后进行数据传输

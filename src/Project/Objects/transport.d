@@ -1,10 +1,9 @@
 .\objects\transport.o: ..\MQTT\transport.c
-.\objects\transport.o: ..\MQTT\transport.h
 .\objects\transport.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\transport.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\errno.h
 .\objects\transport.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\transport.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\transport.o: ..\driver\usart.h
+.\objects\transport.o: ..\MQTT\transport.h
 .\objects\transport.o: ..\bsp\bsp.h
 .\objects\transport.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\transport.o: ..\Libraries\CMSIS\Include\core_cm3.h
@@ -39,6 +38,7 @@
 .\objects\transport.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\transport.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\transport.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
+.\objects\transport.o: ..\driver\usart.h
 .\objects\transport.o: ..\MQTT\MQTTPacket.h
 .\objects\transport.o: ..\MQTT\MQTTConnect.h
 .\objects\transport.o: ..\MQTT\MQTTPacket.h
