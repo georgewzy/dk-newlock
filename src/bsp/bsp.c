@@ -326,12 +326,12 @@ uint8_t bsp_get_port_value(uint8_t port_name)
 			value = LOCK_OFF_READ();
 		break;
 		
-		case SW2A:
-			value = SW2A_READ();
+		case DS1A:
+			value = DS1A_READ();
 		break;
 		
-		case SW2B:
-			value = SW2B_READ();
+		case DS1B:
+			value = DS1B_READ();
 		break;
 		
 		

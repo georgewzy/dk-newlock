@@ -70,9 +70,9 @@ uint8_t gprs_rx_flag = 0;
 void gprs_power_on(void)
 {
 
-	GPIO_SetBits(GPIOA, GPIO_Pin_6);
+	GPIO_SetBits(GPIOA, GPIO_Pin_6);		//GPRS POWER EN
 	timer_delay_1ms(1);
-	GPIO_SetBits(GPIOB, GPIO_Pin_6);				//GPRS POWER EN
+	GPIO_SetBits(GPIOA, GPIO_Pin_6);				
 	timer_delay_1ms(10);
 	
 	GPIO_SetBits(GPIOA, GPIO_Pin_7);				//GPRS_PWON

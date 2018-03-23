@@ -45,8 +45,8 @@
 
 
 #define SW1_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6)		//按键
-#define SW2A_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)		//按键
-#define SW2B_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_2)		//按键
+#define DS1A_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)		//按键
+#define DS1B_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_2)		//按键
 
 #define LOCK_ON_READ()			GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_4)
 #define LOCK_OFF_READ()			GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5)
@@ -76,8 +76,8 @@ typedef enum
 	SW1,
 	LOCK_ON,
 	LOCK_OFF,
-	SW2A,
-	SW2B
+	DS1A,
+	DS1B
 	
 } bsp_get_port;
 

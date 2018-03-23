@@ -42,6 +42,8 @@ typedef struct
 void button_gpio_init(void);
 void button_timer_ms(void);
 BUTTON_STATE button_get_state(uint8_t button_name, uint32_t long_time);
+uint8_t button_ds_get_value(void);
+
 
 
 #endif

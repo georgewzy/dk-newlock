@@ -111,9 +111,12 @@ void heartbeat(uint32_t ms)
 	if(timer_is_timeout_1ms(timer_heartbeat, ms) == 0)
 	{
 		
+		memset(topic_buff, 0 ,100);
+		
 		sprintf((char *)topic_buff,"%s%s","lockdata/", PARK_LOCK_Buffer);
 		heartbeat_buff[0] = 0x30;
-
+		heartbeat_buff[0] = '\0';
+		
 		USART_OUT(USART1, "heartbeat=%s\r\n", topic_buff);
 		mqtt_pub = mqtt_publist(topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
 		if(mqtt_pub == 1)
@@ -373,10 +376,7 @@ int main(void)
 	
 	while(1)
 	{
-		if(button_scan(SW2A) == 0 && button_scan(SW2B))
-		{
-			
-		}
+
 		usart1_recv_data();
 		p1 = strstr((u8*)protocol_buff, "lockid=");
 		if(p1 != NULL)

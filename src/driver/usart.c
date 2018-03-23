@@ -319,7 +319,7 @@ void usart2_recv_data(void)
 	char *p1 = NULL;
 	char *p2 = NULL;
 	char *p3 = NULL;
-	u8 tmp_str[20] = {0};
+	u8 pick_str[50] = {0};
 	int data_len = 0;
 	
 	if(timer_is_timeout_1ms(timer_uart2, 20) == 0)	//20ms没接收到数据认为接收数据完成		
@@ -327,10 +327,10 @@ void usart2_recv_data(void)
 		p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
 		if(p1 != NULL)
 		{
-			p2 = str_picked(p1, ",", ":", (char*)tmp_str);
+			p2 = str_picked(p1, ",", ":", (char*)pick_str);
 			if(p2 != NULL)
 			{
-				data_len = atoi((char*)tmp_str);
+				data_len = atoi((char*)pick_str);
 			}
 			
 			p3 = strstr((const char*)usart2_rx_buff.pdata, ":");
