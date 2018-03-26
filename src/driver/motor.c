@@ -19,20 +19,20 @@ void motor_gpio_init(void)
 
 
 
-
-void lock_open(void)
+//Õý×ª
+void motor_forward(void)
 {
 	MOTOA_HIGH();
 	MOTOB_LOW();
 }
 
-void lock_close(void)
+void motor_reversal(void)
 {
 	MOTOA_LOW();
 	MOTOB_HIGH();
 }
 
-void lock_stop(void)
+void motor_stop(void)
 {
 	MOTOA_LOW();
 	MOTOB_LOW();

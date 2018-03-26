@@ -634,7 +634,7 @@ void AES_Decrypt(char* pExpressText , char* pCipherText , char* pAeskey)
 	
 	
 	//send_buff：待解密的数据  ，pkey：密钥   str2：解密后的数据
-  str2 = decrypt(newstr, pAeskey , aesDataLen);
+	str2 = decrypt(newstr, pAeskey , aesDataLen);
 	free(newstr);
 	//去除末尾补码
 	buIndex = str2[aesDataLen-1];

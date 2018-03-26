@@ -38,7 +38,6 @@
 .\objects\transport.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\transport.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\transport.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
-.\objects\transport.o: ..\driver\usart.h
 .\objects\transport.o: ..\MQTT\MQTTPacket.h
 .\objects\transport.o: ..\MQTT\MQTTConnect.h
 .\objects\transport.o: ..\MQTT\MQTTPacket.h
@@ -47,6 +46,7 @@
 .\objects\transport.o: ..\MQTT\MQTTUnsubscribe.h
 .\objects\transport.o: ..\MQTT\MQTTFormat.h
 .\objects\transport.o: ..\MQTT\StackTrace.h
+.\objects\transport.o: ..\driver\usart.h
 .\objects\transport.o: ..\driver\timer.h
 .\objects\transport.o: ..\driver\gprs.h
 .\objects\transport.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

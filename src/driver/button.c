@@ -120,7 +120,7 @@ BUTTON_STATE button_get_state(uint8_t button_name, uint32_t long_time)
 
 
 
-u8 button_scan(uint8_t button_name)
+uint8_t button_scan(uint8_t button_name)
 {
 	
 	uint8_t i = 0;
@@ -128,7 +128,6 @@ u8 button_scan(uint8_t button_name)
 	uint8_t button_cnt1 = 0;
 	uint8_t button_cnt2 = 0;
 	uint8_t button_state = 0;
-	
 	
 	while(!ret)
 	{

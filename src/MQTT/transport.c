@@ -23,7 +23,6 @@
 #include <stdlib.h>
 #include "transport.h"
 #include "usart.h"
-#include "MQTTPacket.h"
 #include "timer.h"
 #include "gprs.h"
 
@@ -41,7 +40,7 @@ int mqtt_buff_len = 0;
 
 u32 packet_id = 0;
 uint16_t mqtt_publist_msgid = 0;				//发布消息id
-uint16_t mqtt_subscribe_msgid = 0;			//订阅消息id
+uint16_t mqtt_subscribe_msgid = 0;				//订阅消息id
 
 /**
 This simple low-level implementation assumes a single connection for a single thread. Thus, a static
@@ -62,8 +61,6 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 //	u8 end_char[2] = {0};
 //	end_char[0] = 0x1A;//结束字符
 //	end_char[1] = '\0';
-	
-	
 	
 	
 	memset(send_buff, 0, sizeof(send_buff));
@@ -106,115 +103,9 @@ int transport_getdata(unsigned char* buf, int count)
 
 
 
-int toStop = 0;
-
-
-
-void mqtt_qos0(void)
+int mqtt_connect(MQTTPacket_connectData pdata)
 {
-	
-	
-	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
-	int rc = 0;
-	int mysock = 0;
-	unsigned char buf[200];
-	int buflen = sizeof(buf);
-	int msgid = 1;
-	MQTTString topicString = MQTTString_initializer;
-	int req_qos = 0;
-	char* payload = "mypayload";
-	int payloadlen = strlen(payload);
-	int len = 0;
-	char *host = "m2m.eclipse.org";
-	int port = 1883;
 
-
-	data.clientID.cstring = "me";
-	data.keepAliveInterval = 60;
-	data.cleansession = 1;
-	data.username.cstring = "testuser";
-	data.password.cstring = "testpassword";
-
-	len = MQTTSerialize_connect(buf, buflen, &data);
-		
-	usart_send(USART1, buf, len);
-	
-	rc = transport_sendPacketBuffer(mysock, buf, len);
-
-	/* wait for connack */
-	if (MQTTPacket_read(buf, buflen, transport_getdata) == CONNACK)
-	{
-		unsigned char sessionPresent, connack_rc;
-
-		if (MQTTDeserialize_connack(&sessionPresent, &connack_rc, buf, buflen) != 1 || connack_rc != 0)
-		{
-			USART_OUT(USART1, "Unable to connect, return code %d\n", connack_rc);
-		}
-	}
-	
-		
-
-	/* subscribe */
-	topicString.cstring = "substopic";
-	len = MQTTSerialize_subscribe(buf, buflen, 0, msgid, 1, &topicString, &req_qos);
-
-	rc = transport_sendPacketBuffer(mysock, buf, len);
-	if (MQTTPacket_read(buf, buflen, transport_getdata) == SUBACK) 	/* wait for suback */
-	{
-		unsigned short submsgid;
-		int subcount;
-		int granted_qos;
-
-		rc = MQTTDeserialize_suback(&submsgid, 1, &subcount, &granted_qos, buf, buflen);
-		if (granted_qos != 0)
-		{
-			USART_OUT(USART1, "granted qos != 0, %d\n", granted_qos);
-		}
-	}
-	
-
-	/* loop getting msgs on subscribed topic */
-	topicString.cstring = "pubtopic";
-	while (!toStop)
-	{
-		/* transport_getdata() has a built-in 1 second timeout,
-		your mileage will vary */
-		if (MQTTPacket_read(buf, buflen, transport_getdata) == PUBLISH)
-		{
-			unsigned char dup;
-			int qos;
-			unsigned char retained;
-			unsigned short msgid;
-			int payloadlen_in;
-			unsigned char* payload_in;
-			int rc;
-			MQTTString receivedTopic;
-
-			rc = MQTTDeserialize_publish(&dup, &qos, &retained, &msgid, &receivedTopic,
-					&payload_in, &payloadlen_in, buf, buflen);
-
-			USART_OUT(USART1, "message arrived %.*s\n", payloadlen_in, payload_in);
-		}
-
-
-		USART_OUT(USART1, "publishing reading\n");
-		len = MQTTSerialize_publish(buf, buflen, 0, 0, 0, 0, topicString, (unsigned char*)payload, payloadlen);
-		rc = transport_sendPacketBuffer(mysock, buf, len);
-	}
-
-	USART_OUT(USART1, "disconnecting\n");
-	len = MQTTSerialize_disconnect(buf, buflen);
-	rc = transport_sendPacketBuffer(mysock, buf, len);
-}
-
-
-
-
-
-
-int mqtt_connect(void)
-{
-	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 	int ret = 0;
 	int status = 0;	
 	int rc = 0;
@@ -223,13 +114,8 @@ int mqtt_connect(void)
 	int buflen = sizeof(buf);
 	int len = 0;
 
-	data.clientID.cstring = "me1";
-	data.keepAliveInterval = 120;
-	data.cleansession = 1;
-//	data.username.cstring = "";
-//	data.password.cstring = "";
-
-	len = MQTTSerialize_connect(buf, buflen, &data);		
+	
+	len = MQTTSerialize_connect(buf, buflen, &pdata);		
 	rc = transport_sendPacketBuffer(mysock, buf, len);
 	
 	timer_is_timeout_1ms(timer_mqtt_resend, 0);
@@ -240,7 +126,7 @@ int mqtt_connect(void)
 
 		if(timer_is_timeout_1ms(timer_mqtt_resend, 2000) == 0)
 		{
-			len = MQTTSerialize_connect(buf, buflen, &data);		
+			len = MQTTSerialize_connect(buf, buflen, &pdata);		
 			rc = transport_sendPacketBuffer(mysock, buf, len);
 		}
 		
@@ -300,13 +186,14 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				len = MQTTSerialize_publish((unsigned char *)buf , buflen, 0, qos, 0, packetid, topicString, (unsigned char *)payload, payload_len);
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				publist_status = PUBREC;
-				
+				USART_OUT(USART1, "PUBLISH\r\n");
 			break;
 				
 			case PUBREC:
 				if (MQTTPacket_read(buf, buflen, transport_getdata) == PUBREC)
 				{
 					publist_status = PUBREL;
+					USART_OUT(USART1, "PUBREC\r\n");
 				}	
 			break;
 				
@@ -314,6 +201,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				len = MQTTSerialize_pubrel(buf, buflen, 0, packetid);
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				publist_status = PUBCOMP;
+				USART_OUT(USART1, "PUBREL\r\n");
 			break;
 
 			case PUBCOMP:
@@ -322,6 +210,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 					ret = 1;
 					status = 1;
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
+					USART_OUT(USART1, "PUBCOMP\r\n");
 					
 				}	
 			break;
@@ -330,7 +219,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 			break;	
 		}
 
-		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 3000) == 0)
 		{
 			ret = 1;
 			status = 0;
@@ -505,7 +394,6 @@ int mqtt_keep_alive(uint32_t ms)
 	len = MQTTSerialize_pingreq(buf, buflen);
 	rc = transport_sendPacketBuffer(mysock, buf, len);
 	
-	
 	timer_is_timeout_1ms(timer_mqtt_resend, 0);
 	timer_is_timeout_1ms(timer_mqtt_timeout, 0);
 	while(!ret)
@@ -514,7 +402,6 @@ int mqtt_keep_alive(uint32_t ms)
 
 		if(timer_is_timeout_1ms(timer_mqtt_resend, 2000) == 0)
 		{
-//			gprs_wakeup(1);
 			len = MQTTSerialize_pingreq(buf, buflen);
 			rc = transport_sendPacketBuffer(mysock, buf, len);
 		}
@@ -522,15 +409,12 @@ int mqtt_keep_alive(uint32_t ms)
 		if(MQTTPacket_read(buf, buflen, transport_getdata) == PINGRESP)
 		{
 			USART_OUT(USART1, "mqtt_keep_alive ok\r\n", buf);
-//			if(gprs_sleep() == 1)
-//			{
-//				USART_OUT(USART1, "gprs_sleep\r\n");
-//			}
+
 			ret = 1;
 			status = 1;
 		}
 
-		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 3000) == 0)
 		{
 			ret = 1;
 			status = 0;

@@ -40,3 +40,11 @@
 .\objects\gprs.o: ..\driver\usart.h
 .\objects\gprs.o: ..\driver\timer.h
 .\objects\gprs.o: ..\MQTT\transport.h
+.\objects\gprs.o: ..\MQTT\MQTTPacket.h
+.\objects\gprs.o: ..\MQTT\MQTTConnect.h
+.\objects\gprs.o: ..\MQTT\MQTTPacket.h
+.\objects\gprs.o: ..\MQTT\MQTTPublish.h
+.\objects\gprs.o: ..\MQTT\MQTTSubscribe.h
+.\objects\gprs.o: ..\MQTT\MQTTUnsubscribe.h
+.\objects\gprs.o: ..\MQTT\MQTTFormat.h
+.\objects\gprs.o: ..\MQTT\StackTrace.h

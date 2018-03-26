@@ -36,7 +36,7 @@ typedef struct
 
 
 
-
+#define GPRS_CONFIG_INIT 	{NULL, 0}
 
 
 
@@ -49,8 +49,7 @@ void gprs_power_on(void);
 u8 *gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout);
 int gprs_send_data(u8 *data, u16 data_len, u8 *ack, u16 waittime);
 uint8_t gprs_init(void);
-void gprs_config(void);
-void gprs_init_task(void);
+void gprs_init_task(GPRS_CONFIG *gprs_info);
 int gprs_sleep(void);
 int gprs_wakeup(uint8_t mode);
 

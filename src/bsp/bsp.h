@@ -44,9 +44,9 @@
 
 
 
-#define SW1_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6)		//按键
-#define DS1A_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1)		//按键
-#define DS1B_READ()				GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_2)		//按键
+#define HAND_CLOSE_LOCK_READ()	GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6)		//按键
+#define DS1A_READ()				GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_1)		//拨码开个
+#define DS1B_READ()				GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_2)		//按键
 
 #define LOCK_ON_READ()			GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_4)
 #define LOCK_OFF_READ()			GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5)
@@ -73,7 +73,7 @@
 
 typedef enum
 {
-	SW1,
+	HAND_CLOSE_LOCK,
 	LOCK_ON,
 	LOCK_OFF,
 	DS1A,

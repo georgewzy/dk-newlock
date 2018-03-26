@@ -44,10 +44,15 @@ void bsp_rcc_init(void)
 	ErrorStatus err_status;
 
 	RCC_DeInit();
+	
+	RCC_HSICmd(ENABLE);
+	/* Check that HSI oscillator is ready */
+    while(RCC_GetFlagStatus(RCC_FLAG_HSIRDY) == RESET);
+	
 	RCC_HSEConfig(RCC_HSE_ON);
 
 	err_status = RCC_WaitForHSEStartUp();
-
+	
 	if (err_status == SUCCESS)
 	{    
 
@@ -140,7 +145,7 @@ void bsp_rcc_clock_fre(void)
 void iwatchdog_config(void)
 {
 	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
-	IWDG_SetPrescaler(IWDG_Prescaler_64);
+	IWDG_SetPrescaler(IWDG_Prescaler_256);
 	IWDG_SetReload(0xFFE);
 	IWDG_ReloadCounter();
 	IWDG_Enable();		
@@ -242,16 +247,19 @@ void bsp_gpio_init(void)
 	
 	//SW1
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;  
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	//SW2
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
 	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
+  	GPIO_Init(GPIOB, &gpio_init_structure);
+	
+	//DS
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;	
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN; 
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
   	GPIO_Init(GPIOC, &gpio_init_structure);
 	
-	//LOCK ON   OFF
+	
+	//LOCK ON OFF
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;          
@@ -268,8 +276,7 @@ void bsp_gpio_init(void)
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
   	GPIO_Init(GPIOB, &gpio_init_structure);
-	
-	
+		
 	//GPRS POWER EN
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
@@ -314,8 +321,8 @@ uint8_t bsp_get_port_value(uint8_t port_name)
 	
 	switch(port_name)
 	{
-		case SW1:
-			value = SW1_READ();
+		case HAND_CLOSE_LOCK:
+			value = HAND_CLOSE_LOCK_READ();
 		break;
 		
 		case LOCK_ON:
@@ -417,7 +424,7 @@ void bsp_init(void)
 	bsp_rcc_init();
 	bsp_nvic_init();
 	bsp_gpio_init();
-	button_gpio_init();
+//	button_gpio_init();
 	adc_gpio_init();
 //	pwm_gpio_init();
 //	iwatchdog_config();

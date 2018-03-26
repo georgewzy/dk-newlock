@@ -12,10 +12,13 @@
 
 
 
-void lock_open(void);
-void lock_close(void);
-void lock_stop(void);
+
+
+void motor_forward(void);
+void motor_reversal(void);
+void motor_stop(void);
 uint8_t lock_on_status_get(void);
 uint8_t lock_off_status_get(void);
+
 
 #endif

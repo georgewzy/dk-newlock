@@ -25,6 +25,12 @@
 #define EEPROM_BYTE_SIZE        0x0FFF
 
 
+#define EEPROM_LOCK_ID_ADDR			EEPROM_BASE_ADDR+0
+#define EEPROM_LOCK_ID_SIZE			16
+
+
+
+
 // STM32F103C8 ???? 1k
 #define PAGE_SIZE								0x400 			// 1k
 

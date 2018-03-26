@@ -445,6 +445,11 @@
               <FileType>1</FileType>
               <FilePath>..\driver\flash.c</FilePath>
             </File>
+            <File>
+              <FileName>lock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\lock.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

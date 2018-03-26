@@ -12,6 +12,7 @@
 ".\objects\usart.o"
 ".\objects\gu906.o"
 ".\objects\flash.o"
+".\objects\lock.o"
 ".\objects\bsp.o"
 ".\objects\app_md5.o"
 ".\objects\aes.o"

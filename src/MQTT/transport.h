@@ -17,14 +17,15 @@
 #ifndef __TRANSPORT_H_
 #define __TRANSPORT_H_
 #include "bsp.h"
-
+#include "MQTTPacket.h"
 
 int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen);
 int transport_getdata(unsigned char* buf, int count);
 
 
 
-int mqtt_connect(void);
+//int mqtt_connect(void);
+int mqtt_connect(MQTTPacket_connectData pdata);
 int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, int qos, unsigned short packetid);
 int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen);
 int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packetid);

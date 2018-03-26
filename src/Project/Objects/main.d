@@ -45,6 +45,17 @@
 .\objects\main.o: ..\tplib\aes128.h
 .\objects\main.o: ..\tplib\app_md5.h
 .\objects\main.o: ..\MQTT\transport.h
+.\objects\main.o: ..\MQTT\MQTTPacket.h
+.\objects\main.o: ..\MQTT\MQTTConnect.h
+.\objects\main.o: ..\MQTT\MQTTPacket.h
+.\objects\main.o: ..\MQTT\MQTTPublish.h
+.\objects\main.o: ..\MQTT\MQTTSubscribe.h
+.\objects\main.o: ..\MQTT\MQTTUnsubscribe.h
+.\objects\main.o: ..\MQTT\MQTTFormat.h
+.\objects\main.o: ..\MQTT\StackTrace.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: ..\driver\button.h
 .\objects\main.o: ..\driver\flash.h
 .\objects\main.o: ..\driver\motor.h
+.\objects\main.o: ..\app\main.h
+.\objects\main.o: ..\driver\lock.h

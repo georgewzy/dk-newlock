@@ -20,11 +20,10 @@ void adc_gpio_init(void)
 
 
 															   
-void  adc_init(void)
+void adc_init(void)
 { 	
 	ADC_InitTypeDef adc_init_structure; 
 	
-
 	ADC_DeInit(ADC1);  
 
 	adc_init_structure.ADC_Resolution = ADC_Resolution_12b;
@@ -56,7 +55,7 @@ uint16_t adc_get_value(uint8_t ch)
 	
 	ADC_SoftwareStartConv(ADC1);		//使能指定的ADC1的软件转换启动功能	
 	
-	while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);//等待转换结束
+	while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC));//等待转换结束
 
 	return 	ADC_GetConversionValue(ADC1);	//返回最近一次ADC1规则组的转换结果
 }

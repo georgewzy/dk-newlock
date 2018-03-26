@@ -35,7 +35,7 @@ extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
 extern uint16_t mqtt_publist_msgid;
 extern u8 usart2_rx_status;
-extern u8 PARK_LOCK_Buffer[17];
+extern u8 lock_id[17];
 
 
 
@@ -183,21 +183,31 @@ u8* gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void gprs_init_task(void)
+void gprs_init_task(GPRS_CONFIG *gprs_info)
 {
-
 	int mqtt_rc = 0;
 
 	u8 *ret;
 	u8 buff[100] = {0};
-	static u8 gprs_init_flag = true;		//
-		
+	u8 cipstart[100] = {0};
+	MQTTPacket_connectData pdata = MQTTPacket_connectData_initializer;
+
+	
+	pdata.clientID.cstring = "me3";
+	pdata.keepAliveInterval = 121;
+	pdata.cleansession = 1;
+	pdata.username.cstring = "";
+	pdata.password.cstring = "";
+	
+	
 	while(1)
 	{
 		switch(gprs_status)
 		{
 			case 0:
 				gprs_power_on();
+				mqtt_publist_msgid = 0;
+				
 				USART_OUT(USART1, "gprs_power_on\r\n");
 				gprs_status = 1;
 				gprs_err_cnt = 0;
@@ -324,6 +334,7 @@ void gprs_init_task(void)
 			break;
 			
 			case 8:
+				 sprintf(cipstart, "%s,%s,%d\r\n","AT+CIPSTART=\"TCP\"", gprs_info->server_ip, gprs_info->server_port);
 //				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"103.46.128.47\",14947\r\n", "CONNECT OK", 1500, 20000);//
 				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"118.31.69.148\",1883\r\n", "CONNECT OK", 1500, 10000);
 				if (ret != NULL)
@@ -342,7 +353,7 @@ void gprs_init_task(void)
 			break;
 				
 			case 9:
-				mqtt_rc = mqtt_connect();
+				mqtt_rc = mqtt_connect(pdata);
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
@@ -360,7 +371,7 @@ void gprs_init_task(void)
 			break;				
 				
 			case 10:
-				sprintf((char*)buff, "%s%s", "bell/", PARK_LOCK_Buffer);
+				sprintf((char*)buff, "%s%s", "bell/", lock_id);
 				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
@@ -380,7 +391,7 @@ void gprs_init_task(void)
 			break;
 				
 			case 11:
-				sprintf((char*)buff, "%s%s", "lock/", PARK_LOCK_Buffer);
+				sprintf((char*)buff, "%s%s", "lock/", lock_id);
 				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
