@@ -20,7 +20,8 @@
 #include "pwm.h"
 #include "adc.h"
 #include "button.h"
-
+#include "motor.h"
+#include "lock.h"
 
 
 
@@ -71,7 +72,7 @@ void bsp_rcc_init(void)
         /* PCLK2 = HCLK */
         RCC_PCLK2Config(RCC_HCLK_Div1); 
         
-        /* PLLCLK = 8MHz * 4 = 32 MHz */
+        /* PLLCLK = 8MHz * 8 / 2 = 32 MHz */
         RCC_PLLConfig(RCC_PLLSource_HSE, RCC_PLLMul_8, RCC_PLLDiv_2);
 		
         /* Enable PLL */ 
@@ -145,7 +146,7 @@ void bsp_rcc_clock_fre(void)
 void iwatchdog_config(void)
 {
 	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
-	IWDG_SetPrescaler(IWDG_Prescaler_256);
+	IWDG_SetPrescaler(IWDG_Prescaler_128);
 	IWDG_SetReload(0xFFE);
 	IWDG_ReloadCounter();
 	IWDG_Enable();		
@@ -213,88 +214,21 @@ void bsp_system_reset(void)
 void bsp_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;
-	
-//	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);
-//	gpio_init_structure.GPIO_Pin = GPIO_Pin_3;				                 //LED1
-//  	gpio_init_structure.GPIO_Mode = GPIO_Mode_Out_PP;
-//  	gpio_init_structure.GPIO_Speed = GPIO_Speed_50MHz;
-//  	GPIO_Init(GPIOB, &gpio_init_structure);	
 
-	
-	// UART1
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_9;				// UART1 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;	
-  	GPIO_Init(GPIOA, &gpio_init_structure);
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
-  	GPIO_Init(GPIOA, &gpio_init_structure);
-	
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1);
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
-	
-	// UART2
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_2;				// UART2 TX				    
-  	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
-  	GPIO_Init(GPIOA, &gpio_init_structure);
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_3;				
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_8 | GPIO_Pin_12 | GPIO_Pin_15;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
   	GPIO_Init(GPIOA, &gpio_init_structure);
 
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
-	
-	//SW1
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_3 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_12 | GPIO_Pin_13;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
   	GPIO_Init(GPIOB, &gpio_init_structure);
 	
-	//DS
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;	
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN; 
-	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_3 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
   	GPIO_Init(GPIOC, &gpio_init_structure);
-	
-	
-	//LOCK ON OFF
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;          
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	
-	//MOTO D+ MOTO D-
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_14 | GPIO_Pin_15;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	
-	//BELL
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-		
-	//GPRS POWER EN
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOA, &gpio_init_structure);
-	
-	//GPRS PWON
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_7;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOA, &gpio_init_structure);
-	
-	//GPRS DTR
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;          
-  	GPIO_Init(GPIOA, &gpio_init_structure);
-	
 }
 
 
@@ -424,18 +358,22 @@ void bsp_init(void)
 	bsp_rcc_init();
 	bsp_nvic_init();
 	bsp_gpio_init();
-//	button_gpio_init();
+	button_gpio_init();
+	usart_gpio_init();
+	lock_gpio_init();
+	motor_gpio_init();
+	gprs_gpio_init();
 	adc_gpio_init();
 //	pwm_gpio_init();
 //	iwatchdog_config();
 	usart1_init(115200, 8, 0, 1);
 	usart2_init(115200);
-
 	timer2_init(99, 319);
+	adc_init();
 //	pwm_timer3_init(9999, 143);
 //	pwm3_init(30);
  
-	adc_init();
+	
 }
 
 

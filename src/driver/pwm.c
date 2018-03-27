@@ -10,7 +10,7 @@ void pwm_gpio_init(void)
 	
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_0; //TIM2_CH3
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;     
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
 	GPIO_Init(GPIOB, &gpio_init_structure);
 
 }

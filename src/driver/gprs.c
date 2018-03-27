@@ -39,7 +39,7 @@ extern u8 lock_id[17];
 
 
 
-
+uint8_t gprs_reset_cnt = 0;
 uint8_t gprs_err_cnt = 0; 	//GPRS´íÎó¼ÆÊýÆ÷
 uint8_t gprs_status = 0;	//GPRSµÄ×´Ì¬
 
@@ -48,6 +48,36 @@ uint16_t gprs_rx_cnt = 0;
 
 uint8_t gprs_send_at_flag = 0;	
 uint8_t gprs_rx_flag = 0;
+
+
+
+void gprs_gpio_init(void)
+{
+	GPIO_InitTypeDef gpio_init_structure;
+	//GPRS POWER EN
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  	GPIO_Init(GPIOA, &gpio_init_structure);
+	
+	//GPRS PWON
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_7;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT; 
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
+  	GPIO_Init(GPIOA, &gpio_init_structure);
+	
+	//GPRS DTR
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT; 
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  	GPIO_Init(GPIOA, &gpio_init_structure);
+	
+}
+
+
 
 
 
@@ -70,8 +100,8 @@ uint8_t gprs_rx_flag = 0;
 void gprs_power_on(void)
 {
 
-	GPIO_SetBits(GPIOA, GPIO_Pin_6);		//GPRS POWER EN
-	timer_delay_1ms(1);
+	GPIO_ResetBits(GPIOA, GPIO_Pin_6);		//GPRS POWER EN
+	timer_delay_1ms(10);
 	GPIO_SetBits(GPIOA, GPIO_Pin_6);				
 	timer_delay_1ms(10);
 	
@@ -102,7 +132,7 @@ void gprs_power_on(void)
 * Note(s)     : 
 *********************************************************************************************************
 */
-u8 *gprs_check_cmd(u8 *src_str, u8 *p_str)
+uint8_t *gprs_check_cmd(u8 *src_str, u8 *p_str)
 {
 	char *str = NULL;
 	
@@ -127,7 +157,7 @@ u8 *gprs_check_cmd(u8 *src_str, u8 *p_str)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-u8* gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout)
+uint8_t* gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout)
 {
 	u8 res = 1;
 	u8 buff[512];
@@ -183,22 +213,14 @@ u8* gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void gprs_init_task(GPRS_CONFIG *gprs_info)
+void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 {
 	int mqtt_rc = 0;
 
-	u8 *ret;
-	u8 buff[100] = {0};
-	u8 cipstart[100] = {0};
-	MQTTPacket_connectData pdata = MQTTPacket_connectData_initializer;
+	uint8_t *ret;
+	uint8_t buff[100] = {0};
+	uint8_t cipstart[100] = {0};
 
-	
-	pdata.clientID.cstring = "me3";
-	pdata.keepAliveInterval = 121;
-	pdata.cleansession = 1;
-	pdata.username.cstring = "";
-	pdata.password.cstring = "";
-	
 	
 	while(1)
 	{
@@ -211,7 +233,12 @@ void gprs_init_task(GPRS_CONFIG *gprs_info)
 				USART_OUT(USART1, "gprs_power_on\r\n");
 				gprs_status = 1;
 				gprs_err_cnt = 0;
-			
+				gprs_reset_cnt++;
+				if(gprs_reset_cnt > 3)
+				{
+					bsp_system_reset();		
+					USART_OUT(USART1, "bsp_system_reset\r\n");
+				}
 			break;
 					
 			case 1:
@@ -316,7 +343,6 @@ void gprs_init_task(GPRS_CONFIG *gprs_info)
 			break;
 			
 			case 7:
-//				gprs_status++;
 				ret = gprs_send_at("AT+CIPCLOSE=0\r\n", "ERROR", 800, 10000);//
 				if (ret != NULL)
 				{
@@ -334,9 +360,10 @@ void gprs_init_task(GPRS_CONFIG *gprs_info)
 			break;
 			
 			case 8:
-				 sprintf(cipstart, "%s,%s,%d\r\n","AT+CIPSTART=\"TCP\"", gprs_info->server_ip, gprs_info->server_port);
+				 sprintf(cipstart, "%s,\"%s\",%d\r\n","AT+CIPSTART=\"TCP\"", gprs_info->server_ip, gprs_info->server_port);
 //				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"103.46.128.47\",14947\r\n", "CONNECT OK", 1500, 20000);//
-				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"118.31.69.148\",1883\r\n", "CONNECT OK", 1500, 10000);
+//				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"118.31.69.148\",1883\r\n", "CONNECT OK", 1500, 10000);
+				ret = gprs_send_at(cipstart, "CONNECT OK", 1500, 10000);
 				if (ret != NULL)
 				{
 					gprs_status++;
@@ -353,7 +380,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info)
 			break;
 				
 			case 9:
-				mqtt_rc = mqtt_connect(pdata);
+				mqtt_rc = mqtt_connect(mqtt_data);
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
@@ -376,7 +403,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info)
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
-					USART_OUT(USART1, "mqtt_subscribe_topic 1 ok=%s\r\n", buff);
+					USART_OUT(USART1, "mqtt_subscribe_topic bell ok=%s\r\n", buff);
 				}
 				else
 				{
@@ -396,7 +423,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info)
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
-					USART_OUT(USART1, "mqtt_subscribe_topic 2 ok=%s\r\n", buff);
+					USART_OUT(USART1, "mqtt_subscribe_topic lock ok=%s\r\n", buff);
 				}
 				else
 				{

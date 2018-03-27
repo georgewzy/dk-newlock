@@ -39,6 +39,16 @@
 
 
 
+#define MQTT_KEEP_ALIVE_INTERVAL		120
+#define HEARTBEAT						1000*60*5
+
+
+
+
+
+
+
+
 
 
 

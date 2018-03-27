@@ -51,6 +51,7 @@ typedef struct
 *                                           FUNCTION PROTOTYPES
 *********************************************************************************************************
 */
+void usart_gpio_init(void);
 void usart1_init(u32 band_rate, u8 word_length, u8 parity, u8 stop_bit);
 void usart2_init(u32 band_rate);
 void usart4_init(u32 band_rate);

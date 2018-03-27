@@ -39,3 +39,5 @@
 .\objects\bsp.o: ..\driver\pwm.h
 .\objects\bsp.o: ..\driver\adc.h
 .\objects\bsp.o: ..\driver\button.h
+.\objects\bsp.o: ..\driver\motor.h
+.\objects\bsp.o: ..\driver\lock.h

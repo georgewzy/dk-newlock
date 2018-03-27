@@ -38,3 +38,15 @@
 .\objects\protocol.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
 .\objects\protocol.o: ..\driver\usart.h
 .\objects\protocol.o: ..\system\common.h
+.\objects\protocol.o: ..\driver\timer.h
+.\objects\protocol.o: ..\MQTT\transport.h
+.\objects\protocol.o: ..\MQTT\MQTTPacket.h
+.\objects\protocol.o: ..\MQTT\MQTTConnect.h
+.\objects\protocol.o: ..\MQTT\MQTTPacket.h
+.\objects\protocol.o: ..\MQTT\MQTTPublish.h
+.\objects\protocol.o: ..\MQTT\MQTTSubscribe.h
+.\objects\protocol.o: ..\MQTT\MQTTUnsubscribe.h
+.\objects\protocol.o: ..\MQTT\MQTTFormat.h
+.\objects\protocol.o: ..\MQTT\StackTrace.h
+.\objects\protocol.o: ..\tplib\aes.h
+.\objects\protocol.o: ..\driver\motor.h

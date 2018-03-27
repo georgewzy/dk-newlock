@@ -21,8 +21,6 @@ extern uint8_t send_buff[100];
 
 
 
-
-
 u8 lock_open_err_flag = 0;
 u8 lock_close_err_flag = 0;
 u8 Lock_Open=0;
@@ -35,14 +33,27 @@ uint8_t shake_flag = 0;
 
 
 
+void lock_gpio_init(void)
+{
+	GPIO_InitTypeDef gpio_init_structure;
+	//BELL
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
+  	GPIO_Init(GPIOB, &gpio_init_structure);
+}
+
+
+
 
 void lock_shake_alarm(void)
 {
 	//»Î¶¯±¨¾¯
 	
-	if(1 == LOCK_ON_READ() && 1 == LOCK_OFF_READ() && shake_flag == 0)
+	if(1 == button_scan(LOCK_ON) && 1 == button_scan(LOCK_OFF) && shake_flag == 0)
 	{
-		USART_OUT(USART1, "Sharking\r\n");
+		USART_OUT(USART1, "sharking\r\n");
 		BEEP_ON();
 	}
 	else

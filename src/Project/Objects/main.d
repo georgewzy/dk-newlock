@@ -40,10 +40,6 @@
 .\objects\main.o: ..\driver\timer.h
 .\objects\main.o: ..\driver\gprs.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\main.o: ..\driver\usart.h
-.\objects\main.o: ..\tplib\aes.h
-.\objects\main.o: ..\tplib\aes128.h
-.\objects\main.o: ..\tplib\app_md5.h
 .\objects\main.o: ..\MQTT\transport.h
 .\objects\main.o: ..\MQTT\MQTTPacket.h
 .\objects\main.o: ..\MQTT\MQTTConnect.h
@@ -54,8 +50,13 @@
 .\objects\main.o: ..\MQTT\MQTTFormat.h
 .\objects\main.o: ..\MQTT\StackTrace.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: ..\driver\usart.h
+.\objects\main.o: ..\tplib\aes.h
+.\objects\main.o: ..\tplib\aes128.h
+.\objects\main.o: ..\tplib\app_md5.h
 .\objects\main.o: ..\driver\button.h
 .\objects\main.o: ..\driver\flash.h
 .\objects\main.o: ..\driver\motor.h
 .\objects\main.o: ..\app\main.h
 .\objects\main.o: ..\driver\lock.h
+.\objects\main.o: ..\app\protocol.h

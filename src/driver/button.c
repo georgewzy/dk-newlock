@@ -11,18 +11,27 @@ void button_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;	
 	
-	//button
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
+	//HAND_CLOSE_LOCK
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_6; 
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN; 
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   	GPIO_Init(GPIOB, &gpio_init_structure);
 	
+	//DS
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN;  
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;				
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;	
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN; 
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
   	GPIO_Init(GPIOC, &gpio_init_structure);
 	
 	
+	//LOCK ON OFF
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
+	gpio_init_structure.GPIO_Mode = GPIO_Mode_IN; 
+	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
+  	GPIO_Init(GPIOB, &gpio_init_structure);
 	
 }
 

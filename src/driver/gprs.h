@@ -21,10 +21,10 @@
 *                                             INCLUDE FILES
 *********************************************************************************************************
 */
+#include <stdbool.h>
 #include  "bsp.h"
 #include "stm32l1xx.h"
-#include <stdbool.h>
-
+#include "transport.h"
 
 
 typedef struct
@@ -44,12 +44,12 @@ typedef struct
 
 
 
-
+void gprs_gpio_init(void);
 void gprs_power_on(void);
-u8 *gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout);
+uint8_t *gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout);
 int gprs_send_data(u8 *data, u16 data_len, u8 *ack, u16 waittime);
 uint8_t gprs_init(void);
-void gprs_init_task(GPRS_CONFIG *gprs_info);
+void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data);
 int gprs_sleep(void);
 int gprs_wakeup(uint8_t mode);
 

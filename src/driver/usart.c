@@ -64,26 +64,25 @@ void usart_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;
 	
-		// UART1
+	// UART1
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_9;				// UART1 TX				    
   	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;	
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;	
   	GPIO_Init(GPIOA, &gpio_init_structure);
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;				
-	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
+	gpio_init_structure.GPIO_Pin = GPIO_Pin_10;	
+	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;			 
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
 	
-	
 	// UART2
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_2;				// UART2 TX				    
   	gpio_init_structure.GPIO_Mode = GPIO_Mode_AF;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;			
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_3;				
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;			 
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;			 
   	GPIO_Init(GPIOA, &gpio_init_structure);
 
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_USART2);
