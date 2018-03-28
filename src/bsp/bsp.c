@@ -22,7 +22,7 @@
 #include "button.h"
 #include "motor.h"
 #include "lock.h"
-
+#include "gprs.h"
 
 
 /*
@@ -215,20 +215,20 @@ void bsp_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;
 
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_8 | GPIO_Pin_12 | GPIO_Pin_15;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
-  	GPIO_Init(GPIOA, &gpio_init_structure);
+//	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_8 | GPIO_Pin_12 | GPIO_Pin_15;
+//  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
+//	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
+//  	GPIO_Init(GPIOA, &gpio_init_structure);
 
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_3 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_12 | GPIO_Pin_13;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
-  	GPIO_Init(GPIOB, &gpio_init_structure);
-	
-	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_3 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
-	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
-  	GPIO_Init(GPIOC, &gpio_init_structure);
+//	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_3 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_12 | GPIO_Pin_13;
+//  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
+//	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
+//  	GPIO_Init(GPIOB, &gpio_init_structure);
+//	
+//	gpio_init_structure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_3 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13;
+//  	gpio_init_structure.GPIO_Speed = GPIO_Speed_400KHz;
+//	gpio_init_structure.GPIO_Mode = GPIO_Mode_AN;          
+//  	GPIO_Init(GPIOC, &gpio_init_structure);
 }
 
 

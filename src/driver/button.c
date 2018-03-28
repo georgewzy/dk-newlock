@@ -132,7 +132,6 @@ BUTTON_STATE button_get_state(uint8_t button_name, uint32_t long_time)
 uint8_t button_scan(uint8_t button_name)
 {
 	
-	uint8_t i = 0;
 	uint8_t ret = 0;
 	uint8_t button_cnt1 = 0;
 	uint8_t button_cnt2 = 0;
@@ -160,7 +159,7 @@ uint8_t button_scan(uint8_t button_name)
 				ret = 1;
 			}
 		}
-		timer_delay(10);
+//		timer_delay(10);
 	}
 	
 	return button_state;

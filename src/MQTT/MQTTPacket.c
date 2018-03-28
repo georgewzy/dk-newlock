@@ -21,7 +21,7 @@
 #include <string.h>
 
 extern usart_buff_t mqtt_buff;
-extern int mqtt_buff_len;
+extern int mqtt_buff_cnt;
 /**
  * Encodes the message length according to the MQTT algorithm
  * @param buf the buffer into which the encoded data is written
@@ -315,9 +315,9 @@ int MQTTPacket_read(unsigned char* buf, int buflen, int (*getfn)(unsigned char*,
 
 	header.byte = buf[0];
 	rc = header.bits.type;
-	memset(&mqtt_buff, 0, sizeof(usart_buff_t));
-	mqtt_buff_len = 0;
 exit:
+	memset(&mqtt_buff, 0, sizeof(mqtt_buff));
+	mqtt_buff_cnt = 0;
 	return rc;
 }
 

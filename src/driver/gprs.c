@@ -58,21 +58,21 @@ void gprs_gpio_init(void)
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_6;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;
-	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+//	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	
 	//GPRS PWON
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_7;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT; 
-	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
+//	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;	
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	
 	//GPRS DTR
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_11;
   	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT; 
-	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+//	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   	GPIO_Init(GPIOA, &gpio_init_structure);
 	
 }
@@ -160,12 +160,12 @@ uint8_t *gprs_check_cmd(u8 *src_str, u8 *p_str)
 uint8_t* gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout)
 {
 	u8 res = 1;
-	u8 buff[512];
+	u8 buff[512] = {0};
 	
 	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
 	while (res)
 	{	
-		memset(&usart2_rx_buff, 0, sizeof(usart_buff_t));
+		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));
 		
 		usart2_rx_status = 0;
 		USART_OUT(USART2, cmd);		
@@ -181,7 +181,7 @@ uint8_t* gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout)
 			
 			memcpy(buff, usart2_rx_buff.pdata, 512);
 			
-			memset(&usart2_rx_buff, 0, sizeof(usart_buff_t));	
+			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
 			
 			return buff;
 		}
@@ -368,6 +368,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				{
 					gprs_status++;
 					gprs_err_cnt = 0;
+					timer_delay_1ms(1000);
 				}
 				else
 				{

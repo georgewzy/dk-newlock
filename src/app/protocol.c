@@ -43,7 +43,7 @@ void protocol_analyze(void)
 	{
 		timer_is_timeout_1ms(timer_heartbeat, 0);
 		USART_OUT(USART1, "AAAA=%s=%s\r\n", payload, recv_topic);
-	}
+	
 	sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
 	if(strncmp((char*)recv_topic, (char*)"lock/", 5)==0)
 	{	
@@ -99,7 +99,7 @@ void protocol_analyze(void)
 		memset(payload, 0, 100);
 	}
 
-	
+	}
 
 }
 

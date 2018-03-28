@@ -30,7 +30,8 @@
 
 
 extern u8 protocol_buff[512];
-
+extern usart_buff_t mqtt_buff;
+extern int mqtt_buff_cnt;
 
 
 
@@ -239,7 +240,7 @@ void USART1_IRQHandler(void)
 			}
 			else
 			{
-				memset(&usart1_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区		
+				memset(&usart1_rx_buff, 0, sizeof(usart1_rx_buff));	//清理缓冲区		
 			}
 		}
 	}
@@ -260,7 +261,7 @@ void usart1_recv_data(void)
 		usart_send(USART1, usart1_rx_buff.pdata, usart1_rx_buff.index);
 		
 		memcpy(protocol_buff, usart1_rx_buff.pdata, 512);
-		memset(&usart1_rx_buff, 0, sizeof(usart_buff_t));
+		memset(&usart1_rx_buff, 0, sizeof(usart1_rx_buff));
 	}
 
 }
@@ -300,7 +301,7 @@ void USART2_IRQHandler(void)
 			}
 			else
 			{
-				memset(&usart2_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区
+				memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
 			}
 		}
 	}
@@ -317,7 +318,7 @@ void usart2_recv_data(void)
 {		
 	char *p1 = NULL;
 	char *p2 = NULL;
-	char *p3 = NULL;
+	char *p3 = NULL; 
 	u8 pick_str[50] = {0};
 	int data_len = 0;
 	
@@ -333,13 +334,18 @@ void usart2_recv_data(void)
 			}
 			
 			p3 = strstr((const char*)usart2_rx_buff.pdata, ":");
+
+			memset(&mqtt_buff, 0, sizeof(mqtt_buff));
+			mqtt_buff_cnt = 0;
 			memcpy(mqtt_buff.pdata, p3+1, data_len);
 			mqtt_buff.index = data_len;
 			
+			USART_OUT(USART1, "\n\n");
 			usart_send(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);	
+			USART_OUT(USART1, "\n\n");
 		}		
 		
-		memset(&usart2_rx_buff, 0, sizeof(usart_buff_t));	//清理缓冲区
+		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
 	}	
 }
 

@@ -34,11 +34,11 @@ extern usart_buff_t mqtt_buff;
 extern u8 send_buff[100];
 
 
-u8 subscribe_status = PUBLISH;
+uint8_t subscribe_status = PUBLISH;
 
-int mqtt_buff_len = 0;
+int mqtt_buff_cnt = 0;
 
-u32 packet_id = 0;
+uint32_t packet_id = 0;
 uint16_t mqtt_publist_msgid = 0;				//发布消息id
 uint16_t mqtt_subscribe_msgid = 0;				//订阅消息id
 
@@ -64,8 +64,8 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 	
 	
 	memset(send_buff, 0, sizeof(send_buff));
-	memset(&mqtt_buff, 0, sizeof(usart_buff_t));
-	mqtt_buff_len = 0;
+	memset(&mqtt_buff, 0, sizeof(mqtt_buff));
+	mqtt_buff_cnt = 0;
 	sprintf((char *)cmd, "AT+CIPSEND=%d,1\r\n", buflen);
 	ret = gprs_send_at(cmd, ">", 20, 100);
 	if(ret != NULL)
@@ -87,15 +87,15 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 }
 
 
-int transport_getdata(unsigned char* buf, int count)
+int transport_getdata(unsigned char* buf, int size)
 {
 	if(mqtt_buff.index > 0)
 	{
-		memcpy(buf, &mqtt_buff.pdata[mqtt_buff_len], count);
+		memcpy(buf, &mqtt_buff.pdata[mqtt_buff_cnt], size);
 //		usart_send(USART1, mqtt_buff.pdata, mqtt_buff.index);
 //		usart_send(USART1, &mqtt_buff->pdata[mqtt_buff_len], count);
-		mqtt_buff_len += count;
-		return count;
+		mqtt_buff_cnt += size;
+		return size;
 	}
 	
 }
@@ -142,6 +142,7 @@ int mqtt_connect(MQTTPacket_connectData *pdata)
 						ret = 1;
 						status = 1;
 						timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);	
+						USART_OUT(USART1, "CONNACK\r\n");
 					}
 				}
 			break;
@@ -213,8 +214,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 					ret = 1;
 					status = 1;
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-					USART_OUT(USART1, "PUBCOMP\r\n");
-					
+					USART_OUT(USART1, "PUBCOMP\r\n");	
 				}	
 			break;
 				
@@ -222,7 +222,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 			break;	
 		}
 
-		if(timer_is_timeout_1ms(timer_mqtt_timeout, 3000) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 5000) == 0)
 		{
 			ret = 1;
 			status = 0;
@@ -289,8 +289,10 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 					rc = MQTTDeserialize_ack(&type, 0, &msgid, buf, buflen);
 					if(type == PUBREL && msgid == mqtt_subscribe_msgid)
 					{
-						USART_OUT(USART1, "message ack type=%d==msgid=%d\n", type, msgid);
+						
 						subscribe_status = PUBCOMP;
+						USART_OUT(USART1, "message ack type=%d==msgid=%d\n", type, msgid);
+						USART_OUT(USART1, "PUBREL\r\n");
 					}	
 				}				
 			break;
@@ -311,7 +313,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 			break;	
 		}
 		
-		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 5000) == 0)
 		{
 			ret = 1;
 			status = 0;
@@ -360,7 +362,7 @@ int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packe
 					int granted_qos;
 
 					rc = MQTTDeserialize_suback(&submsgid, 1, &subcount, &granted_qos, buf, buflen);
-					USART_OUT(USART1, "granted qos=%d submsgid=%d\n", granted_qos, submsgid);	
+					USART_OUT(USART1, "qos=%d submsgid=%d\r\n", granted_qos, submsgid);	
 					ret = 1;
 					status = 1;
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
@@ -411,6 +413,7 @@ int mqtt_keep_alive(uint32_t ms)
 				len = MQTTSerialize_pingreq(buf, buflen);
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				keep_alive_status = PINGRESP;
+				USART_OUT(USART1, " PINGREQ\r\n");
 			break;
 			
 			case PINGRESP:
@@ -418,7 +421,7 @@ int mqtt_keep_alive(uint32_t ms)
 				{
 					ret = 1;
 					status = 1;
-					USART_OUT(USART1, " mqtt_keep_alive\r\n");
+					USART_OUT(USART1, " PINGRESP\r\n");
 				}		
 			break;
 			
@@ -426,7 +429,7 @@ int mqtt_keep_alive(uint32_t ms)
 			break;					
 		}
 
-		if(timer_is_timeout_1ms(timer_mqtt_timeout, 3000) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
 		{
 			ret = 1;
 			status = 0;

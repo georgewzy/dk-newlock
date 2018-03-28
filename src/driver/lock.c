@@ -108,7 +108,7 @@ void lock_close_deal(void)
 		
 		if(LOCK_OFF_READ() == 0)	//正常关锁
 		{
-//			Lock_Close = 0;
+			Lock_Close = 0;
 			motor_stop();	//停止运行
 			shake_flag = 0;
 			USART_OUT(USART1, "BBB lock_stop\r\n");
@@ -192,9 +192,9 @@ void lock_open_deal(void)
 			memset(expressText, 0 ,512);
 			memset(cipherText, 0 ,512);
 			
-			sprintf((char *)topic_buff, "%s%s", "lockback/", (char *)lock_id);
+			sprintf((char*)topic_buff, "%s%s", "lockback/", (char *)lock_id);
 			sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
-			AES_Encrypt((char *)expressText, cipherText, aesKey);
+			AES_Encrypt((char*)expressText, cipherText, aesKey);
 			
 			USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
 			USART_OUT(USART1, "expressText=%s\r\n", expressText);
@@ -218,9 +218,9 @@ void lock_open_deal(void)
 			memset(topic_buff, 0 ,100);
 			memset(expressText, 0 ,512);
 			memset(cipherText, 0 ,512);
-			sprintf((char *)topic_buff, "%s%s", "lockback/", (char *)lock_id);
-			sprintf((char *)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"1");
-			AES_Encrypt((char *)expressText, cipherText, aesKey);
+			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"1");
+			AES_Encrypt((char*)expressText, cipherText, aesKey);
 			
 			USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
 			USART_OUT(USART1, "expressText=%s\r\n", expressText);
