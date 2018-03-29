@@ -122,7 +122,7 @@ void timer_delay_1ms(uint32_t ms)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-u8 timer_is_timeout_1ms(uint8_t type, uint32_t count)
+uint8_t timer_is_timeout_1ms(uint8_t type, uint32_t count)
 {
 	int status = 0;
 	

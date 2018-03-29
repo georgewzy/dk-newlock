@@ -19,7 +19,7 @@
 *                                             INCLUDE FILES
 *********************************************************************************************************
 */
-#include "stm32l1xx_usart.h"
+
 #include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -29,7 +29,7 @@
 #include "common.h"
 
 
-extern u8 protocol_buff[512];
+extern uint8_t protocol_buff[512];
 extern usart_buff_t mqtt_buff;
 extern int mqtt_buff_cnt;
 
@@ -49,10 +49,10 @@ usart_buff_t mqtt_buff = SerialBuffDefault();
 //u16 usart2_cnt = 0;
 //u16 usart3_cnt = 0;
 
-u8 usart1_rx_status = 0;
-u8 usart2_rx_status = 0;
-u8 usart3_rx_status = 0;
-u8 usart4_rx_status = 0;
+uint8_t usart1_rx_status = 0;
+uint8_t usart2_rx_status = 0;
+uint8_t usart3_rx_status = 0;
+uint8_t usart4_rx_status = 0;
 
 
 
@@ -111,7 +111,7 @@ void usart_gpio_init(void)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void usart1_init(u32 band_rate, u8 word_length, u8 parity, u8 stop_bit)
+void usart1_init(uint32_t band_rate, uint8_t word_length, uint8_t parity, uint8_t stop_bit)
 {
 	
 	USART_InitTypeDef usart_init_structre;
@@ -149,7 +149,7 @@ void usart1_init(u32 band_rate, u8 word_length, u8 parity, u8 stop_bit)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void usart2_init(u32 band_rate)
+void usart2_init(uint32_t band_rate)
 {
 	USART_InitTypeDef usart_init_structre;
 	
@@ -185,7 +185,7 @@ void usart2_init(u32 band_rate)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void usart4_init(u32 band_rate)
+void usart4_init(uint32_t band_rate)
 {
 	USART_InitTypeDef usart_init_structre;
 	
@@ -222,7 +222,7 @@ void usart4_init(u32 band_rate)
 */
 void USART1_IRQHandler(void)
 {
-	u8 ch = 0;	
+	uint8_t ch = 0;	
 	
    	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
     {   
@@ -283,7 +283,7 @@ void usart1_recv_data(void)
 */
 void USART2_IRQHandler(void)
 {
-	u8 ch = 0;	
+	uint8_t ch = 0;	
 
    	if (USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
     {   
@@ -319,10 +319,10 @@ void usart2_recv_data(void)
 	char *p1 = NULL;
 	char *p2 = NULL;
 	char *p3 = NULL; 
-	u8 pick_str[50] = {0};
+	uint8_t pick_str[50] = {0};
 	int data_len = 0;
 	
-	if(timer_is_timeout_1ms(timer_uart2, 20) == 0)	//20ms没接收到数据认为接收数据完成		
+	if(timer_is_timeout_1ms(timer_uart2, 5) == 0)	//20ms没接收到数据认为接收数据完成		
 	{
 		p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
 		if(p1 != NULL)

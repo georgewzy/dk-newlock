@@ -1,5 +1,10 @@
 .\objects\usart.o: ..\driver\usart.c
-.\objects\usart.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
+.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\usart.o: ..\driver\usart.h
+.\objects\usart.o: ..\bsp\bsp.h
 .\objects\usart.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\usart.o: ..\Libraries\CMSIS\Include\core_cm3.h
 .\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -33,11 +38,5 @@
 .\objects\usart.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\usart.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\usart.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
-.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\usart.o: ..\driver\usart.h
-.\objects\usart.o: ..\bsp\bsp.h
 .\objects\usart.o: ..\driver\timer.h
 .\objects\usart.o: ..\system\common.h

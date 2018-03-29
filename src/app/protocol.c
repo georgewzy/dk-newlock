@@ -12,16 +12,16 @@
 
 
 
-extern u8 lock_id[17];
+extern uint8_t lock_id[17];
 extern uint8_t receiveText[24];
 extern uint8_t expressText[512];  
 extern uint8_t cipherText[512];
 extern uint8_t aesKey[16];
 
-extern u8 lock_open_err_flag;
-extern u8 lock_close_err_flag;
-extern u8 Lock_Open;
-extern u8 Lock_Close;
+extern uint8_t lock_open_err_flag;
+extern uint8_t lock_close_err_flag;
+extern uint8_t Lock_Open;
+extern uint8_t Lock_Close;
 
 //œÏ¡Â
 extern uint8_t bell_flag;

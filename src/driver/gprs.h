@@ -46,8 +46,8 @@ typedef struct
 
 void gprs_gpio_init(void);
 void gprs_power_on(void);
-uint8_t *gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout);
-int gprs_send_data(u8 *data, u16 data_len, u8 *ack, u16 waittime);
+uint8_t *gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout);
+int gprs_send_data(uint8_t *data, uint16_t data_len, uint8_t *ack, uint16_t waittime);
 uint8_t gprs_init(void);
 void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data);
 int gprs_sleep(void);

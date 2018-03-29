@@ -34,8 +34,8 @@
 extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
 extern uint16_t mqtt_publist_msgid;
-extern u8 usart2_rx_status;
-extern u8 lock_id[17];
+extern uint8_t usart2_rx_status;
+extern uint8_t lock_id[17];
 
 
 
@@ -132,13 +132,13 @@ void gprs_power_on(void)
 * Note(s)     : 
 *********************************************************************************************************
 */
-uint8_t *gprs_check_cmd(u8 *src_str, u8 *p_str)
+uint8_t *gprs_check_cmd(uint8_t *src_str, uint8_t *p_str)
 {
 	char *str = NULL;
 	
 	str = strstr((const char*)src_str, (const char*)p_str);
 
-	return (u8*)str;
+	return (uint8_t*)str;
 }
 
 
@@ -157,10 +157,10 @@ uint8_t *gprs_check_cmd(u8 *src_str, u8 *p_str)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-uint8_t* gprs_send_at(u8 *cmd, u8 *ack, u16 waittime, u16 timeout)
+uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
 {
-	u8 res = 1;
-	u8 buff[512] = {0};
+	uint8_t res = 1;
+	uint8_t buff[512] = {0};
 	
 	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
 	while (res)
@@ -228,7 +228,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 		{
 			case 0:
 				gprs_power_on();
-				mqtt_publist_msgid = 0;
+				mqtt_publist_msgid = 1;
 				
 				USART_OUT(USART1, "gprs_power_on\r\n");
 				gprs_status = 1;
@@ -439,7 +439,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 				
 			case 12:
-				
+				timer_is_timeout_1ms(timer_close_lock, 0);
 				gprs_status = 255;
 			
 			break;
@@ -466,7 +466,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 
 int gprs_sleep(void)
 {
-	u8 *ret;
+	uint8_t *ret;
 	int rc = 0;
 	ret = gprs_send_at("AT+CSCLK=1\r\n", "OK", 100, 1000);
 	if(ret != NULL)
@@ -483,7 +483,7 @@ int gprs_sleep(void)
 
 int gprs_wakeup(uint8_t mode)
 {
-	u8 *ret;
+	uint8_t *ret;
 	int rc = 0;
 	if(mode == 0)
 	{

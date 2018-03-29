@@ -71,11 +71,11 @@ void flash_page_erase(uint32_t start_addr, uint32_t sector_sum)
 	
 }
 
-void flash_erase_sector(u8 start_sector, u8 sector_sum, u8 voltage_range)
+void flash_erase_sector(uint8_t start_sector, uint8_t sector_sum, uint8_t voltage_range)
 {
 	FLASH_Status flash_status;
-	u8 end_sector = start_sector + sector_sum;
-	u8 i = 0;
+	uint8_t end_sector = start_sector + sector_sum;
+	uint8_t i = 0;
 	
 	
 	FLASH_Unlock();

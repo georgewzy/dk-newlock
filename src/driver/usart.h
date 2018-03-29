@@ -24,7 +24,7 @@
 */
 #include  "bsp.h"
 #include "stm32l1xx.h"
-
+#include "stm32l1xx_usart.h"
 
 
 #define USART_BUFF_LENGHT				   	512
@@ -52,9 +52,9 @@ typedef struct
 *********************************************************************************************************
 */
 void usart_gpio_init(void);
-void usart1_init(u32 band_rate, u8 word_length, u8 parity, u8 stop_bit);
-void usart2_init(u32 band_rate);
-void usart4_init(u32 band_rate);
+void usart1_init(uint32_t band_rate, uint8_t word_length, uint8_t parity, uint8_t stop_bit);
+void usart2_init(uint32_t band_rate);
+void usart4_init(uint32_t band_rate);
 
 void USART1_IRQHandler(void);
 void USART2_IRQHandler(void);

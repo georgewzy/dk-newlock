@@ -170,7 +170,7 @@ uint8_t button_scan(uint8_t button_name)
 
 uint8_t button_ds_get_value(void)
 {
-	u8 val = 0;
+	uint8_t val = 0;
 	val = button_scan(DS1A); 
 	val |= button_scan(DS1B)<<1;
 		
