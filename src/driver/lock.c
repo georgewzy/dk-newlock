@@ -32,7 +32,7 @@ uint8_t lock_close_time_flag = 0;
 
 
 uint8_t bell_flag = 0;
-uint8_t shake_flag = 0;
+uint8_t shake_flag = 1 ;
 
 
 
@@ -81,12 +81,116 @@ void lock_hand_close(void)
 
 void lock_self_checking(void)
 {
+	int mqtt_pub = 0;
+	int lock_run_status = 0;
+	
 	if(timer_is_timeout_1ms(timer_lock_self_checking, 1000*60*60*24) == 0)
 	{
+		lock_status = 1;
 		
 	}
 	
+	switch(lock_run_status)
+	{
+	
+		case 0:
+			if(LOCK_ON_READ()==1 && lock_open_time_flag == 0)
+			{
+				motor_forward();	//开锁	
+				USART_OUT(USART1, "AAA lock_open\r\n");
+				lock_run_status = 1;
+			}
+		break;
+	
+		case 1:
+			if(LOCK_ON_READ() == 0) //正常开锁
+			{
+				shake_flag = 0;	
+				motor_stop();	//停止运行					
+
+			}
+			
+		break;
+				
+		case 2:
+			if(LOCK_OFF_READ() == 1)	//正常关锁
+			{
+				motor_reversal();
+				USART_OUT(USART1, "BBB lock close\r\n");
+				lock_run_status = 1;
+			}
+		break;
+	}
+	
+	
+
+	
 }
+
+
+void lock_close_deal_1(void)
+{
+	int mqtt_pub = 0;
+	int lock_run_status = 0;
+	
+	
+	switch(lock_run_status)
+	{
+		case 0:
+			if(LOCK_OFF_READ() == 1 && lock_close_time_flag == 0)	//正常关锁
+			{
+				motor_reversal();
+				USART_OUT(USART1, "BBB lock close\r\n");
+				lock_run_status = 1;
+		
+			}
+		break;
+		
+		case 1:
+	
+			if(LOCK_OFF_READ() == 0)	//正常关锁
+			{
+
+				motor_stop();	//停止运行
+				shake_flag = 0;	
+				
+				if(lock_close_time_flag == 0)
+				{
+					lock_close_time_flag = 1;
+					USART_OUT(USART1, "BBB lock_stop\r\n");
+					memset(topic_buff, 0 ,100);
+					memset(expressText, 0 ,512);
+					memset(cipherText, 0 ,512);
+					
+					sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+					sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"0");
+					AES_Encrypt((char*)expressText, cipherText, aesKey);
+					
+					USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+					USART_OUT(USART1, "expressText=%s\r\n", expressText);
+					USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
+					
+					mqtt_pub = mqtt_publist(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+					if(mqtt_pub == 1)
+					{
+						USART_OUT(USART1, "mqtt_publist ok\r\n");
+					}
+				}
+			}
+		break;		
+		
+		case 2:
+			
+			
+		break;
+		
+	}
+
+
+	
+}
+
+
 
 
 void lock_close_deal(void)
@@ -104,14 +208,14 @@ void lock_close_deal(void)
 			USART_OUT(USART1, "Lock_Close timer\r\n");
 			
 		}
-		
-		if(LOCK_OFF_READ() == 1 && lock_close_time_flag == 0)	//正常关锁
+		if(button_scan(LOCK_OFF) == 1 && lock_close_time_flag == 0)
+//		if(LOCK_OFF_READ() == 1 && lock_close_time_flag == 0)	//正常关锁
 		{
 			motor_reversal();
 			USART_OUT(USART1, "BBB lock close\r\n");
 		}
-		
-		if(LOCK_OFF_READ() == 0)	//正常关锁
+		if(button_scan(LOCK_OFF) == 0)	//正常关锁
+//		if(LOCK_OFF_READ() == 0)	//正常关锁
 		{
 
 			motor_stop();	//停止运行
@@ -138,10 +242,15 @@ void lock_close_deal(void)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
 				}
+				else
+				{
+					USART_OUT(USART1, "mqtt_publist error\r\n");
+				}
 			}
 		}
 		
-		if(LOCK_OFF_READ() == 1 && lock_close_err_flag == 1) //关锁超时处理
+		if(button_scan(LOCK_OFF) == 1 && lock_close_err_flag == 1) //关锁超时处理
+//		if(LOCK_OFF_READ() == 1 && lock_close_err_flag == 1) //关锁超时处理
 		{
 			lock_close_err_flag = 0;
 			motor_stop();	//停止运行
@@ -165,9 +274,14 @@ void lock_close_deal(void)
 			{
 				USART_OUT(USART1, "mqtt_publist ok\r\n");
 			}
+			else
+			{
+				USART_OUT(USART1, "mqtt_publist error\r\n");
+			}
 		}		
 	}
 }
+
 
 void lock_open_deal(void)
 {
@@ -182,13 +296,14 @@ void lock_open_deal(void)
 			motor_reversal();
 			USART_OUT(USART1, "Lock_Open timer\r\n");
 		}
-
-		if(LOCK_ON_READ()==1 && lock_open_time_flag == 0)
+		if(button_scan(LOCK_ON)==1 && lock_open_time_flag == 0)
+//		if(LOCK_ON_READ()==1 && lock_open_time_flag == 0)
 		{
 			motor_forward();	//开锁	
 			USART_OUT(USART1, "AAA lock_open\r\n");
 		}
-		if(LOCK_ON_READ() == 0) //正常开锁
+		if(button_scan(LOCK_ON) == 0) //正常开锁
+//		if(LOCK_ON_READ() == 0) //正常开锁
 		{
 
 			shake_flag = 0;	
@@ -215,11 +330,15 @@ void lock_open_deal(void)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
 				}
+				else
+				{
+					USART_OUT(USART1, "mqtt_publist error\r\n");
+				}
 			}	
 			
 		}
-		
-		if(LOCK_ON_READ() == 1 && lock_open_err_flag == 1)//开锁超时异常处理
+		if(button_scan(LOCK_ON) == 1 && lock_open_err_flag == 1)//开锁超时异常处理
+//		if(LOCK_ON_READ() == 1 && lock_open_err_flag == 1)//开锁超时异常处理
 		{
 			lock_open_err_flag = 0;
 
@@ -241,6 +360,10 @@ void lock_open_deal(void)
 			if(mqtt_pub == 1)
 			{
 				USART_OUT(USART1, "mqtt_publist ok\r\n");
+			}
+			else
+			{
+				USART_OUT(USART1, "mqtt_publist error\r\n");
 			}
 		}
 	}

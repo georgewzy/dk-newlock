@@ -12,9 +12,9 @@ void motor_gpio_init(void)
 	
 	//MOTO D+ MOTO D-
 	gpio_init_structure.GPIO_Pin = GPIO_Pin_14 | GPIO_Pin_15;
-  	gpio_init_structure.GPIO_Speed = GPIO_Speed_10MHz;
+  	gpio_init_structure.GPIO_Speed = GPIO_Speed_2MHz;
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT;  
-	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+//	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   	GPIO_Init(GPIOB, &gpio_init_structure);
 }
 

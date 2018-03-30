@@ -183,7 +183,7 @@ int main(void)
 			
 			gprs_info.server_ip = "118.31.69.148";
 			gprs_info.server_port = 1883;
-			mqtt_data.clientID.cstring = "22211221";
+			mqtt_data.clientID.cstring = lock_id;
 			mqtt_data.keepAliveInterval = 300;
 			mqtt_data.cleansession = 1;
 			mqtt_data.username.cstring = "";
@@ -191,6 +191,17 @@ int main(void)
 			
 			USART_OUT(USART1, "mqtt_data.clientID.cstring=%s\r\n", mqtt_data.clientID.cstring);
 			USART_OUT(USART1, "lock_id=%s\r\n", lock_id);
+			
+			if(LOCK_OFF_READ() == 0)
+			{
+				USART_OUT(USART1, "55555\r\n");
+			}
+			
+//			motor_forward();
+//			
+//			motor_reversal();
+
+//			motor_stop();
 			break;
 		}
 		else if(ds_val == 1)
@@ -212,7 +223,6 @@ int main(void)
 				eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
 				USART_OUT(USART1, "lock_id=%s\r\n", lock_id);
 			}	
-//			lock_shake_alarm();
 		}
 	}
 	 
@@ -242,11 +252,11 @@ int main(void)
 				memset(expressText, 0, 512);
 				
 				strncpy((char*)receiveText, (char*)payload, payloadlen);
-//				AES_Decrypt(expressText, receiveText, aesKey);
+				AES_Decrypt(expressText, receiveText, aesKey);
 				
 				USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);	
-				if(*receiveText == 0x31)
+				if(*expressText == 0x31)
 				{
 					timer_is_timeout_1ms(timer_open_lock, 0);
 					shake_flag = 1;
@@ -256,7 +266,7 @@ int main(void)
 					USART_OUT(USART1, "Lock_Open11111\r\n");
 				
 				}
-				else if(*receiveText == 0x32)
+				else if(*expressText == 0x32)
 				{
 					timer_is_timeout_1ms(timer_close_lock, 0);
 					shake_flag = 1;
@@ -265,7 +275,7 @@ int main(void)
 					lock_close_time_flag = 0;
 					USART_OUT(USART1, "Lock_Close11111\r\n");
 				}
-				else if(*receiveText == 0x30)
+				else if(*expressText == 0x30)
 				{
 					motor_stop();	//Õ£÷π‘À––;
 				}	
@@ -322,7 +332,7 @@ int main(void)
 		dev_to_srv_batt_voltage(1000*60*60);	
 
 		heartbeat(1000*60*10);
-//		lock_shake_alarm();
+		lock_shake_alarm();
 		
 	}
 

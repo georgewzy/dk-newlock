@@ -64,7 +64,7 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 	memset(&mqtt_buff, 0, sizeof(mqtt_buff));
 	mqtt_buff_cnt = 0;
 	sprintf((char *)cmd, "AT+CIPSEND=%d,1\r\n", buflen);
-	ret = gprs_send_at(cmd, ">", 25, 100);
+	ret = gprs_send_at(cmd, ">", 20, 100);
 	if(ret != NULL)
 	{
 		memcpy((char *)send_buff, buf, buflen);
@@ -200,16 +200,29 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				topicString.cstring = topic;				
 //				strcpy(topicString.cstring, "test");	//死机
 				len = MQTTSerialize_publish((unsigned char *)buf , buflen, 0, qos, 0, packetid, topicString, (unsigned char *)payload, payload_len);
-				rc = transport_sendPacketBuffer(mysock, buf, len);
+				rc = transport_sendPacketBuffer(mysock, buf, len);				
 				publist_status = PUBREC;
 				USART_OUT(USART1, "PUBLISH\r\n");
+				USART_OUT(USART1, "packetid=%d\r\n", packetid);
+				
 			break;
 				
 			case PUBREC:
 				if (MQTTPacket_read(buf, buflen, transport_getdata) == PUBREC)
 				{
+					unsigned char type = 0;
+					unsigned short msgid;
+					unsigned char dup;
+					
+					rc = MQTTDeserialize_ack(&type, &dup, &msgid, buf, buflen);
+					if(packetid == msgid)
+					{
+						
+					}						
+					
 					publist_status = PUBREL;
 					USART_OUT(USART1, "PUBREC\r\n");
+					USART_OUT(USART1, "msgid=%d====type=%d\r\n", msgid, type);
 				}	
 			break;
 				
@@ -218,23 +231,34 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				publist_status = PUBCOMP;
 				USART_OUT(USART1, "PUBREL\r\n");
+				
 			break;
 
 			case PUBCOMP:
 				if (MQTTPacket_read(buf, buflen, transport_getdata) == PUBCOMP)
-				{
-					ret = 1;
-					status = 1;
-					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-					USART_OUT(USART1, "PUBCOMP\r\n");	
+				{					
+					unsigned char type = 0;
+					unsigned short msgid;
+					unsigned char dup;
 					
-					//消息id
-					mqtt_publist_msgid++;
-					if(mqtt_publist_msgid >= 65535)
+					rc = MQTTDeserialize_ack(&type, &dup, &msgid, buf, buflen);
+					if(packetid == msgid)
 					{
-						mqtt_publist_msgid = 0;
-					}
-				}	
+						USART_OUT(USART1, "msgid=%d==type=%d\r\n", msgid, type);
+						
+						ret = 1;
+						status = 1;
+						timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
+						USART_OUT(USART1, "PUBCOMP\r\n");	
+//						publist_status = PUBLISH;
+						//消息id
+						mqtt_publist_msgid++;
+						if(mqtt_publist_msgid >= 65535)
+						{
+							mqtt_publist_msgid = 0;
+						}
+					}							
+				}			
 			break;
 				
 			default:
@@ -340,6 +364,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 		{
 			ret = 1;
 			status = 0;
+			
 		}
 		
 	}
@@ -386,7 +411,8 @@ int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packe
 					int granted_qos;
 
 					rc = MQTTDeserialize_suback(&submsgid, 1, &subcount, &granted_qos, buf, buflen);
-					USART_OUT(USART1, "qos=%d submsgid=%d\r\n", granted_qos, submsgid);	
+					USART_OUT(USART1, "qos=%d==submsgid=%d\r\n", granted_qos, submsgid);	
+					
 					ret = 1;
 					status = 1;
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
@@ -453,9 +479,19 @@ int mqtt_keep_alive(uint32_t ms)
 			case PINGRESP:
 				if(MQTTPacket_read(buf, buflen, transport_getdata) == PINGRESP)
 				{
-					ret = 1;
-					status = 1;
-					USART_OUT(USART1, " PINGRESP\r\n");
+					unsigned char type = 0;
+					unsigned short msgid;
+					int rc;
+					rc = MQTTDeserialize_ack(&type, 0, &msgid, buf, buflen);
+					if(msgid == mqtt_subscribe_msgid)
+					{
+						ret = 1;
+						status = 1;
+						subscribe_status = PUBCOMP;
+						USART_OUT(USART1, " PINGRESP\r\n");
+						USART_OUT(USART1, "message ack type=%d==msgid=%d\n", type, msgid);
+
+					}
 				}		
 			break;
 			
@@ -463,7 +499,7 @@ int mqtt_keep_alive(uint32_t ms)
 			break;					
 		}
 
-		if(timer_is_timeout_1ms(timer_mqtt_timeout, 2000) == 0)
+		if(timer_is_timeout_1ms(timer_mqtt_timeout, 5000) == 0)
 		{
 			ret = 1;
 			status = 0;

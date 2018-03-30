@@ -381,6 +381,25 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 				
 			case 9:
+				gprs_status++;
+//				mqtt_rc = mqtt_disconnect();
+//				if(1 == mqtt_rc)
+//				{
+//					gprs_status++;
+//					USART_OUT(USART1, "mqtt_disconnect ok\r\n");
+//				}
+//				else
+//				{
+//					gprs_err_cnt++;
+//					if (gprs_err_cnt > 5)
+//					{
+//						gprs_status = 0;
+//						USART_OUT(USART1, "mqtt_disconnect error\r\n");
+//					}
+//				}
+			break;
+				
+			case 10:
 				mqtt_rc = mqtt_connect(mqtt_data);
 				if(1 == mqtt_rc)
 				{
@@ -398,7 +417,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				}
 			break;				
 				
-			case 10:
+			case 11:
 				sprintf((char*)buff, "%s%s", "bell/", lock_id);
 				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
@@ -418,7 +437,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				
 			break;
 				
-			case 11:
+			case 12:
 				sprintf((char*)buff, "%s%s", "lock/", lock_id);
 				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
@@ -438,7 +457,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				
 			break;
 				
-			case 12:
+			case 13:
 				timer_is_timeout_1ms(timer_close_lock, 0);
 				gprs_status = 255;
 			
