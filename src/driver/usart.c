@@ -413,7 +413,7 @@ void USART_OUT(USART_TypeDef* USARTx, uint8_t *Data,...)
 						while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
                 	}
 					Data++;
-                	break;
+                break;
             	case 'd':										 
                 	d = __va_arg(ap, int);
 					
@@ -424,7 +424,21 @@ void USART_OUT(USART_TypeDef* USARTx, uint8_t *Data,...)
 						while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
                 	}
 					Data++;
-                	break;
+                break;
+				case 'x':										 
+                	s = __va_arg(ap, const char *);
+				
+					int n = atoi(s);
+					itoa(n, buf, 16);
+//					strtol(buf, &s, 16);
+//					sprintf(buf, "%x", s);
+                	for (s = buf; *s; s++) 
+					{
+                    	USART_SendData(USARTx,*s);
+						while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
+                	}
+					Data++;
+                break;	
 				default:
 					Data++;
 				    break;
@@ -493,6 +507,17 @@ void usart_send(USART_TypeDef* USARTx, uint8_t *data, uint16_t data_size,...)
                 	}
 					data++;
                 	break;
+				case 'x':										 
+                	d = __va_arg(ap, int);
+
+					sprintf(buf, "%x", d);
+                	for (s = buf; *s; s++) 
+					{
+                    	USART_SendData(USARTx,*s);
+						while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
+                	}
+					data++;
+                break;
 				default:
 					data++;
 				    break;

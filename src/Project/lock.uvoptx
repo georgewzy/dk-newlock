@@ -150,55 +150,33 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>200</LineNumber>
+          <LineNumber>305</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134226774</Address>
+          <Address>134229642</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\app\main.c</Filename>
+          <Filename>..\MQTT\MQTTPacket.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\lock\../app/main.c\200</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>202</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134226778</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\app\main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\lock\../app/main.c\202</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>204</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134226782</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\app\main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\lock\../app/main.c\204</Expression>
+          <Expression>\\lock\../MQTT/MQTTPacket.c\305</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>buf</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>s</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
           <WinNumber>1</WinNumber>
           <ItemText>buf</ItemText>
         </Ww>
@@ -498,7 +476,7 @@
 
   <Group>
     <GroupName>system</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -870,7 +848,7 @@
 
   <Group>
     <GroupName>mqtt</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

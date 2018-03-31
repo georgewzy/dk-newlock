@@ -2,6 +2,9 @@
 
 
 
+#include <stdarg.h>
+#include <stdio.h>
+
 #include <string.h>		
 #include <stdlib.h>
 #include "adc.h"
@@ -175,7 +178,17 @@ int main(void)
 	while(1)
 	{	
 		ds_val = button_ds_get_value();
-	
+		topic[0] = 0xAE;
+		topic[1] = 0x11;
+		topic[2] = 0x20;
+		topic[3] = 0x04;
+		topic[4] = 0xA0;
+//		
+//		USART_OUT(USART1, "aaaa=%x\r\n", topic);
+		
+//		int n = atoi((const char*)topic[0]);
+//		itoa(n, payload, 16);
+//		USART_OUT(USART1, "aaaa=%x\r\n", topic);
 		if(ds_val == 0)
 		{
 			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
@@ -184,7 +197,7 @@ int main(void)
 			gprs_info.server_ip = "118.31.69.148";
 			gprs_info.server_port = 1883;
 			mqtt_data.clientID.cstring = lock_id;
-			mqtt_data.keepAliveInterval = 300;
+			mqtt_data.keepAliveInterval = 120;
 			mqtt_data.cleansession = 1;
 			mqtt_data.username.cstring = "";
 			mqtt_data.password.cstring = "";
@@ -298,7 +311,7 @@ int main(void)
 		}		
 			
 		//保持在线
-		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, 1000*300) == 0) || (mqtt_keep_alive_flag == 1))
+		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, 1000*120) == 0) || (mqtt_keep_alive_flag == 1))
 		{
 			USART_OUT(USART1, "mqtt_keep_alive\r\n");
 			rc = mqtt_keep_alive(1);
@@ -331,7 +344,7 @@ int main(void)
 	
 		dev_to_srv_batt_voltage(1000*60*60);	
 
-		heartbeat(1000*60*10);
+		heartbeat(1000*60*3);
 		lock_shake_alarm();
 		
 	}

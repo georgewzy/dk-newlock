@@ -1,4 +1,6 @@
 .\objects\main.o: ..\app\main.c
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: ..\driver\adc.h
@@ -49,7 +51,6 @@
 .\objects\main.o: ..\MQTT\MQTTUnsubscribe.h
 .\objects\main.o: ..\MQTT\MQTTFormat.h
 .\objects\main.o: ..\MQTT\StackTrace.h
-.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: ..\driver\usart.h
 .\objects\main.o: ..\tplib\aes.h
 .\objects\main.o: ..\tplib\aes128.h
