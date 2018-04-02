@@ -77,7 +77,8 @@ uint8_t topic_buff[100] = {0};
 uint8_t send_buff[100] = {0};
 
 
-
+uint8_t tmp[32] = {0x34,0x1E,0x00,0x19,0x6C,0x6F,0x63,0x6B,0x64,0x61,0x74,0x61,0x2F,0x30,0x30,0x37,0x39,0x34,0x34,0x34,0x30,0x36,0x39,0x32,0x33,0x35,0x36,0x30,0x33,0x00,0x25,0x30};
+	
 void heartbeat(uint32_t ms)
 {
 	int mqtt_pub = 0;
@@ -90,7 +91,7 @@ void heartbeat(uint32_t ms)
 		
 		sprintf((char*)topic_buff,"%s%s","lockdata/", lock_id);
 		heartbeat_buff[0] = 0x30;
-		heartbeat_buff[0] = '\0';
+		heartbeat_buff[1] = '\0';
 		
 		USART_OUT(USART1, "heartbeat=%s\r\n", topic_buff);
 		mqtt_pub = mqtt_publist(topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
@@ -169,26 +170,18 @@ int main(void)
 	
 	
 	bsp_init();
-                         
-	
+    USART_OUT(USART1, "BBBB");                    
+	usart_send(USART1, tmp, 32);
+	USART_OUT(USART1, "BBBB");
 	USART_OUT(USART1, "uart1 is ok\r\n");
 	USART_OUT(USART1, "server_port=%d\r\n", gprs_info.server_port);
 	USART_OUT(USART1, "server_ip=%s\r\n", gprs_info.server_ip);
 	
+	
+	
 	while(1)
 	{	
 		ds_val = button_ds_get_value();
-		topic[0] = 0xAE;
-		topic[1] = 0x11;
-		topic[2] = 0x20;
-		topic[3] = 0x04;
-		topic[4] = 0xA0;
-//		
-//		USART_OUT(USART1, "aaaa=%x\r\n", topic);
-		
-//		int n = atoi((const char*)topic[0]);
-//		itoa(n, payload, 16);
-//		USART_OUT(USART1, "aaaa=%x\r\n", topic);
 		if(ds_val == 0)
 		{
 			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
@@ -197,7 +190,7 @@ int main(void)
 			gprs_info.server_ip = "118.31.69.148";
 			gprs_info.server_port = 1883;
 			mqtt_data.clientID.cstring = lock_id;
-			mqtt_data.keepAliveInterval = 120;
+			mqtt_data.keepAliveInterval = 60;
 			mqtt_data.cleansession = 1;
 			mqtt_data.username.cstring = "";
 			mqtt_data.password.cstring = "";
@@ -210,11 +203,6 @@ int main(void)
 				USART_OUT(USART1, "55555\r\n");
 			}
 			
-//			motor_forward();
-//			
-//			motor_reversal();
-
-//			motor_stop();
 			break;
 		}
 		else if(ds_val == 1)
@@ -247,6 +235,10 @@ int main(void)
 		usart1_recv_data();
 //		usart2_recv_data();
 //		protocol_analyze();
+		if(timer_is_timeout_1ms(tim1_test, 1000*30) == 0)
+		{
+			
+		}
 		
 		mqtt_sub = mqtt_subscribe(topic, payload, &payloadlen);
 		if(mqtt_sub == 1)
@@ -311,7 +303,7 @@ int main(void)
 		}		
 			
 		//保持在线
-		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, 1000*120) == 0) || (mqtt_keep_alive_flag == 1))
+		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, 1000*60) == 0) || (mqtt_keep_alive_flag == 1))
 		{
 			USART_OUT(USART1, "mqtt_keep_alive\r\n");
 			rc = mqtt_keep_alive(1);
@@ -344,7 +336,7 @@ int main(void)
 	
 		dev_to_srv_batt_voltage(1000*60*60);	
 
-		heartbeat(1000*60*3);
+		heartbeat(1000*60*2);
 		lock_shake_alarm();
 		
 	}

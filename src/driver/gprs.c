@@ -33,7 +33,7 @@
 
 extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
-extern uint16_t mqtt_publist_msgid;
+extern unsigned short mqtt_publist_msgid;
 extern uint8_t usart2_rx_status;
 extern uint8_t lock_id[17];
 
@@ -228,7 +228,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 		{
 			case 0:
 				gprs_power_on();
-				mqtt_publist_msgid = 1;
+				mqtt_publist_msgid = 35;
 				
 				USART_OUT(USART1, "gprs_power_on\r\n");
 				gprs_status = 1;

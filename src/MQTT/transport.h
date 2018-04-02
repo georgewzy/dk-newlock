@@ -19,6 +19,30 @@
 #include "bsp.h"
 #include "MQTTPacket.h"
 
+
+
+
+typedef struct
+{
+	MQTTHeader	m_header;
+	int	msg_len;
+	int topic_len;
+	MQTTString m_string;
+	unsigned short msg_id;
+	char *payload;
+
+}mqtt_protocol;
+
+
+
+
+
+
+
+
+
+
+
 int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen);
 int transport_getdata(unsigned char* buf, int count);
 
