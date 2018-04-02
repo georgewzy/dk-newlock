@@ -203,7 +203,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				rc = transport_sendPacketBuffer(mysock, buf, len);				
 				publist_status = PUBREC;
 				USART_OUT(USART1, "PUBLISH\r\n");
-				USART_OUT(USART1, "packetid=%d\r\n", packetid);
+				USART_OUT(USART1, "PUBLISH packetid=%d\r\n", packetid);
 				timer_is_timeout_1ms(timer_mqtt_resend, 0);
 			break;
 				
@@ -219,7 +219,11 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 					{
 						publist_status = PUBREL;
 						USART_OUT(USART1, "PUBREC\r\n");
-						USART_OUT(USART1, "msgid=%d====type=%d\r\n", msgid, type);
+						
+					}
+					else
+					{
+						USART_OUT(USART1, "PUBREC msgid=%d\r\n", msgid);
 					}						
 				}	
 			break;
@@ -240,9 +244,9 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 					unsigned char dup;
 					
 					rc = MQTTDeserialize_ack(&type, &dup, &msgid, buf, buflen);
-//					if(packetid == msgid)
+					if(packetid == msgid)
 					{
-						USART_OUT(USART1, "msgid=%d==type=%d\r\n", msgid, type);
+						
 						
 						ret = 1;
 						status = 1;
@@ -255,7 +259,11 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 						{
 							mqtt_publist_msgid = 0;
 						}
-					}							
+					}
+					else
+					{
+						USART_OUT(USART1, "PUBCOMP msgid=%d\r\n", msgid);
+					}
 				}			
 			break;
 				
@@ -543,7 +551,10 @@ int mqtt_keep_alive(uint32_t ms)
 }
 
 
+void mqtt_client()
+{
 
+}
 
 
 

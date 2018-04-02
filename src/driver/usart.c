@@ -340,9 +340,9 @@ void usart2_recv_data(void)
 			memcpy(mqtt_buff.pdata, p3+1, data_len);
 			mqtt_buff.index = data_len;
 			
-			USART_OUT(USART1, "\n\n");
+			USART_OUT(USART1, "AAAA");
 			usart_send(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);	
-			USART_OUT(USART1, "\n\n");
+			USART_OUT(USART1, "AAAA");
 		}		
 		
 		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//«Â¿Ìª∫≥Â«¯

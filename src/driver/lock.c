@@ -87,44 +87,64 @@ void lock_self_checking(void)
 	if(timer_is_timeout_1ms(timer_lock_self_checking, 1000*60*60*24) == 0)
 	{
 		lock_status = 1;
+		lock_run_status = 0;
 		
 	}
-	
-	switch(lock_run_status)
+	if(lock_status == 1)
 	{
-	
-		case 0:
-			if(LOCK_ON_READ()==1 && lock_open_time_flag == 0)
-			{
-				motor_forward();	//开锁	
-				USART_OUT(USART1, "AAA lock_open\r\n");
-				lock_run_status = 1;
-			}
-		break;
-	
-		case 1:
-			if(LOCK_ON_READ() == 0) //正常开锁
-			{
-				shake_flag = 0;	
-				motor_stop();	//停止运行					
-
-			}
+		switch(lock_run_status)
+		{
+		
+			case 0:
+				if(LOCK_ON_READ() == 1)
+				{
+					motor_forward();	//开锁	
+					USART_OUT(USART1, "lock_run_status0\r\n");
+					lock_run_status = 1;
+				}		
+			break;
 			
-		break;
+			case 1:
+				if(LOCK_ON_READ() == 0) //正常开锁
+				{
+					shake_flag = 0;	
+					lock_run_status = 2;
+					motor_reversal();	//关锁			
+					USART_OUT(USART1, "lock_run_status1 A\r\n");
+				}
+				if(timer_is_timeout_1ms(timer_open_lock, 5000) == 0)
+				{	
+					lock_run_status = 3;
+					motor_reversal();
+					USART_OUT(USART1, "lock_run_status1 B\r\n");
+				}
 				
-		case 2:
-			if(LOCK_OFF_READ() == 1)	//正常关锁
-			{
-				motor_reversal();
-				USART_OUT(USART1, "BBB lock close\r\n");
-				lock_run_status = 1;
-			}
-		break;
+			break;
+				
+			case 2:
+				if(LOCK_OFF_READ() == 1)	//正常关锁
+				{
+					motor_stop();
+					USART_OUT(USART1, "lock_run_status2\r\n");	
+					lock_status = 0;
+				}
+			break;
+					
+			case 3:
+				if(LOCK_OFF_READ() == 1)	//开锁异常
+				{
+					motor_stop();
+					USART_OUT(USART1, "lock_run_status3 \r\n");
+					lock_status = 0;
+				}
+			break;
+						
+			default:
+			break;		
+		}
+	
 	}
-	
-	
 
-	
 }
 
 
