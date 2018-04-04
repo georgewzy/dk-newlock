@@ -405,6 +405,11 @@
               <FileType>1</FileType>
               <FilePath>..\app\mcu_mode.c</FilePath>
             </File>
+            <File>
+              <FileName>test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

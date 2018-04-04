@@ -258,7 +258,7 @@ void usart1_recv_data(void)
 	if(timer_is_timeout_1ms(timer_uart1, 20) == 0)	//40ms没接收到数据认为接收数据完成		
 	{
 		
-		usart_send(USART1, usart1_rx_buff.pdata, usart1_rx_buff.index);
+		usart_send_data(USART1, usart1_rx_buff.pdata, usart1_rx_buff.index);
 		
 		memcpy(protocol_buff, usart1_rx_buff.pdata, 512);
 		memset(&usart1_rx_buff, 0, sizeof(usart1_rx_buff));
@@ -313,7 +313,7 @@ void USART2_IRQHandler(void)
  	
 }
 
-
+  
 void usart2_recv_data(void)
 {		
 	char *p1 = NULL;
@@ -340,9 +340,9 @@ void usart2_recv_data(void)
 			memcpy(mqtt_buff.pdata, p3+1, data_len);
 			mqtt_buff.index = data_len;
 			
-			USART_OUT(USART1, "AAAA");
-			usart_send(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);	
-			USART_OUT(USART1, "AAAA");
+//			USART_OUT(USART1, "AAAA");
+			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);	
+//			USART_OUT(USART1, "AAAA");
 		}		
 		
 		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
@@ -452,7 +452,7 @@ void USART_OUT(USART_TypeDef* USARTx, uint8_t *Data,...)
 
 
 
-
+//此函数有bug
 void usart_send(USART_TypeDef* USARTx, uint8_t *data, uint16_t data_size,...)
 { 
 	const char *s;
@@ -507,20 +507,9 @@ void usart_send(USART_TypeDef* USARTx, uint8_t *data, uint16_t data_size,...)
                 	}
 					data++;
                 	break;
-				case 'x':										 
-                	d = __va_arg(ap, int);
-
-					sprintf(buf, "%x", d);
-                	for (s = buf; *s; s++) 
-					{
-                    	USART_SendData(USARTx,*s);
-						while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
-                	}
-					data++;
-                break;
 				default:
 					data++;
-				    break;
+				   break;
 			}		 
 		}
 		else 
@@ -530,7 +519,19 @@ void usart_send(USART_TypeDef* USARTx, uint8_t *data, uint16_t data_size,...)
 	
 }
 
-
+void usart_send_data(USART_TypeDef* USARTx, uint8_t *data, uint16_t len, ...)
+{ 
+//	USART_ReceiveData(USARTx);
+	
+	USART_GetFlagStatus(USARTx, USART_FLAG_TC);
+	
+	while( len!=0 )
+	{				                         
+		USART_SendData(USARTx, *data++);
+		len--;
+		while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);	
+	}
+}
 
 
 

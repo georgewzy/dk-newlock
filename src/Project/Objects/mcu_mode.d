@@ -1,6 +1,6 @@
 .\objects\mcu_mode.o: ..\app\mcu_mode.c
 .\objects\mcu_mode.o: ..\app\mcu_mode.h
-.\objects\mcu_mode.o: ..\bsp\bsp.h
+.\objects\mcu_mode.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_pwr.h
 .\objects\mcu_mode.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\mcu_mode.o: ..\Libraries\CMSIS\Include\core_cm3.h
 .\objects\mcu_mode.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -34,3 +34,4 @@
 .\objects\mcu_mode.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\mcu_mode.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\mcu_mode.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
+.\objects\mcu_mode.o: ..\bsp\bsp.h

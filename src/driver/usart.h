@@ -66,7 +66,7 @@ void usart2_recv_data(void);
 
 void USART_OUT(USART_TypeDef* USARTx, uint8_t *Data,...);
 void usart_send(USART_TypeDef* USARTx, uint8_t *data, uint16_t data_size,...);
-
+void usart_send_data(USART_TypeDef* USARTx, uint8_t *data, uint16_t len, ...);
 #endif
 
 

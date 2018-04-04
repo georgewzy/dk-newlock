@@ -18,7 +18,7 @@
        Modification:
     2. ...
 *************************************************/
-#include <stm32l1xx_flash.h>
+#include "stm32l1xx_flash.h"
 #include "flash.h"
 
 
@@ -30,7 +30,7 @@
 
 
 
-u32 flash_get_sector(u32 addr)
+uint32_t flash_get_sector(uint32_t addr)
 {
 
 

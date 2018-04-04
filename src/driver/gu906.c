@@ -272,7 +272,7 @@ static s8 SendAT(struct GprsData *gprs, char *out, u32 Delay)
     p = NULL;
  
 	
-	usart_send(USART1, gprs->order, gprs->olen);
+	usart_send_data(USART1, gprs->order, gprs->olen);
 	
     if((gprs->type == _GSMSEND) || (gprs->type == _ATATD)) 
     {
@@ -825,7 +825,7 @@ s8 gu906_gprs_write(char* pdat, int len)
 	else		//数据透传模式
 	{
 		//发送数据
-		usart_send(USART2, pdat, len);
+		usart_send_data(USART2, pdat, len);
 		ret = _ATOK;
 	}
 	

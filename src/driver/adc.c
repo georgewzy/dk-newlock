@@ -79,7 +79,11 @@ uint16_t adc_get_average(uint8_t ch, uint8_t times)
 
 
 
-
+void adc_disable(void)
+{
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);//
+	ADC_Cmd(ADC1, DISABLE);
+}
 
 
 

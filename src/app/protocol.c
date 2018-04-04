@@ -20,8 +20,9 @@ extern uint8_t aesKey[16];
 
 extern uint8_t lock_open_err_flag;
 extern uint8_t lock_close_err_flag;
-extern uint8_t Lock_Open;
-extern uint8_t Lock_Close;
+extern uint8_t lock_status;
+extern uint8_t lock_open_time_flag;
+extern uint8_t lock_close_time_flag;
 
 //响铃
 extern uint8_t bell_flag;
@@ -43,61 +44,63 @@ void protocol_analyze(void)
 	{
 		timer_is_timeout_1ms(timer_heartbeat, 0);
 		USART_OUT(USART1, "AAAA=%s=%s\r\n", payload, recv_topic);
-	
-	sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
-	if(strncmp((char*)recv_topic, (char*)"lock/", 5)==0)
-	{	
-		USART_OUT(USART1, "topic==%s\r\n", recv_topic);
-				
-		timer_is_timeout_1ms(timer_heartbeat, 0);
+		
+		sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+		if(strncmp((char*)recv_topic, (char*)"lock/", 5)==0)
+		{	
+			USART_OUT(USART1, "topic==%s\r\n", recv_topic);
+					
+			timer_is_timeout_1ms(timer_heartbeat, 0);
 
-		memset(receiveText , 0, 24);
-		memset(expressText , 0, 512);
-		
-		strncpy((char*)receiveText, (char*)payload, payloadlen);
-		AES_Decrypt(expressText, receiveText, aesKey);
-		
-		USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
-		USART_OUT(USART1, "expressText=%s\r\n", expressText);	
-		if(*expressText == 0x31)
-		{
-			timer_is_timeout_1ms(timer_open_lock, 0);
-			shake_flag = 1;
-			Lock_Open = 1;
-			USART_OUT(USART1, "Lock_Open11111\r\n");
-		
+			memset(receiveText , 0, 24);
+			memset(expressText , 0, 512);
+			
+			strncpy((char*)receiveText, (char*)payload, payloadlen);
+			AES_Decrypt(expressText, receiveText, aesKey);
+			
+			USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
+			USART_OUT(USART1, "expressText=%s\r\n", expressText);	
+			if(*expressText == 0x31)
+			{
+				timer_is_timeout_1ms(timer_open_lock, 0);
+				shake_flag = 1;
+				lock_status = 1;
+				lock_open_time_flag = 0;
+				USART_OUT(USART1, "Lock_Open11111\r\n");
+			
+			}
+			else if(*expressText == 0x32)
+			{
+				timer_is_timeout_1ms(timer_close_lock, 0);
+				shake_flag = 1;
+				lock_status = 0;
+				lock_close_time_flag = 0;
+				USART_OUT(USART1, "Lock_Close11111\r\n");
+			}
+			else if(*expressText == 0x30)
+			{
+				motor_stop();	//停止运行;
+			}
+								
+			payloadlen = 0;
+			memset(recv_topic, 0, 50);
+			memset(payload, 0, 100);	
 		}
-		else if(*expressText == 0x32)
+		
+		sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+		if(strncmp((char*)recv_topic,(char *)"bell/", 5)==0)
 		{
-			timer_is_timeout_1ms(timer_close_lock, 0);
-			shake_flag = 1;
-			Lock_Close = 1;
-			USART_OUT(USART1, "Lock_Close11111\r\n");
-		}
-		else if(*expressText == 0x30)
-		{
-			motor_stop();	//停止运行;
-		}
-							
-		payloadlen = 0;
-		memset(recv_topic, 0, 50);
-		memset(payload, 0, 100);	
-	}
-	
-	sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
-	if(strncmp((char*)recv_topic,(char *)"bell/", 5)==0)
-	{
-		timer_is_timeout_1ms(timer_heartbeat, 0);
-		USART_OUT(USART1, "bell\r\n");
+			timer_is_timeout_1ms(timer_heartbeat, 0);
+			USART_OUT(USART1, "bell\r\n");
 
-		BEEP_ON();
-		timer_delay_1ms(100);
-		BEEP_OFF();
-		
-		payloadlen = 0;
-		memset(recv_topic, 0, 50);
-		memset(payload, 0, 100);
-	}
+			BEEP_ON();
+			timer_delay_1ms(100);
+			BEEP_OFF();
+			
+			payloadlen = 0;
+			memset(recv_topic, 0, 50);
+			memset(payload, 0, 100);
+		}
 
 	}
 

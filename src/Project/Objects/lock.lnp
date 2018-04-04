@@ -4,6 +4,7 @@
 ".\objects\system_stm32l1xx.o"
 ".\objects\protocol.o"
 ".\objects\mcu_mode.o"
+".\objects\test.o"
 ".\objects\adc.o"
 ".\objects\button.o"
 ".\objects\gprs.o"

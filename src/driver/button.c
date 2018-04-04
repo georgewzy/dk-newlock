@@ -159,7 +159,7 @@ uint8_t button_scan(uint8_t button_name)
 				ret = 1;
 			}
 		}
-//		timer_delay(10);
+		timer_delay(10);
 	}
 	
 	return button_state;

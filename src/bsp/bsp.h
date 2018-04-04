@@ -21,12 +21,13 @@
 #include <stm32l1xx_usart.h>
 #include <stm32l1xx_tim.h>
 #include <stm32l1xx_iwdg.h>
-#include <misc.h>
+#include "stm32l1xx_flash.h"
+#include "misc.h"
 
 
 
-#define ENABLE						1
-#define DISABLE						0
+//#define ENABLE						1
+//#define DISABLE						0
 
 
 #define SCL_HIGH()				GPIO_SetBits(GPIOB, GPIO_Pin_0)

@@ -25,6 +25,18 @@
 #include "gprs.h"
 
 
+
+
+
+void bsp_hsi_init(void)
+{
+	RCC_DeInit();
+	
+	RCC_HSICmd(ENABLE);
+	/* Check that HSI oscillator is ready */
+    while(RCC_GetFlagStatus(RCC_FLAG_HSIRDY) == RESET);
+}
+
 /*
 *********************************************************************************************************
 *                                          gprs_power_on()
@@ -44,19 +56,14 @@ void bsp_rcc_init(void)
 {
 	ErrorStatus err_status;
 
-	RCC_DeInit();
-	
-	RCC_HSICmd(ENABLE);
-	/* Check that HSI oscillator is ready */
-    while(RCC_GetFlagStatus(RCC_FLAG_HSIRDY) == RESET);
-	
+//	RCC_DeInit();
+
 	RCC_HSEConfig(RCC_HSE_ON);
 
 	err_status = RCC_WaitForHSEStartUp();
 	
 	if (err_status == SUCCESS)
 	{    
-
 		/* Enable Prefetch Buffer */
         FLASH_PrefetchBufferCmd(ENABLE);
         
@@ -86,7 +93,6 @@ void bsp_rcc_init(void)
         while(RCC_GetSYSCLKSource() != 0x0C);
 	}
 
-
 	
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA , ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB , ENABLE);
@@ -98,8 +104,7 @@ void bsp_rcc_init(void)
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
-	
-	
+		
 }
 
 
@@ -355,6 +360,7 @@ void bsp_nvic_init(void)
 */
 void bsp_init(void)
 {
+	bsp_hsi_init();
 	bsp_rcc_init();
 	bsp_nvic_init();
 	bsp_gpio_init();

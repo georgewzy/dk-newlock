@@ -39,9 +39,12 @@
 
 
 
-#define MQTT_KEEP_ALIVE_INTERVAL		120
-#define HEARTBEAT						1000*60*5
 
+
+
+#define MQTT_KEEP_ALIVE_INTERVAL		1000*60*5
+#define HEARTBEAT						1000*60*10
+#define BATT_VOLTAGE					1000*60*60
 
 
 
