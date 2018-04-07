@@ -68,7 +68,23 @@ void lock_shake_alarm(void)
 	}	
 }
 
-
+void lock_bell(void)
+{
+	uint8_t bell = 0;
+	if(bell == 1)
+	{
+		timer_is_timeout_1ms(timer_bell, 0);
+		bell = 0;
+		BEEP_ON();
+	}
+	
+	if(timer_is_timeout_1ms(timer_bell, 100))
+	{
+		BEEP_OFF();
+	}
+	
+	
+}
 
 void lock_hand_close(void)
 {

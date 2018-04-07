@@ -54,5 +54,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen);
 int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packetid);
 int mqtt_keep_alive(uint32_t ms);
+void mqtt_client(uint8_t msg_tpye, unsigned char* topic, unsigned char* payload, int payload_len, int qos, unsigned short packetid);
+
 
 #endif

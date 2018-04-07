@@ -188,8 +188,6 @@ int main(void)
 			mqtt_data.password.cstring = "DaokeEmq13245768";
 			
 			USART_OUT(USART1, "mqtt_data.clientID.cstring=%s\r\n", mqtt_data.clientID.cstring);
-			USART_OUT(USART1, "lock_id=%s\r\n", lock_id);
-			
 			
 			break;
 		}
@@ -287,7 +285,9 @@ int main(void)
 //			memset(topic, 0, 50);
 //			memset(payload, 0, 100);
 //		}		
-			
+		
+//		mqtt_client(0, topic_buff, send_buff, 44, 2, 0);
+	
 		//保持在线
 		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0) || (mqtt_keep_alive_flag == 1))
 		{
@@ -322,7 +322,7 @@ int main(void)
 		dev_to_srv_batt_voltage(BATT_VOLTAGE);	
 
 		heartbeat(HEARTBEAT);
-		lock_shake_alarm();
+//		lock_shake_alarm();
 		
 	}
 

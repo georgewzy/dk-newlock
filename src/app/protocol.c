@@ -42,7 +42,7 @@ void protocol_analyze(void)
 	mqtt_sub = mqtt_subscribe(recv_topic, payload, &payloadlen);
 	if(mqtt_sub == 1)
 	{
-		timer_is_timeout_1ms(timer_heartbeat, 0);
+//		timer_is_timeout_1ms(timer_heartbeat, 0);
 		USART_OUT(USART1, "AAAA=%s=%s\r\n", payload, recv_topic);
 		
 		sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
@@ -91,10 +91,10 @@ void protocol_analyze(void)
 		if(strncmp((char*)recv_topic,(char *)"bell/", 5)==0)
 		{
 			timer_is_timeout_1ms(timer_heartbeat, 0);
-			USART_OUT(USART1, "bell\r\n");
+			USART_OUT(USART1, "bell===========================================================================\r\n");
 
 			BEEP_ON();
-			timer_delay_1ms(100);
+//			timer_delay_1ms(100);
 			BEEP_OFF();
 			
 			payloadlen = 0;

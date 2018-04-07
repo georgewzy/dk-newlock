@@ -57,7 +57,23 @@ uint8_t usart4_rx_status = 0;
 
 
 
-
+#pragma import(__use_no_semihosting)               
+//??????????                   
+struct __FILE  
+{  
+    int handle;  
+  
+};  
+FILE __stdout;  
+  
+  
+//???fputc??,???????????????  
+int fputc(int ch, FILE *f)  
+{  
+    while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);  
+    USART_SendData(USART1, (uint8_t) ch);  
+    return ch;  
+}  
 
 
 
@@ -293,7 +309,7 @@ void USART2_IRQHandler(void)
 //		if(usart2_rx_status == 0)
 		{
 			ch = USART_ReceiveData(USART2);	 
-			
+//			USART_SendData(USART1, ch);
 			if (usart2_rx_buff.index < USART_BUFF_LENGHT)
 			{			
 				usart2_rx_buff.pdata[usart2_rx_buff.index++] = ch;
@@ -320,7 +336,7 @@ void usart2_recv_data(void)
 	char *p2 = NULL;
 	char *p3 = NULL; 
 	uint8_t pick_str[50] = {0};
-	int data_len = 0;
+	int data_len = 0,i =0;
 	
 	if(timer_is_timeout_1ms(timer_uart2, 5) == 0)	//20ms没接收到数据认为接收数据完成		
 	{
@@ -341,7 +357,14 @@ void usart2_recv_data(void)
 			mqtt_buff.index = data_len;
 			
 //			USART_OUT(USART1, "AAAA");
-			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);	
+			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
+//			for(i = 0 ;  i< usart2_rx_buff.index; i++)
+//			{
+//				printf("%c",usart2_rx_buff.pdata[i]);
+//			}
+//			printf("%s\n",usart2_rx_buff.pdata);
+//			USART_OUT(USART1,"%s",usart2_rx_buff.pdata);
+//			usart_send_data(USART1, mqtt_buff.pdata, mqtt_buff.index);			
 //			USART_OUT(USART1, "AAAA");
 		}		
 		

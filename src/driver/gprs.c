@@ -34,6 +34,7 @@
 extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
 extern unsigned short mqtt_publist_msgid;
+extern unsigned short mqtt_subscribe_msgid;
 extern uint8_t usart2_rx_status;
 extern uint8_t lock_id[17];
 
@@ -228,7 +229,6 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 		{
 			case 0:
 				gprs_power_on();
-				mqtt_publist_msgid = 1;
 				
 				USART_OUT(USART1, "gprs_power_on\r\n");
 				gprs_status = 1;
@@ -259,7 +259,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 			
 			case 2:
-				ret = gprs_send_at("ATE1\r\n", "OK", 500,10000);
+				ret = gprs_send_at("ATE0\r\n", "OK", 500,10000);
 				if (ret != NULL)
 				{
 					gprs_status++;
@@ -403,6 +403,8 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				mqtt_rc = mqtt_connect(mqtt_data);
 				if(1 == mqtt_rc)
 				{
+					mqtt_publist_msgid = 1;
+					mqtt_subscribe_msgid = 0;
 					gprs_status++;
 					USART_OUT(USART1, "mqtt_connect ok\r\n");
 				}
