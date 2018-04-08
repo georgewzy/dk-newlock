@@ -322,7 +322,7 @@ int main(void)
 		dev_to_srv_batt_voltage(BATT_VOLTAGE);	
 
 		heartbeat(HEARTBEAT);
-//		lock_shake_alarm();
+		lock_shake_alarm();
 		
 	}
 

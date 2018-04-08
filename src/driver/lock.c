@@ -163,9 +163,7 @@ void lock_self_checking(void)
 			default:
 			break;		
 		}
-	
 	}
-
 }
 
 
@@ -236,7 +234,6 @@ void lock_close_deal_1(void)
 void lock_open_deal_1(void)
 {
 	int mqtt_pub = 0;
-
 	
 	switch(lock_run_status)
 	{
@@ -277,8 +274,7 @@ void lock_open_deal_1(void)
 				else
 				{
 					USART_OUT(USART1, "mqtt_publist error\r\n");
-				}
-				
+				}	
 			}
 			
 			if(timer_is_timeout_1ms(timer_open_lock, 5000) == 0)
@@ -375,7 +371,7 @@ void lock_close_deal(void)
 		if(button_scan(LOCK_OFF) == 1 && lock_close_time_flag == 0)
 		{
 			motor_reversal();
-			USART_OUT(USART1, "BBB lock close\r\n");
+//			USART_OUT(USART1, "BBB lock close\r\n");
 		}
 		if(button_scan(LOCK_OFF) == 0)	//正常关锁
 		{
@@ -410,7 +406,7 @@ void lock_close_deal(void)
 			}
 		}
 		
-		if(button_scan(LOCK_OFF) == 1 && lock_close_err_flag == 1) //关锁超时处理
+		if(button_scan(LOCK_ON) == 0 && lock_close_err_flag == 1) //关锁超时处理
 		{
 			lock_close_err_flag = 0;
 			motor_stop();	//停止运行
@@ -494,13 +490,13 @@ void lock_open_deal(void)
 			}	
 			
 		}
-		if(button_scan(LOCK_ON) == 1 && lock_open_err_flag == 1)//开锁超时异常处理
+		if(button_scan(LOCK_OFF) == 0 && lock_open_err_flag == 1)//开锁超时异常处理
 		{
 			lock_open_err_flag = 0;
 
 			motor_stop();
 			shake_flag = 0;
-
+			USART_OUT(USART1, "Lock_Open timerout\r\n");
 			memset(topic_buff, 0 ,100);
 			memset(expressText, 0 ,512);
 			memset(cipherText, 0 ,512);

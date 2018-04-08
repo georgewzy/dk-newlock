@@ -214,7 +214,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 		switch(publist_status)
 		{
 			case PUBLISH:
-				gprs_wakeup_status = gprs_wakeup(0);
+//				gprs_wakeup_status = gprs_wakeup(0);
 //				if(gprs_wakeup_status == 1)
 //				{
 //					USART_OUT(USART1, "gprs_wakeup ok\r\n");
@@ -281,11 +281,6 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 			default:
 			break;	
 		}
-
-		if(timer_is_timeout_1ms(timer_mqtt_resend, 5000) == 0)
-		{
-				
-		}
 		
 		if(timer_is_timeout_1ms(timer_mqtt_publist_timeout, 5000) == 0)
 		{
@@ -338,9 +333,11 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 		mqtt_msg_tpye = MQTTPacket_read(buf, buflen, transport_getdata);
 		if(mqtt_msg_tpye > 0)
 		{
-			tmp = 1;
-			subscribe_status = mqtt_msg_tpye;
-			
+			if(mqtt_msg_tpye == PUBLISH || mqtt_msg_tpye == PUBREL)
+			{
+				tmp = 1; 
+				subscribe_status = mqtt_msg_tpye;
+			}
 			switch(subscribe_status)
 			{	
 				case PUBLISH: //3
@@ -362,8 +359,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 							rc = transport_sendPacketBuffer(mysock, buf, len);
 							if(rc != -1)
 							{
-	//							subscribe_status = 0;	
-								
+	//							subscribe_status = 0;								
 								USART_OUT(USART1, "PUBREC=%d\r\n", msgid);
 							}	
 						}	
@@ -393,8 +389,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 							}
 						}
 					}		
-				break;
-					
+				break;					
 					
 				case PUBREL:	//6	
 					rc = MQTTDeserialize_ack(&type, 0, &msgid, buf, buflen);
@@ -423,9 +418,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 						
 					}
 				break;
-
-
-					
+			
 				default:
 				break;	
 			}	
@@ -442,9 +435,6 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 			}
 		}
 		
-		
-		
-		
 		if(timer_is_timeout_1ms(timer_mqtt_subscribe_timeout, 1000*30) == 0)
 		{	
 			USART_OUT(USART1, "========================================mqtt_subscribe_err_cnt\r\n");
@@ -460,6 +450,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 
 	return status;
 }
+
 
 
 
@@ -591,11 +582,11 @@ int mqtt_keep_alive(uint32_t ms)
 		{
 			
 			case PINGREQ:
-				gprs_wakeup_status = gprs_wakeup(0);
-				if(gprs_wakeup_status == 1)
-				{
-					USART_OUT(USART1, "gprs_wakeup ok\r\n");
-				}
+//				gprs_wakeup_status = gprs_wakeup(0);
+//				if(gprs_wakeup_status == 1)
+//				{
+//					USART_OUT(USART1, "gprs_wakeup ok\r\n");
+//				}
 				timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 0);
 				len = MQTTSerialize_pingreq(buf, buflen);
 				rc = transport_sendPacketBuffer(mysock, buf, len);
@@ -609,11 +600,11 @@ int mqtt_keep_alive(uint32_t ms)
 				{
 					ret = 1;
 					status = 1;
-					gprs_sleep_status = gprs_sleep();
-					if(gprs_sleep_status == 1)
-					{
-						USART_OUT(USART1, "gprs_sleep ok\r\n");	
-					}
+//					gprs_sleep_status = gprs_sleep();
+//					if(gprs_sleep_status == 1)
+//					{
+//						USART_OUT(USART1, "gprs_sleep ok\r\n");	
+//					}
 					USART_OUT(USART1, " PINGRESP\r\n");
 					USART_OUT(USART1, "message ack type=%d==msgid=%d\n", type, msgid);
 				}		
@@ -852,7 +843,6 @@ void mqtt_client(uint8_t msg_tpye, unsigned char* topic, unsigned char* payload,
 		break;
 	}
 }
-
 
 
 

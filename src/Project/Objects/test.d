@@ -41,3 +41,14 @@
 .\objects\test.o: ..\driver\usart.h
 .\objects\test.o: ..\driver\timer.h
 .\objects\test.o: ..\driver\lock.h
+.\objects\test.o: ..\driver\gprs.h
+.\objects\test.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\test.o: ..\MQTT\transport.h
+.\objects\test.o: ..\MQTT\MQTTPacket.h
+.\objects\test.o: ..\MQTT\MQTTConnect.h
+.\objects\test.o: ..\MQTT\MQTTPacket.h
+.\objects\test.o: ..\MQTT\MQTTPublish.h
+.\objects\test.o: ..\MQTT\MQTTSubscribe.h
+.\objects\test.o: ..\MQTT\MQTTUnsubscribe.h
+.\objects\test.o: ..\MQTT\MQTTFormat.h
+.\objects\test.o: ..\MQTT\StackTrace.h

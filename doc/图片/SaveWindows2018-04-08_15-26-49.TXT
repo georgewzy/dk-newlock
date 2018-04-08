@@ -1,0 +1,475 @@
+
+[14:57:16.775]สีก๛ก๔+IPD,52:42\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==2
+Topic=lock/0026210218731838======qos=2
+PUBLISH=3
+
+>
+[14:57:16.831]สีก๛ก๔PUBREC=3
+
+[14:57:17.352]สีก๛ก๔+IPD,4:b\0
+PUBREL=3
+
+>
+[14:57:17.434]สีก๛ก๔PUBCOMP=3
+AAAA=GMTJ6fxjKk8zSfMb58HfKg==2=lock/0026210218731838
+topic==lock/0026210218731838
+receiveText=GMTJ6fxjKk8zSfMb58HfKg==2
+expressText=2
+Lock_Close11111
+BBB lock_stop
+send_buff=lockback/0026210218731838
+expressText={"cmd":2,"ok":0}
+cipherText=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+
+>PUBLISH
+PUBLISH packetid=6
+
+[14:57:18.133]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[14:57:18.180]สีก๛ก๔PUBREL
+
+[14:57:18.674]สีก๛ก๔+IPD,4:p\0
+PUBCOMP
+mqtt_publist ok
+
+[14:57:31.817]สีก๛ก๔+IPD,52:42\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==1
+Topic=lock/0026210218731838======qos=2
+PUBLISH=4
+
+>
+[14:57:31.872]สีก๛ก๔PUBREC=4
+
+[14:57:32.696]สีก๛ก๔+IPD,4:b\0
+PUBREL=4
+
+>
+[14:57:32.764]สีก๛ก๔PUBCOMP=4
+AAAA=yF/b8OHun3MmZZbXI+Lg7Q==1=lock/0026210218731838
+topic==lock/0026210218731838
+receiveText=yF/b8OHun3MmZZbXI+Lg7Q==1
+expressText=1
+Lock_Open11111
+
+[14:57:34.537]สีก๛ก๔AAA lock_stop
+s
+[14:57:34.564]สีก๛ก๔end_buff=lockback/0026210218731838
+expressText={"cmd":1,"ok":0}
+cipherText=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+
+>
+[14:57:34.596]สีก๛ก๔PUBLISH
+PUBLISH packetid=7
+
+[14:57:35.431]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[14:57:35.478]สีก๛ก๔PUBREL
+
+[14:57:36.851]สีก๛ก๔+IPD,4:p\0
+PUBCOMP
+mqtt_publist ok
+
+[14:57:56.262]สีก๛ก๔+IPD,52:42\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==2
+Topic=lock/0026210218731838======qos=2
+PUBLISH=5
+
+>
+[14:57:56.318]สีก๛ก๔PUBREC=5
+
+[14:58:23.582]สีก๛ก๔+IPD,52:42\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==2
+Topic=lock/0026210218731838======qos=2
+PUBLISH=5
+
+>
+[14:58:23.638]สีก๛ก๔PUBREC=5
+
+SEND OK
++IPD,4:b\0
+PUBREL=5
+
+>
+[14:58:23.714]สีก๛ก๔PUBCOMP=5
+AAAA=GMTJ6fxjKk8zSfMb58HfKg==2=lock/0026210218731838
+topic==lock/0026210218731838
+receiveText=GMTJ6fxjKk8zSfMb58HfKg==2
+expressText=2
+Lock_Close11111
+
+[14:58:25.487]สีก๛ก๔BBB lock_st
+[14:58:25.516]สีก๛ก๔op
+send_buff=lockback/0026210218731838
+expressText={"cmd":2,"ok":0}
+cipherText=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+
+>
+[14:58:25.548]สีก๛ก๔PUBLISH
+PUBLISH packetid=8
+
+[14:58:30.516]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>PUBLISH
+PUBLISH packetid=8
+
+[14:58:35.515]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>
+[14:58:35.563]สีก๛ก๔PUBLISH
+PUBLISH packetid=8
+
+[14:58:40.515]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>
+[14:58:40.563]สีก๛ก๔PUBLISH
+PUBLISH packetid=8
+
+[14:58:45.531]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>PUBLISH
+PUBLISH packetid=8
+
+[14:58:50.531]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>
+[14:58:50.579]สีก๛ก๔PUBLISH
+PUBLISH packetid=8
+
+[14:58:55.531]สีก๛ก๔=============================mqtt_publist_err_cnt
+=============================mqtt_publist_err_cnt error
+mqtt_publist error
+
+[14:59:24.740]สีก๛ก๔+IPD,36:b\0b\0b\0P\0P\0P\0P\0P\0P\0
+PUBREL=5
+
+>
+[14:59:24.790]สีก๛ก๔PUBCOMP=5
+AAAA==
+
+[15:00:39.969]สีก๛ก๔+IPD,260:42\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==142\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==1
+Topic=lock/0026210218731838======qos=2
+PUBLISH=6
+
+>
+[15:00:40.044]สีก๛ก๔PUBREC=6
+
+[15:01:09.987]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:01:10.593]สีก๛ก๔+IPD,208:42\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==142\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0
+[15:01:10.632]สีก๛ก๔yF/b8OHun3MmZZbXI+Lg7Q==1
+Topic=lock/0026210218731838======qos=2
+PUBLISH=6
+
+>
+[15:01:10.664]สีก๛ก๔PUBREC=6
+
+[15:01:24.177]สีก๛ก๔+IPD,52:42\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==2
+Topic=lock/0026210218731838======qos=2
+PUBLISH=6
+
+>
+[15:01:24.232]สีก๛ก๔PUBREC=6
+
+[15:01:39.966]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:01:57.267]สีก๛ก๔+IPD,156:42\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==142\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==1
+Topic=lock/0026210218731838======qos=2
+PUBLISH=7
+
+>
+[15:01:57.333]สีก๛ก๔PUBREC=7
+
+[15:02:09.969]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:02:27.807]สีก๛ก๔+IPD,216:42\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==142\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==242\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==1b\0b\0
+Topic=lock/0026210218731838======qos=2
+PUBLISH=6
+
+>PUBREC=6
++IPD,4:b\0
+PUBREL=7
+
+>
+[15:02:27.971]สีก๛ก๔PUBCOMP=7
+AAAA=GMTJ6fxjKk8zSfMb58HfKg==2=lock/0026210218731838
+topic==lock/0026210218731838
+receiveText=GMTJ6fxjKk8zSfMb58HfKg==2
+expressText=2
+Lock_Close11111
+BBB lock_stop
+send_buff=lockback/0026210218731838
+expressText={"cmd":2,"ok":0}
+cipherText=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+
+>PUBLISH
+PUBLISH packetid=8
+
+[15:02:28.262]สีก๛ก๔+IPD,4:b\0
+
+[15:02:28.802]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[15:02:28.849]สีก๛ก๔PUBREL
+
+[15:02:29.307]สีก๛ก๔+IPD,4:p\0
+PUBCOMP
+mqtt_publist ok
+
+[15:02:50.951]สีก๛ก๔+IPD,4:b\0
+PUBREL=6
+
+>
+[15:02:50.999]สีก๛ก๔PUBCOMP=6
+AAAA==
+
+[15:05:07.176]สีก๛ก๔+IPD,52:42\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==1
+Topic=lock/0026210218731838======qos=2
+PUBLISH=8
+
+>
+[15:05:07.231]สีก๛ก๔PUBREC=8
+
+[15:05:21.790]สีก๛ก๔+IPD,4:b\0
+PUBREL=8
+
+>
+[15:05:21.858]สีก๛ก๔PUBCOMP=8
+AAAA=yF/b8OHun3MmZZbXI+Lg7Q==1=lock/0026210218731838
+topic==lock/0026210218731838
+receiveText=yF/b8OHun3MmZZbXI+Lg7Q==1
+expressText=1
+Lock_Open11111
+
+[15:05:23.631]สีก๛ก๔AAA lock_stop
+send_buff=lockb
+[15:05:23.658]สีก๛ก๔ack/0026210218731838
+expressText={"cmd":1,"ok":0}
+cipherText=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+
+>
+[15:05:23.690]สีก๛ก๔PUBLISH
+PUBLISH packetid=9
+
+[15:05:25.329]สีก๛ก๔+IPD,4:P\0	
+PUBREC
+
+>
+[15:05:25.376]สีก๛ก๔PUBREL
+
+[15:05:26.391]สีก๛ก๔+IPD,4:p\0	
+PUBCOMP
+mqtt_publist ok
+
+[15:05:31.313]สีก๛ก๔+IPD,52:42\0lock/0026210218731838\0	GMTJ6fxjKk8zSfMb58HfKg==2
+Topic=lock/0026210218731838======qos=2
+PUBLISH=9
+
+>
+[15:05:31.370]สีก๛ก๔PUBREC=9
+
+[15:05:35.134]สีก๛ก๔+IPD,4:b\0	
+PUBREL=9
+
+>
+[15:05:35.201]สีก๛ก๔PUBCOMP=9
+AAAA=GMTJ6fxjKk8zSfMb58HfKg==2=lock/0026210218731838
+topic==lock/0026210218731838
+receiveText=GMTJ6fxjKk8zSfMb58HfKg==2
+expressText=2
+Lock_Close11111
+
+[15:05:36.994]สีก๛ก๔BBB lock_stop
+send_buff=lockback/0026210218731838
+expressText={"cmd":2,"ok":0}
+cipherText=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+
+>PUBLISH
+PUBLISH packetid=10
+
+[15:05:39.274]สีก๛ก๔+IPD,4:P\0
+
+PUBREC
+
+>
+[15:05:39.321]สีก๛ก๔PUBREL
+
+[15:05:40.172]สีก๛ก๔+IPD,4:p\0
+
+PUBCOMP
+mqtt_publist ok
+
+[15:10:40.165]สีก๛ก๔mqtt_keep_alive
+
+> PINGREQ
+
+[15:10:45.165]สีก๛ก๔=============================keep_alive_err_cnt
+
+> PINGREQ
+
+[15:10:50.166]สีก๛ก๔=============================keep_alive_err_cnt
+
+>
+[15:10:50.212]สีก๛ก๔ PINGREQ
+
+[15:10:55.181]สีก๛ก๔=============================keep_alive_err_cnt
+
+> PINGREQ
+
+[15:10:58.119]สีก๛ก๔+IPD,2:ะ\0
+ PINGRESP
+message ack type=13==msgid=0
+mqtt_keep_alive ok
++IPD,4:ะ\0ะ\0
+
+[15:10:58.282]สีก๛ก๔+IPD,2:ะ\0
+
+[15:11:28.160]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:11:58.159]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:12:28.157]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:12:58.140]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:13:28.155]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:13:58.159]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+========================================mqtt_subscribe_err_cnt error
+
+[15:15:40.153]สีก๛ก๔heartbeat=lockdata/0026210218731838
+
+>PUBLISH
+PUBLISH packetid=11
+
+[15:15:45.153]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>
+[15:15:45.201]สีก๛ก๔PUBLISH
+PUBLISH packetid=11
+
+[15:15:49.520]สีก๛ก๔+IPD,8:P\0P\0
+PUBREC
+
+>
+[15:15:49.568]สีก๛ก๔PUBREL
+
+[15:15:50.158]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>PUBLISH
+PUBLISH packetid=11
+
+[15:15:54.321]สีก๛ก๔+IPD,8:p\0P\0
+PUBCOMP
+heartbeat mqtt_publist ok
+
+[15:20:54.312]สีก๛ก๔mqtt_keep_alive
+
+> PINGREQ
+
+[15:20:59.311]สีก๛ก๔=============================keep_alive_err_cnt
+
+> PINGREQ
+
+[15:21:04.328]สีก๛ก๔=============================keep_alive_err_cnt
+
+> PINGREQ
+
+[15:21:09.327]สีก๛ก๔=============================keep_alive_err_cnt
+
+> PINGREQ
+
+[15:21:12.397]สีก๛ก๔+IPD,2:ะ\0
+ PINGRESP
+message ack type=13==msgid=0
+mqtt_keep_alive ok
+
+[15:21:48.239]สีก๛ก๔+IPD,6:ะ\0ะ\0ะ\0
+
+[15:22:18.237]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:22:48.237]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:23:18.236]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:23:48.236]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:24:18.234]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+
+[15:24:48.234]สีก๛ก๔========================================mqtt_subscribe_err_cnt
+========================================mqtt_subscribe_err_cnt error
+
+[15:25:54.307]สีก๛ก๔heartbeat=lockdata/0026210218731838
+
+>PUBLISH
+PUBLISH packetid=12
+
+[15:25:59.307]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>PUBLISH
+PUBLISH packetid=12
+
+[15:26:04.306]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>
+[15:26:04.356]สีก๛ก๔PUBLISH
+PUBLISH packetid=12
+
+[15:26:09.307]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>
+[15:26:09.356]สีก๛ก๔PUBLISH
+PUBLISH packetid=12
+
+[15:26:14.322]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>PUBLISH
+PUBLISH packetid=12
+
+[15:26:19.035]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[15:26:19.083]สีก๛ก๔PUBREL
+
+[15:26:19.174]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[15:26:19.221]สีก๛ก๔PUBREL
+
+[15:26:19.318]สีก๛ก๔=============================mqtt_publist_err_cnt
+
+>
+[15:26:19.366]สีก๛ก๔PUBLISH
+PUBLISH packetid=12
+
+[15:26:19.457]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[15:26:19.504]สีก๛ก๔PUBREL
+
+[15:26:19.552]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[15:26:19.599]สีก๛ก๔PUBREL
+
+[15:26:19.816]สีก๛ก๔+IPD,4:P\0
+PUBREC
+
+>
+[15:26:19.864]สีก๛ก๔PUBREL
++IPD,4:p\0
+PUBCOMP
+heartbeat mqtt_publist ok
+
+[15:26:19.916]สีก๛ก๔+IPD,4:p\0
+
+[15:26:20.239]สีก๛ก๔+IPD,8:P\0p\0
+
+[15:26:20.675]สีก๛ก๔+IPD,4:p\0
+
+[15:26:20.736]สีก๛ก๔+IPD,4:p\0
