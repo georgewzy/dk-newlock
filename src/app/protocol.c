@@ -24,11 +24,13 @@ extern uint8_t lock_status;
 extern uint8_t lock_open_time_flag;
 extern uint8_t lock_close_time_flag;
 
+extern uint8_t lock_run_status;
+
 //ÏìÁå
-extern uint8_t bell_flag;
+extern uint8_t lock_bell_flag;
 
 //Õð¶¯
-extern uint8_t shake_flag;
+extern uint8_t lock_shake_flag;
 
 
 void protocol_analyze(void)
@@ -62,18 +64,20 @@ void protocol_analyze(void)
 			USART_OUT(USART1, "expressText=%s\r\n", expressText);	
 			if(*expressText == 0x31)
 			{
-				timer_is_timeout_1ms(timer_open_lock, 0);
-				shake_flag = 1;
+//				timer_is_timeout_1ms(timer_open_lock, 0);
+				lock_shake_flag = 1;
 				lock_status = 1;
 				lock_open_time_flag = 0;
+				lock_run_status = 0;
 				USART_OUT(USART1, "Lock_Open11111\r\n");
 			
 			}
 			else if(*expressText == 0x32)
 			{
-				timer_is_timeout_1ms(timer_close_lock, 0);
-				shake_flag = 1;
+//				timer_is_timeout_1ms(timer_close_lock, 0);
+				lock_shake_flag = 1;
 				lock_status = 0;
+				lock_run_status = 0;
 				lock_close_time_flag = 0;
 				USART_OUT(USART1, "Lock_Close11111\r\n");
 			}
@@ -93,9 +97,7 @@ void protocol_analyze(void)
 			timer_is_timeout_1ms(timer_heartbeat, 0);
 			USART_OUT(USART1, "bell===========================================================================\r\n");
 
-			BEEP_ON();
-//			timer_delay_1ms(100);
-			BEEP_OFF();
+			lock_bell_flag = 1;
 			
 			payloadlen = 0;
 			memset(recv_topic, 0, 50);

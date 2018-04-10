@@ -6,5 +6,9 @@
 
 
 void test_dev(void);
+void test_lock_open(void);
+void test_lock_close(void);
+
+
 
 #endif

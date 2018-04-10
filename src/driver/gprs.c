@@ -508,7 +508,7 @@ int gprs_wakeup(uint8_t mode)
 	int rc = 0;
 	if(mode == 0)
 	{
-		gprs_send_at("AT+CSCLK=0\r\n", "OK", 50, 2000);
+		ret = gprs_send_at("AT+CSCLK=0\r\n", "OK", 50, 2000);
 		if(ret != NULL)
 		{
 			rc = 1;
