@@ -57,6 +57,7 @@ uint8_t expressText[512];
 uint8_t cipherText[512];
 uint8_t aesKey[16];
 
+DEV_BASIC_INFO dev_basic_info;
 
 
 //电压
@@ -167,9 +168,9 @@ int main(void)
 	bsp_init();
 
 	USART_OUT(USART1, "uart1 is ok\r\n");
-	USART_OUT(USART1, "server_port=%d\r\n", gprs_info.server_port);
-	USART_OUT(USART1, "server_ip=%s\r\n", gprs_info.server_ip);
-	
+//	USART_OUT(USART1, "software_version=%d\r\n",);
+//	USART_OUT(USART1, "server_ip=%s\r\n", gprs_info.server_ip);
+//	
 	
 	while(1)
 	{	
@@ -227,8 +228,7 @@ int main(void)
 		{
 			
 		}
-
-		
+	
 //		mqtt_client(0, topic_buff, send_buff, 44, 2, 0);
 	
 		//保持在线

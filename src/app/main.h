@@ -47,6 +47,23 @@
 #define BATT_VOLTAGE					1000*60*60
 
 
+#define OEM_CODE				000001
+#define SOFTWARE_VERSION		0100
+#define HAREWARE_VERSION		0130
+
+
+
+typedef struct
+{
+	uint8_t OEM_code[5];
+	uint8_t software_version[4];
+	uint8_t hareware_version[4];
+	
+} DEV_BASIC_INFO;
+
+
+
+
 
 
 
