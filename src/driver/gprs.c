@@ -385,7 +385,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 //				mqtt_rc = mqtt_disconnect();
 //				if(1 == mqtt_rc)
 //				{
-//					gprs_status++;
+//					gprs_status=255;
 //					USART_OUT(USART1, "mqtt_disconnect ok\r\n");
 //				}
 //				else
@@ -405,7 +405,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				{
 					mqtt_publist_msgid = 1;
 					mqtt_subscribe_msgid = 0;
-					gprs_status++;
+					gprs_status=255;
 					USART_OUT(USART1, "mqtt_connect ok\r\n");
 				}
 				else
@@ -435,8 +435,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 						gprs_status = 0;
 						USART_OUT(USART1, "mqtt_subscribe_topic bell error\r\n");
 					}
-				}
-				
+				}	
 			break;
 				
 			case 12:

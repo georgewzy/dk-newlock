@@ -63,7 +63,7 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 	memset(&mqtt_buff, 0, sizeof(mqtt_buff));
 	mqtt_buff_cnt = 0;
 	sprintf((char *)cmd, "AT+CIPSEND=%d,1\r\n", buflen);
-	ret = gprs_send_at(cmd, ">", 10, 80);
+	ret = gprs_send_at(cmd, ">", 10, 30);
 	if(ret != NULL)
 	{
 		timer_delay_1ms(20);
@@ -99,7 +99,6 @@ int transport_getdata(unsigned char* buf, int size)
 
 int mqtt_connect(MQTTPacket_connectData *pdata)
 {
-
 	int ret = 0;
 	int status = 0;	
 	int rc = 0;
@@ -222,7 +221,7 @@ int mqtt_publist(unsigned char* topic, unsigned char* payload, int payload_len, 
 				gprs_wakeup_status = gprs_wakeup(0);
 				if(gprs_wakeup_status == 1)
 				{
-					USART_OUT(USART1, "gprs_wakeup ok\r\n");
+					USART_OUT(USART1, "publist gprs_wakeup ok\r\n");
 				}
 				
 				timer_is_timeout_1ms(timer_mqtt_publist_timeout, 0);
@@ -605,7 +604,7 @@ int mqtt_keep_alive(uint32_t ms)
 					gprs_sleep_status = gprs_sleep();
 					if(gprs_sleep_status == 1)
 					{
-						USART_OUT(USART1, "gprs_sleep ok\r\n");	
+						USART_OUT(USART1, "keep_alive gprs_sleep ok\r\n");	
 					}
 					USART_OUT(USART1, " PINGRESP\r\n");
 					USART_OUT(USART1, "message ack type=%d==msgid=%d\n", type, msgid);
@@ -632,6 +631,152 @@ int mqtt_keep_alive(uint32_t ms)
 	
 	return status;
 }
+
+
+int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len)
+{
+	int status = 0;
+	uint8_t ret = 0;
+	int rc = 0;
+	int len = 0;
+	char buf[200];
+	int buflen = sizeof(buf);
+	int mysock = 0;
+	MQTTString topicString = MQTTString_initializer;
+	int publist_status = PUBLISH;
+
+	int gprs_sleep_status = 0;
+	int gprs_wakeup_status = 0;
+	
+	len = MQTTSerialize_publish((unsigned char *)buf , buflen, 0, 0, 0, 0, topicString, (unsigned char*)payload, payload_len);
+	rc = transport_sendPacketBuffer(mysock, buf, len);	
+	if(rc != -1)
+	{
+		status = 1;
+	}			
+	
+	return status;
+}
+
+int mqtt_keep_alive_test(void)
+{
+	int status = 0;
+	int ret = 0;
+	int rc = 0;
+	int mysock = 0;
+	int len = 0;
+	unsigned char buf[20];
+	int buflen = sizeof(buf);
+	uint8_t keep_alive_err_cnt = 0;
+	unsigned char type = 0;
+	unsigned short msgid;
+	int mqtt_msg_tpye = 0; 
+	int keep_alive_status = PINGREQ;
+	int gprs_sleep_status = 0;
+	int gprs_wakeup_status = 0;
+	
+	timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 0);
+	while(!ret)
+	{	
+		usart2_recv_data();	
+		mqtt_msg_tpye = MQTTPacket_read(buf, buflen, transport_getdata);
+		if(mqtt_msg_tpye > 0)
+		{
+			keep_alive_status = mqtt_msg_tpye;
+		}
+		else
+		{
+			
+		}
+		
+		switch(keep_alive_status)
+		{					
+			case PINGREQ:		
+				timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 0);
+				len = MQTTSerialize_pingreq(buf, buflen);
+				rc = transport_sendPacketBuffer(mysock, buf, len);
+				keep_alive_status = 0;
+				USART_OUT(USART1, " PINGREQ\r\n");
+			break;
+			
+			case PINGRESP:
+				rc = MQTTDeserialize_ack(&type, 0, &msgid, buf, buflen);
+				if(rc == 1)
+				{
+					ret = 1;
+					status = 1;
+					gprs_sleep_status = gprs_sleep();
+					if(gprs_sleep_status == 1)
+					{
+						USART_OUT(USART1, "keep_alive gprs_sleep ok\r\n");	
+					}
+					USART_OUT(USART1, " PINGRESP\r\n");
+					USART_OUT(USART1, "message ack type=%d==msgid=%d\n", type, msgid);
+				}		
+			break;
+			
+			default:
+			break;					
+		}			
+
+		if(timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 5000) == 0)
+		{		
+			keep_alive_status = PINGREQ;
+			USART_OUT(USART1, "=============================keep_alive_err_cnt\r\n");
+			keep_alive_err_cnt++;
+			if(keep_alive_err_cnt > 6)
+			{
+				ret = 1;
+				status = 0;
+				USART_OUT(USART1, "============================keep_alive_err_cnt error\r\n");
+			}
+		}
+	}
+	
+	return status;
+}
+
+
+int mqtt_subscribe_qos0(unsigned char* topic, unsigned char *payload, int *payloadlen)
+{
+	int status = 0;
+	uint8_t ret = 0;
+	int rc = 0;
+	int len = 0;
+	char buf[200] = {0};	//数据过大容易导致死机 原因未知
+	int buflen = sizeof(buf);
+	int mysock = 0;
+	MQTTString topicString = MQTTString_initializer;
+	unsigned char dup;
+	int qos;
+	unsigned char type = 0;
+	unsigned short msgid;
+	unsigned char retained;
+	unsigned char* payload_in;
+	MQTTString receivedTopic;
+	uint8_t mqtt_subscribe_err_cnt = 0;
+	int mqtt_msg_tpye = 0; 
+	int subscribe_status = 0;
+	int gprs_sleep_status = 0;
+	int gprs_wakeup_status = 0;
+	
+	usart2_recv_data();
+	if(MQTTPacket_read(buf, buflen, transport_getdata) == SUBACK)
+	{
+		rc = MQTTDeserialize_publish(&dup, &qos, &retained, &msgid, &receivedTopic,
+					&payload_in, payloadlen, buf, buflen);
+		if(rc == 1)
+		{
+			memcpy(topic, receivedTopic.lenstring.data, receivedTopic.lenstring.len);
+			memcpy(payload, payload_in, *payloadlen);			
+			
+			USART_OUT(USART1, "Topic=%s======qos=%d\r\n", topic, qos);
+			USART_OUT(USART1, "PUBLISH qos0\r\n");
+		}	
+	}
+}
+
+
 
 
 

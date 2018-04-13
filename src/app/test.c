@@ -302,8 +302,8 @@ void test_gprs(void)
 			break;
 			
 			case 4:			
-				ret = gprs_send_at("AT+CPIN?\r\n", "OK", 500, 10000);
-				if (ret != NULL)
+//				ret = gprs_send_at("AT+CPIN?\r\n", "OK", 500, 10000);
+//				if (ret != NULL)
 				{
 					test_gprs_status++;
 				}

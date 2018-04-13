@@ -41,12 +41,12 @@ typedef struct
 
 
 
-
+int mqtt_keep_alive_test(void);
 
 int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen);
 int transport_getdata(unsigned char* buf, int count);
 
-
+int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len);
 
 int mqtt_connect(MQTTPacket_connectData *pdata);
 int mqtt_disconnect(void);

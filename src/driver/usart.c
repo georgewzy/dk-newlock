@@ -338,12 +338,12 @@ void usart2_recv_data(void)
 	uint8_t pick_str[50] = {0};
 	int data_len = 0,i =0;
 	
-	if(timer_is_timeout_1ms(timer_uart2, 5) == 0)	//20ms没接收到数据认为接收数据完成		
+	if(timer_is_timeout_1ms(timer_uart2, 10) == 0)	//20ms没接收到数据认为接收数据完成		
 	{
 		p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
 		if(p1 != NULL)
 		{
-			p2 = str_picked(p1, ",", ":", (char*)pick_str);
+			p2 = str_picked(p1, ",", ":", (char*)pick_str);	//取出数据长度
 			if(p2 != NULL)
 			{
 				data_len = atoi((char*)pick_str);
@@ -356,7 +356,6 @@ void usart2_recv_data(void)
 			memcpy(mqtt_buff.pdata, p3+1, data_len);
 			mqtt_buff.index = data_len;
 			
-//			USART_OUT(USART1, "AAAA");
 			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
 //			for(i = 0 ;  i< usart2_rx_buff.index; i++)
 //			{

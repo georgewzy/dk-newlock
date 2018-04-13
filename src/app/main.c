@@ -71,6 +71,7 @@ uint8_t *p2;
 
 
 uint8_t protocol_buff[512] = {0};
+uint8_t	eeprom_buff[128] = {0};
 
 
 uint8_t mqtt_keep_alive_flag = 0;
@@ -164,6 +165,9 @@ int main(void)
 	MQTTPacket_connectData mqtt_data = MQTTPacket_connectData_initializer;
 	int gprs_sleep_status = 0;
 	int gprs_wakeup_status = 0;
+	unsigned char buf[20];
+	int buflen = sizeof(buf);
+	int len = 0;
 	
 	bsp_init();
 
@@ -179,10 +183,14 @@ int main(void)
 		{
 			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
 			MakeFile_MD5_Checksum(lock_id, 16);
+			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
+			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
 			
 //			gprs_info.server_ip = "118.31.69.148";
 			gprs_info.server_ip = "emq.91daoke.com";
 			gprs_info.server_port = 1883;
+//			gprs_info.server_ip = "103.46.128.47";
+//			gprs_info.server_port = 14947;
 			mqtt_data.clientID.cstring = lock_id;
 			mqtt_data.keepAliveInterval = MQTT_KEEP_ALIVE_INTERVAL;
 			mqtt_data.cleansession = 1;
@@ -190,6 +198,9 @@ int main(void)
 			mqtt_data.password.cstring = "DaokeEmq13245768";
 			
 			USART_OUT(USART1, "mqtt_data.clientID.cstring=%s\r\n", mqtt_data.clientID.cstring);
+			
+			memset(send_buff, 0, sizeof(send_buff));
+			sprintf(send_buff, "wangzhongya=%d", mqtt_publist_msgid);
 			
 			break;
 		}
@@ -207,12 +218,60 @@ int main(void)
 			p1 = strstr((uint8_t*)protocol_buff, "lockid=");
 			if(p1 != NULL)
 			{
-				memcpy((char*)lock_id ,(char*)(p1+7), 16);		
-				eeprom_write_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
-				eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
+				memset(eeprom_buff, 0, sizeof(eeprom_buff));
+				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("lockid=")), sizeof(protocol_buff)-strlen("lockid="));		
+				eeprom_write_data(EEPROM_LOCK_ID_ADDR, eeprom_buff, EEPROM_LOCK_ID_SIZE);
+				eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, EEPROM_LOCK_ID_SIZE);
 				USART_OUT(USART1, "lock_id=%s\r\n", lock_id);
 				memset(protocol_buff, 0, 512);
-			}		
+			}
+			
+			p1 = strstr((uint8_t*)protocol_buff, "ip=");
+			if(p1 != NULL)
+			{
+				memset(eeprom_buff, 0, sizeof(eeprom_buff));
+				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("ip=")), sizeof(protocol_buff)-strlen("lockid="));		
+				eeprom_write_data(EEPROM_IP_ADDR, eeprom_buff, EEPROM_IP_SIZE);
+				eeprom_read_data(EEPROM_IP_ADDR, lock_id, EEPROM_IP_SIZE);
+				USART_OUT(USART1, "ip=%s\r\n", lock_id);
+				memset(protocol_buff, 0, 512);
+			}
+			
+			p1 = strstr((uint8_t*)protocol_buff, "ip=");
+			if(p1 != NULL)
+			{
+				memset(eeprom_buff, 0, sizeof(eeprom_buff));
+				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("port=")), sizeof(protocol_buff)-strlen("port="));		
+				eeprom_write_data(EEPROM_PORT_ADDR, eeprom_buff, EEPROM_PORT_SIZE);
+				eeprom_read_data(EEPROM_PORT_ADDR, lock_id, EEPROM_PORT_SIZE);
+				USART_OUT(USART1, "port=%s\r\n", lock_id);
+				memset(protocol_buff, 0, 512);
+			}
+			
+		}
+	}
+	while(1)
+	{
+		gprs_init_task(&gprs_info, &mqtt_data);
+		
+		usart2_recv_data();
+		if(timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0)
+		{
+//			rc = mqtt_publist_qos0("heartbeat", "wangzhongya", 11);
+//			rc = transport_sendPacketBuffer(0, send_buff, 50);
+//			if(rc == 1)
+//			{
+//				mqtt_publist_msgid++;
+//				USART_OUT(USART1, "mqtt_publist_qos0=%d\r\n", mqtt_publist_msgid);
+//			}
+			memset(buf, 0, sizeof(buf));
+			len = MQTTSerialize_pingreq(buf, buflen);
+			rc = transport_sendPacketBuffer(0, buf, len);
+			if(rc != 1)
+			{	
+				USART_OUT(USART1, "keep_alive=%d\r\n", mqtt_publist_msgid);
+				mqtt_publist_msgid++;
+			}
 		}
 	}
 	
@@ -224,22 +283,20 @@ int main(void)
 		usart1_recv_data();
 //		usart2_recv_data();
 		protocol_analyze();
-		if(timer_is_timeout_1ms(tim1_test, 1000*30) == 0)
-		{
-			
-		}
-	
+
+		
 //		mqtt_client(0, topic_buff, send_buff, 44, 2, 0);
 	
 		//保持在线
-		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0) || (mqtt_keep_alive_flag == 1))
+		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0))
+//		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0) || (mqtt_keep_alive_flag == 1))
 		{
 			
 			USART_OUT(USART1, "mqtt_keep_alive\r\n");
 			gprs_wakeup_status = gprs_wakeup(0);
 			if(gprs_wakeup_status == 1)
 			{
-				USART_OUT(USART1, "gprs_wakeup ok\r\n");
+				USART_OUT(USART1, "keep_alive gprs_wakeup ok\r\n");
 				rc = mqtt_keep_alive(1);
 				if(rc == 1)
 				{
@@ -265,20 +322,20 @@ int main(void)
 		
 //		lock_open_deal();
 //		lock_close_deal();
-		lock_open_deal_1();
-		lock_close_deal_1();
+//		lock_open_deal_1();
+//		lock_close_deal_1();
 
-		lock_hand_close();
-		
-		lock_self_checking();
-		
-		dev_to_srv_batt_voltage(BATT_VOLTAGE);	
-		
-		lock_bell();
-		
-		heartbeat(HEARTBEAT);
-		
-		lock_shake_alarm();
+//		lock_hand_close();
+//		
+//		lock_self_checking();
+//		
+//		dev_to_srv_batt_voltage(BATT_VOLTAGE);	
+//		
+//		lock_bell();
+//		
+//		heartbeat(HEARTBEAT);
+//		
+//		lock_shake_alarm();
 		
 	}
 
