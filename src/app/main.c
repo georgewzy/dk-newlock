@@ -23,6 +23,7 @@
 #include "lock.h"
 #include "protocol.h"
 #include "test.h"
+#include "queue.h"
 
 
 extern uint8_t lock_status1;
@@ -178,6 +179,9 @@ int main(void)
 	
 	while(1)
 	{	
+		queue_test();
+		
+		
 		ds_val = button_ds_get_value();
 		if(ds_val == 0)
 		{
@@ -202,7 +206,7 @@ int main(void)
 			memset(send_buff, 0, sizeof(send_buff));
 			sprintf(send_buff, "wangzhongya=%d", mqtt_publist_msgid);
 			
-			break;
+//			break;
 		}
 		else if(ds_val == 1)
 		{
@@ -250,7 +254,7 @@ int main(void)
 			
 		}
 	}
-	while(1)
+	while(0)
 	{
 		gprs_init_task(&gprs_info, &mqtt_data);
 		

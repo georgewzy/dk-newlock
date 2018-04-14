@@ -1,5 +1,6 @@
 .\objects\queue.o: ..\system\queue.c
-.\objects\queue.o: ..\system\queue.h
+.\objects\queue.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\queue.o: ..\driver\usart.h
 .\objects\queue.o: ..\bsp\bsp.h
 .\objects\queue.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\queue.o: ..\Libraries\CMSIS\Include\core_cm3.h
@@ -34,3 +35,5 @@
 .\objects\queue.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\queue.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\queue.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
+.\objects\queue.o: ..\system\queue.h
+.\objects\queue.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

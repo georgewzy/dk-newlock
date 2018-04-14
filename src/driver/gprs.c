@@ -222,7 +222,6 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 	uint8_t buff[100] = {0};
 	uint8_t cipstart[100] = {0};
 
-	
 	while(1)
 	{
 		switch(gprs_status)

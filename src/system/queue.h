@@ -2,20 +2,35 @@
 
 #ifndef __QUEUE_H_
 #define __QUEUE_H_
-
+#include <stdbool.h>
 #include "bsp.h"
 
 
 
-
+#define QUEUE_MAXSIZE		10
 
 
 typedef struct
 {
-	uint8_t queue_array[100];
+	char **buff;
 	int front;
 	int rear;
-}sp_queue;
+	int size;
+}sp_queue, *p_que;
+
+
+
+
+
+
+
+
+
+void queue_test(void);
+
+
+
+
 
 
 
