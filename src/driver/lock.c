@@ -10,8 +10,8 @@
 extern uint16_t mqtt_publist_msgid;
 
 extern uint8_t receiveText[24];
-extern uint8_t expressText[512];  
-extern uint8_t cipherText[512];
+extern uint8_t expressText[128];  
+extern uint8_t cipherText[128];
 extern uint8_t aesKey[16];
 
 extern uint8_t lock_id[17];
@@ -203,9 +203,9 @@ void lock_close_deal_1(void)
 
 			case 2:
 				USART_OUT(USART1, "EEE lock_stop\r\n");
-				memset(topic_buff, 0 ,100);
-				memset(expressText, 0 ,512);
-				memset(cipherText, 0 ,512);
+				memset(topic_buff, 0, 100);
+				memset(expressText, 0, 128);
+				memset(cipherText, 0, 128);
 				
 				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"0");
@@ -215,7 +215,7 @@ void lock_close_deal_1(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publist(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -242,9 +242,9 @@ void lock_close_deal_1(void)
 				
 			case 5:
 				USART_OUT(USART1, "EEE lock_run_status3\r\n");
-				memset(topic_buff, 0 ,100);
-				memset(expressText, 0 ,512);
-				memset(cipherText, 0 ,512);
+				memset(topic_buff, 0, 100);
+				memset(expressText, 0, 128);
+				memset(cipherText, 0, 128);
 				
 				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
@@ -254,7 +254,7 @@ void lock_close_deal_1(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publist(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -322,9 +322,9 @@ void lock_open_deal_1(void)
 			break;
 				
 			case 2:
-				memset(topic_buff, 0 ,100);
-				memset(expressText, 0 ,512);
-				memset(cipherText, 0 ,512);
+				memset(topic_buff, 0, 100);
+				memset(expressText, 0, 128);
+				memset(cipherText, 0, 128);
 				
 				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 				sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
@@ -334,7 +334,7 @@ void lock_open_deal_1(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 
-				mqtt_pub = mqtt_publist(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -366,9 +366,9 @@ void lock_open_deal_1(void)
 			
 			case 5:
 				USART_OUT(USART1, "DDDlock_run_status3\r\n");
-				memset(topic_buff, 0 ,100);
-				memset(expressText, 0 ,512);
-				memset(cipherText, 0 ,512);
+				memset(topic_buff, 0, 100);
+				memset(expressText, 0, 128);
+				memset(cipherText, 0, 128);
 				
 				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
@@ -378,7 +378,7 @@ void lock_open_deal_1(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publist(topic_buff, expressText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, expressText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -442,9 +442,9 @@ void lock_close_deal(void)
 			{
 				lock_close_time_flag = 1;
 				USART_OUT(USART1, "BBB lock_stop\r\n");
-				memset(topic_buff, 0 ,100);
-				memset(expressText, 0 ,512);
-				memset(cipherText, 0 ,512);
+				memset(topic_buff, 0, 100);
+				memset(expressText, 0, 128);
+				memset(cipherText, 0, 128);
 				
 				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"0");
@@ -454,7 +454,7 @@ void lock_close_deal(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publist(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -473,9 +473,9 @@ void lock_close_deal(void)
 			lock_shake_flag = 0;
 			USART_OUT(USART1, "BBB close lock unusual\r\n");
 			
-			memset(topic_buff, 0 ,100);
-			memset(expressText, 0 ,512);
-			memset(cipherText, 0 ,512);
+			memset(topic_buff, 0, 100);
+			memset(expressText, 0, 128);
+			memset(cipherText, 0, 128);
 			
 			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
@@ -485,7 +485,7 @@ void lock_close_deal(void)
 			USART_OUT(USART1, "expressText=%s\r\n", expressText);
 			USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 			
-			mqtt_pub = mqtt_publist(topic_buff, expressText, 44, 2, mqtt_publist_msgid);
+			mqtt_pub = mqtt_publish(topic_buff, expressText, 44, 2, mqtt_publist_msgid);
 			if(mqtt_pub == 1)
 			{
 				USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -526,9 +526,9 @@ void lock_open_deal(void)
 			{
 				lock_open_time_flag = 1;
 				USART_OUT(USART1, "AAA lock_stop\r\n");
-				memset(topic_buff, 0 ,100);
-				memset(expressText, 0 ,512);
-				memset(cipherText, 0 ,512);
+				memset(topic_buff, 0, 100);
+				memset(expressText, 0, 128);
+				memset(cipherText, 0, 128);
 				
 				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 				sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
@@ -538,7 +538,7 @@ void lock_open_deal(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 
-				mqtt_pub = mqtt_publist(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -557,9 +557,9 @@ void lock_open_deal(void)
 			motor_stop();
 			lock_shake_flag = 0;
 			USART_OUT(USART1, "Lock_Open timerout\r\n");
-			memset(topic_buff, 0 ,100);
-			memset(expressText, 0 ,512);
-			memset(cipherText, 0 ,512);
+			memset(topic_buff, 0, 100);
+			memset(expressText, 0, 128);
+			memset(cipherText, 0, 128);
 			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
 			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"1");
 			AES_Encrypt((char*)expressText, cipherText, aesKey);
@@ -568,7 +568,7 @@ void lock_open_deal(void)
 			USART_OUT(USART1, "expressText=%s\r\n", expressText);
 			USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-			mqtt_pub = mqtt_publist(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+			mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 			if(mqtt_pub == 1)
 			{
 				USART_OUT(USART1, "mqtt_publist ok\r\n");

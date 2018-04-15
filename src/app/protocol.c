@@ -14,8 +14,8 @@
 
 extern uint8_t lock_id[17];
 extern uint8_t receiveText[24];
-extern uint8_t expressText[512];  
-extern uint8_t cipherText[512];
+extern uint8_t expressText[128];  
+extern uint8_t cipherText[128];
 extern uint8_t aesKey[16];
 
 extern uint8_t lock_open_err_flag;
@@ -55,7 +55,7 @@ void protocol_analyze(void)
 			timer_is_timeout_1ms(timer_heartbeat, 0);
 
 			memset(receiveText , 0, 24);
-			memset(expressText , 0, 512);
+			memset(expressText , 0, 128);
 			
 			strncpy((char*)receiveText, (char*)payload, payloadlen);
 			AES_Decrypt(expressText, receiveText, aesKey);

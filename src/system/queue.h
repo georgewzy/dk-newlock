@@ -7,11 +7,12 @@
 
 
 
-#define QUEUE_MAXSIZE		10
+#define QUEUE_MAXSIZE		5
 
 
 typedef struct
 {
+	char *data;
 	char **buff;
 	int front;
 	int rear;
@@ -24,6 +25,9 @@ typedef struct
 
 
 
+
+
+bool queue_init(sp_queue *que, int maxsize);
 
 
 void queue_test(void);

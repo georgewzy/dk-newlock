@@ -20,6 +20,7 @@
 ".\objects\aes.o"
 ".\objects\common.o"
 ".\objects\queue.o"
+".\objects\list.o"
 ".\objects\misc.o"
 ".\objects\stm32l1xx_adc.o"
 ".\objects\stm32l1xx_aes.o"
@@ -60,6 +61,6 @@
 ".\objects\mqttunsubscribeserver.o"
 ".\objects\transport.o"
 --library_type=microlib --strict --scatter ".\Objects\lock.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\lock.map" -o .\Objects\lock.axf
