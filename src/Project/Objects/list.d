@@ -1,4 +1,5 @@
 .\objects\list.o: ..\system\list.c
+.\objects\list.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\list.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\list.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\list.o: ..\system\list.h
@@ -37,3 +38,13 @@
 .\objects\list.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\list.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\list.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
+.\objects\list.o: ..\MQTT\transport.h
+.\objects\list.o: ..\MQTT\MQTTPacket.h
+.\objects\list.o: ..\MQTT\MQTTConnect.h
+.\objects\list.o: ..\MQTT\MQTTPacket.h
+.\objects\list.o: ..\MQTT\MQTTPublish.h
+.\objects\list.o: ..\MQTT\MQTTSubscribe.h
+.\objects\list.o: ..\MQTT\MQTTUnsubscribe.h
+.\objects\list.o: ..\MQTT\MQTTFormat.h
+.\objects\list.o: ..\MQTT\StackTrace.h
+.\objects\list.o: ..\driver\usart.h

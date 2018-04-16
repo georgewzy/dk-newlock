@@ -36,7 +36,16 @@ typedef struct
 
 
 
+typedef struct
+{
+	char *buff;
+	int buff_len;
+	unsigned short msg_id;
+	int status;
+} mqtt_msg_s;
 
+
+#define MQTT_MSG_DEFAULT() {{0},0,0}
 
 
 
@@ -55,7 +64,7 @@ int mqtt_publish(unsigned char* topic, unsigned char* payload, int payload_len, 
 int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen);
 int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packetid);
 int mqtt_keep_alive(uint32_t ms);
-void mqtt_client(uint8_t msg_tpye, unsigned char* topic, unsigned char* payload, int payload_len, int qos, unsigned short packetid);
+void mqtt_client(uint8_t msg_tpye);
 
 
 #endif

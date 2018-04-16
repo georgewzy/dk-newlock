@@ -42,9 +42,10 @@ void protocol_analyze(void)
 	int mqtt_sub;
 	
 	mqtt_sub = mqtt_subscribe(recv_topic, payload, &payloadlen);
+	
 	if(mqtt_sub == 1)
 	{
-//		timer_is_timeout_1ms(timer_heartbeat, 0);
+
 		USART_OUT(USART1, "AAAA=%s=%s\r\n", payload, recv_topic);
 		
 		sprintf((char*)local_topic, "%s%s", "lock/", lock_id);

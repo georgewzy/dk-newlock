@@ -50,4 +50,4 @@
 .\objects\transport.o: ..\driver\timer.h
 .\objects\transport.o: ..\driver\gprs.h
 .\objects\transport.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\objects\transport.o: ..\system\queue.h
+.\objects\transport.o: ..\system\list.h

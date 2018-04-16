@@ -404,7 +404,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				{
 					mqtt_publist_msgid = 1;
 					mqtt_subscribe_msgid = 0;
-					gprs_status=255;
+					gprs_status++;
 					USART_OUT(USART1, "mqtt_connect ok\r\n");
 				}
 				else

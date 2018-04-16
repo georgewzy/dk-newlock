@@ -250,7 +250,9 @@ int main(void)
 	
 	while(1)
 	{	
-		queue_test();
+//		queue_test();
+		
+		list_test();
 		
 		
 		ds_val = button_ds_get_value();
@@ -380,11 +382,11 @@ int main(void)
 			}
 		}
 		
-		mqtt_client(0, topic_buff, send_buff, 44, 2, 0);
+		mqtt_client(0);
 	
 		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0))
 		{
-			mqtt_client(PINGREQ, topic_buff, send_buff, 44, 2, 0);	
+			mqtt_client(PINGREQ);	
 		}
 		
 		
@@ -421,20 +423,20 @@ int main(void)
 //			}
 //		}
 		
-		lock_open_deal();
-		lock_close_deal();
-		lock_open_deal_1();
-		lock_close_deal_1();
+//		lock_open_deal();
+//		lock_close_deal();
+//		lock_open_deal_1();
+//		lock_close_deal_1();
 
-		lock_hand_close();
-		
-		lock_self_checking();
-		
-		dev_to_srv_batt_voltage1(BATT_VOLTAGE);	
-		
-		lock_bell();
-		
-		heartbeat1(HEARTBEAT);
+//		lock_hand_close();
+//		
+//		lock_self_checking();
+//		
+//		dev_to_srv_batt_voltage1(BATT_VOLTAGE);	
+//		
+//		lock_bell();
+//		
+//		heartbeat1(HEARTBEAT);
 //		
 //		lock_shake_alarm();
 		
