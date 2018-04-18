@@ -36,9 +36,8 @@
 .\objects\protocol.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\protocol.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\protocol.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
-.\objects\protocol.o: ..\driver\usart.h
-.\objects\protocol.o: ..\system\common.h
-.\objects\protocol.o: ..\driver\timer.h
+.\objects\protocol.o: ..\system\list.h
+.\objects\protocol.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\protocol.o: ..\MQTT\transport.h
 .\objects\protocol.o: ..\MQTT\MQTTPacket.h
 .\objects\protocol.o: ..\MQTT\MQTTConnect.h
@@ -48,5 +47,8 @@
 .\objects\protocol.o: ..\MQTT\MQTTUnsubscribe.h
 .\objects\protocol.o: ..\MQTT\MQTTFormat.h
 .\objects\protocol.o: ..\MQTT\StackTrace.h
+.\objects\protocol.o: ..\driver\usart.h
+.\objects\protocol.o: ..\system\common.h
+.\objects\protocol.o: ..\driver\timer.h
 .\objects\protocol.o: ..\tplib\aes.h
 .\objects\protocol.o: ..\driver\motor.h

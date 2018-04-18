@@ -61,5 +61,6 @@
 .\objects\main.o: ..\app\main.h
 .\objects\main.o: ..\driver\lock.h
 .\objects\main.o: ..\app\protocol.h
+.\objects\main.o: ..\system\list.h
 .\objects\main.o: ..\app\test.h
 .\objects\main.o: ..\system\queue.h

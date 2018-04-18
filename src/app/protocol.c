@@ -9,6 +9,7 @@
 #include "transport.h"
 #include "aes.h"
 #include "motor.h"
+#include "list.h"
 
 
 
@@ -33,6 +34,9 @@ extern uint8_t lock_bell_flag;
 extern uint8_t lock_shake_flag;
 
 
+
+
+
 void protocol_analyze(void)
 {
 	uint8_t local_topic[50] = {0};
@@ -45,7 +49,6 @@ void protocol_analyze(void)
 	
 	if(mqtt_sub == 1)
 	{
-
 		USART_OUT(USART1, "AAAA=%s=%s\r\n", payload, recv_topic);
 		
 		sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
@@ -106,8 +109,84 @@ void protocol_analyze(void)
 		}
 
 	}
+}
+
+
+
+void protocol_analyze1(list_node **list)
+{
+	uint8_t local_topic[50] = {0};
+	uint8_t recv_topic[50] = {0};
+	uint8_t payload[100];
+	int payloadlen = 0;
+	int list_status;
+	mqtt_msg_s *msg;
+	
+	list_status = list_is_empty(list);
+	
+	if(list_status == 1)	
+	{	
+//		USART_OUT(USART1, "777777777777\r\n");
+		msg = list_get_addr_by_status(*list ,PUBCOMP);
+		if(msg->status == PUBCOMP)
+		{	
+			timer_is_timeout_1ms(timer_heartbeat, 0);
+			
+			USART_OUT(USART1, "topic==%s\r\n", msg->topic);
+			list_travese(list);
+			sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+			if(strncmp((char*)msg->topic, (char*)"lock/", 5)==0)
+			{					
+//				timer_is_timeout_1ms(timer_heartbeat, 0);
+				memset(receiveText , 0, 24);
+				memset(expressText , 0, 128);
+				
+				strncpy((char*)receiveText, (char*)msg->payload, msg->payloadlen);
+				AES_Decrypt(expressText, receiveText, aesKey);
+				
+				USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
+				USART_OUT(USART1, "expressText=%s\r\n", expressText);
+				USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
+				if(*expressText == 0x31)
+				{
+	//				timer_is_timeout_1ms(timer_open_lock, 0);
+					lock_shake_flag = 1;
+					lock_status = 1;
+					lock_open_time_flag = 0;
+					lock_run_status = 0;
+					USART_OUT(USART1, "Lock_Open11111\r\n");
+				}
+				else if(*expressText == 0x32)
+				{
+	//				timer_is_timeout_1ms(timer_close_lock, 0);
+					lock_shake_flag = 1;
+					lock_status = 0;
+					lock_run_status = 0;
+					lock_close_time_flag = 0;
+					USART_OUT(USART1, "Lock_Close11111\r\n");
+				}
+				else if(*expressText == 0x30)
+				{
+					motor_stop();	//Í£Ö¹ÔËĞĞ;
+				}				
+			}
+			
+			sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+			if(strncmp((char*)msg->topic, (char*)"bell/", 5)==0)
+			{
+//				timer_is_timeout_1ms(timer_heartbeat, 0);
+				USART_OUT(USART1, "bell===========================================================================\r\n");
+
+				lock_bell_flag = 1;
+			}
+			
+			list_de_by_elem(list, msg->msg_id);
+			list_travese(list);
+		}
+	}
 
 }
+
 
 
 

@@ -30,22 +30,39 @@ typedef struct
 	MQTTString m_string;
 	unsigned short msg_id;
 	char *payload;
-
 }mqtt_protocol;
 
 
 
 
-typedef struct
+typedef struct 
 {
-	char *buff;
-	int buff_len;
+	char payload[100];
+	char topic[50];
+	int payloadlen;
+	int topiclen;
 	unsigned short msg_id;
+	unsigned char retained;
+	unsigned char dup;
+	int qos;
 	int status;
 } mqtt_msg_s;
 
 
+
+typedef struct Node
+{
+	mqtt_msg_s msg;
+	struct Node *next;
+	
+}list_node, *p_node;
+
+
+
 #define MQTT_MSG_DEFAULT() {{0},0,0}
+
+
+
 
 
 
@@ -56,7 +73,7 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen);
 int transport_getdata(unsigned char* buf, int count);
 
 int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len);
-int mqtt_publish_qos2(unsigned char* topic, unsigned char* payload, int payload_len, int qos, unsigned short packetid);
+int mqtt_publish_qos2(list_node **list, unsigned char* topic, unsigned char* payload, int payload_len, int qos, unsigned short packetid);
 
 int mqtt_connect(MQTTPacket_connectData *pdata);
 int mqtt_disconnect(void);
@@ -64,7 +81,7 @@ int mqtt_publish(unsigned char* topic, unsigned char* payload, int payload_len, 
 int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen);
 int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packetid);
 int mqtt_keep_alive(uint32_t ms);
-void mqtt_client(uint8_t msg_tpye);
+int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye);
 
 
 #endif

@@ -273,7 +273,6 @@ void usart1_recv_data(void)
 	
 	if(timer_is_timeout_1ms(timer_uart1, 20) == 0)	//40ms没接收到数据认为接收数据完成		
 	{
-		
 		usart_send_data(USART1, usart1_rx_buff.pdata, usart1_rx_buff.index);
 		
 		memcpy(protocol_buff, usart1_rx_buff.pdata, 512);

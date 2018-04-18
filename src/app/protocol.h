@@ -7,7 +7,7 @@
 
 #include  "bsp.h"
 #include "stm32l1xx.h"
-
+#include "list.h"
 
 typedef struct
 {
@@ -28,6 +28,6 @@ typedef struct
 
 
 
-void protocol_analyze(void);
+void protocol_analyze1(list_node **list);
 
 #endif

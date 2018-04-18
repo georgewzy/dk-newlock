@@ -58,9 +58,9 @@ ARM Macro Assembler    Page 1
    36 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
    37 00000000         ; </h>
    38 00000000         
-   39 00000000 00000400 
+   39 00000000 00000800 
                        Stack_Size
-                               EQU              0x00000400
+                               EQU              0x00000800
    40 00000000         
    41 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
 
@@ -72,18 +72,18 @@ ARM Macro Assembler    Page 2
 =3
    42 00000000         Stack_Mem
                                SPACE            Stack_Size
-   43 00000400         __initial_sp
-   44 00000400         
-   45 00000400         
-   46 00000400         ; <h> Heap Configuration
-   47 00000400         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   48 00000400         ; </h>
-   49 00000400         
-   50 00000400 00000500 
+   43 00000800         __initial_sp
+   44 00000800         
+   45 00000800         
+   46 00000800         ; <h> Heap Configuration
+   47 00000800         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   48 00000800         ; </h>
+   49 00000800         
+   50 00000800 00000500 
                        Heap_Size
                                EQU              0x00000500
-   51 00000400         
-   52 00000400                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+   51 00000800         
+   52 00000800                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
    53 00000000         __heap_base
    54 00000000         Heap_Mem
@@ -571,7 +571,7 @@ s\arm\startup_stm32l1xx_hd.s
    Uses
       None
 Comment: Stack_Mem unused
-__initial_sp 00000400
+__initial_sp 00000800
 
 Symbol: __initial_sp
    Definitions
@@ -1592,7 +1592,7 @@ s\arm\startup_stm32l1xx_hd.s
       At line 54 in file ..\Libraries\CMSIS\Device\ST\STM32L1xx\Source\Template
 s\arm\startup_stm32l1xx_hd.s
 Comment: Heap_Size used once
-Stack_Size 00000400
+Stack_Size 00000800
 
 Symbol: Stack_Size
    Definitions

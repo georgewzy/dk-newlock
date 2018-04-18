@@ -24,7 +24,7 @@
 #include "protocol.h"
 #include "test.h"
 #include "queue.h"
-
+#include "list.h"
 
 extern uint8_t lock_status1;
 
@@ -116,7 +116,7 @@ void heartbeat(uint32_t ms)
 	}
 }
 
-void heartbeat1(uint32_t ms)
+void heartbeat1(list_node **list, uint32_t ms)
 {
 	int mqtt_pub = 0;
 	uint8_t heartbeat_buff[2] = {0};
@@ -130,8 +130,7 @@ void heartbeat1(uint32_t ms)
 		heartbeat_buff[0] = 0x30;
 		heartbeat_buff[1] = '\0';
 		
-		USART_OUT(USART1, "heartbeat=%s\r\n", topic_buff);
-		mqtt_pub = mqtt_publish_qos2(topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
+		mqtt_pub = mqtt_publish_qos2(list, topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
 		if(mqtt_pub == 1)
 		{
 			USART_OUT(USART1, "heartbeat mqtt_publist ok\r\n");
@@ -143,6 +142,46 @@ void heartbeat1(uint32_t ms)
 	}
 }
 
+void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_stauts)
+{	
+	int gprs_sleep_status = 0;
+	int gprs_wakeup_status = 0;
+	//保持在线
+	if(timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0)
+	{
+		USART_OUT(USART1, "mqtt_keep_alive\r\n");
+		gprs_wakeup_status = gprs_wakeup(0);
+		if(gprs_wakeup_status == 1)
+		{
+			mqtt_stauts = mqtt_client(&list_recv, &list_send, PINGREQ);	
+			if(mqtt_stauts == PINGREQ)
+			{
+				timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 0);
+				mqtt_keep_alive_flag = 0;		
+				USART_OUT(USART1, "mqtt_keep_alive send ok\r\n");
+			}
+		}
+			
+	}
+	
+	if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 1000*10) == 0) && mqtt_keep_alive_flag == 0)
+	{
+		mqtt_keep_alive_err_cnt++;
+		if(mqtt_keep_alive_err_cnt > 6)
+		{
+			gprs_status = 0;
+			mqtt_keep_alive_flag = 0;
+			mqtt_keep_alive_err_cnt = 0;
+		}
+		mqtt_stauts = mqtt_client(&list_recv, &list_send, PINGREQ);	
+		if(mqtt_stauts == PINGREQ)
+		{
+			mqtt_keep_alive_flag = 0;
+			USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
+		}	
+	}
+	
+}
 
 
 void dev_to_srv_batt_voltage(uint32_t ms)
@@ -170,7 +209,7 @@ void dev_to_srv_batt_voltage(uint32_t ms)
 		USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
 		USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 		
-		mqtt_pub = mqtt_publish(topic_buff, cipherText, 24, 2, mqtt_publist_msgid);
+//		mqtt_pub = mqtt_publish(list, topic_buff, cipherText, 24, 2, mqtt_publist_msgid);
 		if(mqtt_pub == 1)
 		{
 			USART_OUT(USART1, "dev_to_srv_batt mqtt_publist ok\r\n");
@@ -182,7 +221,7 @@ void dev_to_srv_batt_voltage(uint32_t ms)
 	}
 }
 
-void dev_to_srv_batt_voltage1(uint32_t ms)
+void dev_to_srv_batt_voltage1(list_node **list, uint32_t ms)
 {
 	int mqtt_pub;
 	
@@ -207,7 +246,7 @@ void dev_to_srv_batt_voltage1(uint32_t ms)
 		USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
 		USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 		
-		mqtt_pub = mqtt_publish_qos2(topic_buff, cipherText, 24, 2, mqtt_publist_msgid);
+		mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 24, 2, mqtt_publist_msgid);
 		if(mqtt_pub == 1)
 		{
 			USART_OUT(USART1, "dev_to_srv_batt mqtt_publist ok\r\n");
@@ -218,6 +257,8 @@ void dev_to_srv_batt_voltage1(uint32_t ms)
 		}
 	}
 }
+
+
 
 
 
@@ -232,29 +273,28 @@ int main(void)
 	int payloadlen = 0;
 	int mqtt_pub;
 	int mqtt_sub;
+	int mqtt_stauts = 0;
 	GPRS_CONFIG gprs_info = GPRS_CONFIG_INIT;
 	MQTTPacket_connectData mqtt_data = MQTTPacket_connectData_initializer;
-	int gprs_sleep_status = 0;
-	int gprs_wakeup_status = 0;
+
 	unsigned char buf[20];
 	int buflen = sizeof(buf);
 	int len = 0;
+	list_node *list_recv = NULL;
+	list_node *list_send = NULL;
 	
 	
 	bsp_init();
 
 	USART_OUT(USART1, "uart1 is ok\r\n");
-//	USART_OUT(USART1, "software_version=%d\r\n",);
-//	USART_OUT(USART1, "server_ip=%s\r\n", gprs_info.server_ip);
-//	
+
 	
 	while(1)
 	{	
-//		queue_test();
 		
-		list_test();
-		
-		
+//		list_test(&list);
+//		
+//		list_test2(&list);
 		ds_val = button_ds_get_value();
 		if(ds_val == 0)
 		{
@@ -323,122 +363,47 @@ int main(void)
 				eeprom_read_data(EEPROM_PORT_ADDR, lock_id, EEPROM_PORT_SIZE);
 				USART_OUT(USART1, "port=%s\r\n", lock_id);
 				memset(protocol_buff, 0, 512);
-			}
-			
+			}	
 		}
 	}
-	while(0)
-	{
-		gprs_init_task(&gprs_info, &mqtt_data);
-		
-		usart2_recv_data();
-		if(timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0)
-		{
-//			rc = mqtt_publist_qos0("heartbeat", "wangzhongya", 11);
-//			rc = transport_sendPacketBuffer(0, send_buff, 50);
-//			if(rc == 1)
-//			{
-//				mqtt_publist_msgid++;
-//				USART_OUT(USART1, "mqtt_publist_qos0=%d\r\n", mqtt_publist_msgid);
-//			}
-			memset(buf, 0, sizeof(buf));
-			len = MQTTSerialize_pingreq(buf, buflen);
-			rc = transport_sendPacketBuffer(0, buf, len);
-			if(rc != 1)
-			{	
-				USART_OUT(USART1, "keep_alive=%d\r\n", mqtt_publist_msgid);
-				mqtt_publist_msgid++;
-			}
-		}
-	}
+
 	
 	while(1)
 	{
 		
 		gprs_init_task(&gprs_info, &mqtt_data);
 
-		usart1_recv_data();
-//		usart2_recv_data();
-//		protocol_analyze();
+//		usart1_recv_data();
+		usart2_recv_data();
+		protocol_analyze1(&list_recv);
 
 		
-		if(test_flag == 0)
+		mqtt_stauts = mqtt_client(&list_recv, &list_send, MATTNULL);
+		if(mqtt_stauts == PINGRESP)
 		{
-			test_flag = 1;
-			memset(topic_buff, 0, 100);
-			memset(expressText, 0, 128);
-			memset(cipherText, 0, 128);
-			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
-			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"1");
-			AES_Encrypt((char*)expressText, cipherText, aesKey);
 			
-			USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
-			USART_OUT(USART1, "expressText=%s\r\n", expressText);
-			USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
-			mqtt_pub = mqtt_publish_qos2(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);	
-			if(mqtt_pub == 0)
-			{
-				USART_OUT(USART1, "mqtt_publist www ok\r\n");
-			}
-		}
-		
-		mqtt_client(0);
-	
-		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0))
-		{
-			mqtt_client(PINGREQ);	
+			mqtt_keep_alive_flag = 1;
+			mqtt_keep_alive_err_cnt = 0;
+			USART_OUT(USART1, "mqtt_keep_alive recv ok\r\n");
 		}
 		
 		
-		//保持在线
-//		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0))
-////		if((timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0) || (mqtt_keep_alive_flag == 1))
-//		{
-//			
-//			USART_OUT(USART1, "mqtt_keep_alive\r\n");
-//			gprs_wakeup_status = gprs_wakeup(0);
-//			if(gprs_wakeup_status == 1)
-//			{
-//				USART_OUT(USART1, "keep_alive gprs_wakeup ok\r\n");
-//				rc = mqtt_keep_alive(1);
-//				if(rc == 1)
-//				{
-//					mqtt_keep_alive_flag = 0;
-//					mqtt_keep_alive_err_cnt = 0;
-//					USART_OUT(USART1, "mqtt_keep_alive ok\r\n");
-//				}  
-//				else
-//				{
-//					mqtt_keep_alive_flag = 1;
-//					mqtt_keep_alive_err_cnt++;
-//					if(mqtt_keep_alive_err_cnt > 5)
-//					{
-//						gprs_status = 0;
-//						mqtt_keep_alive_flag = 0;
-//						mqtt_keep_alive_err_cnt = 0;
-//						
-//						USART_OUT(USART1, "mqtt_keep_aliv error\r\n");
-//					}
-//				}
-//			}
-//		}
+		mqtt_keep_alive1(list_recv, list_send, mqtt_stauts);
 		
-//		lock_open_deal();
-//		lock_close_deal();
-//		lock_open_deal_1();
-//		lock_close_deal_1();
+		
 
-//		lock_hand_close();
-//		
-//		lock_self_checking();
-//		
-//		dev_to_srv_batt_voltage1(BATT_VOLTAGE);	
-//		
-//		lock_bell();
-//		
-//		heartbeat1(HEARTBEAT);
-//		
-//		lock_shake_alarm();
+
+		
+		lock_open_deal_1(&list_send);
+		lock_close_deal_1(&list_send);
+		dev_to_srv_batt_voltage1(&list_send, BATT_VOLTAGE);	
+		heartbeat1(&list_send, HEARTBEAT);
+		
+		
+		lock_hand_close();
+		lock_self_checking();
+		lock_bell();
+		lock_shake_alarm();
 		
 	}
 

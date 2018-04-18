@@ -8,8 +8,6 @@
 
 
 
-
-
 void lock_gpio_init(void);
 void lock_bell(void);
 void lock_shake_alarm(void);

@@ -5,7 +5,7 @@
 #include "motor.h"
 #include "usart.h"
 #include "button.h"
-
+#include "transport.h"
 
 extern uint16_t mqtt_publist_msgid;
 
@@ -61,8 +61,7 @@ void lock_shake_alarm(void)
 	{
 		USART_OUT(USART1, "sharking\r\n");
 		lock_bell_flag = 1;
-	}	
-	
+	}		
 }
 
 
@@ -75,6 +74,7 @@ void lock_bell(void)
 		timer_is_timeout_1ms(timer_bell, 0);
 		USART_OUT(USART1, "BEEP_ON\r\n");
 	}
+	
 	
 	if(timer_is_timeout_1ms(timer_bell, 100) == 0)
 	{
@@ -166,7 +166,7 @@ void lock_self_checking(void)
 }
 
 
-void lock_close_deal_1(void)
+void lock_close_deal_1(list_node **list)
 {
 	int mqtt_pub = 0;
 
@@ -215,10 +215,14 @@ void lock_close_deal_1(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
+				}
+				else
+				{
+					USART_OUT(USART1, "mqtt_publist error\r\n");
 				}
 				lock_run_status = 3;
 			break;
@@ -254,7 +258,7 @@ void lock_close_deal_1(void)
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -285,7 +289,7 @@ void lock_close_deal_1(void)
 	}
 }
 
-void lock_open_deal_1(void)
+void lock_open_deal_1(list_node **list)
 {
 	int mqtt_pub = 0;
 	
@@ -333,8 +337,8 @@ void lock_open_deal_1(void)
 				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
-
-				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+			
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -377,8 +381,8 @@ void lock_open_deal_1(void)
 				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
-				
-				mqtt_pub = mqtt_publish(topic_buff, expressText, 44, 2, mqtt_publist_msgid);
+			
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");

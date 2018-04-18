@@ -38,3 +38,13 @@
 .\objects\lock.o: ..\driver\motor.h
 .\objects\lock.o: ..\driver\usart.h
 .\objects\lock.o: ..\driver\button.h
+.\objects\lock.o: ..\MQTT\transport.h
+.\objects\lock.o: ..\MQTT\MQTTPacket.h
+.\objects\lock.o: ..\MQTT\MQTTConnect.h
+.\objects\lock.o: ..\MQTT\MQTTPacket.h
+.\objects\lock.o: ..\MQTT\MQTTPublish.h
+.\objects\lock.o: ..\MQTT\MQTTSubscribe.h
+.\objects\lock.o: ..\MQTT\MQTTUnsubscribe.h
+.\objects\lock.o: ..\MQTT\MQTTFormat.h
+.\objects\lock.o: ..\MQTT\StackTrace.h
+.\objects\lock.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
