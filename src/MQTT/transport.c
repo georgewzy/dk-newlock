@@ -1077,11 +1077,11 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			rc = MQTTDeserialize_ack(&type, 0, &msgid, buf, buflen);
 			if(rc == 1)
 			{
-//				gprs_sleep_status = gprs_sleep();
-//				if(gprs_sleep_status == 1)
-//				{
-//					USART_OUT(USART1, "keep_alive gprs_sleep ok\r\n");	
-//				}
+				gprs_sleep_status = gprs_sleep();
+				if(gprs_sleep_status == 1)
+				{
+					USART_OUT(USART1, "keep_alive gprs_sleep ok\r\n");	
+				}
 				USART_OUT(USART1, "PINGRESP\r\n");
 
 			}		

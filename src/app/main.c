@@ -153,6 +153,7 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 		gprs_wakeup_status = gprs_wakeup(0);
 		if(gprs_wakeup_status == 1)
 		{
+			USART_OUT(USART1, "publist keep_alive ok\r\n");
 			mqtt_stauts = mqtt_client(&list_recv, &list_send, PINGREQ);	
 			if(mqtt_stauts == PINGREQ)
 			{
