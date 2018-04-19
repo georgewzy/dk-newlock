@@ -71,19 +71,20 @@ list_node *list_creat(list_node *p_head)
 	if(p1 == NULL || p2 == NULL)
 	{
 		return NULL;
-	}
-	
-	
-	
+	}	
 }
 
 
 void list_travese(list_node **p_head)
 {
+	int size = 0;
 	list_node *tmp = *p_head;
 	
+	USART_OUT(USART1, "list_travese p_head =%d\r\n", p_head);
+	USART_OUT(USART1, "list_travese AAp_head =%d\r\n", *p_head);
 	while(NULL != tmp)
 	{
+		size++;
 		USART_OUT(USART1, "p_head->msg.payload=%s\r\n", tmp->msg.payload);
 		USART_OUT(USART1, "p_head->msg.topic=%s\r\n", tmp->msg.topic);
 		USART_OUT(USART1, "p_head->msg.payloadlen=%d\r\n", tmp->msg.payloadlen);
@@ -92,7 +93,8 @@ void list_travese(list_node **p_head)
 
 		tmp = tmp->next;
 	}
-	USART_OUT(USART1, "\r\n======================\r\n");
+	
+	USART_OUT(USART1, "list_travese size=====%d\r\n", size);
 }
 
 
@@ -150,8 +152,6 @@ void list_insert_last(list_node **p_head, mqtt_msg_s m_data)
 	list_node *p_insert = NULL;
 	list_node *p_tmp = *p_head;	//定义一个临时链表用来存放第一个节点
 		
-	
-	USART_OUT(USART1, "sizeaa list_node=%d\r\n", sizeof(list_node));
 
 	p_insert = (list_node *)malloc(sizeof(list_node));
 	if(p_insert == NULL)
@@ -232,10 +232,8 @@ void list_de_by_elem(list_node **p_head, int msg_id)
 					tmp_node->next = cur_node->next;
 					free(tmp_node);
 				}
-				tmp_node = tmp_node->next;
-				
-			}
-			
+				tmp_node = tmp_node->next;		
+			}		
 		}
 	}
 }
@@ -272,11 +270,6 @@ void list_de_by_elem1(list_node *p_head, int msg_id)
 	}
 }
 
-
-mqtt_msg_s *list_get_elem(list_node *p_head, int msg_id)
-{
-
-}
 
 
 mqtt_msg_s *list_get_addr_by_msgid(list_node *p_head, int msg_id)
@@ -361,6 +354,28 @@ int list_modify_elem(list_node **p_node, int msg_id, int status)
 	return 1;
 }
 
+mqtt_msg_s *list_find_min_val(list_node **p_head)
+{
+	list_node *min;
+	list_node *temp = (*p_head);
+	
+	min = (*p_head)->next;
+	
+	while(NULL != temp)
+	{
+		if(temp->msg.msg_id < min->msg.msg_id)
+		{
+			min = temp;
+		}
+		temp = temp->next;
+	}
+	
+	USART_OUT(USART1, "list min val=%d\r\n", min->msg.msg_id);
+	
+	return &(min->msg);
+}
+
+
 void l_test(char **p)
 {
 	char *b;
@@ -387,7 +402,13 @@ void list_test(list_node **list)
 	mqtt_msg_s mqtt_msg5;
 	mqtt_msg_s *mqtt_msg6;
 	mqtt_msg_s *mqtt_msg7;
+	mqtt_msg_s *mqtt_msg8;
 	
+	memset(&mqtt_msg, 0, sizeof(mqtt_msg_s));
+	memset(&mqtt_msg1, 0, sizeof(mqtt_msg_s));
+	memset(&mqtt_msg2, 0, sizeof(mqtt_msg_s));
+	memset(&mqtt_msg3, 0, sizeof(mqtt_msg_s));
+	memset(&mqtt_msg4, 0, sizeof(mqtt_msg_s));
 	
 	char a[55]="aaa";
 	char b[55]="bbb";
@@ -396,6 +417,7 @@ void list_test(list_node **list)
 	char e[55]="eee";
 	char f[55]="fff";
 	char g[55]="ggg";
+	
 	
 //	mqtt_msg1.payload = a;
 	memcpy(mqtt_msg1.payload, a, 3);
@@ -448,9 +470,15 @@ void list_test(list_node **list)
 	size = list_size(*list);
 	
 	mqtt_msg6 = list_get_addr_by_status(*list, 55);
-	
 	USART_OUT(USART1, "mqtt_msg6->status=%d\r\n", mqtt_msg6->status);
 	USART_OUT(USART1, "mqtt_msg6->payload=%s\r\n", mqtt_msg6->payload);
+	
+	
+	mqtt_msg8 = list_find_min_val(list);
+	USART_OUT(USART1, "mqtt_msg8->msg_id=%d\r\n", mqtt_msg8->msg_id);
+	USART_OUT(USART1, "mqtt_msg8->payload=%s\r\n", mqtt_msg8->payload);
+	
+	size = list_size(*list);
 	
 //	list_insert_last(&list, mqtt_msg4);
 //	list_travese(list);

@@ -39,6 +39,8 @@ typedef struct
 {
 	char payload[100];
 	char topic[50];
+//	char *payload;
+//	char *topic;
 	int payloadlen;
 	int topiclen;
 	unsigned short msg_id;

@@ -29,6 +29,7 @@ void list_de_last(list_node **p_head);
 void list_de_by_elem(list_node **p_head, int msg_id);
 mqtt_msg_s *list_get_addr_by_msgid(list_node *p_head, int msg_id);
 mqtt_msg_s *list_get_addr_by_status(list_node *p_head, int status);
+mqtt_msg_s *list_find_min_val(list_node **p_head);
 void list_test(list_node **list);
 void list_test2(list_node **list);
 

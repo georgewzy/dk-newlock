@@ -141,46 +141,63 @@ void heartbeat1(list_node **list, uint32_t ms)
 		}
 	}
 }
+int keep_alive_status = 0;
 
 void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_stauts)
 {	
-	int gprs_sleep_status = 0;
 	int gprs_wakeup_status = 0;
 	//保持在线
-	if(timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0)
+	if(timer_is_timeout_1ms(timer_mqtt_keep_alive, MQTT_KEEP_ALIVE_INTERVAL) == 0 || mqtt_keep_alive_flag == 1)
 	{
-		USART_OUT(USART1, "mqtt_keep_alive\r\n");
-		gprs_wakeup_status = gprs_wakeup(0);
-		if(gprs_wakeup_status == 1)
+		if(mqtt_keep_alive_flag == 0)
 		{
-			USART_OUT(USART1, "publist keep_alive ok\r\n");
-			mqtt_stauts = mqtt_client(&list_recv, &list_send, PINGREQ);	
-			if(mqtt_stauts == PINGREQ)
-			{
-				timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 0);
-				mqtt_keep_alive_flag = 0;		
-				USART_OUT(USART1, "mqtt_keep_alive send ok\r\n");
+			mqtt_keep_alive_flag = 1;
+			gprs_wakeup_status = gprs_wakeup(0);
+			if(gprs_wakeup_status == 1)
+			{						
+				keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
+				if(keep_alive_status == PINGREQ)
+				{
+					timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 0);	
+					USART_OUT(USART1, "mqtt_keep_alive send ok\r\n");
+				}
 			}
 		}
 			
+		if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, MQTT_KEEP_ALIVE_INTERVAL/10) == 0))
+		{
+			mqtt_keep_alive_err_cnt++;
+			if(mqtt_keep_alive_err_cnt > 6)
+			{
+				gprs_status = 0;
+				mqtt_keep_alive_flag = 0;
+				mqtt_keep_alive_err_cnt = 0;
+			}
+			keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
+			if(keep_alive_status == PINGREQ)
+			{
+				USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
+			}	
+		}
+		
 	}
 	
-	if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 1000*10) == 0) && mqtt_keep_alive_flag == 0)
-	{
-		mqtt_keep_alive_err_cnt++;
-		if(mqtt_keep_alive_err_cnt > 6)
-		{
-			gprs_status = 0;
-			mqtt_keep_alive_flag = 0;
-			mqtt_keep_alive_err_cnt = 0;
-		}
-		mqtt_stauts = mqtt_client(&list_recv, &list_send, PINGREQ);	
-		if(mqtt_stauts == PINGREQ)
-		{
-			mqtt_keep_alive_flag = 0;
-			USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
-		}	
-	}
+//	if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 1000*10) == 0) && mqtt_keep_alive_flag == 1)
+//	{
+//		mqtt_keep_alive_err_cnt++;
+//		if(mqtt_keep_alive_err_cnt > 6)
+//		{
+//			gprs_status = 0;
+//			mqtt_keep_alive_flag = 0;
+//			mqtt_keep_alive_err_cnt = 0;
+//		}
+//		mqtt_stauts = mqtt_client(&list_recv, &list_send, PINGREQ);	
+//		if(mqtt_stauts == PINGREQ)
+//		{
+//			mqtt_keep_alive_flag = 0;
+//			USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
+//		}	
+//	}
 	
 }
 
@@ -283,7 +300,7 @@ int main(void)
 	int len = 0;
 	list_node *list_recv = NULL;
 	list_node *list_send = NULL;
-	
+	list_node *list_test1 = NULL;
 	
 	bsp_init();
 
@@ -293,9 +310,9 @@ int main(void)
 	while(1)
 	{	
 		
-//		list_test(&list);
-//		
-//		list_test2(&list);
+		list_test(&list_test1);
+		
+		list_test2(&list_test1);
 		ds_val = button_ds_get_value();
 		if(ds_val == 0)
 		{
@@ -304,8 +321,8 @@ int main(void)
 			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
 			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
 			
-//			gprs_info.server_ip = "118.31.69.148";
-			gprs_info.server_ip = "emq.91daoke.com";
+			gprs_info.server_ip = "118.31.69.148";
+//			gprs_info.server_ip = "emq.91daoke.com";
 			gprs_info.server_port = 1883;
 //			gprs_info.server_ip = "103.46.128.47";
 //			gprs_info.server_port = 14947;
@@ -378,23 +395,19 @@ int main(void)
 		usart2_recv_data();
 		protocol_analyze1(&list_recv);
 
+
 		
-		mqtt_stauts = mqtt_client(&list_recv, &list_send, MATTNULL);
+		mqtt_stauts = mqtt_client(&list_recv, &list_send, MQTTNULL);
 		if(mqtt_stauts == PINGRESP)
 		{
-			
-			mqtt_keep_alive_flag = 1;
+			mqtt_keep_alive_flag = 0;
 			mqtt_keep_alive_err_cnt = 0;
 			USART_OUT(USART1, "mqtt_keep_alive recv ok\r\n");
-		}
+		}		
 		
-		
-		mqtt_keep_alive1(list_recv, list_send, mqtt_stauts);
-		
+		mqtt_keep_alive1(list_recv, list_send, PINGREQ);
 		
 
-
-		
 		lock_open_deal_1(&list_send);
 		lock_close_deal_1(&list_send);
 		dev_to_srv_batt_voltage1(&list_send, BATT_VOLTAGE);	

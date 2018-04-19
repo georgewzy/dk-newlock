@@ -126,7 +126,6 @@ void protocol_analyze1(list_node **list)
 	
 	if(list_status == 1)	
 	{	
-//		USART_OUT(USART1, "777777777777\r\n");
 		msg = list_get_addr_by_status(*list ,PUBCOMP);
 		if(msg->status == PUBCOMP)
 		{	
