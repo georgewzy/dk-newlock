@@ -205,6 +205,26 @@ uint8_t flash_read_byte(uint32_t addr)
  Func: EEPROM???????
  Note:
 -------------------------------------------------------------*/
+void eeprom_erase_data(uint32_t addr, uint16_t length)
+{
+	uint8_t *wAddr;
+	uint16_t i = 0;
+	volatile FLASH_Status flash_status = FLASH_COMPLETE;
+	
+	if(addr > EEPROM_BASE_ADDR+EEPROM_BYTE_SIZE)
+	{
+		return;
+	}
+	DATA_EEPROM_Unlock();
+	for(i=0; i<length; i++)
+	{
+		flash_status = DATA_EEPROM_FastProgramByte(addr+i, 0);
+		while(flash_status != FLASH_COMPLETE);
+	}
+	
+	DATA_EEPROM_Lock();
+}
+
 void eeprom_write_data(uint32_t addr, uint8_t *buffer, uint16_t length)
 {
 	uint8_t *wAddr;
@@ -251,4 +271,9 @@ uint8_t eeprom_read_bytes(uint32_t addr)
 
 	return ch;
 }
+
+
+
+
+
 

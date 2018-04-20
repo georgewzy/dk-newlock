@@ -151,7 +151,7 @@ void bsp_rcc_clock_fre(void)
 void iwatchdog_config(void)
 {
 	IWDG_WriteAccessCmd(IWDG_WriteAccess_Enable);
-	IWDG_SetPrescaler(IWDG_Prescaler_128);
+	IWDG_SetPrescaler(IWDG_Prescaler_256);
 	IWDG_SetReload(0xFFE);
 	IWDG_ReloadCounter();
 	IWDG_Enable();		
@@ -317,15 +317,7 @@ void bsp_nvic_init(void)
     nvic_init_structure.NVIC_IRQChannelSubPriority = 2;
     nvic_init_structure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&nvic_init_structure);
-	
-//		// TIM3
-//	nvic_init_structure.NVIC_IRQChannel = TIM3_IRQn;
-//    nvic_init_structure.NVIC_IRQChannelPreemptionPriority = 0;    //
-//    nvic_init_structure.NVIC_IRQChannelSubPriority = 3;
-//    nvic_init_structure.NVIC_IRQChannelCmd = ENABLE;
-//    NVIC_Init(&nvic_init_structure);
 
-	
 	// USART1
 	nvic_init_structure.NVIC_IRQChannel = USART1_IRQn;
     nvic_init_structure.NVIC_IRQChannelPreemptionPriority = 1;

@@ -73,7 +73,7 @@ void test_dev(void)
 		USART_OUT(USART1, "test lock_bell_flag\r\n");
 		memset(protocol_buff, 0, 512);
 	}
-	lock_bell();
+	lock_find_bell();
 	lock_shake_alarm();
 	
 	p = strstr((uint8_t*)protocol_buff, "CSQ=1");

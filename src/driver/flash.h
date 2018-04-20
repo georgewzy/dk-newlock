@@ -37,7 +37,7 @@
 #define EEPROM_IP_SIZE				128
 
 
-#define EEPROM_PORT_OFFSET			128	
+#define EEPROM_PORT_OFFSET			128 + EEPROM_IP_OFFSET
 #define EEPROM_PORT_ADDR			EEPROM_BASE_ADDR + EEPROM_PORT_OFFSET
 #define EEPROM_PORT_SIZE			10
 
@@ -109,6 +109,8 @@ bool flash_write_data(uint32_t addr, uint8_t *data, uint16_t size);
 void flash_read_data(uint32_t addr, uint8_t *pdata, uint32_t size);
 bool flash_write_byte(uint32_t addr, uint8_t ch);
 uint8_t flash_read_byte(uint32_t addr);
+
+void eeprom_erase_data(uint32_t addr, uint16_t length);
 void eeprom_read_data(uint32_t addr, uint8_t *pdata, uint32_t size);
 void eeprom_write_data(uint32_t addr, uint8_t *buffer, uint16_t length);
 uint8_t eeprom_read_bytes(uint32_t addr);

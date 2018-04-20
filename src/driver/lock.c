@@ -8,25 +8,22 @@
 #include "transport.h"
 
 extern uint16_t mqtt_publist_msgid;
-
 extern uint8_t receiveText[24];
 extern uint8_t expressText[128];  
 extern uint8_t cipherText[128];
 extern uint8_t aesKey[16];
-
 extern uint8_t lock_id[17];
 extern uint8_t topic_buff[100];
 extern uint8_t send_buff[100];
 
 
 
-
 uint8_t lock_open_err_flag = 0;
 uint8_t lock_close_err_flag = 0;
-uint8_t Lock_Open=0;
-uint8_t Lock_Close=0;
 
-uint8_t lock_status = 0;
+
+uint8_t lock_status = 255;		//初始化的时候不要初始化成0 1
+
 uint8_t lock_open_time_flag = 0;
 uint8_t lock_close_time_flag = 0;
 
@@ -61,11 +58,12 @@ void lock_shake_alarm(void)
 	{
 		USART_OUT(USART1, "sharking\r\n");
 		lock_bell_flag = 1;
-	}		
+	}
+	
 }
 
 
-void lock_bell(void)
+void lock_find_bell(void)
 {
 	if(lock_bell_flag == 1)
 	{	
@@ -74,7 +72,6 @@ void lock_bell(void)
 		timer_is_timeout_1ms(timer_bell, 0);
 		USART_OUT(USART1, "BEEP_ON\r\n");
 	}
-	
 	
 	if(timer_is_timeout_1ms(timer_bell, 100) == 0)
 	{
@@ -98,8 +95,6 @@ void lock_hand_close(void)
 
 void lock_self_checking(void)
 {
-	int mqtt_pub = 0;
-	
 	if(timer_is_timeout_1ms(timer_lock_self_checking, 1000*60*60*24) == 0)
 	{
 		lock_self_run_status = 0;

@@ -51,7 +51,13 @@
 #define SOFTWARE_VERSION		0100
 #define HAREWARE_VERSION		0130
 
-
+typedef struct
+{
+	uint8_t dev_id[17];
+	uint8_t dev_ip[128];
+	uint8_t dev_port[10];
+	
+}DEV_CONFIG_INFO;
 
 typedef struct
 {

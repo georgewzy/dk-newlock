@@ -26,7 +26,7 @@
 #include "usart.h"
 #include "timer.h"
 #include "transport.h"
-
+#include "main.h"
 
 
 
@@ -37,7 +37,7 @@ extern unsigned short mqtt_publist_msgid;
 extern unsigned short mqtt_subscribe_msgid;
 extern uint8_t usart2_rx_status;
 extern uint8_t lock_id[17];
-
+extern DEV_CONFIG_INFO  dev_config_info;
 
 
 uint8_t gprs_reset_cnt = 0;
@@ -419,7 +419,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;				
 				
 			case 11:
-				sprintf((char*)buff, "%s%s", "bell/", lock_id);
+				sprintf((char*)buff, "%s%s", "bell/", dev_config_info.dev_id);
 				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
@@ -438,7 +438,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 				
 			case 12:
-				sprintf((char*)buff, "%s%s", "lock/", lock_id);
+				sprintf((char*)buff, "%s%s", "lock/", dev_config_info.dev_id);
 				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
 				if(1 == mqtt_rc)
 				{
@@ -458,8 +458,14 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 				
 			case 13:
-				timer_is_timeout_1ms(timer_close_lock, 0);
+//				timer_is_timeout_1ms(timer_close_lock, 0);
 				gprs_status = 255;
+			
+			break;
+			
+			case 245:
+			
+				bsp_system_reset();
 			
 			break;
 			

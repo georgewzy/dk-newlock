@@ -48,3 +48,4 @@
 .\objects\gprs.o: ..\MQTT\StackTrace.h
 .\objects\gprs.o: ..\driver\usart.h
 .\objects\gprs.o: ..\driver\timer.h
+.\objects\gprs.o: ..\app\main.h

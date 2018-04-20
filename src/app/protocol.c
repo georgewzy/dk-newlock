@@ -116,14 +116,10 @@ void protocol_analyze(void)
 void protocol_analyze1(list_node **list)
 {
 	uint8_t local_topic[50] = {0};
-	uint8_t recv_topic[50] = {0};
-	uint8_t payload[100];
-	int payloadlen = 0;
 	int list_status;
-	mqtt_msg_s *msg;
+	mqtt_msg_s *msg = NULL;
 	
-	list_status = list_is_empty(list);
-	
+	list_status = list_is_empty(list);	
 	if(list_status == 1)	
 	{	
 		msg = list_get_addr_by_status(*list ,PUBCOMP);

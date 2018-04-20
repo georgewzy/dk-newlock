@@ -64,6 +64,7 @@ uint8_t cipherText[128];
 uint8_t aesKey[16];
 
 DEV_BASIC_INFO dev_basic_info;
+DEV_CONFIG_INFO  dev_config_info;
 
 
 //电压
@@ -88,6 +89,10 @@ uint8_t lock_id[17] = {0};
 uint8_t topic_buff[100] = {0};
 uint8_t send_buff[100] = {0};
 uint8_t test_flag = 0;
+
+
+
+
 
 void heartbeat(uint32_t ms)
 {
@@ -169,21 +174,22 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 			mqtt_keep_alive_err_cnt++;
 			if(mqtt_keep_alive_err_cnt > 6)
 			{
-				
 				gprs_status = 0;
 				mqtt_keep_alive_flag = 0;
 				mqtt_keep_alive_err_cnt = 0;
 				USART_OUT(USART1, "GPRS reset\r\n");
 			}
-			keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
-			if(keep_alive_status == PINGREQ)
-			{
-				USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
+			gprs_wakeup_status = gprs_wakeup(0);
+			if(gprs_wakeup_status == 1)
+			{						
+				keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
+				if(keep_alive_status == PINGREQ)
+				{		
+					USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
+				}
 			}	
 		}
-		
 	}
-
 	
 }
 
@@ -280,14 +286,14 @@ int main(void)
 	int mqtt_stauts = 0;
 	GPRS_CONFIG gprs_info = GPRS_CONFIG_INIT;
 	MQTTPacket_connectData mqtt_data = MQTTPacket_connectData_initializer;
-
+	int gprs_wakeup_status = 0;
 	unsigned char buf[20];
 	int buflen = sizeof(buf);
 	int len = 0;
 	list_node *list_recv = NULL;
 	list_node *list_send = NULL;
 	list_node *list_test1 = NULL;
-	
+	int llll = 0;
 	bsp_init();
 
 	USART_OUT(USART1, "uart1 is ok\r\n");
@@ -296,28 +302,36 @@ int main(void)
 	while(1)
 	{	
 		
-		list_test(&list_test1);
-		
-		list_test2(&list_test1);
+//		list_test(&list_test1);
+//		
+//		list_test2(&list_test1);
 		ds_val = button_ds_get_value();
 		if(ds_val == 0)
 		{
-			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
-			MakeFile_MD5_Checksum(lock_id, 16);
-			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
-			eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, 16);
+					
+			eeprom_read_data(EEPROM_LOCK_ID_ADDR, dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
+			MakeFile_MD5_Checksum(dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
+			eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
+			eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
 			
-			gprs_info.server_ip = "118.31.69.148";
+//			memcpy(&gprs_info.server_ip, &dev_config_info.dev_ip, sizeof(dev_config_info.dev_ip));
+//			gprs_info.server_ip = "118.31.69.148";
+			gprs_info.server_ip = dev_config_info.dev_ip;
+					
+			gprs_info.server_port = atoi(dev_config_info.dev_port);
+
 //			gprs_info.server_ip = "emq.91daoke.com";
-			gprs_info.server_port = 1883;
+//			gprs_info.server_port = 1883;
 //			gprs_info.server_ip = "103.46.128.47";
 //			gprs_info.server_port = 14947;
-			mqtt_data.clientID.cstring = lock_id;
+			mqtt_data.clientID.cstring = dev_config_info.dev_id;
 			mqtt_data.keepAliveInterval = MQTT_KEEP_ALIVE_INTERVAL;
 			mqtt_data.cleansession = 1;
 			mqtt_data.username.cstring = "daoke";
 			mqtt_data.password.cstring = "DaokeEmq13245768";
 			
+			USART_OUT(USART1, "bbbbb=%s\r\n", gprs_info.server_ip);	
+			USART_OUT(USART1, "llll=%d\r\n", gprs_info.server_port);
 			USART_OUT(USART1, "mqtt_data.clientID.cstring=%s\r\n", mqtt_data.clientID.cstring);
 			
 			memset(send_buff, 0, sizeof(send_buff));
@@ -340,7 +354,8 @@ int main(void)
 			if(p1 != NULL)
 			{
 				memset(eeprom_buff, 0, sizeof(eeprom_buff));
-				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("lockid=")), sizeof(protocol_buff)-strlen("lockid="));		
+				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("lockid=")), sizeof(protocol_buff)-strlen("lockid="));	
+				eeprom_erase_data(EEPROM_LOCK_ID_ADDR, EEPROM_LOCK_ID_SIZE);
 				eeprom_write_data(EEPROM_LOCK_ID_ADDR, eeprom_buff, EEPROM_LOCK_ID_SIZE);
 				eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, EEPROM_LOCK_ID_SIZE);
 				USART_OUT(USART1, "lock_id=%s\r\n", lock_id);
@@ -351,18 +366,20 @@ int main(void)
 			if(p1 != NULL)
 			{
 				memset(eeprom_buff, 0, sizeof(eeprom_buff));
-				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("ip=")), sizeof(protocol_buff)-strlen("lockid="));		
+				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("ip=")), sizeof(protocol_buff)-strlen("lockid="));
+				eeprom_erase_data(EEPROM_IP_ADDR, EEPROM_IP_SIZE);
 				eeprom_write_data(EEPROM_IP_ADDR, eeprom_buff, EEPROM_IP_SIZE);
 				eeprom_read_data(EEPROM_IP_ADDR, lock_id, EEPROM_IP_SIZE);
 				USART_OUT(USART1, "ip=%s\r\n", lock_id);
 				memset(protocol_buff, 0, 512);
 			}
 			
-			p1 = strstr((uint8_t*)protocol_buff, "ip=");
+			p1 = strstr((uint8_t*)protocol_buff, "port=");
 			if(p1 != NULL)
 			{
 				memset(eeprom_buff, 0, sizeof(eeprom_buff));
-				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("port=")), sizeof(protocol_buff)-strlen("port="));		
+				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("port=")), sizeof(protocol_buff)-strlen("port="));
+				eeprom_erase_data(EEPROM_PORT_ADDR, EEPROM_PORT_SIZE);				
 				eeprom_write_data(EEPROM_PORT_ADDR, eeprom_buff, EEPROM_PORT_SIZE);
 				eeprom_read_data(EEPROM_PORT_ADDR, lock_id, EEPROM_PORT_SIZE);
 				USART_OUT(USART1, "port=%s\r\n", lock_id);
@@ -377,11 +394,10 @@ int main(void)
 		
 		gprs_init_task(&gprs_info, &mqtt_data);
 
-//		usart1_recv_data();
+//		usart1_recv_data();		//用此函数会出问题
 		usart2_recv_data();
 		protocol_analyze1(&list_recv);
-
-
+		
 		
 		mqtt_stauts = mqtt_client(&list_recv, &list_send, MQTTNULL);
 		if(mqtt_stauts == PINGRESP)
@@ -402,8 +418,10 @@ int main(void)
 		
 		lock_hand_close();
 		lock_self_checking();
-		lock_bell();
+		lock_find_bell();
 		lock_shake_alarm();
+		
+		iwatchdog_clear();
 		
 	}
 
