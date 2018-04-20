@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lock.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lock.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Thu Apr 19 18:50:21 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Apr 20 14:09:35 2018
 <BR><P>
 <H3>Maximum Stack Usage =       1776 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -351,6 +351,7 @@ Global Symbols
 
 <P><STRONG><a name="[80]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mqtt_subscribe_topic
+<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mqtt_connect
 <LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gprs_send_at
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;test_gprs
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart2_recv_data
@@ -2028,7 +2029,7 @@ Global Symbols
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_close_deal_1
 </UL>
 
-<P><STRONG><a name="[11b]"></a>mqtt_client</STRONG> (Thumb, 1666 bytes, Stack size 648 bytes, transport.o(i.mqtt_client))
+<P><STRONG><a name="[11b]"></a>mqtt_client</STRONG> (Thumb, 1678 bytes, Stack size 648 bytes, transport.o(i.mqtt_client))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1424<LI>Call Chain = mqtt_client &rArr; transport_sendPacketBuffer &rArr; gprs_send_at &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gprs_sleep
@@ -2062,12 +2063,13 @@ Global Symbols
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[fa]"></a>mqtt_connect</STRONG> (Thumb, 198 bytes, Stack size 248 bytes, transport.o(i.mqtt_connect))
+<P><STRONG><a name="[fa]"></a>mqtt_connect</STRONG> (Thumb, 206 bytes, Stack size 248 bytes, transport.o(i.mqtt_connect))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1024<LI>Call Chain = mqtt_connect &rArr; transport_sendPacketBuffer &rArr; gprs_send_at &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart2_recv_data
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_is_timeout_1ms
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_OUT
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;transport_sendPacketBuffer
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MQTTPacket_read
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MQTTSerialize_connect
@@ -2076,7 +2078,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gprs_init_task
 </UL>
 
-<P><STRONG><a name="[11c]"></a>mqtt_keep_alive1</STRONG> (Thumb, 162 bytes, Stack size 24 bytes, main.o(i.mqtt_keep_alive1))
+<P><STRONG><a name="[11c]"></a>mqtt_keep_alive1</STRONG> (Thumb, 170 bytes, Stack size 24 bytes, main.o(i.mqtt_keep_alive1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1448<LI>Call Chain = mqtt_keep_alive1 &rArr; mqtt_client &rArr; transport_sendPacketBuffer &rArr; gprs_send_at &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_is_timeout_1ms
@@ -2108,7 +2110,7 @@ Global Symbols
 <LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dev_to_srv_batt_voltage1
 </UL>
 
-<P><STRONG><a name="[fb]"></a>mqtt_subscribe_topic</STRONG> (Thumb, 348 bytes, Stack size 296 bytes, transport.o(i.mqtt_subscribe_topic))
+<P><STRONG><a name="[fb]"></a>mqtt_subscribe_topic</STRONG> (Thumb, 364 bytes, Stack size 296 bytes, transport.o(i.mqtt_subscribe_topic))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1072<LI>Call Chain = mqtt_subscribe_topic &rArr; transport_sendPacketBuffer &rArr; gprs_send_at &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart2_recv_data

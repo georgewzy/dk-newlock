@@ -169,9 +169,11 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 			mqtt_keep_alive_err_cnt++;
 			if(mqtt_keep_alive_err_cnt > 6)
 			{
+				
 				gprs_status = 0;
 				mqtt_keep_alive_flag = 0;
 				mqtt_keep_alive_err_cnt = 0;
+				USART_OUT(USART1, "GPRS reset\r\n");
 			}
 			keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
 			if(keep_alive_status == PINGREQ)
@@ -181,23 +183,7 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 		}
 		
 	}
-	
-//	if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 1000*10) == 0) && mqtt_keep_alive_flag == 1)
-//	{
-//		mqtt_keep_alive_err_cnt++;
-//		if(mqtt_keep_alive_err_cnt > 6)
-//		{
-//			gprs_status = 0;
-//			mqtt_keep_alive_flag = 0;
-//			mqtt_keep_alive_err_cnt = 0;
-//		}
-//		mqtt_stauts = mqtt_client(&list_recv, &list_send, PINGREQ);	
-//		if(mqtt_stauts == PINGREQ)
-//		{
-//			mqtt_keep_alive_flag = 0;
-//			USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
-//		}	
-//	}
+
 	
 }
 

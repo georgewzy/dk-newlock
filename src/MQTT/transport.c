@@ -123,6 +123,7 @@ int mqtt_connect(MQTTPacket_connectData *pdata)
 		switch(connect_status)
 		{
 			case CONNECT:
+				memset(buf, 0, sizeof(buf));
 				len = MQTTSerialize_connect(buf, buflen, pdata);		
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				connect_status = CONNACK;
@@ -484,6 +485,7 @@ int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packe
 	while(!ret)
 	{
 		usart2_recv_data();
+		memset(buf, 0, sizeof(buf));
 		mqtt_msg_tpye = MQTTPacket_read(buf, buflen, transport_getdata);
 		if(mqtt_msg_tpye > 0)
 		{			
@@ -495,6 +497,7 @@ int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packe
 			case SUBSCRIBE:
 				/* subscribe */
 				topicString.cstring = topic;
+				memset(buf, 0, sizeof(buf));
 				len = MQTTSerialize_subscribe(buf, buflen, 0, packetid, 1, &topicString, &req_qos);
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				subscribe_topic_status = 0;
@@ -885,15 +888,14 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 	mqtt_msg_s *msg = NULL;
 	
 	memset(buf, 0, sizeof(buf));
-	
-	
+		
 	list_send_status = list_is_empty(list_send);
 	
-//	if(msg_tpye != MQTTNULL)
-//	{
-//		mqtt_stauts = msg_tpye;
-//	}	
-	if(list_send_status == 1)	//不为空
+	if(msg_tpye != MQTTNULL)
+	{
+		mqtt_stauts = msg_tpye;
+	}	
+	else if(list_send_status == 1)	//不为空
 	{
 		msg = list_get_addr_by_status(*list_send, PUBLISH);
 		if(msg->status == PUBLISH)
@@ -903,16 +905,18 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 		}
 		else
 		{
+			memset(buf, 0, sizeof(buf));
 			mqtt_stauts = MQTTPacket_read(buf, buflen, transport_getdata);
 			publisher = 0;
 		}
 	}
-	else if(msg_tpye != MQTTNULL)
-	{
-		mqtt_stauts = msg_tpye;
-	}
+//	else if(msg_tpye != MQTTNULL)
+//	{
+//		mqtt_stauts = msg_tpye;
+//	}
 	else
 	{	
+		memset(buf, 0, sizeof(buf));
 		mqtt_stauts = MQTTPacket_read(buf, buflen, transport_getdata);
 		publisher = 0;
 	}
@@ -929,7 +933,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 		
 		case PUBLISH:
 			timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-			mqtt_keep_alive_flag = 0;
+//			mqtt_keep_alive_flag = 0;
 			if(publisher == 1)
 			{										
 				topicString.cstring = (*list_send)->msg.topic;	
@@ -1130,6 +1134,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 		break;
 		
 		case PINGREQ:
+			memset(buf, 0, sizeof(buf));
 			len = MQTTSerialize_pingreq(buf, buflen);
 			rc = transport_sendPacketBuffer(mysock, buf, len);
 			if(rc != -1)
