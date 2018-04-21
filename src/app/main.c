@@ -85,7 +85,7 @@ uint8_t mqtt_keep_alive_flag = 0;
 uint8_t mqtt_keep_alive_err_cnt = 0;
 
 
-//uint8_t lock_id[17] = {0};
+uint8_t lock_id[17] = {0};
 uint8_t topic_buff[100] = {0};
 uint8_t send_buff[100] = {0};
 uint8_t test_flag = 0;

@@ -39,13 +39,12 @@ extern uint8_t usart2_rx_status;
 extern uint8_t lock_id[17];
 extern DEV_CONFIG_INFO  dev_config_info;
 
-
+uint8_t mcu_reset_cnt = 0;
 uint8_t gprs_reset_cnt = 0;
 uint8_t gprs_err_cnt = 0; 	//GPRS´íÎó¼ÆÊýÆ÷
 uint8_t gprs_status = 0;	//GPRSµÄ×´Ì¬
 
-uint8_t gprs_rx_buf[512];
-uint16_t gprs_rx_cnt = 0;
+
 
 uint8_t gprs_send_at_flag = 0;	
 uint8_t gprs_rx_flag = 0;
@@ -224,6 +223,8 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 
 	while(1)
 	{
+		iwatchdog_clear();
+	
 		switch(gprs_status)
 		{
 			case 0:
