@@ -77,7 +77,7 @@ uint8_t *p2;
 
 
 
-uint8_t protocol_buff[128] = {0};
+uint8_t protocol_buff[512] = {0};
 uint8_t	eeprom_buff[128] = {0};
 
 
@@ -85,7 +85,7 @@ uint8_t mqtt_keep_alive_flag = 0;
 uint8_t mqtt_keep_alive_err_cnt = 0;
 
 
-uint8_t lock_id[17] = {0};
+//uint8_t lock_id[17] = {0};
 uint8_t topic_buff[100] = {0};
 uint8_t send_buff[100] = {0};
 uint8_t test_flag = 0;
@@ -104,7 +104,7 @@ void heartbeat(uint32_t ms)
 		memset(topic_buff, 0 ,100);
 		memset(heartbeat_buff, 0, 2);
 		
-		sprintf((char*)topic_buff,"%s%s","lockdata/", lock_id);
+		sprintf((char*)topic_buff,"%s%s","lockdata/", dev_config_info.dev_id);
 		heartbeat_buff[0] = 0x30;
 		heartbeat_buff[1] = '\0';
 		
@@ -131,7 +131,7 @@ void heartbeat1(list_node **list, uint32_t ms)
 		memset(topic_buff, 0 ,100);
 		memset(heartbeat_buff, 0, 2);
 		
-		sprintf((char*)topic_buff,"%s%s","lockdata/", lock_id);
+		sprintf((char*)topic_buff,"%s%s","lockdata/", dev_config_info.dev_id);
 		heartbeat_buff[0] = 0x30;
 		heartbeat_buff[1] = '\0';
 		
@@ -210,7 +210,7 @@ void dev_to_srv_batt_voltage(uint32_t ms)
 		memset(expressText, 0, 128);
 		memset(cipherText, 0, 128);	
 		
-		sprintf((char *)topic_buff, "%s%s", "lockdata/", (char*)lock_id);	
+		sprintf((char *)topic_buff, "%s%s", "lockdata/", (char*)dev_config_info.dev_id);	
 		sprintf((char *)expressText, "{%c%s%c:%s}",'"',"battery",'"',"20");
 		AES_Encrypt((char *)expressText, (char*)cipherText, (char*)aesKey);
 		
@@ -247,7 +247,7 @@ void dev_to_srv_batt_voltage1(list_node **list, uint32_t ms)
 		memset(expressText, 0, 128);
 		memset(cipherText, 0, 128);	
 		
-		sprintf((char *)topic_buff, "%s%s", "lockdata/", (char*)lock_id);	
+		sprintf((char *)topic_buff, "%s%s", "lockdata/", (char*)dev_config_info.dev_id);	
 		sprintf((char *)expressText, "{%c%s%c:%s}",'"',"battery",'"',"20");
 		AES_Encrypt((char *)expressText, (char*)cipherText, (char*)aesKey);
 		
@@ -314,10 +314,8 @@ int main(void)
 			eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
 			eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
 			
-//			memcpy(&gprs_info.server_ip, &dev_config_info.dev_ip, sizeof(dev_config_info.dev_ip));
-//			gprs_info.server_ip = "118.31.69.148";
-			gprs_info.server_ip = dev_config_info.dev_ip;
-					
+
+			gprs_info.server_ip = dev_config_info.dev_ip;		
 			gprs_info.server_port = atoi(dev_config_info.dev_port);
 
 //			gprs_info.server_ip = "emq.91daoke.com";
@@ -357,8 +355,8 @@ int main(void)
 				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("lockid=")), sizeof(protocol_buff)-strlen("lockid="));	
 				eeprom_erase_data(EEPROM_LOCK_ID_ADDR, EEPROM_LOCK_ID_SIZE);
 				eeprom_write_data(EEPROM_LOCK_ID_ADDR, eeprom_buff, EEPROM_LOCK_ID_SIZE);
-				eeprom_read_data(EEPROM_LOCK_ID_ADDR, lock_id, EEPROM_LOCK_ID_SIZE);
-				USART_OUT(USART1, "lock_id=%s\r\n", lock_id);
+				eeprom_read_data(EEPROM_LOCK_ID_ADDR, dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
+				USART_OUT(USART1, "lock_id=%s\r\n", dev_config_info.dev_id);
 				memset(protocol_buff, 0, 512);
 			}
 			
@@ -369,8 +367,8 @@ int main(void)
 				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("ip=")), sizeof(protocol_buff)-strlen("lockid="));
 				eeprom_erase_data(EEPROM_IP_ADDR, EEPROM_IP_SIZE);
 				eeprom_write_data(EEPROM_IP_ADDR, eeprom_buff, EEPROM_IP_SIZE);
-				eeprom_read_data(EEPROM_IP_ADDR, lock_id, EEPROM_IP_SIZE);
-				USART_OUT(USART1, "ip=%s\r\n", lock_id);
+				eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
+				USART_OUT(USART1, "ip=%s\r\n", dev_config_info.dev_ip);
 				memset(protocol_buff, 0, 512);
 			}
 			
@@ -381,8 +379,8 @@ int main(void)
 				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("port=")), sizeof(protocol_buff)-strlen("port="));
 				eeprom_erase_data(EEPROM_PORT_ADDR, EEPROM_PORT_SIZE);				
 				eeprom_write_data(EEPROM_PORT_ADDR, eeprom_buff, EEPROM_PORT_SIZE);
-				eeprom_read_data(EEPROM_PORT_ADDR, lock_id, EEPROM_PORT_SIZE);
-				USART_OUT(USART1, "port=%s\r\n", lock_id);
+				eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
+				USART_OUT(USART1, "port=%s\r\n", dev_config_info.dev_port);
 				memset(protocol_buff, 0, 512);
 			}	
 		}

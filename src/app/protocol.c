@@ -10,10 +10,10 @@
 #include "aes.h"
 #include "motor.h"
 #include "list.h"
+#include "main.h"
 
 
-
-extern uint8_t lock_id[17];
+//extern uint8_t lock_id[17];
 extern uint8_t receiveText[24];
 extern uint8_t expressText[128];  
 extern uint8_t cipherText[128];
@@ -33,7 +33,7 @@ extern uint8_t lock_bell_flag;
 //Υπ¶―
 extern uint8_t lock_shake_flag;
 
-
+extern DEV_CONFIG_INFO  dev_config_info;
 
 
 
@@ -51,7 +51,7 @@ void protocol_analyze(void)
 	{
 		USART_OUT(USART1, "AAAA=%s=%s\r\n", payload, recv_topic);
 		
-		sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+		sprintf((char*)local_topic, "%s%s", "lock/", dev_config_info.dev_id);
 		if(strncmp((char*)recv_topic, (char*)"lock/", 5)==0)
 		{	
 			USART_OUT(USART1, "topic==%s\r\n", recv_topic);
@@ -95,7 +95,7 @@ void protocol_analyze(void)
 			memset(payload, 0, 100);	
 		}
 		
-		sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+		sprintf((char*)local_topic, "%s%s", "lock/", dev_config_info.dev_id);
 		if(strncmp((char*)recv_topic,(char *)"bell/", 5)==0)
 		{
 			timer_is_timeout_1ms(timer_heartbeat, 0);
@@ -129,7 +129,7 @@ void protocol_analyze1(list_node **list)
 			
 			USART_OUT(USART1, "topic==%s\r\n", msg->topic);
 			list_travese(list);
-			sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+			sprintf((char*)local_topic, "%s%s", "lock/", dev_config_info.dev_id);
 			if(strncmp((char*)msg->topic, (char*)"lock/", 5)==0)
 			{					
 //				timer_is_timeout_1ms(timer_heartbeat, 0);
@@ -166,7 +166,7 @@ void protocol_analyze1(list_node **list)
 				}				
 			}
 			
-			sprintf((char*)local_topic, "%s%s", "lock/", lock_id);
+			sprintf((char*)local_topic, "%s%s", "lock/", dev_config_info.dev_id);
 			if(strncmp((char*)msg->topic, (char*)"bell/", 5)==0)
 			{
 //				timer_is_timeout_1ms(timer_heartbeat, 0);

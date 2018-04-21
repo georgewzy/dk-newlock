@@ -52,3 +52,4 @@
 .\objects\protocol.o: ..\driver\timer.h
 .\objects\protocol.o: ..\tplib\aes.h
 .\objects\protocol.o: ..\driver\motor.h
+.\objects\protocol.o: ..\app\main.h

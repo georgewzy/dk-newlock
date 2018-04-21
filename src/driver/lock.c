@@ -6,16 +6,17 @@
 #include "usart.h"
 #include "button.h"
 #include "transport.h"
+#include "main.h"
 
 extern uint16_t mqtt_publist_msgid;
 extern uint8_t receiveText[24];
 extern uint8_t expressText[128];  
 extern uint8_t cipherText[128];
 extern uint8_t aesKey[16];
-extern uint8_t lock_id[17];
+//extern uint8_t lock_id[17];
 extern uint8_t topic_buff[100];
 extern uint8_t send_buff[100];
-
+extern DEV_CONFIG_INFO  dev_config_info;
 
 
 uint8_t lock_open_err_flag = 0;
@@ -202,7 +203,7 @@ void lock_close_deal_1(list_node **list)
 				memset(expressText, 0, 128);
 				memset(cipherText, 0, 128);
 				
-				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
@@ -245,7 +246,7 @@ void lock_close_deal_1(list_node **list)
 				memset(expressText, 0, 128);
 				memset(cipherText, 0, 128);
 				
-				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
@@ -325,7 +326,7 @@ void lock_open_deal_1(list_node **list)
 				memset(expressText, 0, 128);
 				memset(cipherText, 0, 128);
 				
-				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 				sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
@@ -369,7 +370,7 @@ void lock_open_deal_1(list_node **list)
 				memset(expressText, 0, 128);
 				memset(cipherText, 0, 128);
 				
-				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
 				AES_Encrypt((char*)expressText, (char*)cipherText, (char*)aesKey);
 			
@@ -445,7 +446,7 @@ void lock_close_deal(void)
 				memset(expressText, 0, 128);
 				memset(cipherText, 0, 128);
 				
-				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
@@ -476,7 +477,7 @@ void lock_close_deal(void)
 			memset(expressText, 0, 128);
 			memset(cipherText, 0, 128);
 			
-			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
 			AES_Encrypt((char*)expressText, (char*)cipherText, (char*)aesKey);
 		
@@ -529,7 +530,7 @@ void lock_open_deal(void)
 				memset(expressText, 0, 128);
 				memset(cipherText, 0, 128);
 				
-				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 				sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
@@ -559,7 +560,7 @@ void lock_open_deal(void)
 			memset(topic_buff, 0, 100);
 			memset(expressText, 0, 128);
 			memset(cipherText, 0, 128);
-			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)lock_id);
+			sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"1");
 			AES_Encrypt((char*)expressText, cipherText, aesKey);
 			
