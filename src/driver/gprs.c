@@ -173,7 +173,12 @@ uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t ti
 	
 		usart2_rx_status = 1;	//数据未处理 不在接收数据
 		USART_OUT(USART1, usart2_rx_buff.pdata);
-
+		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
+		{
+			res = 0;
+			gprs_status = 0;
+			
+		}
 		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
 		{
 			res = 0;				//监测到正确的应答数据

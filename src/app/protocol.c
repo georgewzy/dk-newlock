@@ -64,8 +64,8 @@ void protocol_analyze(void)
 			strncpy((char*)receiveText, (char*)payload, payloadlen);
 			AES_Decrypt(expressText, receiveText, aesKey);
 			
-			USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
-			USART_OUT(USART1, "expressText=%s\r\n", expressText);	
+//			USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
+//			USART_OUT(USART1, "expressText=%s\r\n", expressText);	
 			if(*expressText == 0x31)
 			{
 //				timer_is_timeout_1ms(timer_open_lock, 0);
@@ -122,7 +122,7 @@ void protocol_analyze1(list_node **list)
 	list_status = list_is_empty(list);	
 	if(list_status == 1)	
 	{	
-		msg = list_get_addr_by_status(*list ,PUBCOMP);
+		msg = list_get_addr_by_status(*list, PUBCOMP);
 		if(msg->status == PUBCOMP)
 		{	
 			timer_is_timeout_1ms(timer_heartbeat, 0);
@@ -139,9 +139,9 @@ void protocol_analyze1(list_node **list)
 				strncpy((char*)receiveText, (char*)msg->payload, msg->payloadlen);
 				AES_Decrypt(expressText, receiveText, aesKey);
 				
-				USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
-				USART_OUT(USART1, "expressText=%s\r\n", expressText);
-				USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
+//				USART_OUT(USART1, "receiveText=%s\r\n", receiveText);
+//				USART_OUT(USART1, "expressText=%s\r\n", expressText);
+//				USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
 				if(*expressText == 0x31)
 				{
 	//				timer_is_timeout_1ms(timer_open_lock, 0);
@@ -175,7 +175,7 @@ void protocol_analyze1(list_node **list)
 				lock_bell_flag = 1;
 			}
 			
-			list_de_by_elem(list, msg->msg_id);
+			list_de_by_msgid(list, msg->msg_id);
 			list_travese(list);
 		}
 	}

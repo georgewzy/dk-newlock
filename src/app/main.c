@@ -302,9 +302,9 @@ int main(void)
 	while(1)
 	{	
 		
-//		list_test(&list_test1);
-//		
-//		list_test2(&list_test1);
+		list_test(&list_test1);
+		
+		list_test2(&list_test1);
 		ds_val = button_ds_get_value();
 		if(ds_val == 0)
 		{
@@ -314,7 +314,6 @@ int main(void)
 			eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
 			eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
 			
-
 			gprs_info.server_ip = dev_config_info.dev_ip;		
 			gprs_info.server_port = atoi(dev_config_info.dev_port);
 
@@ -392,8 +391,8 @@ int main(void)
 		
 		gprs_init_task(&gprs_info, &mqtt_data);
 
-//		usart1_recv_data();		//用此函数会出问题
-		usart2_recv_data();
+//		usart1_recv_data();		
+		usart2_recv_data();	
 		protocol_analyze1(&list_recv);
 		
 		
@@ -405,16 +404,16 @@ int main(void)
 			USART_OUT(USART1, "mqtt_keep_alive recv ok\r\n");
 		}		
 		
-		mqtt_keep_alive1(list_recv, list_send, PINGREQ);
+		mqtt_keep_alive1(list_recv, list_send, PINGREQ);	//保持在线
 		
 
-		lock_open_deal_1(&list_send);
-		lock_close_deal_1(&list_send);
-		dev_to_srv_batt_voltage1(&list_send, BATT_VOLTAGE);	
-		heartbeat1(&list_send, HEARTBEAT);
+		lock_open_deal_1(&list_send);	//开锁处理
+		lock_close_deal_1(&list_send);	//关锁处理	
+		dev_to_srv_batt_voltage1(&list_send, BATT_VOLTAGE);	//电池电压信息
+		heartbeat1(&list_send, HEARTBEAT);	//心跳
 		
 		
-		lock_hand_close();
+		lock_hand_close();	//手动关锁
 		lock_self_checking();
 		lock_find_bell();
 		lock_shake_alarm();

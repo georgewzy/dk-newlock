@@ -79,24 +79,53 @@ void list_travese(list_node **p_head)
 {
 	int size = 0;
 	list_node *tmp = *p_head;
+	if(NULL == tmp)
+	{
+		USART_OUT(USART1, "list_travese list is NULL =%d\r\n", p_head);
+	}
+	else
+	{
+		USART_OUT(USART1, "list_travese_p_head =%d\r\n", p_head);
+		USART_OUT(USART1, "list_travese_AAp_head =%d\r\n", *p_head);
+		while(NULL != tmp)
+		{		
+			size++;
+			USART_OUT(USART1, "list_travese_tmp=%d\r\n", tmp);
+			USART_OUT(USART1, "p_head->msg.payload=%s\r\n", tmp->msg.payload);
+			USART_OUT(USART1, "p_head->msg.topic=%s\r\n", tmp->msg.topic);
+			USART_OUT(USART1, "p_head->msg.payloadlen=%d\r\n", tmp->msg.payloadlen);
+			USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", tmp->msg.msg_id);
+			USART_OUT(USART1, "p_head->msg.status=%d\r\n", tmp->msg.status);
+			USART_OUT(USART1, "p_head->next=%d\r\n", tmp->next);
+			tmp = tmp->next;
+		}
+	}
 	
-	USART_OUT(USART1, "list_travese p_head =%d\r\n", p_head);
-	USART_OUT(USART1, "list_travese AAp_head =%d\r\n", *p_head);
+	USART_OUT(USART1, "list_travese_size=====%d\r\n", size);
+}
+
+void list_send_travese(list_node **p_head)
+{
+	int size = 0;
+	list_node *tmp = *p_head;
+	
+	USART_OUT(USART1, "list_send_travese_p_head1 =%d\r\n", p_head);
+	USART_OUT(USART1, "list_send_travese_AAp_head1 =%d\r\n", *p_head);
 	while(NULL != tmp)
 	{
 		size++;
-		USART_OUT(USART1, "p_head->msg.payload=%s\r\n", tmp->msg.payload);
-		USART_OUT(USART1, "p_head->msg.topic=%s\r\n", tmp->msg.topic);
-		USART_OUT(USART1, "p_head->msg.payloadlen=%d\r\n", tmp->msg.payloadlen);
-		USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", tmp->msg.msg_id);
-		USART_OUT(USART1, "p_head->msg.status=%d\r\n", tmp->msg.status);
-
+		USART_OUT(USART1, "send_list_travese_tmp =%d\r\n", tmp);
+		USART_OUT(USART1, "send_p_head->msg.payload=%s\r\n", tmp->msg.payload);
+		USART_OUT(USART1, "send_p_head->msg.topic=%s\r\n", tmp->msg.topic);
+		USART_OUT(USART1, "send_p_head->msg.payloadlen=%d\r\n", tmp->msg.payloadlen);
+		USART_OUT(USART1, "send_p_head->msg.msg_id=%d\r\n", tmp->msg.msg_id);
+		USART_OUT(USART1, "send_p_head->msg.status=%d\r\n", tmp->msg.status);
+		USART_OUT(USART1, "send_p_head->next=%d\r\n", tmp->next);
 		tmp = tmp->next;
 	}
 	
-	USART_OUT(USART1, "list_travese size=====%d\r\n", size);
+	USART_OUT(USART1, "list_send_travese_size=====%d\r\n", size);
 }
-
 
 
 void list_clear(list_node *p_head)
@@ -156,6 +185,7 @@ void list_insert_last(list_node **p_head, mqtt_msg_s m_data)
 	p_insert = (list_node *)malloc(sizeof(list_node));
 	if(p_insert == NULL)
 	{
+		USART_OUT(USART1, "p_insert_return\r\n");
 		return;
 	}
 	memset(p_insert, 0, sizeof(list_node));
@@ -165,6 +195,7 @@ void list_insert_last(list_node **p_head, mqtt_msg_s m_data)
 	if(NULL == *p_head)
 	{			
 		*p_head = p_insert;	
+//		p_insert->next = NULL;	//20180423ÍíÉÏÌí¼Ó
 	}
 	else
 	{	
@@ -205,21 +236,24 @@ void list_de_last(list_node **p_head)
 	}	
 }
 
-void list_de_by_elem(list_node **p_head, int msg_id)
+void list_de_by_msgid(list_node **p_head, int msg_id)
 {
 	list_node *tmp_node = *p_head;
 	list_node *cur_node = NULL;
 	
-	if(p_head == NULL)
+	if(tmp_node == NULL)
 	{
+		USART_OUT(USART1, "list_de_by_msgid_return\r\n");
 		return;
 	}
 	else
 	{
 		if(tmp_node->msg.msg_id == msg_id)
 		{
-			*p_head = tmp_node->next;
+			USART_OUT(USART1, "list_de_by_elem333=%d\r\n", tmp_node->msg.msg_id);
+			*p_head = (*p_head)->next;
 			free(tmp_node);
+			USART_OUT(USART1, "list_de_by_elem111=%d\r\n", tmp_node->msg.msg_id);
 		}
 		else
 		{
@@ -230,13 +264,16 @@ void list_de_by_elem(list_node **p_head, int msg_id)
 				if(cur_node->msg.msg_id == msg_id)
 				{
 					tmp_node->next = cur_node->next;
-					free(tmp_node);
+//					free(tmp_node);
+					free(cur_node);
+					USART_OUT(USART1, "list_de_by_elem222=%d\r\n", tmp_node->msg.msg_id);
 				}
 				tmp_node = tmp_node->next;		
 			}		
 		}
 	}
 }
+
 
 void list_de_by_elem1(list_node *p_head, int msg_id)
 {
@@ -291,7 +328,7 @@ mqtt_msg_s *list_get_addr_by_msgid(list_node *p_head, int msg_id)
 	
 	if(p_head->msg.msg_id == msg_id)
 	{
-		USART_OUT(USART1, "msg=%d=list_get_elem_addr=%d\r\n", msg_id, &(p_head->msg));
+		USART_OUT(USART1, "msg_id=%d=list_get_addr_by_msgid=%d\r\n", msg_id, &(p_head->msg));
 	}
 	
 	return &(p_head->msg);
@@ -317,7 +354,7 @@ mqtt_msg_s *list_get_addr_by_status(list_node *p_head, int status)
 	
 	if(p_head->msg.status == status)
 	{
-		USART_OUT(USART1, "status=%d=list_get_elem_addr=%d\r\n", status, &(p_head->msg));
+		USART_OUT(USART1, "status=%d===list_get_addr_by_status=%d\r\n", status, &(p_head->msg));
 	}
 	
 	return &(p_head->msg);
@@ -347,6 +384,7 @@ int list_modify_elem(list_node **p_node, int msg_id, int status)
 	if(p_head->msg.msg_id == msg_id)
 	{
 		p_head->msg.status = status; 
+		USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", p_head->msg.msg_id);
 		USART_OUT(USART1, "p_head->msg.status=%d\r\n", p_head->msg.status);
 		USART_OUT(USART1, "list_get_elem_addr=%d=%d\r\n", msg_id, &(p_head->msg));
 	}
@@ -370,7 +408,7 @@ mqtt_msg_s *list_find_min_val(list_node **p_head)
 		temp = temp->next;
 	}
 	
-	USART_OUT(USART1, "list min val=%d\r\n", min->msg.msg_id);
+	USART_OUT(USART1, "list_min_val=%d\r\n", min->msg.msg_id);
 	
 	return &(min->msg);
 }
@@ -384,7 +422,6 @@ void l_test(char **p)
 	
 	b = (char*)malloc(sizeof(char));
 	
-//	p = b;
 	
 }
 
@@ -403,6 +440,7 @@ void list_test(list_node **list)
 	mqtt_msg_s *mqtt_msg6;
 	mqtt_msg_s *mqtt_msg7;
 	mqtt_msg_s *mqtt_msg8;
+	mqtt_msg_s *mqtt_msg9;
 	
 	memset(&mqtt_msg, 0, sizeof(mqtt_msg_s));
 	memset(&mqtt_msg1, 0, sizeof(mqtt_msg_s));
@@ -428,7 +466,7 @@ void list_test(list_node **list)
 //	mqtt_msg2.payload = b;
 	memcpy(mqtt_msg2.payload, b, 3);
 	mqtt_msg2.payloadlen = 3;
-	mqtt_msg2.msg_id = 2;
+	mqtt_msg2.msg_id = 222;
 	mqtt_msg2.status = 33;
 	
 //	mqtt_msg3.payload = c;
@@ -469,6 +507,8 @@ void list_test(list_node **list)
 	list_travese(list);
 	size = list_size(*list);
 	
+	
+	
 	mqtt_msg6 = list_get_addr_by_status(*list, 55);
 	USART_OUT(USART1, "mqtt_msg6->status=%d\r\n", mqtt_msg6->status);
 	USART_OUT(USART1, "mqtt_msg6->payload=%s\r\n", mqtt_msg6->payload);
@@ -477,6 +517,10 @@ void list_test(list_node **list)
 	mqtt_msg8 = list_find_min_val(list);
 	USART_OUT(USART1, "mqtt_msg8->msg_id=%d\r\n", mqtt_msg8->msg_id);
 	USART_OUT(USART1, "mqtt_msg8->payload=%s\r\n", mqtt_msg8->payload);
+	
+	mqtt_msg9 = list_get_addr_by_msgid(*list, 222);
+	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
+	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
 	
 	size = list_size(*list);
 	
@@ -534,8 +578,10 @@ void list_test2(list_node **list)
 {
 	int size = 0;
 	mqtt_msg_s mqtt_msg5;
-	char e[55]="eee";
 	mqtt_msg_s *mqtt_msg8;
+	mqtt_msg_s *mqtt_msg9;
+	char e[55]="eee";
+	
 	
 	
 	memcpy(mqtt_msg5.payload, e, 3);
@@ -554,6 +600,9 @@ void list_test2(list_node **list)
 	USART_OUT(USART1, "mqtt_msg8->payload=%s\r\n", mqtt_msg8->payload);
 
 	
+	mqtt_msg9 = list_get_addr_by_msgid(*list, 222);
+	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
+	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
 }
 
 
