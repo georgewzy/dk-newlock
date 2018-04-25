@@ -15,6 +15,7 @@ enum timer
 	timer_bell,
 	timer_lock_self_checking,
 	timer_batt,
+	timer_send_list_status,
 	timer_mqtt_publist_timeout,
 	timer_mqtt_subscribe_topic_timeout,
 	timer_mqtt_subscribe_timeout,

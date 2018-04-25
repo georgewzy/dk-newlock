@@ -121,6 +121,7 @@ void heartbeat(uint32_t ms)
 	}
 }
 
+
 void heartbeat1(list_node **list, uint32_t ms)
 {
 	int mqtt_pub = 0;
@@ -293,11 +294,16 @@ int main(void)
 	list_node *list_recv = NULL;
 	list_node *list_send = NULL;
 	list_node *list_test1 = NULL;
-	int llll = 0;
+
+	
+	
 	bsp_init();
 
 	USART_OUT(USART1, "uart1 is ok\r\n");
 
+	
+	
+	
 	
 	while(1)
 	{	

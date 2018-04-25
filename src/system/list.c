@@ -361,7 +361,7 @@ mqtt_msg_s *list_get_addr_by_status(list_node *p_head, int status)
 }
 
 
-int list_modify_elem(list_node **p_node, int msg_id, int status)
+int list_modify_status(list_node **p_node, int msg_id, int status)
 {
 	list_node *p_head;
 	p_head = *p_node;
@@ -391,6 +391,39 @@ int list_modify_elem(list_node **p_node, int msg_id, int status)
 	
 	return 1;
 }
+
+
+int list_modify_timer_id(list_node **p_node, int msg_id, int timer_id)
+{
+	list_node *p_head;
+	p_head = *p_node;
+	
+	if(NULL == p_head)
+	{
+		return NULL;
+	}
+	
+	while((p_head->msg.msg_id  != msg_id) && (NULL != p_head->next))//判断是否到链表的尾部，以及存在要找的元素
+	{
+		p_head = p_head->next;
+	}
+	
+	if((p_head->msg.msg_id != msg_id) && (p_head != NULL))//未找到
+	{
+		return NULL;
+	}
+	
+	if(p_head->msg.msg_id == msg_id)
+	{
+		p_head->msg.timer_id = timer_id; 
+		USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", p_head->msg.msg_id);
+		USART_OUT(USART1, "p_head->msg.status=%d\r\n", p_head->msg.status);
+		USART_OUT(USART1, "list_get_elem_addr=%d=%d\r\n", msg_id, &(p_head->msg));
+	}
+	
+	return 1;
+}
+
 
 mqtt_msg_s *list_find_min_val(list_node **p_head)
 {

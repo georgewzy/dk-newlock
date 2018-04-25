@@ -48,6 +48,7 @@ typedef struct
 	unsigned char dup;
 	int qos;
 	int status;
+	int timer_id;
 } mqtt_msg_s;
 
 

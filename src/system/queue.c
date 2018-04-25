@@ -14,26 +14,26 @@ bool queue_init(sp_queue *que, int maxsize)
 {
 	int i= 0; 
 	
+	
+	
+//	que->buff = (char**)malloc(sizeof(char*)*maxsize);
+// 	for(i=0; i<maxsize; i++)
+//	{
+//		que->buff[i] = (char*)malloc(sizeof(char)*100);
+//		USART_OUT(USART1, "que->buff[%d]=%d\r\n", i, que->buff[i]);
+//		if(que->buff[i] == NULL)
+//		{
+//			return false;
+//		}
+//	}
+	
+	
 	que->data = (char*)malloc(sizeof(char)*maxsize);
 	
-	que->buff = (char**)malloc(sizeof(char*)*maxsize);
- 	for(i=0; i<maxsize; i++)
+	if(que->data == NULL)
 	{
-		que->buff[i] = (char*)malloc(sizeof(char)*100);
-		USART_OUT(USART1, "que->buff[%d]=%d\r\n", i, que->buff[i]);
-		if(que->buff[i] == NULL)
-		{
-			return false;
-		}
+		return false;
 	}
-	
-	
-//	que->buff = (char**)malloc(sizeof(char*) * maxsize);
-	
-//	if(que->buff == NULL)
-//	{
-//		return false;
-//	}
 	que->front = que->rear = 0;
 	que->size = maxsize;
 	
@@ -76,7 +76,6 @@ bool queue_full(sp_queue *que)
 
 bool queue_en(sp_queue *que, char *val)
 {
-	
 	if(!queue_full(que))
 	{
 //		*(que->buff + que->rear) = val;

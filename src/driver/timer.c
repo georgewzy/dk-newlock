@@ -9,24 +9,17 @@
 volatile uint32_t g_timer_cnt[(uint8_t)timer_max] = {0};
 volatile uint32_t g_timeout_cnt = 0;
 
-/*
-*Function: timer2_config      
-*Description: ???2???  
-*Calls: ?  
-*Data Accessed: ?  
-*Data Updated: ?    
-*Input: ?
-*Output: ?
-*Return: ?     
-*Others: ?    
-*/
-void timer2_init(u16 arr, u16 psc)
+volatile uint32_t g_timer_byte_cnt[5][5] = {0};
+
+
+
+void timer2_init(uint16_t arr, uint16_t psc)
 {
 
 	TIM_TimeBaseInitTypeDef tim_init_structure;
 	uint16_t cnt = 1000;
 
-	TIM_DeInit(TIM2); 
+	TIM_DeInit(TIM2);  
     tim_init_structure.TIM_CounterMode = TIM_CounterMode_Up;
     tim_init_structure.TIM_ClockDivision = TIM_CKD_DIV1;
     tim_init_structure.TIM_Period = arr;			//??????=(TIM_Prescaler+1)* (TIM_Period+1)/FLK
@@ -40,17 +33,6 @@ void timer2_init(u16 arr, u16 psc)
 }
 
 
-/*
-*Function: TIM2_IRQHandler      
-*Description: ???2??????
-*Calls: 
-*Data Accessed:  
-*Data Updated: g_tim_cnt   
-*Input: ?
-*Output: ?
-*Return: ??TRUE ??FALSH    
-*Others: ?    
-*/
 void TIM2_IRQHandler(void)
 {
 	uint16_t i = 0;
@@ -140,7 +122,13 @@ uint8_t timer_is_timeout_1ms(uint8_t type, uint32_t count)
 }
 
 
-
+uint8_t timer_timer_type_1ms(uint8_t type, uint32_t count)
+{
+	int status = 0;
+	
+	
+	
+}
 
 
 

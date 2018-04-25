@@ -279,7 +279,7 @@ int mqtt_publish(unsigned char* topic, unsigned char* payload, int payload_len, 
 					ret = 1;
 					status = 1;
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//					timer_is_timeout_1ms(timer_heartbeat, 0);
+
 					USART_OUT(USART1, "PUBCOMP=%d\r\n", msgid);	
 					
 					gprs_sleep_status = gprs_sleep();
@@ -393,7 +393,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 							if(rc != -1)
 							{
 								timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//								timer_is_timeout_1ms(timer_heartbeat, 0);
+
 								gprs_sleep_status = gprs_sleep();
 								if(gprs_sleep_status == 1)
 								{
@@ -421,7 +421,7 @@ int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen
 						if(rc != -1)
 						{					
 							timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//							timer_is_timeout_1ms(timer_heartbeat, 0);
+
 							gprs_sleep_status = gprs_sleep();
 							if(gprs_sleep_status == 1)
 							{
@@ -887,6 +887,7 @@ int mqtt_publish_qos2(list_node **list, unsigned char* topic, unsigned char* pay
 
 int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 {
+	int i = 0;
 	int size = 0;
 	int rc = 0;
 	int len = 0;
@@ -906,46 +907,68 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 	int gprs_sleep_status = 0;
 	int gprs_wakeup_status = 0;
 	int publisher = 0;
-	int list_send_status = 0;
+	int list_send_empty_status = 0;
+	int list_send_size = 0;
 	mqtt_msg_s mqtt_msg;
 	mqtt_msg_s *msg1 = NULL;
-
+	
 	
 	memset(buf, 0, sizeof(buf));
 	memset(&mqtt_msg, 0, sizeof(mqtt_msg));	
 	
-	list_send_status = list_is_empty(list_send);	//链表不为空
 	if(msg_tpye != MQTTNULL)
 	{
 		mqtt_stauts = msg_tpye;
 	}	
-	else if(list_send_status == 1)	//不为空
+	else 	//不为空
 	{
-		
-		
-		msg1 = list_get_addr_by_status(*list_send, PUBLISH);	//找到状态为PUBLISH的节点
-//		if(msg1 != NULL)
+		list_send_empty_status = list_is_empty(list_send);	
+		if(list_send_empty_status == 1)//链表不为空
 		{
-			if(msg1->status == PUBLISH)
+			msg1 = list_get_addr_by_status(*list_send, PUBLISH);	//找到状态为PUBLISH的节点
+			if(msg1 != NULL)	//找到状态为PUBLISH的节点
 			{
-				publisher = 1;
-				mqtt_stauts = msg1->status;
+				if(msg1->status == PUBLISH)
+				{
+					publisher = 1;
+					mqtt_stauts = msg1->status;
+//					list_modify_status(list_send, msg1->msg_id, );
+				}
 			}
-			else
+			else	//找不到状态为PUBLISH的节点
 			{
 				memset(buf, 0, sizeof(buf));
 				mqtt_stauts = MQTTPacket_read(buf, buflen, transport_getdata);
-				publisher = 0;
+				publisher = 0;	
 			}
+			
+			
+			list_send_size = list_size(*list_send);		
+			while(*list_send != NULL)
+			{
+				
+				if(timer_is_timeout_1ms(timer_send_list_status, 1000*10))
+				{
+					if(msg1->status == PUBREC)
+					{
+						list_modify_status(list_send, msg1->msg_id, PUBLISH);
+						list_send_travese(list_send);
+					}
+				}
+				*list_send = (*list_send)->next;
+			}
+			
+
 		}
+		else
+		{
+			memset(buf, 0, sizeof(buf));
+			mqtt_stauts = MQTTPacket_read(buf, buflen, transport_getdata);
+			publisher = 0;		
+		}
+	}
 	
-	}
-	else
-	{	
-		memset(buf, 0, sizeof(buf));
-		mqtt_stauts = MQTTPacket_read(buf, buflen, transport_getdata);
-		publisher = 0;
-	}
+	
 	
 	switch(mqtt_stauts)
 	{
@@ -963,7 +986,8 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			{										
 				topicString.cstring = (*list_send)->msg.topic;				
 				memset(buf, 0, sizeof(buf));
-				len = MQTTSerialize_publish((unsigned char*)buf ,buflen, 0, (*list_send)->msg.qos, 0, (*list_send)->msg.msg_id, topicString, (unsigned char*)(*list_send)->msg.payload, (*list_send)->msg.payloadlen);
+//				len = MQTTSerialize_publish((unsigned char*)buf ,buflen, 0, (*list_send)->msg.qos, 0, (*list_send)->msg.msg_id, topicString, (unsigned char*)(*list_send)->msg.payload, (*list_send)->msg.payloadlen);
+				len = MQTTSerialize_publish((unsigned char*)buf ,buflen, 0, msg1->qos, 0, msg1->msg_id, topicString, (unsigned char*)msg1->payload, msg1->payloadlen);
 				if(len > 0)
 				{			
 					gprs_wakeup_status = gprs_wakeup(0);
@@ -973,10 +997,10 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 						rc = transport_sendPacketBuffer(mysock, buf, len);	//publisher	publish
 						if(rc != -1)
 						{
-							USART_OUT(USART1, "AAAAAAAAAA=%d\r\n", (*list_send)->msg.msg_id);
-							list_modify_elem(list_send, (*list_send)->msg.msg_id, PUBREC);
+							USART_OUT(USART1, "AAAAAAAAAA=%d\r\n", msg1->msg_id);
+							list_modify_status(list_send, msg1->msg_id, PUBREC);
 							list_send_travese(list_send);
-							USART_OUT(USART1, "publisher PUBLISH=%d\r\n", (*list_send)->msg.msg_id);
+							USART_OUT(USART1, "publisher PUBLISH=%d\r\n", msg1->msg_id);
 						}	
 					}			
 				}
@@ -1049,8 +1073,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 						{	
 							USART_OUT(USART1, "subscriber PUBREC=%d\r\n", msgid);
 						}	
-					}	
-					
+					}		
 				}	
 			}
 		break;
@@ -1060,7 +1083,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			if(rc == 1)
 			{		
 				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//				timer_is_timeout_1ms(timer_heartbeat, 0);
+
 				USART_OUT(USART1, " PUBACK=%d\r\n", msgid);					
 			}			
 		break;
@@ -1076,7 +1099,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				if(rc != -1)
 				{
-					list_modify_elem(list_send, msgid, PUBREL);
+					list_modify_status(list_send, msgid, PUBREL);
 //					list_travese(list_send);			
 					USART_OUT(USART1, "publisher PUBREL=%d\r\n", msgid);
 				}	
@@ -1094,12 +1117,12 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				rc = transport_sendPacketBuffer(mysock, buf, len);	//subscriber pubcomp
 				if(rc != -1)
 				{	
-					list_modify_elem(list_recv, msgid, PUBCOMP);
+					list_modify_status(list_recv, msgid, PUBCOMP);
 //					list_travese(list_recv);
 					USART_OUT(USART1, "subscriber PUBCOMP=%d\r\n", msgid);
 					
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//					timer_is_timeout_1ms(timer_heartbeat, 0);
+
 					
 //					list_empty_status = list_is_empty(list_recv);
 					
@@ -1117,7 +1140,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			if(rc == 1)
 			{		
 				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//				timer_is_timeout_1ms(timer_heartbeat, 0);
+
 				USART_OUT(USART1, "publisher PUBCOMP=%d\r\n", msgid);
 				
 				msg1 = list_get_addr_by_msgid(*list_send ,msgid);
@@ -1311,16 +1334,14 @@ int mqtt_client1(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 					}	
 				}	
 				else if(qos == 1)
-				{
-			
-					
+				{	
 					memset(buf, 0, sizeof(buf));
 					len = MQTTSerialize_puback(buf, buflen, msgid);
 					rc = transport_sendPacketBuffer(mysock, buf, len);
 					if(rc != -1)
 					{
 						timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//						timer_is_timeout_1ms(timer_heartbeat, 0);
+
 	//					gprs_sleep_status = gprs_sleep();
 	//					if(gprs_sleep_status == 1)
 	//					{
@@ -1339,7 +1360,7 @@ int mqtt_client1(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			if(rc == 1)
 			{		
 				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//				timer_is_timeout_1ms(timer_heartbeat, 0);
+
 				USART_OUT(USART1, " PUBCOMP=%d\r\n", msgid);	
 				
 //				gprs_sleep_status = gprs_sleep();
@@ -1369,7 +1390,7 @@ int mqtt_client1(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				if(rc != -1)
 				{
-					list_modify_elem(list_send, msgid, PUBREL);
+					list_modify_status(list_send, msgid, PUBREL);
 //					list_travese(list_send);
 					
 					USART_OUT(USART1, "publisher PUBREL=%d\r\n", msgid);
@@ -1389,11 +1410,10 @@ int mqtt_client1(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				rc = transport_sendPacketBuffer(mysock, buf, len);
 				if(rc != -1)
 				{	
-					list_modify_elem(list_recv, msgid, PUBCOMP);
+					list_modify_status(list_recv, msgid, PUBCOMP);
 //					list_travese(list_recv);
 					
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//					timer_is_timeout_1ms(timer_heartbeat, 0);
 					
 					gprs_sleep_status = gprs_sleep();
 					if(gprs_sleep_status == 1)
@@ -1411,10 +1431,9 @@ int mqtt_client1(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			if(rc == 1)
 			{		
 				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//				timer_is_timeout_1ms(timer_heartbeat, 0);
+
 				USART_OUT(USART1, "publisher PUBCOMP=%d\r\n", msgid);
-				
-				
+							
 				msg = list_get_addr_by_msgid(*list_send ,msgid);
 				if(msg->msg_id == msgid)
 				{
@@ -1581,7 +1600,7 @@ int mqtt_subscribe11(unsigned char* topic, unsigned char *payload, int *payloadl
 				if(rc != -1)
 				{
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//					timer_is_timeout_1ms(timer_heartbeat, 0);
+
 //					gprs_sleep_status = gprs_sleep();
 //					if(gprs_sleep_status == 1)
 //					{
@@ -1620,7 +1639,7 @@ int mqtt_subscribe11(unsigned char* topic, unsigned char *payload, int *payloadl
 					if(rc != -1)
 					{					
 						timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//						timer_is_timeout_1ms(timer_heartbeat, 0);
+
 	//					gprs_sleep_status = gprs_sleep();
 	//					if(gprs_sleep_status == 1)
 	//					{
@@ -1642,7 +1661,7 @@ int mqtt_subscribe11(unsigned char* topic, unsigned char *payload, int *payloadl
 				if(rc != -1)
 				{					
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//					timer_is_timeout_1ms(timer_heartbeat, 0);
+
 //					gprs_sleep_status = gprs_sleep();
 //					if(gprs_sleep_status == 1)
 //					{
@@ -1760,7 +1779,7 @@ int mqtt_publist11(unsigned char* topic, unsigned char* payload, int payload_len
 					ret = 1;
 					status = 1;
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-//					timer_is_timeout_1ms(timer_heartbeat, 0);
+
 					USART_OUT(USART1, "PUBCOMP\r\n");	
 //					gprs_sleep_status = gprs_sleep();
 //					if(gprs_sleep_status == 1)

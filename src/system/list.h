@@ -33,6 +33,12 @@ mqtt_msg_s *list_get_addr_by_status(list_node *p_head, int status);
 mqtt_msg_s *list_find_min_val(list_node **p_head);
 void list_test(list_node **list);
 void list_test2(list_node **list);
-int list_modify_elem(list_node **p_node, int msg_id, int status);
+int list_modify_status(list_node **p_node, int msg_id, int status);
+int list_modify_timer_id(list_node **p_node, int msg_id, int timer_id);
+
+
+
+
+
 
 #endif
