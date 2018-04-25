@@ -56,7 +56,7 @@ void protocol_analyze(void)
 		{	
 			USART_OUT(USART1, "topic==%s\r\n", recv_topic);
 					
-			timer_is_timeout_1ms(timer_heartbeat, 0);
+//			timer_is_timeout_1ms(timer_heartbeat, 0);
 
 			memset(receiveText , 0, 24);
 			memset(expressText , 0, 128);
@@ -98,7 +98,7 @@ void protocol_analyze(void)
 		sprintf((char*)local_topic, "%s%s", "lock/", dev_config_info.dev_id);
 		if(strncmp((char*)recv_topic,(char *)"bell/", 5)==0)
 		{
-			timer_is_timeout_1ms(timer_heartbeat, 0);
+//			timer_is_timeout_1ms(timer_heartbeat, 0);
 			USART_OUT(USART1, "bell===========================================================================\r\n");
 
 			lock_bell_flag = 1;
@@ -125,7 +125,7 @@ void protocol_analyze1(list_node **list)
 		msg = list_get_addr_by_status(*list, PUBCOMP);
 		if(msg->status == PUBCOMP)
 		{	
-			timer_is_timeout_1ms(timer_heartbeat, 0);
+//			timer_is_timeout_1ms(timer_heartbeat, 0);
 			
 			USART_OUT(USART1, "topic==%s\r\n", msg->topic);
 			list_travese(list);

@@ -316,8 +316,8 @@ int MQTTPacket_read(unsigned char* buf, int buflen, int (*getfn)(unsigned char*,
 	header.byte = buf[0];
 	rc = header.bits.type;
 exit:
-	memset(&mqtt_buff, 0, sizeof(mqtt_buff));
-	mqtt_buff_cnt = 0;
+//	memset(&mqtt_buff, 0, sizeof(mqtt_buff));
+//	mqtt_buff_cnt = 0;
 	return rc;
 }
 

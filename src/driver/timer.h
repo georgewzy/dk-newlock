@@ -11,6 +11,7 @@ enum timer
 {
     tim1_cnt,
 	tim1_test,
+	timer_system,
 	timer_bell,
 	timer_lock_self_checking,
 	timer_batt,

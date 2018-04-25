@@ -420,6 +420,11 @@ int main(void)
 		
 		iwatchdog_clear();
 		
+		if(timer_is_timeout_1ms(timer_system, 1000*10) == 0)
+		{
+			USART_OUT(USART1, "system running\r\n");
+		}
+		
 	}
 
 }
