@@ -1,5 +1,6 @@
 .\objects\flash.o: ..\driver\flash.c
-.\objects\flash.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_flash.h
+.\objects\flash.o: ..\driver\flash.h
+.\objects\flash.o: ..\bsp\bsp.h
 .\objects\flash.o: ..\Libraries\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
 .\objects\flash.o: ..\Libraries\CMSIS\Include\core_cm3.h
 .\objects\flash.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -33,6 +34,4 @@
 .\objects\flash.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\flash.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\flash.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
-.\objects\flash.o: ..\driver\flash.h
-.\objects\flash.o: ..\bsp\bsp.h
 .\objects\flash.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

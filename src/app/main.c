@@ -78,7 +78,7 @@ uint8_t *p2;
 
 
 uint8_t protocol_buff[512] = {0};
-uint8_t	eeprom_buff[128] = {0};
+
 
 
 uint8_t mqtt_keep_alive_flag = 0;
@@ -279,46 +279,35 @@ int main(void)
 
 	uint8_t ret = 0;
 	uint8_t ds_val = 0;
-	uint8_t topic[50] = {0};
-	uint8_t payload[100];
-	int payloadlen = 0;
-	int mqtt_pub;
-	int mqtt_sub;
 	int mqtt_stauts = 0;
 	GPRS_CONFIG gprs_info = GPRS_CONFIG_INIT;
 	MQTTPacket_connectData mqtt_data = MQTTPacket_connectData_initializer;
 	int gprs_wakeup_status = 0;
-	unsigned char buf[20];
-	int buflen = sizeof(buf);
-	int len = 0;
+
 	list_node *list_recv = NULL;
 	list_node *list_send = NULL;
 	list_node *list_test1 = NULL;
 
-	
 	
 	bsp_init();
 
 	USART_OUT(USART1, "uart1 is ok\r\n");
 
 	
-	
-	
-	
 	while(1)
 	{	
 		
-		list_test(&list_test1);
-		
-		list_test2(&list_test1);
+//		list_test(&list_test1);
+//		
+//		list_test2(&list_test1);
 		ds_val = button_ds_get_value();
 		if(ds_val == 0)
 		{
 					
 			eeprom_read_data(EEPROM_LOCK_ID_ADDR, dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
-			MakeFile_MD5_Checksum(dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
 			eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
 			eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
+			MakeFile_MD5_Checksum(dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
 			
 			gprs_info.server_ip = dev_config_info.dev_ip;		
 			gprs_info.server_port = atoi(dev_config_info.dev_port);
@@ -333,9 +322,12 @@ int main(void)
 			mqtt_data.username.cstring = "daoke";
 			mqtt_data.password.cstring = "DaokeEmq13245768";
 			
-			USART_OUT(USART1, "bbbbb=%s\r\n", gprs_info.server_ip);	
-			USART_OUT(USART1, "llll=%d\r\n", gprs_info.server_port);
+			USART_OUT(USART1, "gprs_info.server_ip=%s\r\n", gprs_info.server_ip);	
+			USART_OUT(USART1, "gprs_info.server_port=%d\r\n", gprs_info.server_port);
 			USART_OUT(USART1, "mqtt_data.clientID.cstring=%s\r\n", mqtt_data.clientID.cstring);
+			USART_OUT(USART1, "mqtt_data.username.cstring=%s\r\n", mqtt_data.username.cstring);
+			USART_OUT(USART1, "mqtt_data.password.cstring=%s\r\n", mqtt_data.password.cstring);
+			
 			
 			memset(send_buff, 0, sizeof(send_buff));
 			sprintf(send_buff, "wangzhongya=%d", mqtt_publist_msgid);
@@ -351,43 +343,8 @@ int main(void)
 			test_dev();	
 		}
 		else if(ds_val == 3)
-		{
-			usart1_recv_data();
-			p1 = strstr((uint8_t*)protocol_buff, "lockid=");
-			if(p1 != NULL)
-			{
-				memset(eeprom_buff, 0, sizeof(eeprom_buff));
-				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("lockid=")), sizeof(protocol_buff)-strlen("lockid="));	
-				eeprom_erase_data(EEPROM_LOCK_ID_ADDR, EEPROM_LOCK_ID_SIZE);
-				eeprom_write_data(EEPROM_LOCK_ID_ADDR, eeprom_buff, EEPROM_LOCK_ID_SIZE);
-				eeprom_read_data(EEPROM_LOCK_ID_ADDR, dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
-				USART_OUT(USART1, "lock_id=%s\r\n", dev_config_info.dev_id);
-				memset(protocol_buff, 0, 512);
-			}
-			
-			p1 = strstr((uint8_t*)protocol_buff, "ip=");
-			if(p1 != NULL)
-			{
-				memset(eeprom_buff, 0, sizeof(eeprom_buff));
-				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("ip=")), sizeof(protocol_buff)-strlen("lockid="));
-				eeprom_erase_data(EEPROM_IP_ADDR, EEPROM_IP_SIZE);
-				eeprom_write_data(EEPROM_IP_ADDR, eeprom_buff, EEPROM_IP_SIZE);
-				eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
-				USART_OUT(USART1, "ip=%s\r\n", dev_config_info.dev_ip);
-				memset(protocol_buff, 0, 512);
-			}
-			
-			p1 = strstr((uint8_t*)protocol_buff, "port=");
-			if(p1 != NULL)
-			{
-				memset(eeprom_buff, 0, sizeof(eeprom_buff));
-				memcpy((char*)eeprom_buff ,(char*)(p1+strlen("port=")), sizeof(protocol_buff)-strlen("port="));
-				eeprom_erase_data(EEPROM_PORT_ADDR, EEPROM_PORT_SIZE);				
-				eeprom_write_data(EEPROM_PORT_ADDR, eeprom_buff, EEPROM_PORT_SIZE);
-				eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
-				USART_OUT(USART1, "port=%s\r\n", dev_config_info.dev_port);
-				memset(protocol_buff, 0, 512);
-			}	
+		{		
+			config_system();
 		}
 	}
 
@@ -426,10 +383,10 @@ int main(void)
 		
 		iwatchdog_clear();
 		
-		if(timer_is_timeout_1ms(timer_system, 1000*10) == 0)
-		{
-			USART_OUT(USART1, "system running\r\n");
-		}
+//		if(timer_is_timeout_1ms(timer_system, 1000*10) == 0)
+//		{
+//			USART_OUT(USART1, "system running\r\n");
+//		}
 		
 	}
 

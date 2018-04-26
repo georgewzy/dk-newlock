@@ -52,3 +52,5 @@
 .\objects\test.o: ..\MQTT\MQTTUnsubscribe.h
 .\objects\test.o: ..\MQTT\MQTTFormat.h
 .\objects\test.o: ..\MQTT\StackTrace.h
+.\objects\test.o: ..\driver\flash.h
+.\objects\test.o: ..\app\main.h

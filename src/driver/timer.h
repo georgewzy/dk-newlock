@@ -4,6 +4,8 @@
 #include "bsp.h"  
 
 
+#define  TIMER_SEND_LIST_MAX		6
+
 
 
 
@@ -43,7 +45,10 @@ enum timer
 	timer_max
 };
 
-
+//enum send_list
+//{
+//	
+//};
 
 
 //如果index对应的时间超时，清零并返回1，未超时返回0
@@ -56,6 +61,7 @@ extern volatile uint32_t g_timer_cnt[(uint8_t)timer_max];
 
 void timer2_init(uint16_t arr, uint16_t psc);
 uint8_t timer_is_timeout_1ms(uint8_t type, uint32_t count);
+uint8_t timer_send_list_1ms(uint8_t type, uint32_t count);
 void timer_delay_1ms(uint32_t ms);
 void timer_delay(uint32_t count);
 

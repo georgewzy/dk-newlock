@@ -12,7 +12,11 @@
 #include "timer.h"
 #include "lock.h"
 #include "gprs.h"
+#include "flash.h"
+#include "main.h"
 
+extern DEV_BASIC_INFO dev_basic_info;
+extern DEV_CONFIG_INFO  dev_config_info;
 
 
 extern uint8_t protocol_buff[512];
@@ -27,6 +31,9 @@ extern uint8_t lock_bell_flag;
 extern uint8_t lock_shake_flag;
 
 extern void test_gprs(void);
+
+uint8_t	eeprom_buff[128] = {0};
+
 
 
 void test_dev(void)
@@ -329,8 +336,55 @@ void test_gprs(void)
 		{
 			break;
 		}
-	}	
-		
+	}			
 }
+
+
+
+
+
+void config_system(void)
+{
+	uint8_t *p1 = NULL;
+	
+	usart1_recv_data();
+	p1 = strstr((uint8_t*)protocol_buff, "lockid=");
+	if(p1 != NULL)
+	{
+		memset(eeprom_buff, 0, sizeof(eeprom_buff));
+		memcpy((char*)eeprom_buff ,(char*)(p1+strlen("lockid=")), sizeof(protocol_buff)-strlen("lockid="));	
+		eeprom_erase_data(EEPROM_LOCK_ID_ADDR, EEPROM_LOCK_ID_SIZE);
+		eeprom_write_data(EEPROM_LOCK_ID_ADDR, eeprom_buff, EEPROM_LOCK_ID_SIZE);
+		eeprom_read_data(EEPROM_LOCK_ID_ADDR, dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
+		USART_OUT(USART1, "lock_id=%s\r\n", dev_config_info.dev_id);
+		memset(protocol_buff, 0, 512);
+	}
+	
+	p1 = strstr((uint8_t*)protocol_buff, "ip=");
+	if(p1 != NULL)
+	{
+		memset(eeprom_buff, 0, sizeof(eeprom_buff));
+		memcpy((char*)eeprom_buff ,(char*)(p1+strlen("ip=")), sizeof(protocol_buff)-strlen("lockid="));
+		eeprom_erase_data(EEPROM_IP_ADDR, EEPROM_IP_SIZE);
+		eeprom_write_data(EEPROM_IP_ADDR, eeprom_buff, EEPROM_IP_SIZE);
+		eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
+		USART_OUT(USART1, "ip=%s\r\n", dev_config_info.dev_ip);
+		memset(protocol_buff, 0, 512);
+	}
+	
+	p1 = strstr((uint8_t*)protocol_buff, "port=");
+	if(p1 != NULL)
+	{
+		memset(eeprom_buff, 0, sizeof(eeprom_buff));
+		memcpy((char*)eeprom_buff ,(char*)(p1+strlen("port=")), sizeof(protocol_buff)-strlen("port="));
+		eeprom_erase_data(EEPROM_PORT_ADDR, EEPROM_PORT_SIZE);				
+		eeprom_write_data(EEPROM_PORT_ADDR, eeprom_buff, EEPROM_PORT_SIZE);
+		eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
+		USART_OUT(USART1, "port=%s\r\n", dev_config_info.dev_port);
+		memset(protocol_buff, 0, 512);
+	}	
+}
+
+
 
 

@@ -9,7 +9,7 @@
 volatile uint32_t g_timer_cnt[(uint8_t)timer_max] = {0};
 volatile uint32_t g_timeout_cnt = 0;
 
-volatile uint32_t g_timer_byte_cnt[5][5] = {0};
+volatile uint32_t g_timer_send_list_cnt[TIMER_SEND_LIST_MAX] = {0};
 
 
 
@@ -35,7 +35,7 @@ void timer2_init(uint16_t arr, uint16_t psc)
 
 void TIM2_IRQHandler(void)
 {
-	uint16_t i = 0;
+	uint16_t i = 0, j = 0;
 
 	if (SET == TIM_GetITStatus(TIM2, TIM_IT_Update))
     {
@@ -50,7 +50,12 @@ void TIM2_IRQHandler(void)
         {
             g_timer_cnt[i]++;
         }	
-
+		
+		for (j=0; j<TIMER_SEND_LIST_MAX; j++)
+		{
+			g_timer_send_list_cnt[j]++;
+		}
+		
 		button_timer_ms();		//???????
     }
 }
@@ -122,12 +127,22 @@ uint8_t timer_is_timeout_1ms(uint8_t type, uint32_t count)
 }
 
 
-uint8_t timer_timer_type_1ms(uint8_t type, uint32_t count)
+uint8_t timer_send_list_1ms(uint8_t type, uint32_t count)
 {
 	int status = 0;
 	
+	if (g_timer_send_list_cnt[type] >= count)
+	{
+		g_timer_send_list_cnt[type] = 0;
+		status = 0;
+	}
+	else
+	{
+		status = 1;
+	}
 	
-	
+	return status;
+		
 }
 
 

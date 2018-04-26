@@ -13,10 +13,11 @@
        Modification:
     2. ...
 *************************************************/
-#ifndef _FLASH_H_
-#define _FLASH_H_
+#ifndef __FLASH_H_
+#define __FLASH_H_
 #include "bsp.h"
 #include "stm32l1xx.h"
+#include "stm32l1xx_flash.h"
 #include <stdbool.h>
 
 
@@ -32,12 +33,12 @@
 #define EEPROM_LOCK_ID_SIZE			16
 
 
-#define EEPROM_IP_OFFSET			16	
+#define EEPROM_IP_OFFSET			EEPROM_LOCK_ID_OFFSET + EEPROM_LOCK_ID_SIZE
 #define EEPROM_IP_ADDR				EEPROM_BASE_ADDR + EEPROM_IP_OFFSET
 #define EEPROM_IP_SIZE				128
 
 
-#define EEPROM_PORT_OFFSET			128 + EEPROM_IP_OFFSET
+#define EEPROM_PORT_OFFSET			EEPROM_IP_SIZE + EEPROM_IP_OFFSET
 #define EEPROM_PORT_ADDR			EEPROM_BASE_ADDR + EEPROM_PORT_OFFSET
 #define EEPROM_PORT_SIZE			10
 

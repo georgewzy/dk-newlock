@@ -18,7 +18,7 @@
        Modification:
     2. ...
 *************************************************/
-#include "stm32l1xx_flash.h"
+
 #include "flash.h"
 
 

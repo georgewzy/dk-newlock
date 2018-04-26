@@ -118,7 +118,7 @@ void lock_self_checking(void)
 		case 1:
 			if(button_scan(LOCK_ON) == 0)//正常开锁
 			{
-				lock_shake_flag = 0;	
+//				lock_shake_flag = 0;	
 				lock_self_run_status = 2;
 				motor_reversal();	//关锁			
 				USART_OUT(USART1, "lock_run_status1 A\r\n");
@@ -241,7 +241,7 @@ void lock_close_deal_1(list_node **list)
 			break;				
 				
 			case 5:
-				USART_OUT(USART1, "EEE_lock_run_status3\r\n");
+				USART_OUT(USART1, "EEE_lock_run_status5\r\n");
 				memset(topic_buff, 0, 100);
 				memset(expressText, 0, 128);
 				memset(cipherText, 0, 128);

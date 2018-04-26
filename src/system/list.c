@@ -85,6 +85,7 @@ void list_travese(list_node **p_head)
 	}
 	else
 	{
+		USART_OUT(USART1, "====================================================\r\n");
 		USART_OUT(USART1, "list_travese_p_head =%d\r\n", p_head);
 		USART_OUT(USART1, "list_travese_AAp_head =%d\r\n", *p_head);
 		while(NULL != tmp)
@@ -101,7 +102,7 @@ void list_travese(list_node **p_head)
 		}
 	}
 	
-	USART_OUT(USART1, "list_travese_size=====%d\r\n", size);
+	USART_OUT(USART1, "====================================list_travese_size=%d\r\n", size);
 }
 
 void list_send_travese(list_node **p_head)
@@ -109,6 +110,7 @@ void list_send_travese(list_node **p_head)
 	int size = 0;
 	list_node *tmp = *p_head;
 	
+	USART_OUT(USART1, "+++++++++++++++++++++++++++++++++++++++++\r\n");
 	USART_OUT(USART1, "list_send_travese_p_head1 =%d\r\n", p_head);
 	USART_OUT(USART1, "list_send_travese_AAp_head1 =%d\r\n", *p_head);
 	while(NULL != tmp)
@@ -124,7 +126,7 @@ void list_send_travese(list_node **p_head)
 		tmp = tmp->next;
 	}
 	
-	USART_OUT(USART1, "list_send_travese_size=====%d\r\n", size);
+	USART_OUT(USART1, "+++++++++++++++++++++++++++list_send_travese_size==%d\r\n", size);
 }
 
 
@@ -174,6 +176,16 @@ int list_is_empty(list_node **p_head)
 	return 1;
 }
 
+void list_insert_head(list_node **p_head, mqtt_msg_s m_data)
+{
+	
+	
+	
+	
+}
+
+
+
 
 void list_insert_last(list_node **p_head, mqtt_msg_s m_data)
 {
@@ -209,6 +221,45 @@ void list_insert_last(list_node **p_head, mqtt_msg_s m_data)
 //	free(p_insert);	//此处不能加free 原因未知
 }
 
+
+void list_de_head(list_node **p_head)
+{
+	list_node *p_temp = *p_head;
+	
+	if(*p_head == NULL)
+	{
+		return;
+	}
+	
+	USART_OUT(USART1, "list_de_head_data=%d\r\n", (*p_head)->msg.msg_id);	
+	*p_head = (*p_head)->next;
+	p_temp->next = NULL;	
+	
+	free(p_temp);
+}
+
+
+void list_delete_last(list_node **p_head)
+{
+	list_node *p_temp = *p_head;
+	list_node *p_last;
+	
+	if(*p_head == NULL)
+	{
+		return;
+	}
+	
+	while(p_temp->next != NULL)
+	{
+		p_last = p_temp;
+		p_temp = p_temp->next;
+	}
+	
+	p_last->next = NULL;
+	USART_OUT(USART1, "list_de_head_data=%d\r\n", p_temp->msg.msg_id);
+	
+	free(p_temp);
+}
 
 void list_de_last(list_node **p_head)
 {
@@ -384,8 +435,8 @@ int list_modify_status(list_node **p_node, int msg_id, int status)
 	if(p_head->msg.msg_id == msg_id)
 	{
 		p_head->msg.status = status; 
-		USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", p_head->msg.msg_id);
-		USART_OUT(USART1, "p_head->msg.status=%d\r\n", p_head->msg.status);
+		USART_OUT(USART1, "p_headmsg.msg_id=%d\r\n", p_head->msg.msg_id);
+		USART_OUT(USART1, "p_headmsg.status=%d\r\n", p_head->msg.status);
 		USART_OUT(USART1, "list_get_elem_addr=%d=%d\r\n", msg_id, &(p_head->msg));
 	}
 	
@@ -415,7 +466,7 @@ int list_modify_timer_id(list_node **p_node, int msg_id, int timer_id)
 	
 	if(p_head->msg.msg_id == msg_id)
 	{
-		p_head->msg.timer_id = timer_id; 
+//		p_head->msg.timer_id = timer_id; 
 		USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", p_head->msg.msg_id);
 		USART_OUT(USART1, "p_head->msg.status=%d\r\n", p_head->msg.status);
 		USART_OUT(USART1, "list_get_elem_addr=%d=%d\r\n", msg_id, &(p_head->msg));
