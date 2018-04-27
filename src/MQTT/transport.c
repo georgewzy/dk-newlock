@@ -914,7 +914,8 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 	int list_recv_size = 0;
 	mqtt_msg_s mqtt_msg;
 	mqtt_msg_s *msg1 = NULL;
-	list_node *tmp = *list_send;
+	list_node *tmp1 = *list_send;
+	list_node *tmp2 = *list_send;
 	
 	memset(buf, 0, sizeof(buf));
 	memset(&mqtt_msg, 0, sizeof(mqtt_msg));	
@@ -936,8 +937,8 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 					publisher = 1;
 					mqtt_stauts = msg1->status;
 //					list_modify_timer_id(list_send, msg1->msg_id, msg1->msg_id%5);	//加入时间标签
-					timer_send_list_1ms(msg1->msg_id%5, 0);
-					USART_OUT(USART1, "timer_send_list_1ms_aa=%d\r\n", tmp->msg.msg_id%5);
+					timer_send_list_pubrec_1ms(msg1->msg_id%5, 0);
+					USART_OUT(USART1, "timer_send_list_1ms_aa=%d\r\n", tmp1->msg.msg_id%5);
 				}
 			}
 			else	//找不到状态为PUBLISH的节点 v
@@ -948,20 +949,43 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				
 			}		
 			
-			list_send_size = list_size(*list_send);		
-			while(tmp != NULL)
+
+			while(tmp1 != NULL)
 			{	
-				if(tmp->msg.status == PUBREC)
+				if(tmp1->msg.status == PUBREC)
 				{
-					if(timer_send_list_1ms(tmp->msg.msg_id%5, 1000*10) == 0)
+					if(timer_send_list_pubrec_1ms(tmp1->msg.msg_id%5, 1000*10) == 0)
 					{
-						USART_OUT(USART1, "timer_send_list_1ms_bb=%d\r\n", tmp->msg.msg_id%5);
-						list_modify_status(list_send, tmp->msg.msg_id, PUBLISH);
+						USART_OUT(USART1, "timer_send_list_1ms_bb=%d\r\n", tmp1->msg.msg_id%5);
+						list_modify_status(list_send, tmp1->msg.msg_id, PUBLISH);
 						list_send_travese(list_send);				
 					}
 				}
-				tmp = tmp->next;
+				tmp1 = tmp1->next;
 			}
+			
+			while(tmp2 != NULL)
+			{	
+				if(tmp2->msg.status == PUBREL)
+				{
+					if(timer_send_list_pubrel_1ms(tmp2->msg.msg_id%5, 1000*10) == 0)	//重新发送
+					{
+						USART_OUT(USART1, "timer_send_list_1ms_cc=%d\r\n", tmp2->msg.msg_id%5);
+						memset(buf, 0, sizeof(buf));
+						len = MQTTSerialize_pubrel(buf, buflen, 0, msgid);	//publisher resend pubrel
+						rc = transport_sendPacketBuffer(mysock, buf, len);
+						if(rc != -1)
+						{
+							list_modify_status(list_send, msgid, PUBREL);
+		//					list_travese(list_send);			
+							USART_OUT(USART1, "publisher_resend_PUBREL=%d\r\n", msgid);
+						}			
+					}
+				}
+				tmp2 = tmp2->next;
+			}
+			
+			
 			
 		}
 		else //链表为空
@@ -1125,7 +1149,6 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 					USART_OUT(USART1, "subscriber_PUBCOMP=%d\r\n", msgid);
 					
 					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-
 					
 //					list_empty_status = list_is_empty(list_recv);
 					

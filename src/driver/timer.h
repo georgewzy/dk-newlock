@@ -4,8 +4,8 @@
 #include "bsp.h"  
 
 
-#define  TIMER_SEND_LIST_MAX		6
-
+#define  TIMER_SEND_LIST_PUBREC_MAX		6
+#define  TIMER_SEND_LIST_PUBREL_MAX		6
 
 
 
@@ -61,7 +61,8 @@ extern volatile uint32_t g_timer_cnt[(uint8_t)timer_max];
 
 void timer2_init(uint16_t arr, uint16_t psc);
 uint8_t timer_is_timeout_1ms(uint8_t type, uint32_t count);
-uint8_t timer_send_list_1ms(uint8_t type, uint32_t count);
+uint8_t timer_send_list_pubrec_1ms(uint8_t type, uint32_t count);
+uint8_t timer_send_list_pubrel_1ms(uint8_t type, uint32_t count);
 void timer_delay_1ms(uint32_t ms);
 void timer_delay(uint32_t count);
 
