@@ -81,7 +81,7 @@ void list_travese(list_node **p_head)
 	list_node *tmp = *p_head;
 	if(NULL == tmp)
 	{
-		USART_OUT(USART1, "list_travese list is NULL =%d\r\n", p_head);
+		USART_OUT(USART1, "list_travese_list_is_NULL =%d\r\n", p_head);
 	}
 	else
 	{
@@ -130,21 +130,29 @@ void list_send_travese(list_node **p_head)
 }
 
 
-void list_clear(list_node *p_head)
+void list_clear(list_node **p_head)
 {
-	list_node *p_next;
+	list_node *p_temp;
 	
-	if(p_head == NULL)
+	if(*p_head == NULL)
 	{
+		USART_OUT(USART1, "list_clear\r\n");
 		return;
 	}
 	
-	while(p_head->next != NULL)
+	while((*p_head)->next != NULL)
 	{
-		p_next = p_head->next;
-		free(p_head);
-		p_head = p_next;
+		p_temp = (*p_head)->next;
+		free(*p_head);
+		*p_head = p_temp;
 	}
+	if(*p_head != NULL)
+	{
+		free(*p_head);
+		(*p_head) = NULL;
+	}
+	
+	USART_OUT(USART1, "list_clear_ok\r\n");
 }
 
 
@@ -176,11 +184,10 @@ int list_is_empty(list_node **p_head)
 	return 1;
 }
 
+
 void list_insert_head(list_node **p_head, mqtt_msg_s m_data)
 {
-	
-	
-	
+		
 	
 }
 
@@ -315,9 +322,9 @@ void list_de_by_msgid(list_node **p_head, int msg_id)
 				if(cur_node->msg.msg_id == msg_id)
 				{
 					tmp_node->next = cur_node->next;
+					USART_OUT(USART1, "list_de_by_msgid222=%d\r\n", cur_node->msg.msg_id);
 //					free(tmp_node);
 					free(cur_node);
-					USART_OUT(USART1, "list_de_by_elem222=%d\r\n", tmp_node->msg.msg_id);
 				}
 				tmp_node = tmp_node->next;		
 			}		
@@ -687,6 +694,15 @@ void list_test2(list_node **list)
 	mqtt_msg9 = list_get_addr_by_msgid(*list, 222);
 	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
 	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
+	
+	
+	list_clear(list);
+	list_travese(list);
+	
+	
+	list_insert_last(list, mqtt_msg5);
+	list_travese(list);
+	
 }
 
 

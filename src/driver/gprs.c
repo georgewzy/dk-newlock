@@ -490,8 +490,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 		{
 			break;
 		}
-	} // while end
-		
+	} // while end	
 }
 
 

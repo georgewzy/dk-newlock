@@ -937,16 +937,15 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 					publisher = 1;
 					mqtt_stauts = msg1->status;
 //					list_modify_timer_id(list_send, msg1->msg_id, msg1->msg_id%5);	//加入时间标签
-					timer_send_list_pubrec_1ms(msg1->msg_id%5, 0);
+					timer_send_list_pubrec_1ms(msg1->msg_id%5, 0);//加入时间标签
 					USART_OUT(USART1, "timer_send_list_1ms_aa=%d\r\n", tmp1->msg.msg_id%5);
 				}
 			}
-			else	//找不到状态为PUBLISH的节点 v
+			else	//找不到状态为PUBLISH的节点
 			{
 				memset(buf, 0, sizeof(buf));
 				mqtt_stauts = MQTTPacket_read(buf, buflen, transport_getdata);
-				publisher = 0;	
-				
+				publisher = 0;		
 			}		
 			
 
@@ -983,9 +982,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 					}
 				}
 				tmp2 = tmp2->next;
-			}
-			
-			
+			}	
 			
 		}
 		else //链表为空
@@ -1008,7 +1005,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 		break;
 		
 		case PUBLISH:
-			timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
+//			timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
 			if(publisher == 1)
 			{										
 				topicString.cstring = (*list_send)->msg.topic;				
@@ -1109,7 +1106,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			rc = MQTTDeserialize_ack(&type, &dup, &msgid, buf, buflen);		//publisher 
 			if(rc == 1)
 			{		
-				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
+//				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
 
 				USART_OUT(USART1, " PUBACK=%d\r\n", msgid);					
 			}			
@@ -1127,6 +1124,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				if(rc != -1)
 				{
 					list_modify_status(list_send, msgid, PUBREL);
+					timer_send_list_pubrel_1ms(msgid%5, 0);//加入时间标签
 //					list_travese(list_send);			
 					USART_OUT(USART1, "publisher_PUBREL=%d\r\n", msgid);
 				}	
@@ -1174,6 +1172,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				{
 					if(msg1->msg_id == msgid)
 					{
+						USART_OUT(USART1, "publisher_find_msgid\r\n");
 						list_de_by_msgid(list_send, msg1->msg_id);	//从链表中删除节点
 						list_send_travese(list_send);
 					}

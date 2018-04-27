@@ -94,35 +94,7 @@ uint8_t test_flag = 0;
 
 
 
-void heartbeat(uint32_t ms)
-{
-	int mqtt_pub = 0;
-	uint8_t heartbeat_buff[2] = {0};
-	
-	if(timer_is_timeout_1ms(timer_heartbeat, ms) == 0)
-	{
-		memset(topic_buff, 0 ,100);
-		memset(heartbeat_buff, 0, 2);
-		
-		sprintf((char*)topic_buff,"%s%s","lockdata/", dev_config_info.dev_id);
-		heartbeat_buff[0] = 0x30;
-		heartbeat_buff[1] = '\0';
-		
-		USART_OUT(USART1, "heartbeat=%s\r\n", topic_buff);
-		mqtt_pub = mqtt_publish(topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
-		if(mqtt_pub == 1)
-		{
-			USART_OUT(USART1, "heartbeat mqtt_publist ok\r\n");
-		}	
-		else
-		{
-			USART_OUT(USART1, "heartbeat mqtt_publist error\r\n");
-		}
-	}
-}
-
-
-void heartbeat1(list_node **list, uint32_t ms)
+void heartbeat(list_node **list, uint32_t ms)
 {
 	int mqtt_pub = 0;
 	uint8_t heartbeat_buff[2] = {0};
@@ -373,7 +345,7 @@ int main(void)
 		lock_open_deal_1(&list_send);	//开锁处理
 		lock_close_deal_1(&list_send);	//关锁处理	
 		dev_to_srv_batt_voltage1(&list_send, BATT_VOLTAGE);	//电池电压信息
-		heartbeat1(&list_send, HEARTBEAT);	//心跳
+		heartbeat(&list_send, HEARTBEAT);	//心跳
 		
 		
 		lock_hand_close();	//手动关锁
