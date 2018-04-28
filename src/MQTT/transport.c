@@ -132,10 +132,16 @@ int mqtt_connect(MQTTPacket_connectData *pdata)
 		{
 			case CONNECT:
 				memset(buf, 0, sizeof(buf));
-				len = MQTTSerialize_connect(buf, buflen, pdata);		
-				rc = transport_sendPacketBuffer(mysock, buf, len);
-				connect_status = CONNACK;
-				USART_OUT(USART1, "CONNECT\r\n");
+				len = MQTTSerialize_connect(buf, buflen, pdata);
+				if(len > 0)
+				{					
+					rc = transport_sendPacketBuffer(mysock, buf, len);
+					if(rc != -1)
+					{
+						connect_status = CONNACK;
+						USART_OUT(USART1, "CONNECT\r\n");
+					}
+				}
 			break;
 			
 			case CONNACK:
@@ -506,11 +512,14 @@ int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packe
 				topicString.cstring = topic;
 				memset(buf, 0, sizeof(buf));
 				len = MQTTSerialize_subscribe(buf, buflen, 0, packetid, 1, &topicString, &req_qos);
-				rc = transport_sendPacketBuffer(mysock, buf, len);
-				if(rc != -1)
+				if(len > 0)
 				{
-					subscribe_topic_status = 0;
-					USART_OUT(USART1, "SUBSCRIBE\r\n");
+					rc = transport_sendPacketBuffer(mysock, buf, len);
+					if(rc != -1)
+					{
+						subscribe_topic_status = 0;
+						USART_OUT(USART1, "SUBSCRIBE\r\n");
+					}
 				}
 			break;
 			
@@ -953,11 +962,11 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			{	
 				if(tmp1->msg.status == PUBREC)
 				{
-					if(timer_send_list_pubrec_1ms(tmp1->msg.msg_id%5, 1000*10) == 0)
+					if(timer_send_list_pubrec_1ms(tmp1->msg.msg_id%5, 1000*5) == 0)
 					{
 						USART_OUT(USART1, "timer_send_list_1ms_bb=%d\r\n", tmp1->msg.msg_id%5);
 						list_modify_status(list_send, tmp1->msg.msg_id, PUBLISH);
-						list_send_travese(list_send);				
+//						list_send_travese(list_send);				
 					}
 				}
 				tmp1 = tmp1->next;
@@ -967,18 +976,21 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			{	
 				if(tmp2->msg.status == PUBREL)
 				{
-					if(timer_send_list_pubrel_1ms(tmp2->msg.msg_id%5, 1000*10) == 0)	//重新发送
+					if(timer_send_list_pubrel_1ms(tmp2->msg.msg_id%5, 1000*5) == 0)	//重新发送
 					{
 						USART_OUT(USART1, "timer_send_list_1ms_cc=%d\r\n", tmp2->msg.msg_id%5);
 						memset(buf, 0, sizeof(buf));
 						len = MQTTSerialize_pubrel(buf, buflen, 0, msgid);	//publisher resend pubrel
-						rc = transport_sendPacketBuffer(mysock, buf, len);
-						if(rc != -1)
+						if(len > 0)
 						{
-							list_modify_status(list_send, msgid, PUBREL);
-		//					list_travese(list_send);			
-							USART_OUT(USART1, "publisher_resend_PUBREL=%d\r\n", msgid);
-						}			
+							rc = transport_sendPacketBuffer(mysock, buf, len);
+							if(rc != -1)
+							{
+								list_modify_status(list_send, msgid, PUBREL);
+			//					list_travese(list_send);			
+								USART_OUT(USART1, "publisher_PUBREL_resend=%d\r\n", msgid);
+							}	
+						}						
 					}
 				}
 				tmp2 = tmp2->next;
@@ -1005,7 +1017,6 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 		break;
 		
 		case PUBLISH:
-//			timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
 			if(publisher == 1)
 			{										
 				topicString.cstring = (*list_send)->msg.topic;				
@@ -1092,11 +1103,14 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 						////
 						memset(buf, 0, sizeof(buf));
 						len = MQTTSerialize_pubrec(buf, buflen, msgid);		//subscriber pubrec
-						rc = transport_sendPacketBuffer(mysock, buf, len);
-						if(rc != -1)
-						{	
-							USART_OUT(USART1, "subscriber_PUBREC=%d\r\n", msgid);
-						}	
+						if(len > 0)
+						{
+							rc = transport_sendPacketBuffer(mysock, buf, len);
+							if(rc != -1)
+							{	
+								USART_OUT(USART1, "subscriber_PUBREC=%d\r\n", msgid);
+							}	
+						}
 					}		
 				}	
 			}
@@ -1106,8 +1120,6 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 			rc = MQTTDeserialize_ack(&type, &dup, &msgid, buf, buflen);		//publisher 
 			if(rc == 1)
 			{		
-//				timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-
 				USART_OUT(USART1, " PUBACK=%d\r\n", msgid);					
 			}			
 		break;
@@ -1120,14 +1132,17 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				////
 				memset(buf, 0, sizeof(buf));
 				len = MQTTSerialize_pubrel(buf, buflen, 0, msgid);	//publisher  pubrel
-				rc = transport_sendPacketBuffer(mysock, buf, len);
-				if(rc != -1)
+				if(len > 0)
 				{
-					list_modify_status(list_send, msgid, PUBREL);
-					timer_send_list_pubrel_1ms(msgid%5, 0);//加入时间标签
-//					list_travese(list_send);			
-					USART_OUT(USART1, "publisher_PUBREL=%d\r\n", msgid);
-				}	
+					rc = transport_sendPacketBuffer(mysock, buf, len);
+					if(rc != -1)
+					{
+						list_modify_status(list_send, msgid, PUBREL);
+						timer_send_list_pubrel_1ms(msgid%5, 0);//加入时间标签
+	//					list_travese(list_send);			
+						USART_OUT(USART1, "publisher_PUBREL=%d\r\n", msgid);
+					}	
+				}
 			}	
 		break;
 			
@@ -1138,24 +1153,27 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				USART_OUT(USART1, "subscriber_PUBREL=%d\r\n", msgid);					
 				////
 				memset(buf, 0, sizeof(buf));
-				len = MQTTSerialize_pubcomp(buf, buflen, msgid);	
-				rc = transport_sendPacketBuffer(mysock, buf, len);	//subscriber pubcomp
-				if(rc != -1)
+				len = MQTTSerialize_pubcomp(buf, buflen, msgid);
+				if(len > 0)
 				{	
-					list_modify_status(list_recv, msgid, PUBCOMP);
-//					list_travese(list_recv);
-					USART_OUT(USART1, "subscriber_PUBCOMP=%d\r\n", msgid);
-					
-					timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
-					
-//					list_empty_status = list_is_empty(list_recv);
-					
-					gprs_sleep_status = gprs_sleep();		// 睡眠
-					if(gprs_sleep_status == 1)
-					{
-						USART_OUT(USART1, "subscriber_gprs_sleep_ok\r\n");	
-					}								
-				}	
+					rc = transport_sendPacketBuffer(mysock, buf, len);	//subscriber pubcomp
+					if(rc != -1)
+					{	
+						list_modify_status(list_recv, msgid, PUBCOMP);
+	//					list_travese(list_recv);
+						USART_OUT(USART1, "subscriber_PUBCOMP=%d\r\n", msgid);
+						
+						timer_is_timeout_1ms(timer_mqtt_keep_alive, 0);
+						
+	//					list_empty_status = list_is_empty(list_recv);
+						
+						gprs_sleep_status = gprs_sleep();		// 睡眠
+						if(gprs_sleep_status == 1)
+						{
+							USART_OUT(USART1, "subscriber_gprs_sleep_ok\r\n");	
+						}								
+					}
+				}				
 			}
 		break;
 		
@@ -1183,6 +1201,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 				{
 					USART_OUT(USART1, "publisher_gprs_sleep_ok\r\n");	
 				}
+				
 //				//消息id
 //				mqtt_publist_msgid++;
 //				if(mqtt_publist_msgid >= 65535)
@@ -1211,10 +1230,13 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 		case PINGREQ:
 			memset(buf, 0, sizeof(buf));
 			len = MQTTSerialize_pingreq(buf, buflen);
-			rc = transport_sendPacketBuffer(mysock, buf, len);
-			if(rc != -1)
+			if(len > 0)
 			{
-				USART_OUT(USART1, "PINGREQ\r\n");
+				rc = transport_sendPacketBuffer(mysock, buf, len);
+				if(rc != -1)
+				{
+					USART_OUT(USART1, "PINGREQ\r\n");
+				}
 			}
 		break;
 		
@@ -1228,7 +1250,6 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 					USART_OUT(USART1, "keep_alive gprs_sleep ok\r\n");	
 				}
 				USART_OUT(USART1, "PINGRESP\r\n");
-
 			}		
 		
 		break;

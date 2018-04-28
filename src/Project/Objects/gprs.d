@@ -49,3 +49,4 @@
 .\objects\gprs.o: ..\driver\usart.h
 .\objects\gprs.o: ..\driver\timer.h
 .\objects\gprs.o: ..\app\main.h
+.\objects\gprs.o: ..\system\list.h

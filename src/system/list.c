@@ -117,12 +117,12 @@ void list_send_travese(list_node **p_head)
 	{
 		size++;
 		USART_OUT(USART1, "send_list_travese_tmp =%d\r\n", tmp);
-		USART_OUT(USART1, "send_p_head->msg.payload=%s\r\n", tmp->msg.payload);
-		USART_OUT(USART1, "send_p_head->msg.topic=%s\r\n", tmp->msg.topic);
-		USART_OUT(USART1, "send_p_head->msg.payloadlen=%d\r\n", tmp->msg.payloadlen);
-		USART_OUT(USART1, "send_p_head->msg.msg_id=%d\r\n", tmp->msg.msg_id);
-		USART_OUT(USART1, "send_p_head->msg.status=%d\r\n", tmp->msg.status);
-		USART_OUT(USART1, "send_p_head->next=%d\r\n", tmp->next);
+		USART_OUT(USART1, "send_p_headmsg.payload=%s\r\n", tmp->msg.payload);
+		USART_OUT(USART1, "send_p_headmsg.topic=%s\r\n", tmp->msg.topic);
+		USART_OUT(USART1, "send_p_headmsg.payloadlen=%d\r\n", tmp->msg.payloadlen);
+		USART_OUT(USART1, "send_p_headmsg.msg_id=%d\r\n", tmp->msg.msg_id);
+		USART_OUT(USART1, "send_p_headmsg.status=%d\r\n", tmp->msg.status);
+		USART_OUT(USART1, "send_p_headnext=%d\r\n", tmp->next);
 		tmp = tmp->next;
 	}
 	

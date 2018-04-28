@@ -275,7 +275,8 @@ int main(void)
 		ds_val = button_ds_get_value();
 		if(ds_val == 0)
 		{
-					
+			list_clear(&list_send);	
+			list_clear(&list_recv);				
 			eeprom_read_data(EEPROM_LOCK_ID_ADDR, dev_config_info.dev_id, EEPROM_LOCK_ID_SIZE);
 			eeprom_read_data(EEPROM_IP_ADDR, dev_config_info.dev_ip, EEPROM_IP_SIZE);
 			eeprom_read_data(EEPROM_PORT_ADDR, dev_config_info.dev_port, EEPROM_PORT_SIZE);
@@ -286,8 +287,8 @@ int main(void)
 
 //			gprs_info.server_ip = "emq.91daoke.com";
 //			gprs_info.server_port = 1883;
-//			gprs_info.server_ip = "103.46.128.47";
-//			gprs_info.server_port = 14947;
+//			gprs_info.server_ip = "gpscore.net";
+//			gprs_info.server_port = 4120;
 			mqtt_data.clientID.cstring = dev_config_info.dev_id;
 			mqtt_data.keepAliveInterval = MQTT_KEEP_ALIVE_INTERVAL;
 			mqtt_data.cleansession = 1;
@@ -336,7 +337,7 @@ int main(void)
 		{
 			mqtt_keep_alive_flag = 0;
 			mqtt_keep_alive_err_cnt = 0;
-			USART_OUT(USART1, "mqtt_keep_alive recv ok\r\n");
+			USART_OUT(USART1, "mqtt_keep_alive_recv_ok\r\n");
 		}		
 		
 		mqtt_keep_alive1(list_recv, list_send, PINGREQ);	//保持在线
@@ -355,9 +356,15 @@ int main(void)
 		
 		iwatchdog_clear();
 		
-//		if(timer_is_timeout_1ms(timer_system, 1000*10) == 0)
+//		if(timer_is_timeout_1ms(timer_system, 1000*2) == 0)
 //		{
-//			USART_OUT(USART1, "system running\r\n");
+////			USART_OUT(USART1, "system running\r\n");
+//			
+//			rc = transport_sendPacketBuffer(0, "wangzhongya", 11);
+//			if(rc != -1)
+//			{
+//				USART_OUT(USART1, "george\r\n");
+//			}
 //		}
 		
 	}

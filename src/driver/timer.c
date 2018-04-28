@@ -55,9 +55,9 @@ void TIM2_IRQHandler(void)
 			g_timer_send_list_pubrec_cnt[j]++;
 		}
 		
-		for (j=0; j<TIMER_SEND_LIST_PUBREL_MAX; j++)
+		for (k=0; k<TIMER_SEND_LIST_PUBREL_MAX; k++)
 		{
-			g_timer_send_list_pubrel_cnt[j]++;
+			g_timer_send_list_pubrel_cnt[k]++;
 		}
 		
 		button_timer_ms();		//???????
