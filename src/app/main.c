@@ -93,7 +93,6 @@ uint8_t test_flag = 0;
 
 
 
-
 void heartbeat(list_node **list, uint32_t ms)
 {
 	int mqtt_pub = 0;
@@ -167,44 +166,9 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 }
 
 
-void dev_to_srv_batt_voltage(uint32_t ms)
-{
-	int mqtt_pub;
-	
-	if(timer_is_timeout_1ms(timer_batt, ms) == 0)
-	{
-		Bat_V = adc_get_average(ADC_Channel_0, 10);
-		Bat_V = Bat_V*3300/4096;
-		Bat_V = Bat_V*88/20;
-		Bat_Pre = (Bat_V-5000)*100/2400;
-		USART_OUT(USART1, "Bat_Pre=%s\r\n", Bat_Pre);
-		
-		memset(topic_buff, 0, 100);	
-		memset(expressText, 0, 128);
-		memset(cipherText, 0, 128);	
-		
-		sprintf((char *)topic_buff, "%s%s", "lockdata/", (char*)dev_config_info.dev_id);	
-		sprintf((char *)expressText, "{%c%s%c:%s}",'"',"battery",'"',"20");
-		AES_Encrypt((char *)expressText, (char*)cipherText, (char*)aesKey);
-		
-		USART_OUT(USART1, "dev_to_srv_batt_voltage\r\n");
-		USART_OUT(USART1, "expressText=%s\r\n", expressText);
-		USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
-		USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
-		
-//		mqtt_pub = mqtt_publish(list, topic_buff, cipherText, 24, 2, mqtt_publist_msgid);
-		if(mqtt_pub == 1)
-		{
-			USART_OUT(USART1, "dev_to_srv_batt mqtt_publist ok\r\n");
-		}
-		else
-		{
-			USART_OUT(USART1, "dev_to_srv_batt mqtt_publist error\r\n");
-		}
-	}
-}
 
-void dev_to_srv_batt_voltage1(list_node **list, uint32_t ms)
+
+void dev_to_srv_batt_voltage(list_node **list, uint32_t ms)
 {
 	int mqtt_pub;
 	
@@ -345,7 +309,7 @@ int main(void)
 
 		lock_open_deal_1(&list_send);	//开锁处理
 		lock_close_deal_1(&list_send);	//关锁处理	
-		dev_to_srv_batt_voltage1(&list_send, BATT_VOLTAGE);	//电池电压信息
+		dev_to_srv_batt_voltage(&list_send, BATT_VOLTAGE);	//电池电压信息
 		heartbeat(&list_send, HEARTBEAT);	//心跳
 		
 		

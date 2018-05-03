@@ -34,7 +34,6 @@
 extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
 extern unsigned short mqtt_publist_msgid;
-extern unsigned short mqtt_subscribe_msgid;
 extern uint8_t usart2_rx_status;
 extern uint8_t lock_id[17];
 extern DEV_CONFIG_INFO  dev_config_info;
@@ -409,7 +408,6 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				if(1 == mqtt_rc)
 				{
 					mqtt_publist_msgid = 1;
-					mqtt_subscribe_msgid = 0;
 					gprs_status++;
 					USART_OUT(USART1, "mqtt_connect ok\r\n");
 				}
