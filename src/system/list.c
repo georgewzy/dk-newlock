@@ -412,7 +412,8 @@ mqtt_msg_s *list_get_addr_by_status(list_node *p_head, int status)
 	
 	if(p_head->msg.status == status)
 	{
-		USART_OUT(USART1, "status=%d===list_get_addr_by_status=%d\r\n", status, &(p_head->msg));
+		
+		USART_OUT(USART1, "status=%d==msgid=%d=list_get_addr_by_status=%d\r\n", status, p_head->msg.msg_id, &(p_head->msg));
 	}
 	
 	return &(p_head->msg);
