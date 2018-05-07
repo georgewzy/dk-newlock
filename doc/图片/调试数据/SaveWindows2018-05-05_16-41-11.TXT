@@ -1,0 +1,7870 @@
+
+[15:23:06.583]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:08.091]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:09.604]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:11.102]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:12.602]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:14.122]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:15.622]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:17.122]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:18.632]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:20.131]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:21.631]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:23.152]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:24.652]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:26.152]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:27.664]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:29.162]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:30.663]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:32.182]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:33.681]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:35.181]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:36.691]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:38.192]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:39.692]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:41.211]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:42.702]สีก๛ก๔
++CME ERROR: 2
+
+[15:23:42.722]สีก๛ก๔
++CME ERROR: 2
+
+[15:23:44.201]สีก๛ก๔
++CME ERROR: 2
+
+[15:23:44.221]สีก๛ก๔
++CME ERROR: 2
+
+[15:23:45.721]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:47.221]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:48.722]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:50.241]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[15:23:51.732]สีก๛ก๔
++CME ERROR: 2
+
+[15:23:51.752]สีก๛ก๔
++CME ERROR: 2
+
+[15:23:51.852]สีก๛ก๔
+CONNECT OK
+
+[15:23:53.241]สีก๛ก๔
++CME ERROR: 2
+
+CONNECT OK
+
+[15:23:54.253]สีก๛ก๔
+>
+>
+[15:23:54.293]สีก๛ก๔CONNECT
+
+SEND OK
+
+[15:23:55.271]สีก๛ก๔+IPD,4: \0\0
++IPD,4: \0\0
+CONNACK
+mqtt_connect ok
+
+>
+>
+[15:23:55.331]สีก๛ก๔SUBSCRIBE
+
+SEND OK
+
+[15:23:55.931]สีก๛ก๔+IPD,5:\0
++IPD,5:\0
+qos=2==submsgid=1
+SUBACK
+mqtt_subscribe_topic bell ok=bell/0026210218731838
+
+>
+>
+[15:23:55.991]สีก๛ก๔SUBSCRIBE
+
+SEND OK
+
+[15:23:59.654]สีก๛ก๔+IPD,5:\0
++IPD,5:\0
+qos=2==submsgid=2
+SUBACK
+mqtt_subscribe_topic lock ok=lock/0026210218731838
+
+[15:24:50.071]สีก๛ก๔+IPD,51:41\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==
++IPD,51:41\0lock/0026210218731838\0
+[15:24:50.151]สีก๛ก๔yF/b8OHun3MmZZbXI+Lg7Q==
+subscriber_PUBLISH=1
+list_recv_size11=0
+msgid22=1
+subscriber_frist_insert
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875664
+list_travese_tmp=536875664
+p_head->msg.payload=yF/b8OHun3MmZZbXI+Lg7Q==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=1
+p_head->msg.status=5
+p_head->next=0
+====================================list_travese_size=1
+
+>
+>subscriber_PUBREC=1
+
+SEND OK
+
+[15:24:52.071]สีก๛ก๔+IPD,4:b\0
++IPD,4:b\0
+subscriber_PUBREL=1
+
+>
+>
+[15:24:52.141]สีก๛ก๔p_headmsg.msg_id=1
+p_headmsg.status=7
+list_get_ele
+SEND OK
+m_addr=1=536875664
+subscriber_PUBCOMP=1
+
+OK
+
+[15:24:52.231]สีก๛ก๔
+OK
+subscriber_gprs_sleep_ok
+status=7==msg
+[15:24:52.311]สีก๛ก๔id=1=list_get_addr_by_status=536875664
+topic==lock/0026210218731838
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875664
+list_travese_tmp=536875664
+p_head->msg.payload=yF/b8OHun3MmZZbXI+Lg7Q==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=1
+p_head->msg.status=7
+p_head->next=0
+====================================list_travese_size=1
+Lock_Open11111
+list_de_by_elem333=1
+list_de_by_elem111=1
+list_travese_list_is_NULL =536879652
+====================================list_travese_size=0
+DDDlock_run_status0
+
+[15:24:53.922]สีก๛ก๔DDDlock_run_status1 A
+DDDlock_run_status2
+
+[15:24:54.002]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=3
+publisher_msgid_insert1=339
+mqtt_publist ok
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:24:54.051]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:24:54.082]สีก๛ก๔AAAAAAAAAA=3
+
+[15:24:54.141]สีก๛ก๔p_headmsg.msg_id=3
+p_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:24:59.062]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:24:59.102]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:24:59.142]สีก๛ก๔AAAAAAA
+[15:24:59.202]สีก๛ก๔AAA=3
+p_headmsg.msg_id=3
+p_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:04.121]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:04.171]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=3
+p
+[15:25:04.261]สีก๛ก๔_headmsg.msg_id=3
+p_headmsg.st
+SEND OK
+tus=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:09.181]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:09.221]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=3
+[15:25:09.321]สีก๛ก๔
+p_headmsg.msg_id=3
+p_headmsg
+SEND OK
+.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:14.240]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:14.283]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=
+[15:25:14.383]สีก๛ก๔3
+p_headmsg.msg_id=3
+p_headmsg.status=5
+SEND OK
+
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:19.291]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:19.341]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:25:19.361]สีก๛ก๔
+>AAAAAAAA
+[15:25:19.441]สีก๛ก๔AA=3
+p_headmsg.msg_id=3
+p_headmsg.status=5
+SEND OK
+
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:24.351]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:24.401]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:25:24.421]สีก๛ก๔
+>AAAAAAA
+[15:25:24.501]สีก๛ก๔AAA=3
+p_headmsg.msg_id=3
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:29.417]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:29.457]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=3
+p
+[15:25:29.557]สีก๛ก๔_headmsg.msg_id=3
+p_headmsg.statu
+SEND OK
+s=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:34.472]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:34.522]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=
+[15:25:34.612]สีก๛ก๔3
+p_headmsg.msg_id=3
+p_headmsg.s
+SEND OK
+tatus=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:39.532]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:39.572]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:25:39.612]สีก๛ก๔AAAAAAAAA
+[15:25:39.672]สีก๛ก๔A=3
+p_headmsg.msg_id=3
+p_headmsg.
+SEND OK
+status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:44.589]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:44.639]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAA
+[15:25:44.729]สีก๛ก๔AAA=3
+p_headmsg.msg_id=3
+p_headmsg
+SEND OK
+status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:49.642]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:49.692]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAA4I\0lockback/0026210218731838\0
+[15:25:49.802]สีก๛ก๔tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+SEND K
+A=3
+p_headmsg.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:54.631]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_se
+[15:25:54.701]สีก๛ก๔nd_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:54.751]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:25:54.851]สีก๛ก๔AAAAAAAAAA=3
+p_headmsg.msg_id=3
+p_headmsg.statu
+SEND OK
+s=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:25:59.768]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:25:59.818]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA
+[15:25:59.908]สีก๛ก๔=3
+p_headmsg.msg_i
+SED OK
+d=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:04.821]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:26:04.871]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:26:04.891]สีก๛ก๔
+>AAAAAAAA
+[15:26:04.971]สีก๛ก๔AA=3
+p_he
+SEND OK
+admsg.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:09.881]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:26:09.931]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAA
+[15:26:10.031]สีก๛ก๔AAA=3
+p_headmsg
+SEND OK
+.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:14.944]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:26:14.994]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=
+[15:26:15.083]สีก๛ก๔3
+p_headms
+SEND OK
+g.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:20.001]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:26:20.051]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:26:20.081]สีก๛ก๔AAAAAAAAA4I\0lockback/0026210218731838\0
+[15:26:20.151]สีก๛ก๔tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+SND OK
+A=3
+p_headmsg.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:24.985]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_
+[15:26:25.061]สีก๛ก๔send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:26:25.101]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:26:25.201]สีก๛ก๔AAAAAAAAAA=3
+p_he
+SEND OK
+admsg.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:30.121]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_send_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:26:30.171]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAA4I\0lockback/0026210218731838\0
+[15:26:30.271]สีก๛ก๔tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+SEND OK
+=3
+p_headmsg.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:35.101]สีก๛ก๔timer_send_list_1ms_bb11=3
+timer_s
+[15:26:35.181]สีก๛ก๔end_list_1ms_bb22=3
+p_headmsg.msg_id=3
+p_headmsg.status=3
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+OK
+
+[15:26:35.221]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:26:35.323]สีก๛ก๔AAAAAAAAAA=3
+p_headmsg.msg_id=3
+p_headmsg.sta
+SEND OK
+tus=5
+list_get_elem_addr=3=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[15:26:38.237]สีก๛ก๔+IPD,182:P\0P\0P\0P\0P\0P\0P\0P\0P\0P\0P\0P\0P\041\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+L7Q==41\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==P\0
+[15:26:38.268]สีก๛ก๔P\0P\0P\0P\0P\0P\0
++IPD,182:P\0P\0P\0P\0P\0P\0P\0P\0P\0P\0P\0P\0P\041\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==41\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==P\0P\0P\0P\0P\0P\0P\0
+publisher_PUBREC=3
+
+>+IPD,4:P\0
+
+>+IPD,4:Pp_headmsg.msg_id=3
+p_headmsg.status=6
+list_get
+SEND OK
+_elem_addr=3=536875664
+publisher_PUBREL=3
+
+[15:26:39.013]สีก๛ก๔+IPD,4:p\0
+[15:26:39.039]สีก๛ก๔
++IPD,4:p\0
+publisher_PUBCOMP=3
+msg_id=3=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=3
+list_de_by_elem111=3
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:26:39.151]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:26:44.672]สีก๛ก๔+IPD,51:41\0lock/0026210218731838\0yF/b8OHun3MmZZbXI+Lg7Q==
++IPD,51:41\0lock/0026210218731838\0
+[15:26:44.742]สีก๛ก๔yF/b8OHun3MmZZbXI+Lg7Q==
+subscriber_PUBLISH=2
+list_recv_size11=0
+msgid22=2
+subscriber_frist_insert
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875664
+list_travese_tmp=536875664
+p_head->msg.payload=yF/b8OHun3MmZZbXI+Lg7Q==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=2
+p_head->msg.status=5
+p_head->next=0
+====================================list_travese_size=1
+
+>
+>subscriber_PUBREC=2
+
+SEND OK
+
+[15:26:45.271]สีก๛ก๔+IPD,4:b\0
++IPD,4:b\0
+subscriber_PUBREL=2
+
+>
+>
+[15:26:45.341]สีก๛ก๔p_headmsg.msg_id=2
+p_headmsg.status=7
+list_get_elem
+SEND OK
+_addr=2=536875664
+subscriber_PUBCOMP=2
+
+OK
+
+[15:26:45.431]สีก๛ก๔
+OK
+subscriber_gprs_sleep_ok
+status=7==msgid=2=li
+[15:26:45.571]สีก๛ก๔st_get_addr_by_status=536875664
+topic==lock/0026210218731838
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875664
+list_travese_tmp=536875664
+p_head->msg.payload=yF/b8OHun3MmZZbXI+Lg7Q==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=2
+p_head->msg.status=7
+p_head->next=0
+====================================list_travese_size=1
+Lock_Open11111
+list_de_by_elem333=2
+list_de_by_elem111=2
+list_travese_list_is_NULL =536879652
+====================================list_travese_size=0
+DDDlock_run_status1 A
+DDDlock_run_status2
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=4
+publisher_msgid_insert1=339
+mqtt_publist ok
+status=3==msgid=4=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=4
+
+OK
+
+[15:26:45.621]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:26:45.641]สีก๛ก๔
+>
+[15:26:45.721]สีก๛ก๔AAAAAAAAAA=4
+p_headmsg.msg_id=4
+p_headmsg.sta
+SEND OK
+tus=5
+list_get_elem_addr=4=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=4
+
+[15:26:50.636]สีก๛ก๔timer_send_list_1ms_bb11=4
+timer_send_list_1ms_bb22=4
+p_headmsg.msg_id=4
+p_headmsg.status=3
+list_get_elem_addr=4=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=4=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=4
+
+OK
+
+[15:26:50.686]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=4
+[15:26:50.776]สีก๛ก๔
+p_headmsg.msg_id=4
+p_headmsg.
+SEND OK
+status=5
+list_get_elem_addr=4=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=tTHba9HTmmSej1PrHDdCozjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=4
+
+[15:26:53.514]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=4
+
+>+IPD,4:P\0
+
+>+IPD,4:Pp_headmsg.msg_id=4
+p_headmsg.status=6
+list_get_
+SEND OK
+elem_addr=4=536875664
+publisher_PUBREL=4
+
+[15:26:54.732]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[15:26:54.782]สีก๛ก๔
+publisher_PUBCOMP=4
+msg_id=4=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=4
+list_de_by_elem111=4
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:26:54.872]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:27:46.722]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=5
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:27:46.772]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=
+[15:27:46.852]สีก๛ก๔5
+p_headmsg.status=5
+list_get_elem_addr=5=536875664
+SEND OK
+
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:27:51.705]สีก๛ก๔timer_send_list_1ms_bb11=5
+
+[15:27:51.775]สีก๛ก๔timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:27:51.825]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:27:51.845]สีก๛ก๔
+>
+[15:27:51.915]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:27:56.764]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p
+[15:27:56.824]สีก๛ก๔_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:27:56.874]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:27:56.894]สีก๛ก๔
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+[15:27:56.964]สีก๛ก๔
+p_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:01.820]สีก๛ก๔timer_send_list_1ms_bb11=5
+time
+[15:28:01.894]สีก๛ก๔r_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:01.942]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:28:02.018]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.
+SEND OK
+status=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:06.870]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p
+[15:28:06.940]สีก๛ก๔_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:06.990]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+[15:28:07.071]สีก๛ก๔
+p_headmsg.status=5
+SEND OK
+
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:11.924]สีก๛ก๔timer_send_list_1ms_bb11=5
+t
+[15:28:11.994]สีก๛ก๔imer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:12.048]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:28:12.131]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.status=5
+list_get_elem_addr=5=53687
+SEND OK
+5664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:16.981]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p
+[15:28:17.052]สีก๛ก๔_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:17.092]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:28:17.112]สีก๛ก๔
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+[15:28:17.182]สีก๛ก๔
+p_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:22.040]สีก๛ก๔timer_send_list_1ms_bb11=5
+time
+[15:28:22.112]สีก๛ก๔r_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:22.142]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:28:22.242]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.st
+SEND OK
+tus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:27.091]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_he
+[15:28:27.161]สีก๛ก๔admsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:27.201]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:28:27.221]สีก๛ก๔
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p
+[15:28:27.291]สีก๛ก๔_headmsg.s
+SEND OK
+tatus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:32.142]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_
+[15:28:32.222]สีก๛ก๔send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:32.256]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:28:32.350]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:37.202]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_hea
+[15:28:37.262]สีก๛ก๔dmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:37.312]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_he
+[15:28:37.400]สีก๛ก๔admsg.stat
+SEND OK
+us=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:42.252]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_se
+[15:28:42.332]สีก๛ก๔nd_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:42.362]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:28:42.462]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.sta
+SEND OK
+us=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:47.374]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:47.424]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:28:47.454]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg
+[15:28:47.514]สีก๛ก๔_id=5
+p_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:52.359]สีก๛ก๔timer_send_list_1ms_bb11=5
+
+[15:28:52.429]สีก๛ก๔timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:52.479]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:28:52.569]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headm
+SEND OK
+sg.status=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:28:57.482]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:28:57.532]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=
+[15:28:57.622]สีก๛ก๔5
+p_headmsg.status=5
+SEND OK
+
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:02.473]สีก๛ก๔timer_send_list_1ms_bb11=5
+time
+[15:29:02.543]สีก๛ก๔r_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:02.593]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:29:02.683]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.status=
+SEND OK
+5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:07.534]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_hea
+[15:29:07.594]สีก๛ก๔dmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:07.644]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:29:07.674]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_h
+[15:29:07.734]สีก๛ก๔eadmsg.status=5
+SEND OK
+
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:12.583]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_s
+[15:29:12.653]สีก๛ก๔end_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:12.683]สีก๛ก๔
+O
+[15:29:12.703]สีก๛ก๔K
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:29:12.793]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:17.704]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:17.754]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:29:17.784]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id
+[15:29:17.844]สีก๛ก๔=5
+p_headm
+SEND OK
+sg.status=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:22.692]สีก๛ก๔timer_send_list_1ms_bb11=5
+
+[15:29:22.762]สีก๛ก๔timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:22.812]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:29:22.902]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.sta
+SEND OK
+tus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:27.752]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+
+[15:29:27.812]สีก๛ก๔p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:27.862]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+[15:29:27.951]สีก๛ก๔
+p_headmsg.status=
+SEND OK
+
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:32.797]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer
+[15:29:32.877]สีก๛ก๔_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:32.927]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:29:33.007]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.status=5
+l
+SEND OK
+ist_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:37.860]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_hea
+[15:29:37.920]สีก๛ก๔dmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:37.970]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_he
+[15:29:38.062]สีก๛ก๔admsg.statu
+SEND OK
+s=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:42.916]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send
+[15:29:42.980]สีก๛ก๔_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:43.028]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAA
+[15:29:43.123]สีก๛ก๔AAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:48.038]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:48.085]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id
+[15:29:48.175]สีก๛ก๔=5
+p_headmsg.status=5
+
+SEND OK
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:53.021]สีก๛ก๔timer_send_list_1ms_bb11=5
+
+[15:29:53.092]สีก๛ก๔timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:53.142]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:29:53.233]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headms
+SEND OK
+g.status=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:29:54.741]สีก๛ก๔
+OK
+
+[15:29:54.791]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[15:29:58.143]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:29:58.193]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=
+[15:29:58.282]สีก๛ก๔5
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:03.132]สีก๛ก๔timer_send_list_1ms_bb11=5
+t
+[15:30:03.202]สีก๛ก๔imer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:30:03.252]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:30:03.342]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.status=
+SEND OK
+
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:08.191]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p
+[15:30:08.257]สีก๛ก๔_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:30:08.300]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p
+[15:30:08.390]สีก๛ก๔_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:12.823]สีก๛ก๔
+OK
+
+[15:30:12.873]สีก๛ก๔
+OK
+
+>
+[15:30:12.893]สีก๛ก๔
+>PINGREQ
+mqtt_keep_alive resend ok
+
+S
+[15:30:12.923]สีก๛ก๔END OK
+
+[15:30:13.241]สีก๛ก๔timer_send_list_1ms_bb11=5
+time
+[15:30:13.311]สีก๛ก๔r_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:30:13.347]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:30:13.447]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:18.292]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_
+[15:30:18.362]สีก๛ก๔headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:30:18.412]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_h
+[15:30:18.502]สีก๛ก๔eadmsg.status=5
+list_get_elem_addr=5=53
+SEND OK
+6875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:23.345]สีก๛ก๔timer_send_list_1ms_bb11=5
+ti
+[15:30:23.424]สีก๛ก๔mer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:30:23.472]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:30:23.554]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.status=5
+list_get_elem_addr=5=
+SEND3OK
+6875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:25.186]สีก๛ก๔+IPD,900:41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/002621028731838\0
+[15:30:25.236]สีก๛ก๔GMTJ6fxjKk8zSfMb58HfKg==P\0P\0P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0P\0P\0P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfK==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0P\0P\0P\0P\0P\041\0lock/0026210218731838\0GMT6fxjKk8zSfMb58HfKg==P\0P\0P\0
+
+[15:30:28.469]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+[15:30:28.519]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=5
+p_headmsg.msg_id=5
+[15:30:28.609]สีก๛ก๔
+p_headmsg.status=
+SEND OK
+
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:30.828]สีก๛ก๔
+OK
+
+[15:30:30.878]สีก๛ก๔
+OK
+
+>
+>
+[15:30:30.908]สีก๛ก๔PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:30:33.461]สีก๛ก๔timer_send_list_1ms_bb11=5
+timer
+[15:30:33.531]สีก๛ก๔_send_list_1ms_bb22=0
+p_headmsg.msg_id=5
+p_headmsg.status=3
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+OK
+
+OK
+p
+[15:30:33.581]สีก๛ก๔ublisher_gprs_wakeup_ok
+
+>
+>
+[15:30:33.661]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.sta
+SEND OK
+tus=5
+list_get_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[15:30:36.362]สีก๛ก๔+IPD,405:P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0ะ\0P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58fKg==P\0ะ\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfM58HfKg==P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==
++IPD,405:P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0ะ\0P\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0ะ\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0P\041\0lock/0026210218731838\0
+[15:30:36.472]สีก๛ก๔GMTJ6fxjKk8zSfMb58HfKg==
+publisher_PUBREC=5
+
+>
+>
+[15:30:36.512]สีก๛ก๔p_headmsg.msg_id=5
+p_headmsg.status=6
+list_get_ele
+SEND OK
+m_addr=5=536875664
+publisher_PUBREL=5
+
+[15:30:41.513]สีก๛ก๔timer_send_list_1ms_cc11=5
+timer_send_list_1ms_cc22=0
+publisher_4444444444
+
+>
+>
+[15:30:41.593]สีก๛ก๔p_headmsg.msg_id=5
+p_headmsg.status=6
+list_ge
+SEND OK
+t_elem_addr=5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=5
+
+[15:30:43.151]สีก๛ก๔+IPD,167:41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0ะ\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg=p\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==
++IPD,167:41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==P\0ะ\0P\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==p\041\0lock/0026210218731838\0
+[15:30:43.241]สีก๛ก๔GMTJ6fxjKk8zSfMb58HfKg==
+subscriber_PUBLISH=3
+list_recv_size11=0
+msgid22=3
+subscriber_frist_insert
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875848
+list_travese_tmp=536875848
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=3
+p_head->msg.status=5
+p_head->next=0
+====================================list_travese_size=1
+
+>
+>subscriber_PUBREC=3
+
+SEND OK
+
+[15:30:43.772]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+publisher_PUBCOMP=5
+msg_id=5=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem3+IPD,4:b\0
+33=5
+list_de_by_elem111=5
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:30:43.922]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:30:48.821]สีก๛ก๔
+OK
+
+[15:30:48.861]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:31:06.731]สีก๛ก๔+IPD,112:41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==ะ\0b\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58Hfg==b\0
++IPD,112:41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==ะ\0b\041\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==b\0
+[15:31:06.881]สีก๛ก๔
+subscriber_PUBLISH=4
+list_recv_size11=1
+msgid11=4
+msg->msg_id11=339
+msg->msg_id and msgid no
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875848
+list_travese_tmp=536875848
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=3
+p_head->msg.status=5
+p_head->next=0
+====================================list_travese_size=1
+msg->msg_id and msgid no22
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875848
+list_travese_tmp=536875848
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=3
+p_head->msg.status=5
+p_head->next=536875664
+list_travese_tmp=536875664
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=4
+p_head->msg.status=5
+p_head->next=0
+====================================list_travese_size=2
+subscriber_msgid_insert=339
+
+>
+>
+[15:31:06.911]สีก๛ก๔subscriber_PUBREC=4
+
+SEND OK
+
+[15:31:06.961]สีก๛ก๔
+SEND OK
+
+>
+>PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:31:07.407]สีก๛ก๔+IPD,51:41\0lock/0026210218731838\0GMTJ6fxjKk8zSfMb58HfKg==
++IPD,51:41\0lock/0026210218731838\0
+[15:31:07.457]สีก๛ก๔GMTJ6fxjKk8zSfMb58HfKg==
+subscriber_PUBLISH=4
+list_recv_size11=2
+msg_id=4=list_get_addr_by_msgid=536875664
+msgid11=4
+msg->msg_id11=4
+subscriber_msgid_repeat=4
+
+>
+>
+[15:31:07.487]สีก๛ก๔subscriber_PUBREC=4
+
+SEND OK
+
+[15:31:07.567]สีก๛ก๔+IPD,4:b\0
++IPD,4:b\0
+[15:31:07.597]สีก๛ก๔
+subscriber_PUBREL=4
+
+>
+>
+[15:31:07.637]สีก๛ก๔p_headmsg.msg_id=4
+p_headmsg.status=7
+list_get_el
+SEND OK
+em_addr=4=536875664
+subscriber_PUBCOMP=4
+
+OK
+
+[15:31:07.727]สีก๛ก๔
+OK
+subscriber_gprs_sleep_ok
+status=7==msgid=4=l
+[15:31:07.847]สีก๛ก๔ist_get_addr_by_status=536875664
+topic==lock/0026210218731838
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875848
+list_travese_tmp=536875848
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=3
+p_head->msg.status=5
+p_head->next=536875664
+list_travese_tmp=536875664
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=4
+p_head->msg.status=7
+p_head->next=0
+====================================list_travese_size=2
+Lock_Close11111
+list_de_by_msgid222=4
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875848
+list_travese_tmp=536875848
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=3
+p_head->msg.status=5
+p_head->next=0
+====================================list_travese_size=1
+EEE lock close0
+
+[15:31:08.131]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[15:31:08.254]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
++IPD,4:b\0
++IPD,4:b\0
+subscriber_PUBREL=4
+
+>
+>
+[15:31:08.308]สีก๛ก๔subscriber_PUBCOMP=4
+
+SEND OK
+
+[15:31:08.398]สีก๛ก๔
+SEND OK
+subscriber_gprs_sleep_ok
+
+[15:31:09.491]สีก๛ก๔EEE lock close1 A
+EEE lock_stop2
+CCCCCC
+[15:31:09.571]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=6
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=6
+publisher_msgid_insert1=339
+mqtt_publist ok
+status=3==msgid=6=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=6
+
+OK
+
+[15:31:09.601]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:31:09.701]สีก๛ก๔AAAAAAAAAA=6
+p_headmsg.msg_id=6
+p_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=6=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=6
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=6
+
+[15:31:10.144]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+[15:31:10.174]สีก๛ก๔
+publisher_PUBREC=6
+
+>
+>
+[15:31:10.214]สีก๛ก๔p_headmsg.msg_id=6
+p_headmsg.status=6
+list_get_e
+SEND OK
+lem_addr=6=536875664
+publisher_PUBREL=6
+
+[15:31:10.684]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[15:31:10.734]สีก๛ก๔
+publisher_PUBCOMP=6
+msg_id=6=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=6
+list_de_by_elem111=6
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:31:10.834]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:31:14.969]สีก๛ก๔+IPD,4:b\0
++IPD,4:b\0
+subscriber_PUBREL=3
+
+>
+>
+[15:31:15.039]สีก๛ก๔p_headmsg.msg_id=3
+p_headmsg.status=7
+list_get_el
+SEND OK
+em_addr=3=536875848
+subscriber_PUBCOMP=3
+
+OK
+
+[15:31:15.132]สีก๛ก๔
+OK
+subscriber_gprs_sleep_ok
+status=7==msgid=
+[15:31:15.272]สีก๛ก๔3=list_get_addr_by_status=536875848
+topic==lock/0026210218731838
+====================================================
+list_travese_p_head =536879652
+list_travese_AAp_head =536875848
+list_travese_tmp=536875848
+p_head->msg.payload=GMTJ6fxjKk8zSfMb58HfKg==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=3
+p_head->msg.status=7
+p_head->next=0
+====================================list_travese_size=1
+Lock_Close11111
+list_de_by_elem333=3
+list_de_by_elem111=3
+list_travese_list_is_NULL =536879652
+====================================list_travese_size=0
+EEE lock close1 A
+EEE lock_stop2
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=7
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=7
+publisher_msgid_insert1=339
+mqtt_publist ok
+status=3==msgid=7=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=7
+
+OK
+
+[15:31:15.322]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:31:15.412]สีก๛ก๔AAAAAAAAAA=7
+p_headmsg.msg_id=7
+p_headmsg.s
+SEND OK
+tatus=5
+list_get_elem_addr=7=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0kDoQNaAmMwqDpFVPcxJQTjaHgs65qoupDBDat6x85U=
+send_p_headmsg.topic=lockback/0026210218731838
+send_p_headmsg.payloadlen=44
+send_p_headmsg.msg_id=7
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=7
+
+[15:31:16.371]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=7
+
+>
+>
+[15:31:16.437]สีก๛ก๔p_headmsg.msg_id=7
+p_headmsg.status=6
+list_g
+SEND OK
+et_elem_addr=7=536875664
+publisher_PUBREL=7
+
+[15:31:16.912]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[15:31:16.963]สีก๛ก๔
+publisher_PUBCOMP=7
+msg_id=7=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=7
+list_de_by_elem111=7
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:31:17.059]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:32:46.631]สีก๛ก๔CCCCCCCCCCCCCCC
+[15:32:46.701]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=8
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=8
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=8=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=8
+
+[15:32:47.061]สีก๛ก๔
+OK
+
+[15:32:47.101]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:32:47.201]สีก๛ก๔AAAAAAAAAA=8
+p_headmsg.msg_id=8
+p_headmsg.status=5
+list_get_elem_addr=8=5368
+SEND OK
+75664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=8
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=8
+
+[15:32:48.061]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=8
+
+>
+>
+[15:32:48.131]สีก๛ก๔p_headmsg.msg_id=8
+p_headmsg.status=6
+l
+SEND OK
+ist_get_elem_addr=8=536875664
+publisher_PUBREL=8
+
+[15:32:48.571]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[15:32:48.621]สีก๛ก๔
+publisher_PUBCOMP=8
+msg_id=8=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=8
+list_de_by_elem111=8
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:32:48.711]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:35:49.294]สีก๛ก๔
+OK
+
+[15:35:49.351]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[15:35:50.105]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[15:35:50.240]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[15:37:46.691]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=9
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=9
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=9=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=9
+
+[15:37:48.012]สีก๛ก๔
+OK
+
+[15:37:48.062]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAA
+[15:37:48.152]สีก๛ก๔AAA=9
+p_headmsg.msg_id=9
+p_headmsg.status=5
+list_get_elem_addr=9=536875
+SEND OK
+664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=9
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=9
+
+[15:37:48.882]สีก๛ก๔+IPD,4:P\0	
++IPD,4:P\0	
+publisher_PUBREC=9
+
+>
+>
+[15:37:48.952]สีก๛ก๔p_headmsg.msg_id=9
+p_headmsg.status=6
+list_ge
+SEND OK
+t_elem_addr=9=536875664
+publisher_PUBREL=9
+
+[15:37:50.783]สีก๛ก๔+IPD,4:p\0	
++IPD,4:p\0
+[15:37:50.833]สีก๛ก๔	
+publisher_PUBCOMP=9
+msg_id=9=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=9
+list_de_by_elem111=9
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:37:50.933]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:40:51.211]สีก๛ก๔
+OK
+
+[15:40:51.260]สีก๛ก๔
+OK
+
+>
+>
+[15:40:51.288]สีก๛ก๔PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[15:41:04.710]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[15:41:04.850]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[15:42:46.681]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=10
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+[15:42:46.729]สีก๛ก๔
+OK
+
+[15:42:46.777]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:42:46.874]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.status=5
+list_get_elem_addr=10=536875664
+SEND OK
+
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:42:51.736]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:42:51.784]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_hea
+[15:42:51.875]สีก๛ก๔dmsg.msg_id=10
+p_headmsg.status=5
+list_get_elem_addr=10=5
+SEND OK
+36875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:42:56.724]สีก๛ก๔timer_send_list_1ms_bb11=10
+ti
+[15:42:56.795]สีก๛ก๔mer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:42:56.843]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:42:56.874]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.st
+SEND OK
+
+[15:42:56.932]สีก๛ก๔atus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:01.842]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:01.892]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:43:01.922]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg
+[15:43:01.982]สีก๛ก๔.msg_id=10
+p_headmsg.sta
+SEND OK
+tus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:06.829]สีก๛ก๔timer_send_list_1ms_
+[15:43:06.899]สีก๛ก๔bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:06.949]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.s
+[15:43:07.042]สีก๛ก๔ta
+SEND OK
+tus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:11.892]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1m
+[15:43:11.957]สีก๛ก๔s_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:12.005]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+[15:43:12.095]สีก๛ก๔
+p_headmsg.msg_id=10
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:16.936]สีก๛ก๔timer_send_l
+[15:43:17.006]สีก๛ก๔ist_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:17.062]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_h
+[15:43:17.152]สีก๛ก๔eadmsg.status=5
+
+SEND OK
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:22.001]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send
+[15:43:22.072]สีก๛ก๔_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:22.122]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:43:22.202]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.statu
+SEND OK
+s=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:27.125]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:27.165]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:43:27.205]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg
+[15:43:27.255]สีก๛ก๔_id=10
+p_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:32.105]สีก๛ก๔timer_send_list_1ms_bb11=10
+
+[15:43:32.175]สีก๛ก๔timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:32.225]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.
+SENs OK
+[15:43:32.314]สีก๛ก๔
+tatus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:37.236]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:37.284]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headm
+[15:43:37.374]สีก๛ก๔sg.msg_id=10
+p_headmsg.s
+SEND OK
+tatus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:42.222]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer
+[15:43:42.292]สีก๛ก๔_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:42.342]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headms
+SEND OK
+g.stat
+[15:43:42.432]สีก๛ก๔us=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:47.275]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_
+[15:43:47.345]สีก๛ก๔headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:47.385]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:43:47.425]สีก๛ก๔AAAAAAAAAA=10
+[15:43:47.476]สีก๛ก๔
+p_headmsg.msg_id=10
+p_headmsg
+SEND OK
+status=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:50.785]สีก๛ก๔
+OK
+
+[15:43:50.825]สีก๛ก๔
+OK
+
+[15:43:50.845]สีก๛ก๔
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[15:43:52.331]สีก๛ก๔timer_send_li
+[15:43:52.401]สีก๛ก๔st_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:52.451]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_head
+[15:43:52.541]สีก๛ก๔msg.sta
+tEND OK
+us=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:43:57.386]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_
+[15:43:57.466]สีก๛ก๔list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:43:57.496]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:43:57.596]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:02.447]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+[15:44:02.507]สีก๛ก๔
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:02.557]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headms
+[15:44:02.647]สีก๛ก๔g.msg_id=10
+p_headmsg.
+SEND OK
+status=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:07.501]สีก๛ก๔timer_send_list_1ms_b
+[15:44:07.563]สีก๛ก๔b11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:07.613]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.statu
+[15:44:07.703]สีก๛ก๔s=
+SEND OK
+5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:08.874]สีก๛ก๔
+OK
+
+[15:44:08.914]สีก๛ก๔
+OK
+
+>
+>
+[15:44:08.954]สีก๛ก๔PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:44:12.551]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_b
+[15:44:12.621]สีก๛ก๔b22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:12.671]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAA
+[15:44:12.761]สีก๛ก๔AAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:17.672]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:17.722]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_head
+[15:44:17.812]สีก๛ก๔msg.msg_id=10
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:22.663]สีก๛ก๔timer_send_list_1ms_
+[15:44:22.733]สีก๛ก๔bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:22.783]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:44:22.813]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.sta
+[15:44:22.873]สีก๛ก๔
+SEND OK
+tus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:26.873]สีก๛ก๔
+OK
+
+[15:44:26.923]สีก๛ก๔
+OK
+
+>
+>
+[15:44:26.953]สีก๛ก๔PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:44:27.726]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_b
+[15:44:27.786]สีก๛ก๔b22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:27.836]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+[15:44:27.926]สีก๛ก๔
+p_headmsg.msg_id=10
+p_headms
+SEND OK
+.status=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:32.774]สีก๛ก๔timer_send_lis
+[15:44:32.844]สีก๛ก๔t_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:32.894]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:44:32.924]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headm
+[15:44:32.984]สีก๛ก๔sg.status=5
+list_get_elem_addr=10=5368
+SEND OK
+75664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:37.831]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_sen
+[15:44:37.911]สีก๛ก๔d_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:37.941]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:44:38.043]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:42.892]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb
+[15:44:42.952]สีก๛ก๔22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:43.002]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_he
+[15:44:43.091]สีก๛ก๔admsg.msg_id=10
+p_headmsg.status=
+SEND OK
+5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:44.862]สีก๛ก๔
+OK
+
+[15:44:44.912]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:44:47.943]สีก๛ก๔timer_send_list_1
+[15:44:48.013]สีก๛ก๔ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:48.061]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.s
+[15:44:48.152]สีก๛ก๔tatus=5
+SEND OK
+
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:53.004]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_lis
+[15:44:53.069]สีก๛ก๔t_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:53.117]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=
+[15:44:53.207]สีก๛ก๔10
+p_headmsg.msg_id=10
+p_headmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:44:58.052]สีก๛ก๔timer_s
+[15:44:58.122]สีก๛ก๔end_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:44:58.172]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p
+[15:44:58.262]สีก๛ก๔_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:02.873]สีก๛ก๔
+OK
+
+[15:45:02.923]สีก๛ก๔
+OK
+
+>
+>
+[15:45:02.953]สีก๛ก๔PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:45:03.112]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_sen
+[15:45:03.182]สีก๛ก๔d_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:45:03.232]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:45:03.322]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.statu
+SEND OK
+s=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:08.238]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:45:08.280]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[15:45:08.300]สีก๛ก๔
+>AAAAAAAAAA=10
+p_headmsg.msg_i
+[15:45:08.370]สีก๛ก๔d=10
+p_headmsg.status=5
+list_get_elem_addr=10=53687
+SEND OK
+5664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:13.222]สีก๛ก๔timer_send_list_1ms_bb11
+[15:45:13.292]สีก๛ก๔=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:45:13.342]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.status=
+[15:45:13.432]สีก๛ก๔5
+list_get_elem_addr=
+SEND 0K
+=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:18.281]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb
+[15:45:18.341]สีก๛ก๔22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:45:18.391]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_
+[15:45:18.481]สีก๛ก๔headmsg.msg_id=10
+p_headmsg.status=5
+SEND OK
+
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:20.878]สีก๛ก๔
+OK
+
+[15:45:20.926]สีก๛ก๔
+OK
+
+>
+>
+[15:45:20.958]สีก๛ก๔PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:45:23.332]สีก๛ก๔timer_send_l
+[15:45:23.402]สีก๛ก๔ist_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:45:23.452]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_hea
+[15:45:23.542]สีก๛ก๔dmsg.st
+SEND OK
+atus=5
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:28.394]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_sen
+[15:45:28.467]สีก๛ก๔d_list_1ms_bb22=0
+p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:45:28.514]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:45:28.601]สีก๛ก๔AAAAAAAAAA=10
+p_headmsg.msg_id=10
+p_headmsg.status=5
+list_get_elem_addr=10=
+3END OK
+6875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:33.442]สีก๛ก๔timer_send_list_1ms_bb11=10
+timer_send_list_1ms_bb22=0
+
+[15:45:33.512]สีก๛ก๔p_headmsg.msg_id=10
+p_headmsg.status=3
+list_get_elem_addr=10=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=10=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=10
+
+OK
+
+[15:45:33.562]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=10
+p_headms
+[15:45:33.652]สีก๛ก๔g.msg_id=10
+p_headmsg.status=5
+list_get_elem_addr=10=
+SEND OK
+36875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=10
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=10
+
+[15:45:38.244]สีก๛ก๔+IPD,72:P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+P\0
+ะ\0
++IPD,72:P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+P\0
+ะ\0
+publisher_PUBREC=10
+
+>
+>
+[15:45:38.318]สีก๛ก๔p_headmsg.msg_id=10
+p_headmsg.status=6
+list_get_ele
+SEND OK
+m_addr=10=536875664
+publisher_PUBREL=10
+
+[15:45:38.858]สีก๛ก๔
+OK
+
+[15:45:38.908]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[15:45:39.531]สีก๛ก๔+IPD,80:P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+p\0
+
++IPD,80:P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+P\0
+ะ\0P\0
+P\0
+P\0
+p\0
+
+publisher_PUBREC=10
+
+>
+>
+[15:45:39.621]สีก๛ก๔p_headmsg.msg_id=10
+p_headmsg.status=6
+list_g
+SEND OK
+et_elem_addr=10=536875664
+publisher_PUBREL=10
+
+[15:45:39.771]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[15:45:39.911]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[15:45:40.551]สีก๛ก๔+IPD,4:p\0
+
++IPD,4:p\0
+[15:45:40.611]สีก๛ก๔
+
+publisher_PUBCOMP=10
+msg_id=10=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=10
+list_de_by_elem111=10
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:45:40.711]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:47:46.661]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=11
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=11
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=11=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=11
+
+OK
+
+[15:47:46.711]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=11
+p_headmsg.
+[15:47:46.801]สีก๛ก๔msg_id=11
+p_headmsg.status=5
+list_get_elem_addr=11=536875664
+SEND OK
+
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=11
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=11
+
+[15:47:48.532]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=11
+
+>
+>
+[15:47:48.602]สีก๛ก๔p_headmsg.msg_id=11
+p_headmsg.status=6
+list_get_ele
+SEND OK
+m_addr=11=536875664
+publisher_PUBREL=11
+
+[15:47:49.612]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[15:47:49.672]สีก๛ก๔
+publisher_PUBCOMP=11
+msg_id=11=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=11
+list_de_by_elem111=11
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:47:49.772]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:50:51.212]สีก๛ก๔
+OK
+
+[15:50:51.262]สีก๛ก๔
+OK
+
+>
+>
+[15:50:51.292]สีก๛ก๔PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[15:50:52.132]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[15:50:52.262]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[15:52:46.653]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=12
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=12
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=12=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=12
+
+[15:52:47.579]สีก๛ก๔
+OK
+
+[15:52:47.609]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:52:47.709]สีก๛ก๔AAAAAAAAAA=12
+p_headmsg.msg_id=12
+p_headmsg.status=5
+list_get_elem_addr=12=
+SND OK
+536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=12
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=12
+
+[15:52:51.705]สีก๛ก๔timer_send_list_1ms_bb11=12
+timer_send_list_1ms_bb22=2
+p_headmsg.msg_id=12
+p_headmsg.status=3
+list_get_elem_addr=12=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=12
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=12=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=12
+
+OK
+
+[15:52:51.755]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:52:51.785]สีก๛ก๔AAAAAAAAAA=12
+p_headmsg.msg_id=
+[15:52:51.845]สีก๛ก๔12
+p_headmsg.
+SEND OK
+status=5
+list_get_elem_addr=12=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=12
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=12
+
+[15:52:54.092]สีก๛ก๔+IPD,4:P\0
+[15:52:54.112]สีก๛ก๔
++IPD,4:P\0
+publisher_PUBREC=12
+
+>+IPD,4:P\0
+
+>+IPD,4:P
+[15:52:54.162]สีก๛ก๔p_headmsg.msg_id=12
+p_headmsg.status=6
+list_get_el
+SEND OK
+em_addr=12=536875664
+publisher_PUBREL=12
+
+[15:52:55.240]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[15:52:55.300]สีก๛ก๔
+publisher_PUBCOMP=12
+msg_id=12=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=12
+list_de_by_elem111=12
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:52:55.390]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[15:55:55.513]สีก๛ก๔
+OK
+
+[15:55:55.563]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[15:55:56.324]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[15:55:56.464]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[15:57:46.631]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=13
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=13
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=13=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=13
+
+[15:57:46.891]สีก๛ก๔
+OK
+
+[15:57:46.941]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[15:57:46.971]สีก๛ก๔AAAAAAAAAA=13
+p_headmsg.msg_id
+[15:57:47.033]สีก๛ก๔=13
+p_headmsg.status=5
+list_get_elem_addr=13=536875
+SEND OK
+664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=13
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=13
+
+[15:57:49.986]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=13
+
+>
+>
+[15:57:50.062]สีก๛ก๔p_headmsg.msg_id=13
+p_headmsg.status=6
+list_get_elem
+SEND OK
+_addr=13=536875664
+publisher_PUBREL=13
+
+[15:57:51.051]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[15:57:51.111]สีก๛ก๔
+publisher_PUBCOMP=13
+msg_id=13=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=13
+list_de_by_elem111=13
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[15:57:51.201]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:00:51.982]สีก๛ก๔
+OK
+
+[16:00:52.033]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:00:58.703]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[16:00:58.843]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:02:46.622]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=14
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=14
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=14=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=14
+
+[16:02:47.231]สีก๛ก๔
+OK
+
+[16:02:47.273]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[16:02:47.373]สีก๛ก๔AAAAAAAAAA=14
+p_headmsg.msg_id=14
+p_headmsg.status=5
+list_get_elem_addr=
+SEND OK
+14=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=14
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=14
+
+[16:02:51.672]สีก๛ก๔timer_send_list_1ms_bb11=14
+timer_send_list_1ms_bb22=4
+p_headmsg.msg_id=14
+p_headmsg.status=3
+list_get_elem_addr=14=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=14
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=14=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=14
+
+OK
+
+[16:02:51.722]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=14
+p_headmsg.
+[16:02:51.812]สีก๛ก๔msg_id=14
+p_headmsg.status=5
+
+SEND OK
+list_get_elem_addr=14=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=14
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=14
+
+[16:02:53.864]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+[16:02:53.894]สีก๛ก๔
+publisher_PUBREC=14
+
+>
+>
+[16:02:53.934]สีก๛ก๔p_headmsg.msg_id=14
+p_headmsg.status=6
+list
+SEND OK
+_get_elem_addr=14=536875664
+publisher_PUBREL=14
+
+[16:02:54.221]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+[16:02:54.251]สีก๛ก๔
+publisher_PUBREC=14
+
+>
+>
+[16:02:54.291]สีก๛ก๔p_headmsg.msg_id=14
+p_headmsg.status=6
+list_g
+SEND OK
+et_elem_addr=14=536875664
+publisher_PUBREL=14
+
+[16:02:55.343]สีก๛ก๔+IPD,8:p\0p\0
++IPD,8:p\0p\0
+[16:02:55.403]สีก๛ก๔
+publisher_PUBCOMP=14
+msg_id=14=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=14
+list_de_by_elem111=14
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:02:55.503]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+publisher_PUBCOMP=14
+
+OK
+
+[16:02:55.593]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:05:56.051]สีก๛ก๔
+OK
+
+[16:05:56.101]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:05:57.003]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+[16:05:57.035]สีก๛ก๔
+
+OK
+
+[16:05:57.141]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:07:46.602]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=15
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=15
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=15=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=15
+
+[16:07:46.912]สีก๛ก๔
+OK
+
+[16:07:46.962]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[16:07:47.051]สีก๛ก๔AAAAAAAAAA=15
+p_headmsg.msg_id=15
+p_headmsg.status
+SEND OK
+=5
+list_get_elem_addr=15=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=15
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=15
+
+[16:07:48.779]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=15
+
+>
+>
+[16:07:48.849]สีก๛ก๔p_headmsg.msg_id=15
+p_headmsg.status=6
+list_get_el
+SEND OK
+em_addr=15=536875664
+publisher_PUBREL=15
+
+[16:07:52.542]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:07:52.602]สีก๛ก๔
+publisher_PUBCOMP=15
+msg_id=15=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=15
+list_de_by_elem111=15
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:07:52.699]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:10:53.053]สีก๛ก๔
+OK
+
+[16:10:53.103]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:10:53.995]สีก๛ก๔+IPD,2:ะ\0
+[16:10:54.015]สีก๛ก๔
++IPD,2:ะ\0
+
+OK
+
+[16:10:54.132]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:12:46.592]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=16
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=16
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=16=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=16
+
+[16:12:46.845]สีก๛ก๔
+OK
+
+[16:12:46.895]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=16
+p_headmsg.m
+[16:12:46.985]สีก๛ก๔sg_id=16
+p_headmsg.status=5
+list_get_elem_addr=16=
+SEND O
+536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=16
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=16
+
+[16:12:50.604]สีก๛ก๔+IPD,4:P\0
+[16:12:50.766]สีก๛ก๔
++IPD,4:P\0
+publisher_PUBREC=16
+
+>
+>p_headmsg.msg_id=16
+p_headmsg.status=6
+list_get_elem
+SEND OK
+_addr=16=536875664
+publisher_PUBREL=16
+
+[16:12:51.917]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:12:51.977]สีก๛ก๔
+publisher_PUBCOMP=16
+msg_id=16=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=16
+list_de_by_elem111=16
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:12:52.072]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:15:52.543]สีก๛ก๔
+OK
+
+[16:15:52.593]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:15:53.355]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[16:15:53.495]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:17:46.512]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCC
+[16:17:46.582]สีก๛ก๔CCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=17
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=17
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=17=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=17
+
+[16:17:47.813]สีก๛ก๔
+OK
+
+[16:17:47.853]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[16:17:47.943]สีก๛ก๔AAAAAAAAAA=17
+p_headmsg.msg_id=17
+p_headmsg.status=5
+list_get_elem_addr=17=536875
+SEND OK
+664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=17
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=17
+
+[16:17:49.112]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=17
+
+>
+>
+[16:17:49.182]สีก๛ก๔p_headmsg.msg_id=17
+p_headmsg.status=6
+list_get_e
+SEND OK
+lem_addr=17=536875664
+publisher_PUBREL=17
+
+[16:17:53.091]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:17:53.151]สีก๛ก๔
+publisher_PUBCOMP=17
+msg_id=17=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=17
+list_de_by_elem111=17
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:17:53.254]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:20:54.578]สีก๛ก๔
+OK
+
+[16:20:54.628]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:21:12.672]สีก๛ก๔
+OK
+
+[16:21:12.722]สีก๛ก๔
+OK
+
+>
+>
+[16:21:12.752]สีก๛ก๔PINGREQ
+mqtt_keep_alive resend ok
+
+SEND OK
+
+[16:21:19.932]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[16:21:20.062]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:21:39.721]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[16:21:39.851]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:22:46.671]สีก๛ก๔Bat_Pre=
+dev_to_srv_batt_voltage
+expressText={"battery":20}
+aesKey=a94e6b69af9c3820
+cipherText=gmoOf39N2AzpRX4Q1aHweA==
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=gmoOf39N2AzpRX4Q1aHweA==
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=24
+send_p_headmsg.msg_id=18
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=18
+publisher_msgid_insert1=339
+dev_to_srv_batt mqtt_publist ok
+DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=gmoOf39N2AzpRX4Q1aHweA==
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=24
+send_p_headmsg.msg_id=18
+send_p_headmsg.status=3
+send_p_headnext=536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==2
+publisher packetid repeat2=19
+publisher msgid insert2=339
+heartbeat mqtt_publist ok
+status=3==msgid=18=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=18
+
+[16:22:47.693]สีก๛ก๔
+OK
+
+[16:22:47.743]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=18
+p_headmsg.msg_id=18
+p_h
+[16:22:47.863]สีก๛ก๔eadmsg.status=5
+list_get_elem_addr
+SEND OK
+18=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=gmoOf39N2AzpRX4Q1aHweA==
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=24
+send_p_headmsg.msg_id=18
+send_p_headmsg.status=5
+send_p_headnext=536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==2
+publisher_PUBLISH=18
+status=3==msgid=19=list_get_addr_by_status=536875848
+timer_send_list_1ms_aa=18
+
+OK
+
+[16:22:47.913]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=19
+p_headmsg.m
+[16:22:48.031]สีก๛ก๔sg_id=19
+p_headmsg.stat
+SEND OK
+us=5
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=gmoOf39N2AzpRX4Q1aHweA==
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=24
+send_p_headmsg.msg_id=18
+send_p_headmsg.status=5
+send_p_headnext=536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==2
+publisher_PUBLISH=19
+
+[16:22:48.735]สีก๛ก๔+IPD,8:P\0P\0
++IPD,8:P\0P\0
+[16:22:48.765]สีก๛ก๔
+publisher_PUBREC=18
+
+>
+>
+[16:22:48.805]สีก๛ก๔p_headmsg.msg_id=18
+p_headmsg.status=6
+list_get_elem_addr=18=5368756
+SEND OK
+64
+publisher_PUBREL=18
+
+[16:22:49.614]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:22:49.684]สีก๛ก๔
+publisher_PUBCOMP=18
+msg_id=18=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=18
+list_de_by_elem111=18
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+
+OK
+
+[16:22:49.784]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:22:52.923]สีก๛ก๔timer_send_list_1ms_bb11=19
+timer_send_list_1ms_bb22=4
+p_headmsg.msg_id=19
+p_headmsg.status=3
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=19=list_get_addr_by_status=536875848
+timer_send_list_1ms_aa=19
+
+OK
+
+[16:22:52.963]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[16:22:53.003]สีก๛ก๔AAAAAAAAAA=19
+p_head
+[16:22:53.062]สีก๛ก๔msg.msg_id=19
+p_headmsg.status=5
+list_get_elem_addr=19=536
+SEND OK
+875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=19
+
+[16:22:57.905]สีก๛ก๔timer_send_list_1ms_b
+[16:22:57.975]สีก๛ก๔b11=19
+timer_send_list_1ms_bb22=4
+p_headmsg.msg_id=19
+p_headmsg.status=3
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=19=list_get_addr_by_status=536875848
+timer_send_list_1ms_aa=19
+
+OK
+
+[16:22:58.030]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=19
+p_headmsg.msg_id=19
+p_headmsg.s
+[16:22:58.111]สีก๛ก๔
+SEND OK
+tatus=5
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=19
+
+[16:23:00.370]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=19
+
+>+IPD,4:P\0
+
+SEND OK
+
+>+IPD,4:Pp_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+publisher_PUBREL=19
+
+[16:23:05.460]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:05.536]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=53687584
+SEND OK
+8
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:10.451]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:10.531]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+
+SEND OK
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:15.452]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:15.532]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++++++
+SEND OK
++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:20.457]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:20.527]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+SEND OK
+
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:25.457]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:25.527]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_a
+SEND OK
+ddr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:30.451]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:30.534]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=53687584
+SEND OK
+8
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:35.456]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:35.526]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+SEND OK
+
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:40.451]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:40.531]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++++
+SEND OK
++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:45.452]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:45.532]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=53687584
+SEND OK
+8
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:50.457]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:50.527]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++
+SEND OK
++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:23:55.450]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:23:55.530]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+
+SEND OK
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:00.451]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:00.531]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_
+SEND OK
+elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:05.454]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:05.524]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get
+SEND OK
+_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:10.451]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:10.531]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++++
+SEND OK
++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:15.451]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:15.531]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_g
+SEND OK
+et_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:20.455]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:20.525]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++++++
+SEND OK
++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:25.454]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:25.524]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++++
+SEND OK
++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:30.451]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:30.531]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++++
+SEND OK
++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:35.455]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:35.525]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+++++++++++++++++++
+SEND OK
++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:40.450]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:40.530]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
+SEN OK
+
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:45.449]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:24:45.529]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=5368758
+SEND OK
+8
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:24:50.454]สีก๛ก๔timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
++CME ERROR: 9
+
++CME ERROR: 9
+
+[16:24:50.514]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+\0
+[16:24:50.914]สีก๛ก๔
+F1: 0000 0000
+V0: 0000 0000 [0001]
+00: 0000 0000
+U0: 0000 0001 [0000]
+G0: 0002 0000 [0000]
+T0: 0000 00BB
+Jump to BL
+
+
+[16:24:51.752]สีก๛ก๔gprs_power_on
+
+[16:24:52.051]สีก๛ก๔ÿÿ
+[16:24:52.691]สีก๛ก๔
+[16:24:52.951]สีก๛ก๔ÿÿ
+OK
+
+[16:24:53.091]สีก๛ก๔@@Ver:V2_029-OPEN-01, Build Time:2017/11/07 
+[16:24:53.111]สีก๛ก๔10:48
+
+[16:24:53.248]สีก๛ก๔
+OK
+@@Ver:V2_029-OPEN-01, Build 
+[16:24:53.272]สีก๛ก๔Time:2017/11/07 10:48
+
+OK
+
+[16:24:53.762]สีก๛ก๔
+OK
+
+356802032293739
+
+OK
+
+[16:24:54.261]สีก๛ก๔
+356802032293739
+
+OK
+
+ERROR
+
+[16:24:54.771]สีก๛ก๔
+ERROR
+
+ERROR
+
+[16:24:55.260]สีก๛ก๔
+ERROR
+
+ERROR
+
+[16:24:55.770]สีก๛ก๔
+ERROR
+
++CPIN: READY
+
+OK
+
+[16:24:56.271]สีก๛ก๔
++CPIN: READY
+
+OK
+
++CSQ: 99, 99
+
+OK
+
+[16:24:56.772]สีก๛ก๔
++CSQ: 99, 99
+
+OK
+
++CREG: 0,2
+
+OK
+
+[16:24:57.271]สีก๛ก๔
++CREG: 0,2
+
+OK
+
++CME ERROR: 16
+
+[16:24:58.081]สีก๛ก๔
++CME ERROR: 16
+
+OK
+
+[16:24:59.583]สีก๛ก๔
+OK
+
++CME ERROR: 2
+
+[16:25:01.082]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[16:25:02.596]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[16:25:04.101]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[16:25:05.603]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[16:25:07.103]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[16:25:08.614]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[16:25:10.120]สีก๛ก๔
++CME ERROR: 2
+
++CME ERROR: 2
+
+[16:25:12.561]สีก๛ก๔
+CONNECT OK
+
+[16:25:13.131]สีก๛ก๔
++CME ERROR: 2
+
+CONNECT OK
+
+[16:25:14.133]สีก๛ก๔
+>
+>CONNECT
+
+SEND OK
+
+[16:25:15.331]สีก๛ก๔+IPD,4: \0\0
++IPD,4: \0\0
+CONNACK
+mqtt_connect ok
+
+>
+>
+[16:25:15.381]สีก๛ก๔SUBSCRIBE
+
+SEND OK
+
+[16:25:17.162]สีก๛ก๔+IPD,5:\0
++IPD,5:\0
+qos=2==submsgid=1
+SUBACK
+mqtt_subscribe_topic bell ok=bell/0026210218731838
+
+>
+>
+[16:25:17.235]สีก๛ก๔SUBSCRIBE
+
+SEND OK
+
+[16:25:17.624]สีก๛ก๔+IPD,5:\0
++IPD,5:\0
+qos=2==submsgid=2
+SUBACK
+mqtt_subscribe_topic lock ok=lock/0026210218731838
+timer_send_list_1ms_cc11=19
+timer_send_list_1ms_cc22=4
+publisher_4444444444
+
+>
+>
+[16:25:17.744]สีก๛ก๔p_headmsg.msg_id=19
+p_headmsg.status=6
+list_get
+SEND OK
+_elem_addr=19=536875848
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875848
+send_list_travese_tmp =536875848
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=19
+send_p_headmsg.status=6
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBREL_resend=19
+
+[16:25:19.587]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:25:19.647]สีก๛ก๔
+publisher_PUBCOMP=19
+msg_id=19=list_get_addr_by_msgid=536875848
+publisher_find_msgid
+list_de_by_elem333=19
+list_de_by_elem111=19
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:25:19.737]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:27:46.562]สีก๛ก๔CCCCCCCCCCCC
+[16:27:46.632]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=3
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=3=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=3
+
+[16:27:47.101]สีก๛ก๔
+OK
+
+[16:27:47.151]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[16:27:47.239]สีก๛ก๔AAAAAAAAAA=3
+p_headmsg.msg_id=3
+p_headmsg.status=5
+list_get_elem_addr=3=536875664
++++++++++
+SEND OK
+++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=3
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=3
+
+[16:27:48.861]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+[16:27:48.891]สีก๛ก๔
+publisher_PUBREC=3
+
+>
+>
+[16:27:48.931]สีก๛ก๔p_headmsg.msg_id=3
+p_headmsg.status=6
+list_get_
+SEND OK
+elem_addr=3=536875664
+publisher_PUBREL=3
+
+[16:27:49.767]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:27:49.817]สีก๛ก๔
+publisher_PUBCOMP=3
+msg_id=3=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=3
+list_de_by_elem111=3
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:27:49.908]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:30:50.284]สีก๛ก๔
+OK
+
+[16:30:50.334]สีก๛ก๔
+OK
+
+>
+>PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:30:51.121]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[16:30:51.251]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:32:46.554]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+[16:32:46.624]สีก๛ก๔
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=4
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=4=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=4
+
+[16:32:47.597]สีก๛ก๔
+OK
+
+[16:32:47.637]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+[16:32:47.657]สีก๛ก๔
+>AAAAAAAAAA=4
+p_headmsg.msg_id=4
+p_headmsg.status=5
+
+[16:32:47.727]สีก๛ก๔list_get_elem_addr=4=
+SEND OK
+36875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=4
+
+[16:32:51.612]สีก๛ก๔timer_send
+[16:32:51.682]สีก๛ก๔_list_1ms_bb11=4
+timer_send_list_1ms_bb22=4
+p_headmsg.msg_id=4
+p_headmsg.status=3
+list_get_elem_addr=4=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=4=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=4
+
+OK
+
+[16:32:51.722]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>AAAAAAAAAA=4
+p_headmsg.msg_id=4
+p_headmsg.st
+SEN
+[16:32:51.812]สีก๛ก๔D OK
+atus=5
+list_get_elem_addr=4=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=4
+
+[16:32:56.663]สีก๛ก๔timer_send_list_1ms_bb11=4
+timer_send_list_1ms_
+[16:32:56.733]สีก๛ก๔bb22=4
+p_headmsg.msg_id=4
+p_headmsg.status=3
+list_get_elem_addr=4=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+status=3==msgid=4=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=4
+
+OK
+
+[16:32:56.773]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[16:32:56.813]สีก๛ก๔AAAAAAAAAA=4
+p_headmsg.
+[16:32:56.863]สีก๛ก๔msg_id=4
+p_headmsg.status=5
+list_get_elem_addr=4=536875664
++
+SEND OK
+++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=4
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=4
+
+[16:32:57.323]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=4
+
+>
+>
+[16:32:57.383]สีก๛ก๔p_headmsg.msg_id=4
+p_headmsg.status=6
+list_get_
+SEND OK
+elem_addr=4=536875664
+publisher_PUBREL=4
+
+[16:32:57.503]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=4
+
+>
+>
+[16:32:57.563]สีก๛ก๔p_headmsg.msg_id=4
+p_headmsg.status=6
+list_get_elem_a
+SEND OK
+ddr=4=536875664
+publisher_PUBREL=4
+
+[16:32:57.943]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=4
+
+>
+>
+[16:32:58.013]สีก๛ก๔p_headmsg.msg_id=4
+p_headmsg.status=6
+list_get_el
+SEND OK
+em_addr=4=536875664
+publisher_PUBREL=4
+
+[16:32:58.102]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:32:58.152]สีก๛ก๔
+publisher_PUBCOMP=4
+msg_id=4=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=4
+list_de_by_elem111=4
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:32:58.246]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:32:58.366]สีก๛ก๔+IPD,4:p\0
+[16:32:58.376]สีก๛ก๔
++IPD,4:p\0
+publisher_PUBCOMP=4
+
+OK
+
+[16:32:58.486]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:32:58.976]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+publisher_PUBCOMP=4
+
+OK
+
+[16:32:59.102]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:35:59.513]สีก๛ก๔
+OK
+
+[16:35:59.553]สีก๛ก๔
+OK
+
+>
+>
+[16:35:59.593]สีก๛ก๔PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:36:00.522]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[16:36:00.652]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok
+
+[16:37:46.541]สีก๛ก๔CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+[16:37:46.601]สีก๛ก๔CCCCC
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=3
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_packetid_repeat1=5
+publisher_msgid_insert1=339
+heartbeat mqtt_publist ok
+status=3==msgid=5=list_get_addr_by_status=536875664
+timer_send_list_1ms_aa=5
+
+[16:37:47.784]สีก๛ก๔
+OK
+
+[16:37:47.834]สีก๛ก๔
+OK
+publisher_gprs_wakeup_ok
+
+>
+>
+[16:37:47.924]สีก๛ก๔AAAAAAAAAA=5
+p_headmsg.msg_id=5
+p_headmsg.status=5
+list_get_elem_addr=
+SEND OK
+5=536875664
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =536875664
+send_list_travese_tmp =536875664
+send_p_headmsg.payload=0
+send_p_headmsg.topic=lockdata/0026210218731838
+send_p_headmsg.payloadlen=1
+send_p_headmsg.msg_id=5
+send_p_headmsg.status=5
+send_p_headnext=0
++++++++++++++++++++++++++++list_send_travese_size==1
+publisher_PUBLISH=5
+
+[16:37:48.702]สีก๛ก๔+IPD,4:P\0
++IPD,4:P\0
+publisher_PUBREC=5
+
+>
+>
+[16:37:48.762]สีก๛ก๔p_headmsg.msg_id=5
+p_headmsg.status=6
+list_get_elem_addr=5=536
+SEND OK
+875664
+publisher_PUBREL=5
+
+[16:37:49.301]สีก๛ก๔+IPD,4:p\0
++IPD,4:p\0
+[16:37:49.351]สีก๛ก๔
+publisher_PUBCOMP=5
+msg_id=5=list_get_addr_by_msgid=536875664
+publisher_find_msgid
+list_de_by_elem333=5
+list_de_by_elem111=5
++++++++++++++++++++++++++++++++++++++++++
+list_send_travese_p_head1 =536879648
+list_send_travese_AAp_head1 =0
++++++++++++++++++++++++++++list_send_travese_size==0
+
+OK
+
+[16:37:49.441]สีก๛ก๔
+OK
+publisher_gprs_sleep_ok
+
+[16:40:50.033]สีก๛ก๔
+OK
+
+[16:40:50.073]สีก๛ก๔
+OK
+
+>
+>
+[16:40:50.113]สีก๛ก๔PINGREQ
+mqtt_keep_alive send ok
+
+SEND OK
+
+[16:40:50.861]สีก๛ก๔+IPD,2:ะ\0
++IPD,2:ะ\0
+
+OK
+
+[16:40:50.991]สีก๛ก๔
+OK
+keep_alive gprs_sleep ok
+PINGRESP
+mqtt_keep_alive_recv_ok

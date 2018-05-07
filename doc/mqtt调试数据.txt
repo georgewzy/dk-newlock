@@ -1,5 +1,14 @@
 
 
+list_travese_p_head =536879652
+list_travese_AAp_head =536875664
+list_travese_tmp=536875664
+p_head->msg.payload=yF/b8OHun3MmZZbXI+Lg7Q==
+p_head->msg.topic=lock/0026210218731838
+p_head->msg.payloadlen=24
+p_head->msg.msg_id=5
+p_head->msg.status=5
+p_head->next=0
 
 
 yF/b8OHun3MmZZbXI+Lg7Q==1

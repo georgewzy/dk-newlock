@@ -97,6 +97,7 @@ void list_travese(list_node **p_head)
 			USART_OUT(USART1, "p_head->msg.payloadlen=%d\r\n", tmp->msg.payloadlen);
 			USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", tmp->msg.msg_id);
 			USART_OUT(USART1, "p_head->msg.status=%d\r\n", tmp->msg.status);
+			USART_OUT(USART1, "p_head->msg.dup=%d\r\n", tmp->msg.dup);
 			USART_OUT(USART1, "p_head->next=%d\r\n", tmp->next);
 			tmp = tmp->next;
 		}
@@ -122,6 +123,7 @@ void list_send_travese(list_node **p_head)
 		USART_OUT(USART1, "send_p_headmsg.payloadlen=%d\r\n", tmp->msg.payloadlen);
 		USART_OUT(USART1, "send_p_headmsg.msg_id=%d\r\n", tmp->msg.msg_id);
 		USART_OUT(USART1, "send_p_headmsg.status=%d\r\n", tmp->msg.status);
+		USART_OUT(USART1, "send_p_headmsg.dup=%d\r\n", tmp->msg.dup);
 		USART_OUT(USART1, "send_p_headnext=%d\r\n", tmp->next);
 		tmp = tmp->next;
 	}

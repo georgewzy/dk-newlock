@@ -263,7 +263,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 			
 			case 2:
-				ret = gprs_send_at("ATE0\r\n", "OK", 500,10000);
+				ret = gprs_send_at("ATE1\r\n", "OK", 500,10000);
 				if (ret != NULL)
 				{
 					gprs_status++;
@@ -515,7 +515,7 @@ int gprs_wakeup(uint8_t mode)
 	int rc = 0;
 	if(mode == 0)
 	{
-		ret = gprs_send_at("AT+CSCLK=0\r\n", "OK", 50, 2000);
+		ret = gprs_send_at("AT+CSCLK=0\r\n", "OK", 50, 1000);
 		if(ret != NULL)
 		{
 			rc = 1;

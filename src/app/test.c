@@ -66,7 +66,7 @@ void test_dev(void)
 		lock_run_status = 0;
 		
 		USART_OUT(USART1, "lock_status=%s\r\n", &lock_status);
-		memset(protocol_buff, 0, 512);
+		
 	}
 	test_lock_open();
 	test_lock_close();
@@ -78,7 +78,7 @@ void test_dev(void)
 	{
 		lock_bell_flag = 1;
 		USART_OUT(USART1, "test lock_bell_flag\r\n");
-		memset(protocol_buff, 0, 512);
+		
 	}
 	lock_find_bell();
 	lock_shake_alarm();
@@ -91,15 +91,15 @@ void test_dev(void)
 		{
 			
 		}
-		memset(protocol_buff, 0, 512);
 	}
 	
 	p = strstr((uint8_t*)protocol_buff, "gprs_open=1");
 	if(p != NULL)
 	{
 		test_gprs();
-		memset(protocol_buff, 0, 512);
+		
 	}
+	memset(protocol_buff, 0, 512);
 }
 
 

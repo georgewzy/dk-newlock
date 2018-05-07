@@ -64,7 +64,7 @@ uint8_t cipherText[128];
 uint8_t aesKey[16];
 
 DEV_BASIC_INFO dev_basic_info;
-DEV_CONFIG_INFO  dev_config_info;
+DEV_CONFIG_INFO dev_config_info;
 
 
 //µçÑ¹
@@ -90,7 +90,7 @@ uint8_t topic_buff[100] = {0};
 uint8_t send_buff[100] = {0};
 uint8_t test_flag = 0;
 
-
+int keep_alive_status = 0;
 
 
 void heartbeat(list_node **list, uint32_t ms)
@@ -118,7 +118,7 @@ void heartbeat(list_node **list, uint32_t ms)
 		}
 	}
 }
-int keep_alive_status = 0;
+
 
 void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_stauts)
 {	
@@ -144,7 +144,7 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 		if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, MQTT_KEEP_ALIVE_INTERVAL/10) == 0))
 		{
 			mqtt_keep_alive_err_cnt++;
-			if(mqtt_keep_alive_err_cnt > 6)
+			if(mqtt_keep_alive_err_cnt > 5)
 			{
 				gprs_status = 0;
 				mqtt_keep_alive_flag = 0;
@@ -162,7 +162,6 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 			}	
 		}
 	}
-	
 }
 
 
@@ -249,7 +248,7 @@ int main(void)
 			gprs_info.server_ip = dev_config_info.dev_ip;		
 			gprs_info.server_port = atoi(dev_config_info.dev_port);
 
-//			gprs_info.server_ip = "emq.91daoke.com";
+//			gprs_info.server_ip = "118.31.69.148";
 //			gprs_info.server_port = 1883;
 //			gprs_info.server_ip = "gpscore.net";
 //			gprs_info.server_port = 4120;
@@ -273,7 +272,7 @@ int main(void)
 		}
 		else if(ds_val == 1)
 		{
-			
+			test_dev();	
 		}
 		else if(ds_val == 2)	//test
 		{	
@@ -330,6 +329,12 @@ int main(void)
 //				USART_OUT(USART1, "george\r\n");
 //			}
 //		}
+		
+//		if(timer_is_timeout_1ms(timer_system, 1000*10) == 0)
+//		{
+//			gprs_send_at("AT+CSQ\r\n", "OK", 50, 1000);
+//		}
+		
 		
 	}
 

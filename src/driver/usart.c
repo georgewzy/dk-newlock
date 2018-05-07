@@ -356,14 +356,6 @@ void usart2_recv_data(void)
 			mqtt_buff.index = data_len;
 			
 			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
-//			for(i = 0 ;  i< usart2_rx_buff.index; i++)
-//			{
-//				printf("%c",usart2_rx_buff.pdata[i]);
-//			}
-//			printf("%s\n",usart2_rx_buff.pdata);
-//			USART_OUT(USART1,"%s",usart2_rx_buff.pdata);
-//			usart_send_data(USART1, mqtt_buff.pdata, mqtt_buff.index);			
-//			USART_OUT(USART1, "AAAA");
 		}		
 		
 		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//ÇåÀí»º³åÇø
