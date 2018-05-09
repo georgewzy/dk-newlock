@@ -106,7 +106,7 @@ void heartbeat(list_node **list, uint32_t ms)
 		sprintf((char*)topic_buff,"%s%s","lockdata/", dev_config_info.dev_id);
 		heartbeat_buff[0] = 0x30;
 		heartbeat_buff[1] = '\0';
-		
+//		int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len)
 		mqtt_pub = mqtt_publish_qos2(list, topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
 		if(mqtt_pub == 1)
 		{
@@ -120,6 +120,32 @@ void heartbeat(list_node **list, uint32_t ms)
 }
 
 
+void heartbeat1(uint32_t ms)
+{
+	int mqtt_pub = 0;
+	uint8_t heartbeat_buff[2] = {0};
+	
+	if(timer_is_timeout_1ms(timer_heartbeat, ms) == 0)
+	{
+		memset(topic_buff, 0 ,100);
+		memset(heartbeat_buff, 0, 2);
+		
+		sprintf((char*)topic_buff,"%s%s","lockdata/", dev_config_info.dev_id);
+		heartbeat_buff[0] = 0x30;
+		heartbeat_buff[1] = '\0';
+//		int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len)
+		mqtt_pub = mqtt_publist_qos0(topic_buff, heartbeat_buff, 2);
+		if(mqtt_pub == 1)
+		{
+			USART_OUT(USART1, "heartbeat mqtt_publist ok\r\n");
+		}	
+		else
+		{
+			USART_OUT(USART1, "heartbeat mqtt_publist error\r\n");
+		}
+	}
+}
+
 void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_stauts)
 {	
 	int gprs_wakeup_status = 0;
@@ -129,8 +155,8 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 		if(mqtt_keep_alive_flag == 0)
 		{
 			mqtt_keep_alive_flag = 1;
-			gprs_wakeup_status = gprs_wakeup(0);
-			if(gprs_wakeup_status == 1)
+//			gprs_wakeup_status = gprs_wakeup(0);
+//			if(gprs_wakeup_status == 1)
 			{						
 				keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
 				if(keep_alive_status == PINGREQ)
@@ -153,8 +179,8 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 			}
 			else
 			{
-				gprs_wakeup_status = gprs_wakeup(0);
-				if(gprs_wakeup_status == 1)
+//				gprs_wakeup_status = gprs_wakeup(0);
+//				if(gprs_wakeup_status == 1)
 				{						
 					keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
 					if(keep_alive_status == PINGREQ)
@@ -313,7 +339,7 @@ int main(void)
 		lock_open_deal_1(&list_send);	//开锁处理
 		lock_close_deal_1(&list_send);	//关锁处理	
 		dev_to_srv_batt_voltage(&list_send, BATT_VOLTAGE);	//电池电压信息
-		heartbeat(&list_send, HEARTBEAT);	//心跳
+		heartbeat1(HEARTBEAT);	//心跳
 		
 		
 		lock_hand_close();	//手动关锁
@@ -334,9 +360,9 @@ int main(void)
 //			}
 //		}
 		
-//		if(timer_is_timeout_1ms(timer_system, 1000*10) == 0)
+//		if(timer_is_timeout_1ms(timer_system, 1000*20) == 0)
 //		{
-//			gprs_send_at("AT+CSQ\r\n", "OK", 50, 1000);
+//			gprs_send_at("AT+CSQ\r\n", "OK", 30, 1000);
 //		}
 		
 		

@@ -308,16 +308,15 @@ void USART2_IRQHandler(void)
 //		if(usart2_rx_status == 0)
 		{
 			ch = USART_ReceiveData(USART2);	 
-//			USART_SendData(USART1, ch);
+			USART_SendData(USART1, ch);
 			if (usart2_rx_buff.index < USART_BUFF_LENGHT)
 			{			
 				usart2_rx_buff.pdata[usart2_rx_buff.index++] = ch;
-
 			}
-			else
-			{
-				memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
-			}
+//			else
+//			{
+//				memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
+//			}
 		}
 	}
 	
@@ -337,7 +336,7 @@ void usart2_recv_data(void)
 	uint8_t pick_str[50] = {0};
 	int data_len = 0,i =0;
 	
-	if(timer_is_timeout_1ms(timer_uart2, 10) == 0)	//20ms没接收到数据认为接收数据完成		
+	if(timer_is_timeout_1ms(timer_uart2, 5) == 0)	//20ms没接收到数据认为接收数据完成		
 	{
 		p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
 		if(p1 != NULL)
@@ -357,7 +356,7 @@ void usart2_recv_data(void)
 				memcpy(&mqtt_buff.pdata[mqtt_buff.index], p3+1, data_len);
 				mqtt_buff.index += data_len;
 			}
-
+			USART_OUT(USART1, "AA:");
 			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
 		}		
 		

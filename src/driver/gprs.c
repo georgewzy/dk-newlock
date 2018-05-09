@@ -263,7 +263,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 			
 			case 2:
-				ret = gprs_send_at("ATE1\r\n", "OK", 500,10000);
+				ret = gprs_send_at("ATE0\r\n", "OK", 500,10000);
 				if (ret != NULL)
 				{
 					gprs_status++;
@@ -379,7 +379,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 				 sprintf(cipstart, "%s,\"%s\",%d\r\n","AT+CIPSTART=\"TCP\"", gprs_info->server_ip, gprs_info->server_port);
 //				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"103.46.128.47\",14947\r\n", "CONNECT OK", 1500, 20000);//
 //				ret = gprs_send_at("AT+CIPSTART=\"TCP\",\"118.31.69.148\",1883\r\n", "CONNECT OK", 1500, 10000);
-				ret = gprs_send_at(cipstart, "CONNECT OK", 1500, 10000);
+				ret = gprs_send_at(cipstart, "CONNECT OK", 1500, 20000);
 				if (ret != NULL)
 				{
 					gprs_status++;
@@ -532,6 +532,7 @@ int gprs_wakeup(uint8_t mode)
 		ret = gprs_send_at("AT+CSCLK=0\r\n", "OK", 50, 1000);
 		if(ret != NULL)
 		{
+			timer_delay_1ms(2);
 			rc = 1;
 		}
 		else

@@ -27,7 +27,7 @@
 #include "stm32l1xx_usart.h"
 
 
-#define USART_BUFF_LENGHT				   	512
+#define USART_BUFF_LENGHT				   	1024
 
 typedef struct
 {
