@@ -330,11 +330,23 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 			
 			case 6:
-				ret = gprs_send_at("AT+CREG?\r\n", "OK", 500, 10000);
+				ret = gprs_send_at("AT+CREG?\r\n", "OK", 1000, 30000);
 				if (ret != NULL)
 				{
-					gprs_status++;
-					gprs_err_cnt = 0;
+					if((strstr((const char*)ret, (const char*)"+CREG: 0,1") != NULL) 
+						|| (strstr((const char*)ret, (const char*)"+CREG: 0,5") != NULL))
+						{
+							gprs_status++;
+							gprs_err_cnt = 0;
+						}
+						else
+						{
+							gprs_err_cnt++;
+							if (gprs_err_cnt > 120)
+							{
+								gprs_status = 0;
+							}
+						}
 				}
 				else
 				{
@@ -467,7 +479,7 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			
 			break;
 			
-			case 245:
+			case 254:
 			
 				bsp_system_reset();
 			
@@ -515,6 +527,8 @@ int gprs_wakeup(uint8_t mode)
 	int rc = 0;
 	if(mode == 0)
 	{
+		USART_OUT(USART2, "\r\n");	
+		timer_delay_1ms(5);
 		ret = gprs_send_at("AT+CSCLK=0\r\n", "OK", 50, 1000);
 		if(ret != NULL)
 		{

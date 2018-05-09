@@ -41,8 +41,6 @@
 .\objects\bsp.o: ..\driver\button.h
 .\objects\bsp.o: ..\driver\motor.h
 .\objects\bsp.o: ..\driver\lock.h
-.\objects\bsp.o: ..\driver\gprs.h
-.\objects\bsp.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\bsp.o: ..\MQTT\transport.h
 .\objects\bsp.o: ..\MQTT\MQTTPacket.h
 .\objects\bsp.o: ..\MQTT\MQTTConnect.h
@@ -53,3 +51,5 @@
 .\objects\bsp.o: ..\MQTT\MQTTFormat.h
 .\objects\bsp.o: ..\MQTT\StackTrace.h
 .\objects\bsp.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\bsp.o: ..\driver\gprs.h
+.\objects\bsp.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

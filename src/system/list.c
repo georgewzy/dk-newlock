@@ -367,9 +367,32 @@ void list_de_by_elem1(list_node *p_head, int msg_id)
 	}
 }
 
+mqtt_msg_s *list_get_addr_by_msgid(list_node **p_head, int msg_id)
+{
+	if(NULL == *p_head)
+	{
+		return NULL;
+	}
+	
+	while(((*p_head)->msg.msg_id  != msg_id) && (NULL != (*p_head)->next))//判断是否到链表的尾部，以及存在要找的元素
+	{
+		(*p_head) = (*p_head)->next;
+	}
+	
+	if(((*p_head)->msg.msg_id != msg_id) && ((*p_head) != NULL))//未找到
+	{
+		return NULL;
+	}
+	
+	if((*p_head)->msg.msg_id == msg_id)
+	{
+		USART_OUT(USART1, "msg_id=%d=list_get_addr_by_msgid=%d\r\n", msg_id, &((*p_head)->msg));
+	}
+	
+	return &((*p_head)->msg);
+}
 
-
-mqtt_msg_s *list_get_addr_by_msgid(list_node *p_head, int msg_id)
+mqtt_msg_s *list_get_addr_by_msgid1(list_node *p_head, int msg_id)
 {
 	if(NULL == p_head)
 	{
@@ -395,30 +418,30 @@ mqtt_msg_s *list_get_addr_by_msgid(list_node *p_head, int msg_id)
 }
 
 
-mqtt_msg_s *list_get_addr_by_status(list_node *p_head, int status)
+mqtt_msg_s *list_get_addr_by_status(list_node **p_head, int status)
 {
-	if(NULL == p_head)
+	if(NULL == *p_head)
 	{
 		return NULL;
 	}
 	
-	while((p_head->msg.status  != status) && (NULL != p_head->next))//判断是否到链表的尾部，以及存在要找的元素
+	while(((*p_head)->msg.status  != status) && (NULL != (*p_head)->next))//判断是否到链表的尾部，以及存在要找的元素
 	{
-		p_head = p_head->next;
+		(*p_head) = (*p_head)->next;
 	}
 	
-	if((p_head->msg.status != status) && (p_head != NULL))//未找到
+	if(((*p_head)->msg.status != status) && ((*p_head) != NULL))//未找到
 	{
 		return NULL;
 	}
 	
-	if(p_head->msg.status == status)
+	if((*p_head)->msg.status == status)
 	{
 		
-		USART_OUT(USART1, "status=%d==msgid=%d=list_get_addr_by_status=%d\r\n", status, p_head->msg.msg_id, &(p_head->msg));
+		USART_OUT(USART1, "status=%d==msgid=%d=list_get_addr_by_status=%d\r\n", status, (*p_head)->msg.msg_id, &((*p_head)->msg));
 	}
 	
-	return &(p_head->msg);
+	return &((*p_head)->msg);
 }
 
 
@@ -579,7 +602,7 @@ void list_test(list_node **list)
 	list_insert_last(list, mqtt_msg1);
 	list_travese(list);
 	
-	mqtt_msg7 = list_get_addr_by_status(*list, 55);
+	mqtt_msg7 = list_get_addr_by_status(list, 55);
 	USART_OUT(USART1, "mqtt_msg7->status=%d\r\n", mqtt_msg7->status);
 	USART_OUT(USART1, "mqtt_msg7->payload=%s\r\n", mqtt_msg7->payload);
 	
@@ -601,9 +624,8 @@ void list_test(list_node **list)
 	list_travese(list);
 	size = list_size(*list);
 	
-	
-	
-	mqtt_msg6 = list_get_addr_by_status(*list, 55);
+
+	mqtt_msg6 = list_get_addr_by_status(list, 55);
 	USART_OUT(USART1, "mqtt_msg6->status=%d\r\n", mqtt_msg6->status);
 	USART_OUT(USART1, "mqtt_msg6->payload=%s\r\n", mqtt_msg6->payload);
 	
@@ -612,10 +634,10 @@ void list_test(list_node **list)
 	USART_OUT(USART1, "mqtt_msg8->msg_id=%d\r\n", mqtt_msg8->msg_id);
 	USART_OUT(USART1, "mqtt_msg8->payload=%s\r\n", mqtt_msg8->payload);
 	
-	mqtt_msg9 = list_get_addr_by_msgid(*list, 222);
-	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
-	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
-	
+//	mqtt_msg9 = list_get_addr_by_msgid(*list, 222);
+//	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
+//	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
+//	
 	size = list_size(*list);
 	
 //	list_insert_last(&list, mqtt_msg4);
@@ -644,7 +666,7 @@ void list_test(list_node **list)
 //	list_travese(mqtt_send_list);
 
 
-	list_get_addr_by_status(*list, 3);
+	list_get_addr_by_status(list, 3);
 	USART_OUT(USART1, "mqtt_send_list->msg.payload=%s\r\n", mqtt_send_list->msg.payload);	
 	USART_OUT(USART1, "mqtt_send_list->msg.msg_id=%d\r\n", mqtt_send_list->msg.msg_id);
 	
@@ -678,33 +700,33 @@ void list_test2(list_node **list)
 	
 	
 	
-	memcpy(mqtt_msg5.payload, e, 3);
-	mqtt_msg5.payloadlen = 3;
-	mqtt_msg5.msg_id = 4;
-	mqtt_msg5.status = PUBLISH;
-	
-	size = list_size(*list);
-	list_insert_last(list, mqtt_msg5);
-	list_travese(list);
-	size = list_size(*list);
-	USART_OUT(USART1, "list_size=%d\r\n", size);
-	
-	mqtt_msg8 = list_get_addr_by_status(*list, 55);
-	USART_OUT(USART1, "mqtt_msg8->status=%d\r\n", mqtt_msg8->status);
-	USART_OUT(USART1, "mqtt_msg8->payload=%s\r\n", mqtt_msg8->payload);
+//	memcpy(mqtt_msg5.payload, e, 3);
+//	mqtt_msg5.payloadlen = 3;
+//	mqtt_msg5.msg_id = 4;
+//	mqtt_msg5.status = PUBLISH;
+//	
+//	size = list_size(*list);
+//	list_insert_last(list, mqtt_msg5);
+//	list_travese(list);
+//	size = list_size(*list);
+//	USART_OUT(USART1, "list_size=%d\r\n", size);
+//	
+//	mqtt_msg8 = list_get_addr_by_status(*list, 55);
+//	USART_OUT(USART1, "mqtt_msg8->status=%d\r\n", mqtt_msg8->status);
+//	USART_OUT(USART1, "mqtt_msg8->payload=%s\r\n", mqtt_msg8->payload);
 
-	
-	mqtt_msg9 = list_get_addr_by_msgid(*list, 222);
-	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
-	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
-	
-	
-	list_clear(list);
-	list_travese(list);
-	
-	
-	list_insert_last(list, mqtt_msg5);
-	list_travese(list);
+//	
+//	mqtt_msg9 = list_get_addr_by_msgid(*list, 222);
+//	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
+//	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
+//	
+//	
+//	list_clear(list);
+//	list_travese(list);
+//	
+//	
+//	list_insert_last(list, mqtt_msg5);
+//	list_travese(list);
 	
 }
 

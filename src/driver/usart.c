@@ -350,11 +350,14 @@ void usart2_recv_data(void)
 			
 			p3 = strstr((const char*)usart2_rx_buff.pdata, ":");
 
-			memset(&mqtt_buff, 0, sizeof(mqtt_buff));
-			mqtt_buff_cnt = 0;
-			memcpy(mqtt_buff.pdata, p3+1, data_len);
-			mqtt_buff.index = data_len;
-			
+//			memset(&mqtt_buff, 0, sizeof(mqtt_buff));
+//			mqtt_buff_cnt = 0;
+			if(mqtt_buff.index+data_len < USART_BUFF_LENGHT)
+			{
+				memcpy(&mqtt_buff.pdata[mqtt_buff.index], p3+1, data_len);
+				mqtt_buff.index += data_len;
+			}
+
 			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
 		}		
 		

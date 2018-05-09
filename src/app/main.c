@@ -136,7 +136,7 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 				if(keep_alive_status == PINGREQ)
 				{
 					timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 0);	
-					USART_OUT(USART1, "mqtt_keep_alive send ok\r\n");
+					USART_OUT(USART1, "mqtt_keep_alive_send_ok\r\n");
 				}
 			}
 		}
@@ -146,20 +146,24 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 			mqtt_keep_alive_err_cnt++;
 			if(mqtt_keep_alive_err_cnt > 5)
 			{
-				gprs_status = 0;
+				gprs_status = 254;
 				mqtt_keep_alive_flag = 0;
 				mqtt_keep_alive_err_cnt = 0;
-				USART_OUT(USART1, "GPRS reset\r\n");
+				USART_OUT(USART1, "GPRS_reset\r\n");
 			}
-			gprs_wakeup_status = gprs_wakeup(0);
-			if(gprs_wakeup_status == 1)
-			{						
-				keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
-				if(keep_alive_status == PINGREQ)
-				{		
-					USART_OUT(USART1, "mqtt_keep_alive resend ok\r\n");
-				}
-			}	
+			else
+			{
+				gprs_wakeup_status = gprs_wakeup(0);
+				if(gprs_wakeup_status == 1)
+				{						
+					keep_alive_status = mqtt_client(&list_recv, &list_send, PINGREQ);	
+					if(keep_alive_status == PINGREQ)
+					{		
+						USART_OUT(USART1, "mqtt_keep_alive_resend_ok=%d\r\n", mqtt_keep_alive_err_cnt);
+					}
+				}	
+			}
+			
 		}
 	}
 }

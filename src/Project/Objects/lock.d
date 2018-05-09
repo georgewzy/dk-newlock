@@ -34,10 +34,6 @@
 .\objects\lock.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_usart.h
 .\objects\lock.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\stm32l1xx_wwdg.h
 .\objects\lock.o: ..\Libraries\STM32L1xx_StdPeriph_Driver\inc\misc.h
-.\objects\lock.o: ..\driver\timer.h
-.\objects\lock.o: ..\driver\motor.h
-.\objects\lock.o: ..\driver\usart.h
-.\objects\lock.o: ..\driver\button.h
 .\objects\lock.o: ..\MQTT\transport.h
 .\objects\lock.o: ..\MQTT\MQTTPacket.h
 .\objects\lock.o: ..\MQTT\MQTTConnect.h
@@ -48,4 +44,8 @@
 .\objects\lock.o: ..\MQTT\MQTTFormat.h
 .\objects\lock.o: ..\MQTT\StackTrace.h
 .\objects\lock.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\lock.o: ..\driver\timer.h
+.\objects\lock.o: ..\driver\motor.h
+.\objects\lock.o: ..\driver\usart.h
+.\objects\lock.o: ..\driver\button.h
 .\objects\lock.o: ..\app\main.h
