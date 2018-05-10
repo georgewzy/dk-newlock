@@ -24,7 +24,7 @@ Section Cross References
     main.o(i.heartbeat1) refers to timer.o(i.timer_is_timeout_1ms) for timer_is_timeout_1ms
     main.o(i.heartbeat1) refers to memseta.o(.text) for __aeabi_memclr
     main.o(i.heartbeat1) refers to printf6.o(i.__0sprintf$6) for __2sprintf
-    main.o(i.heartbeat1) refers to transport.o(i.mqtt_publist_qos0) for mqtt_publist_qos0
+    main.o(i.heartbeat1) refers to transport.o(i.mqtt_publish_qos0) for mqtt_publish_qos0
     main.o(i.heartbeat1) refers to usart.o(i.USART_OUT) for USART_OUT
     main.o(i.heartbeat1) refers to main.o(.bss) for topic_buff
     main.o(i.main) refers to memcpya.o(.text) for __aeabi_memcpy4
@@ -934,6 +934,10 @@ Section Cross References
     transport.o(i.mqtt_publish) refers to mqttserializepublish.o(i.MQTTSerialize_pubrel) for MQTTSerialize_pubrel
     transport.o(i.mqtt_publish) refers to transport.o(i.transport_getdata) for transport_getdata
     transport.o(i.mqtt_publish) refers to transport.o(.data) for mqtt_publist_msgid
+    transport.o(i.mqtt_publish_qos0) refers to memseta.o(.text) for __aeabi_memclr4
+    transport.o(i.mqtt_publish_qos0) refers to mqttserializepublish.o(i.MQTTSerialize_publish) for MQTTSerialize_publish
+    transport.o(i.mqtt_publish_qos0) refers to usart.o(i.USART_OUT) for USART_OUT
+    transport.o(i.mqtt_publish_qos0) refers to transport.o(i.transport_sendPacketBuffer) for transport_sendPacketBuffer
     transport.o(i.mqtt_publish_qos2) refers to memseta.o(.text) for __aeabi_memclr4
     transport.o(i.mqtt_publish_qos2) refers to strlen.o(.text) for strlen
     transport.o(i.mqtt_publish_qos2) refers to memcpya.o(.text) for __aeabi_memcpy
@@ -945,10 +949,6 @@ Section Cross References
     transport.o(i.mqtt_publish_qos2) refers to list.o(i.list_find_min_val) for list_find_min_val
     transport.o(i.mqtt_publish_qos2) refers to list.o(i.list_de_by_msgid) for list_de_by_msgid
     transport.o(i.mqtt_publish_qos2) refers to transport.o(.data) for mqtt_publist_msgid
-    transport.o(i.mqtt_publist_qos0) refers to memseta.o(.text) for __aeabi_memclr4
-    transport.o(i.mqtt_publist_qos0) refers to mqttserializepublish.o(i.MQTTSerialize_publish) for MQTTSerialize_publish
-    transport.o(i.mqtt_publist_qos0) refers to usart.o(i.USART_OUT) for USART_OUT
-    transport.o(i.mqtt_publist_qos0) refers to transport.o(i.transport_sendPacketBuffer) for transport_sendPacketBuffer
     transport.o(i.mqtt_subscribe) refers to memseta.o(.text) for __aeabi_memclr4
     transport.o(i.mqtt_subscribe) refers to timer.o(i.timer_is_timeout_1ms) for timer_is_timeout_1ms
     transport.o(i.mqtt_subscribe) refers to usart.o(i.usart2_recv_data) for usart2_recv_data
@@ -2492,8 +2492,8 @@ Image Symbol Table
     i.mqtt_client                            0x080066cc   Section        0  transport.o(i.mqtt_client)
     i.mqtt_connect                           0x080070d4   Section        0  transport.o(i.mqtt_connect)
     i.mqtt_keep_alive1                       0x080071f0   Section        0  main.o(i.mqtt_keep_alive1)
-    i.mqtt_publish_qos2                      0x080072fc   Section        0  transport.o(i.mqtt_publish_qos2)
-    i.mqtt_publist_qos0                      0x080075c0   Section        0  transport.o(i.mqtt_publist_qos0)
+    i.mqtt_publish_qos0                      0x080072fc   Section        0  transport.o(i.mqtt_publish_qos0)
+    i.mqtt_publish_qos2                      0x080073b4   Section        0  transport.o(i.mqtt_publish_qos2)
     i.mqtt_subscribe_topic                   0x08007678   Section        0  transport.o(i.mqtt_subscribe_topic)
     i.protocol_analyze1                      0x080078b8   Section        0  protocol.o(i.protocol_analyze1)
     i.readChar                               0x08007a50   Section        0  mqttpacket.o(i.readChar)
@@ -2908,8 +2908,8 @@ Image Symbol Table
     mqtt_client                              0x080066cd   Thumb Code  2296  transport.o(i.mqtt_client)
     mqtt_connect                             0x080070d5   Thumb Code   216  transport.o(i.mqtt_connect)
     mqtt_keep_alive1                         0x080071f1   Thumb Code   168  main.o(i.mqtt_keep_alive1)
-    mqtt_publish_qos2                        0x080072fd   Thumb Code   394  transport.o(i.mqtt_publish_qos2)
-    mqtt_publist_qos0                        0x080075c1   Thumb Code   142  transport.o(i.mqtt_publist_qos0)
+    mqtt_publish_qos0                        0x080072fd   Thumb Code   142  transport.o(i.mqtt_publish_qos0)
+    mqtt_publish_qos2                        0x080073b5   Thumb Code   394  transport.o(i.mqtt_publish_qos2)
     mqtt_subscribe_topic                     0x08007679   Thumb Code   434  transport.o(i.mqtt_subscribe_topic)
     protocol_analyze1                        0x080078b9   Thumb Code   282  protocol.o(i.protocol_analyze1)
     readChar                                 0x08007a51   Thumb Code    14  mqttpacket.o(i.readChar)
@@ -3268,8 +3268,8 @@ Memory Map of the image
     0x080066cc   0x080066cc   0x00000a08   Code   RO         5900    i.mqtt_client       transport.o
     0x080070d4   0x080070d4   0x0000011c   Code   RO         5901    i.mqtt_connect      transport.o
     0x080071f0   0x080071f0   0x0000010c   Code   RO            7    i.mqtt_keep_alive1  main.o
-    0x080072fc   0x080072fc   0x000002c4   Code   RO         5906    i.mqtt_publish_qos2  transport.o
-    0x080075c0   0x080075c0   0x000000b8   Code   RO         5907    i.mqtt_publist_qos0  transport.o
+    0x080072fc   0x080072fc   0x000000b8   Code   RO         5906    i.mqtt_publish_qos0  transport.o
+    0x080073b4   0x080073b4   0x000002c4   Code   RO         5907    i.mqtt_publish_qos2  transport.o
     0x08007678   0x08007678   0x00000240   Code   RO         5910    i.mqtt_subscribe_topic  transport.o
     0x080078b8   0x080078b8   0x00000198   Code   RO          355    i.protocol_analyze1  protocol.o
     0x08007a50   0x08007a50   0x0000000e   Code   RO         5655    i.readChar          mqttpacket.o

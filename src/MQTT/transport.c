@@ -647,7 +647,7 @@ int mqtt_keep_alive(uint32_t ms)
 }
 
 
-int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len)
+int mqtt_publish_qos0(unsigned char* topic, unsigned char* payload, int payload_len)
 {
 	int status = 0;
 	uint8_t ret = 0;

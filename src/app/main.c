@@ -134,7 +134,7 @@ void heartbeat1(uint32_t ms)
 		heartbeat_buff[0] = 0x30;
 		heartbeat_buff[1] = '\0';
 		
-		mqtt_pub = mqtt_publist_qos0(topic_buff, heartbeat_buff, 2);
+		mqtt_pub = mqtt_publish_qos0(topic_buff, heartbeat_buff, 2);
 		if(mqtt_pub == 1)
 		{
 			USART_OUT(USART1, "heartbeat mqtt_publist ok\r\n");
