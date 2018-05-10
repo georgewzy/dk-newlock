@@ -21,7 +21,7 @@
 
 
 void list_clear(list_node **p_head);
-int list_size(list_node *p_head);
+int list_size(list_node **p_head);
 int list_is_empty(list_node **p_head);
 void list_travese(list_node **p_head);
 void list_send_travese(list_node **p_head);

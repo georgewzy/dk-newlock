@@ -158,10 +158,23 @@ void list_clear(list_node **p_head)
 }
 
 
-int list_size(list_node *p_head)
+int list_size1(list_node *p_head)
 {
 	int size = 0;
 	list_node *tmp = p_head;
+	while(tmp != NULL)
+	{
+		size++;
+		tmp = tmp->next;
+	}
+	
+	return size;
+}
+
+int list_size(list_node **p_head)
+{
+	int size = 0;
+	list_node *tmp = *p_head;
 	while(tmp != NULL)
 	{
 		size++;
@@ -608,21 +621,21 @@ void list_test(list_node **list)
 	
 //	list_travese(mqtt_send_list);
 	
-	size = list_size(*list);
+	size = list_size(list);
 //	list_status = list_is_empty(mqtt_send_list);
 //	
 	list_insert_last(list, mqtt_msg2);
 	list_travese(list);
-	size = list_size(*list);
+	size = list_size(list);
 	
 	list_insert_last(list, mqtt_msg3);
 	list_travese(list);
-	size = list_size(*list);
+	size = list_size(list);
 	
 	
 	list_insert_last(list, mqtt_msg4);
 	list_travese(list);
-	size = list_size(*list);
+	size = list_size(list);
 	
 
 	mqtt_msg6 = list_get_addr_by_status(list, 55);
@@ -638,7 +651,7 @@ void list_test(list_node **list)
 //	USART_OUT(USART1, "mqtt_msg9->msg_id=%d\r\n", mqtt_msg9->msg_id);
 //	USART_OUT(USART1, "mqtt_msg9->payload=%s\r\n", mqtt_msg9->payload);
 //	
-	size = list_size(*list);
+	size = list_size(list);
 	
 //	list_insert_last(&list, mqtt_msg4);
 //	list_travese(list);
@@ -649,7 +662,7 @@ void list_test(list_node **list)
 //	list_insert_last(&list, mqtt_msg4);
 //	list_travese(list);
 	
-	size = list_size(*list);
+	size = list_size(list);
 	
 //	list_travese(mqtt_send_list);
 

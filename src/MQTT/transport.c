@@ -63,17 +63,16 @@ int transport_sendPacketBuffer(int sock, unsigned char* buf, int buflen)
 	int rc = -1;
 	uint8_t *ret = NULL;
 	int len = 0;
-	uint8_t cmd[50] = {0};
+	uint8_t cmd[100] = {0};
 	
-	memset(send_buff, 0, sizeof(send_buff));
 	memset(cmd, 0, sizeof(cmd));
 	sprintf((char *)cmd, "AT+CIPSEND=%d,1\r\n", buflen);
 	ret = gprs_send_at(cmd, ">", 10, 30);
 	if(ret != NULL)
 	{
 		timer_delay_1ms(20);
-		memcpy((char*)send_buff, buf, buflen);
 		usart_send_data(USART2, buf, buflen);
+		usart_send_data(USART1, buf, buflen);
 		rc = buflen;
 	}
 	
@@ -843,7 +842,7 @@ int mqtt_publish_qos2(list_node **list, unsigned char* topic, unsigned char* pay
 		mqtt_publist_msgid = 0;
 	}
 	
-	size = list_size(*list);	//链表的大小
+	size = list_size(list);	//链表的大小
 	if(size == 0)	//链表为空
 	{
 		USART_OUT(USART1, "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC\r\n");
@@ -1072,7 +1071,7 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 						mqtt_msg.msg_id = msgid;
 						mqtt_msg.status = PUBREC;
 										
-						list_recv_size = list_size(*list_recv);
+						list_recv_size = list_size(list_recv);
 						USART_OUT(USART1, "list_recv_size11=%d\r\n", list_recv_size);	
 						if(list_recv_size == 0)
 						{

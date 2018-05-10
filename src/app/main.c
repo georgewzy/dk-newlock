@@ -87,7 +87,7 @@ uint8_t mqtt_keep_alive_err_cnt = 0;
 
 uint8_t lock_id[17] = {0};
 uint8_t topic_buff[100] = {0};
-uint8_t send_buff[100] = {0};
+//uint8_t send_buff[100] = {0};
 uint8_t test_flag = 0;
 
 int keep_alive_status = 0;
@@ -133,7 +133,7 @@ void heartbeat1(uint32_t ms)
 		sprintf((char*)topic_buff,"%s%s","lockdata/", dev_config_info.dev_id);
 		heartbeat_buff[0] = 0x30;
 		heartbeat_buff[1] = '\0';
-//		int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len)
+		
 		mqtt_pub = mqtt_publist_qos0(topic_buff, heartbeat_buff, 2);
 		if(mqtt_pub == 1)
 		{
@@ -167,7 +167,7 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 			}
 		}
 			
-		if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, MQTT_KEEP_ALIVE_INTERVAL/10) == 0))
+		if((timer_is_timeout_1ms(timer_mqtt_keep_alive_timeout, 1000*60) == 0))
 		{
 			mqtt_keep_alive_err_cnt++;
 			if(mqtt_keep_alive_err_cnt > 5)
@@ -193,7 +193,6 @@ void mqtt_keep_alive1(list_node *list_recv, list_node *list_send, int mqtt_staut
 		}
 	}
 }
-
 
 
 
@@ -295,8 +294,8 @@ int main(void)
 			USART_OUT(USART1, "mqtt_data.password.cstring=%s\r\n", mqtt_data.password.cstring);
 			
 			
-			memset(send_buff, 0, sizeof(send_buff));
-			sprintf(send_buff, "wangzhongya=%d", mqtt_publist_msgid);
+//			memset(send_buff, 0, sizeof(send_buff));
+//			sprintf(send_buff, "wangzhongya=%d", mqtt_publist_msgid);
 			
 			break;
 		}
