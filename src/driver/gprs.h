@@ -49,7 +49,7 @@ void gprs_power_on(void);
 uint8_t *gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout);
 int gprs_send_data(uint8_t *data, uint16_t data_len, uint8_t *ack, uint16_t waittime);
 uint8_t gprs_init(void);
-void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data);
+void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data);
 int gprs_sleep(void);
 int gprs_wakeup(uint8_t mode);
 

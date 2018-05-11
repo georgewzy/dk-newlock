@@ -35,7 +35,8 @@ extern usart_buff_t mqtt_buff;
 extern uint8_t send_buff[100];
 extern uint8_t mqtt_keep_alive_flag;
 
-
+extern uint8_t mqtt_keep_alive_flag;
+extern uint8_t mqtt_keep_alive_err_cnt;
 
 
 
@@ -572,7 +573,7 @@ int mqtt_unsubscribe_topic(unsigned char* topic, int req_qos, unsigned short pac
 
 
 
-int mqtt_keep_alive(uint32_t ms)
+int mqtt_keep_alive1(uint32_t ms)
 {
 	int status = 0;
 	int ret = 0;
@@ -1259,6 +1260,9 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 //				{
 //					USART_OUT(USART1, "keep_alive_gprs_sleep_ok\r\n");	
 //				}
+				
+				mqtt_keep_alive_flag = 0;
+				mqtt_keep_alive_err_cnt = 0;
 				USART_OUT(USART1, "PINGRESP\r\n");
 			}		
 		break;
@@ -1274,7 +1278,6 @@ int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye)
 	
 	return mqtt_stauts;
 }
-
 
 
 

@@ -217,7 +217,7 @@ uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t ti
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
+void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 {
 	int mqtt_rc = 0;
 
@@ -474,9 +474,8 @@ void gprs_init_task(GPRS_CONFIG *gprs_info, MQTTPacket_connectData *mqtt_data)
 			break;
 				
 			case 13:
-//				timer_is_timeout_1ms(timer_close_lock, 0);
+				dev_first_power_on(list);
 				gprs_status = 255;
-			
 			break;
 			
 			case 254:

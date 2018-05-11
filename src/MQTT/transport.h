@@ -82,7 +82,7 @@ int mqtt_disconnect(void);
 int mqtt_publish(unsigned char* topic, unsigned char* payload, int payload_len, int qos, unsigned short packetid);
 int mqtt_subscribe(unsigned char* topic, unsigned char *payload, int *payloadlen);
 int mqtt_subscribe_topic(unsigned char* topic, int req_qos, unsigned short packetid);
-int mqtt_keep_alive(uint32_t ms);
+int mqtt_keep_alive1(uint32_t ms);
 int mqtt_client(list_node **list_recv, list_node **list_send, uint8_t msg_tpye);
 
 

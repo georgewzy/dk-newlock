@@ -59,8 +59,7 @@ void lock_shake_alarm(void)
 	{
 		USART_OUT(USART1, "sharking\r\n");
 		lock_bell_flag = 1;
-	}
-	
+	}	
 }
 
 
@@ -77,9 +76,9 @@ void lock_find_bell(void)
 	if(timer_is_timeout_1ms(timer_bell, 100) == 0)
 	{
 		BEEP_OFF();
-	}
-	
+	}	
 }
+
 
 void lock_hand_close(void)
 {
