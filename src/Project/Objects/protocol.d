@@ -54,3 +54,4 @@
 .\objects\protocol.o: ..\driver\motor.h
 .\objects\protocol.o: ..\app\main.h
 .\objects\protocol.o: ..\driver\adc.h
+.\objects\protocol.o: ..\driver\flash.h

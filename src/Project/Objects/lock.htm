@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lock.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lock.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri May 11 16:18:25 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat May 12 16:33:04 2018
 <BR><P>
 <H3>Maximum Stack Usage =       1616 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -354,6 +354,8 @@ Global Symbols
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart2_recv_data
 <LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;protocol_analyze1
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mqtt_client
+<LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_open_deal_1
+<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_close_deal_1
 <LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heartbeat1
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gprs_init_task
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dev_to_srv_batt_voltage
@@ -1865,8 +1867,8 @@ Global Symbols
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mqtt_client
 </UL>
 
-<P><STRONG><a name="[111]"></a>lock_close_deal_1</STRONG> (Thumb, 500 bytes, Stack size 40 bytes, lock.o(i.lock_close_deal_1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 648<LI>Call Chain = lock_close_deal_1 &rArr; mqtt_publish_qos2 &rArr; list_insert_last &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
+<P><STRONG><a name="[111]"></a>lock_close_deal_1</STRONG> (Thumb, 508 bytes, Stack size 136 bytes, lock.o(i.lock_close_deal_1))
+<BR><BR>[Stack]<UL><LI>Max Depth = 744<LI>Call Chain = lock_close_deal_1 &rArr; mqtt_publish_qos2 &rArr; list_insert_last &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_reversal
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_forward
@@ -1877,6 +1879,7 @@ Global Symbols
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AES_Encrypt
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_OUT
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1912,8 +1915,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[117]"></a>lock_open_deal_1</STRONG> (Thumb, 500 bytes, Stack size 40 bytes, lock.o(i.lock_open_deal_1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 648<LI>Call Chain = lock_open_deal_1 &rArr; mqtt_publish_qos2 &rArr; list_insert_last &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
+<P><STRONG><a name="[117]"></a>lock_open_deal_1</STRONG> (Thumb, 508 bytes, Stack size 136 bytes, lock.o(i.lock_open_deal_1))
+<BR><BR>[Stack]<UL><LI>Max Depth = 744<LI>Call Chain = lock_open_deal_1 &rArr; mqtt_publish_qos2 &rArr; list_insert_last &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_reversal
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_forward
@@ -1924,6 +1927,7 @@ Global Symbols
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AES_Encrypt
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_OUT
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -2039,7 +2043,7 @@ Global Symbols
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lock_close_deal_1
 </UL>
 
-<P><STRONG><a name="[11d]"></a>mqtt_client</STRONG> (Thumb, 2306 bytes, Stack size 664 bytes, transport.o(i.mqtt_client))
+<P><STRONG><a name="[11d]"></a>mqtt_client</STRONG> (Thumb, 2288 bytes, Stack size 664 bytes, transport.o(i.mqtt_client))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1488<LI>Call Chain = mqtt_client &rArr; transport_sendPacketBuffer &rArr; gprs_send_at &rArr; USART_OUT &rArr; atoi &rArr; strtol &rArr; _strtoul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_is_timeout_1ms

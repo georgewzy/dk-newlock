@@ -26,13 +26,13 @@
 #include "queue.h"
 #include "list.h"
 
-extern uint8_t lock_status1;
+
+
 
 extern usart_buff_t mqtt_buff;
 extern uint16_t mqtt_publist_msgid;
 extern uint8_t gprs_status;
-extern uint8_t usart2_buff[512];
-extern uint16_t usart2_cnt; 
+
 
 //œÏ¡Â
 extern uint8_t bell_flag;
@@ -51,7 +51,6 @@ extern uint8_t lock_open_time_flag;
 extern uint8_t lock_close_time_flag;
 
 extern int lock_run_status;
-
 
 extern sp_queue mqtt_recv_que;
 extern sp_queue mqtt_send_que;
@@ -85,7 +84,6 @@ uint8_t mqtt_keep_alive_err_cnt = 0;
 
 uint8_t lock_id[17] = {0};
 uint8_t topic_buff[100] = {0};
-//uint8_t send_buff[100] = {0};
 uint8_t test_flag = 0;
 
 int keep_alive_status = 0;
@@ -154,11 +152,7 @@ int main(void)
 			USART_OUT(USART1, "mqtt_data.clientID.cstring=%s\r\n", mqtt_data.clientID.cstring);
 			USART_OUT(USART1, "mqtt_data.username.cstring=%s\r\n", mqtt_data.username.cstring);
 			USART_OUT(USART1, "mqtt_data.password.cstring=%s\r\n", mqtt_data.password.cstring);
-			
-			
-//			memset(send_buff, 0, sizeof(send_buff));
-//			sprintf(send_buff, "wangzhongya=%d", mqtt_publist_msgid);
-			
+					
 			break;
 		}
 		else if(ds_val == 1)

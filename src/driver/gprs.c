@@ -33,9 +33,9 @@
 
 extern usart_buff_t  usart1_rx_buff;
 extern usart_buff_t  usart2_rx_buff;
-extern unsigned short mqtt_publist_msgid;
+extern unsigned short mqtt_publish_msgid;
 extern uint8_t usart2_rx_status;
-extern uint8_t lock_id[17];
+
 extern DEV_CONFIG_INFO  dev_config_info;
 
 uint8_t mcu_reset_cnt = 0;
@@ -419,7 +419,7 @@ void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connec
 				mqtt_rc = mqtt_connect(mqtt_data);
 				if(1 == mqtt_rc)
 				{
-					mqtt_publist_msgid = 1;
+					mqtt_publish_msgid = 1;
 					gprs_status++;
 					USART_OUT(USART1, "mqtt_connect ok\r\n");
 				}
@@ -436,7 +436,7 @@ void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connec
 				
 			case 11:
 				sprintf((char*)buff, "%s%s", "bell/", dev_config_info.dev_id);
-				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
+				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publish_msgid);
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
@@ -455,7 +455,7 @@ void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connec
 				
 			case 12:
 				sprintf((char*)buff, "%s%s", "lock/", dev_config_info.dev_id);
-				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publist_msgid);
+				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publish_msgid);
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;

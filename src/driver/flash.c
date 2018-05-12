@@ -115,7 +115,7 @@ bool flash_write_data(uint32_t addr, uint8_t *data, uint16_t size)
 	for (tmp_addr=addr; tmp_addr<(addr + size); tmp_data++, tmp_addr += 2)
 	{
 //		FLASH_ProgramByte(tmp_addr, *tmp_data);	
-		if (*tmp_data != *(uint8_t *)tmp_addr)	 		// ???????? ? ??????? ????
+		if (*tmp_data != *(uint8_t *)tmp_addr)	 		// 
 		{
 			return false;								// 
 		}

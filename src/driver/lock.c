@@ -8,22 +8,23 @@
 #include "transport.h"
 #include "main.h"
 
-extern uint16_t mqtt_publist_msgid;
+
+extern uint16_t mqtt_publish_msgid;
 extern uint8_t receiveText[24];
 extern uint8_t expressText[128];  
 extern uint8_t cipherText[128];
 extern uint8_t aesKey[16];
-//extern uint8_t lock_id[17];
-extern uint8_t topic_buff[100];
-extern uint8_t send_buff[100];
+//extern uint8_t topic_buff[100];
+
 extern DEV_CONFIG_INFO  dev_config_info;
 
-
+//开锁错误标志
 uint8_t lock_open_err_flag = 0;
+//关锁错误标志
 uint8_t lock_close_err_flag = 0;
 
 
-uint8_t lock_status = 255;		//初始化的时候不要初始化成0 1
+uint8_t lock_status = 255;		//初始化的时候不要初始化成0和1
 
 uint8_t lock_open_time_flag = 0;
 uint8_t lock_close_time_flag = 0;
@@ -36,7 +37,7 @@ uint8_t lock_bell_flag = 0;
 uint8_t lock_run_status = 0;
 uint8_t lock_self_run_status = 255;
 
-uint8_t lock_status1 = 0;
+
 
 
 void lock_gpio_init(void)
@@ -164,7 +165,7 @@ void lock_self_checking(void)
 void lock_close_deal_1(list_node **list)
 {
 	int mqtt_pub = 0;
-
+	uint8_t topic_buff[100] = {0};
 	if(lock_status == 0)
 	{
 		switch(lock_run_status)
@@ -206,11 +207,11 @@ void lock_close_deal_1(list_node **list)
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
-//				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+//				USART_OUT(USART1, "topic_buff=%s\r\n", topic_buff);
 //				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 //				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -248,12 +249,8 @@ void lock_close_deal_1(list_node **list)
 				sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
-				
-//				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
-//				USART_OUT(USART1, "expressText=%s\r\n", expressText);
-//				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
-//				
-				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+			
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "EEE_lock_run_status3_mqtt_publist ok\r\n");
@@ -287,7 +284,7 @@ void lock_close_deal_1(list_node **list)
 void lock_open_deal_1(list_node **list)
 {
 	int mqtt_pub = 0;
-	
+	uint8_t topic_buff[100] = {0};
 	if(lock_status == 1)
 	{
 		switch(lock_run_status)
@@ -330,11 +327,11 @@ void lock_open_deal_1(list_node **list)
 				sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
-//				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+//				USART_OUT(USART1, "topic_buff=%s\r\n", topic_buff);
 //				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 //				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 			
-				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -374,11 +371,11 @@ void lock_open_deal_1(list_node **list)
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
 				AES_Encrypt((char*)expressText, (char*)cipherText, (char*)aesKey);
 			
-//				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+//				USART_OUT(USART1, "topic_buff=%s\r\n", topic_buff);
 //				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 //				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 			
-				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "DDDlock_run_status3_mqtt_publist ok\r\n");
@@ -416,7 +413,7 @@ void lock_open_deal_1(list_node **list)
 void lock_close_deal(void)
 {
 	int mqtt_pub;
-	
+	uint8_t topic_buff[100] = {0};
 	//关锁逻辑
 	if(lock_status == 0)
 	{
@@ -450,11 +447,11 @@ void lock_close_deal(void)
 				sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
-				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+				USART_OUT(USART1, "topic_buff=%s\r\n", topic_buff);
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -481,11 +478,11 @@ void lock_close_deal(void)
 			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
 			AES_Encrypt((char*)expressText, (char*)cipherText, (char*)aesKey);
 		
-			USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+			USART_OUT(USART1, "topic_buff=%s\r\n", topic_buff);
 			USART_OUT(USART1, "expressText=%s\r\n", expressText);
 			USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 			
-			mqtt_pub = mqtt_publish(topic_buff, expressText, 44, 2, mqtt_publist_msgid);
+			mqtt_pub = mqtt_publish(topic_buff, expressText, 44, 2, mqtt_publish_msgid);
 			if(mqtt_pub == 1)
 			{
 				USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -502,6 +499,7 @@ void lock_close_deal(void)
 void lock_open_deal(void)
 {
 	int mqtt_pub;
+	uint8_t topic_buff[100] = {0};
 	//开锁逻辑		
 	if(lock_status == 1)
 	{
@@ -534,11 +532,11 @@ void lock_open_deal(void)
 				sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
 				AES_Encrypt((char*)expressText, cipherText, aesKey);
 				
-				USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+				USART_OUT(USART1, "topic_buff=%s\r\n", topic_buff);
 				USART_OUT(USART1, "expressText=%s\r\n", expressText);
 				USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 
-				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+				mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
 				if(mqtt_pub == 1)
 				{
 					USART_OUT(USART1, "mqtt_publist ok\r\n");
@@ -564,11 +562,11 @@ void lock_open_deal(void)
 			sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"1");
 			AES_Encrypt((char*)expressText, cipherText, aesKey);
 			
-			USART_OUT(USART1, "send_buff=%s\r\n", topic_buff);
+			USART_OUT(USART1, "topic_buff=%s\r\n", topic_buff);
 			USART_OUT(USART1, "expressText=%s\r\n", expressText);
 			USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 				
-			mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publist_msgid);
+			mqtt_pub = mqtt_publish(topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
 			if(mqtt_pub == 1)
 			{
 				USART_OUT(USART1, "mqtt_publist ok\r\n");

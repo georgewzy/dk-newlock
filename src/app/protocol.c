@@ -12,6 +12,7 @@
 #include "list.h"
 #include "main.h"
 #include "adc.h"
+#include "flash.h"
 
 
 
@@ -40,7 +41,7 @@ extern DEV_CONFIG_INFO  dev_config_info;
 
 
 extern usart_buff_t mqtt_buff;
-extern uint16_t mqtt_publist_msgid;
+extern uint16_t mqtt_publish_msgid;
 
 //µÁ—π
 uint16_t Bat_V;
@@ -161,6 +162,8 @@ void protocol_analyze1(list_node **list)
 					if(*expressText == 0x31)
 					{
 		//				timer_is_timeout_1ms(timer_open_lock, 0);
+						
+						
 						lock_shake_flag = 1;
 						lock_status = 1;
 						lock_open_time_flag = 0;
@@ -205,7 +208,6 @@ void protocol_analyze1(list_node **list)
 
 void dev_to_srv_batt_voltage(list_node **list, uint32_t ms)
 {
-	
 	int mqtt_pub;
 	uint8_t topic_buff[100] = {0};
 	
@@ -230,7 +232,7 @@ void dev_to_srv_batt_voltage(list_node **list, uint32_t ms)
 		USART_OUT(USART1, "aesKey=%s\r\n", aesKey);
 		USART_OUT(USART1, "cipherText=%s\r\n", cipherText);
 		
-		mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 24, 2, mqtt_publist_msgid);
+		mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 24, 2, mqtt_publish_msgid);
 		if(mqtt_pub == 1)
 		{
 			USART_OUT(USART1, "dev_to_srv_batt mqtt_publist ok\r\n");
@@ -258,7 +260,7 @@ void dev_first_power_on(list_node **list)
 	heartbeat_buff[0] = 0x31;
 	heartbeat_buff[1] = '\0';
 
-	mqtt_pub = mqtt_publish_qos2(list, topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
+	mqtt_pub = mqtt_publish_qos2(list, topic_buff, heartbeat_buff, 1, 2, mqtt_publish_msgid);
 	if(mqtt_pub == 1)
 	{
 		USART_OUT(USART1, "dev_first_power_on ok\r\n");
@@ -284,7 +286,7 @@ void heartbeat(list_node **list, uint32_t ms)
 		heartbeat_buff[0] = 0x30;
 		heartbeat_buff[1] = '\0';
 //		int mqtt_publist_qos0(unsigned char* topic, unsigned char* payload, int payload_len)
-		mqtt_pub = mqtt_publish_qos2(list, topic_buff, heartbeat_buff, 1, 2, mqtt_publist_msgid);
+		mqtt_pub = mqtt_publish_qos2(list, topic_buff, heartbeat_buff, 1, 2, mqtt_publish_msgid);
 		if(mqtt_pub == 1)
 		{
 			USART_OUT(USART1, "heartbeat mqtt_publist ok\r\n");
