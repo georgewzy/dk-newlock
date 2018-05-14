@@ -185,7 +185,7 @@ void protocol_analyze1(list_node **list)
 					}				
 				}
 				
-				sprintf((char*)local_topic, "%s%s", "lock/", dev_config_info.dev_id);
+				sprintf((char*)local_topic, "%s%s", "bell/", dev_config_info.dev_id);
 				if(strncmp((char*)msg->topic, (char*)"bell/", 5)==0)
 				{
 					USART_OUT(USART1, "bell===========================================================================\r\n");

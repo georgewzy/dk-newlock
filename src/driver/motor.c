@@ -23,14 +23,18 @@ void motor_gpio_init(void)
 //Õý×ª
 void motor_forward(void)
 {
-	MOTOA_HIGH();
-	MOTOB_LOW();
+//	MOTOA_HIGH();
+//	MOTOB_LOW();
+	MOTOA_LOW();
+	MOTOB_HIGH();
 }
 
 void motor_reversal(void)
 {
-	MOTOA_LOW();
-	MOTOB_HIGH();
+//	MOTOA_LOW();
+//	MOTOB_HIGH();
+	MOTOA_HIGH();
+	MOTOB_LOW();
 }
 
 void motor_stop(void)

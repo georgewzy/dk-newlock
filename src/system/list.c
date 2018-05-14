@@ -98,6 +98,7 @@ void list_travese(list_node **p_head)
 			USART_OUT(USART1, "p_head->msg.msg_id=%d\r\n", tmp->msg.msg_id);
 			USART_OUT(USART1, "p_head->msg.status=%d\r\n", tmp->msg.status);
 			USART_OUT(USART1, "p_head->msg.dup=%d\r\n", tmp->msg.dup);
+			USART_OUT(USART1, "p_head->msg.qos=%d\r\n", tmp->msg.qos);
 			USART_OUT(USART1, "p_head->next=%d\r\n", tmp->next);
 			tmp = tmp->next;
 		}

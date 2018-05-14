@@ -320,10 +320,10 @@ void USART2_IRQHandler(void)
 		}
 	}
 	
-	if(USART_GetITStatus(USART2, USART_IT_TXE) != RESET)                  
-  	{ 
-     	USART_ITConfig(USART2, USART_IT_TXE, DISABLE);					   
-  	}	
+//	if(USART_GetITStatus(USART2, USART_IT_TXE) != RESET)                  
+//  	{ 
+//     	USART_ITConfig(USART2, USART_IT_TXE, DISABLE);					   
+//  	}	
  	
 }
 
@@ -353,7 +353,7 @@ void usart2_recv_data(void)
 //			mqtt_buff_cnt = 0;
 			if(mqtt_buff.index+data_len < USART_BUFF_LENGHT)
 			{
-				memcpy(&mqtt_buff.pdata[mqtt_buff.index], p3+1, data_len);
+				memcpy(&mqtt_buff.pdata[mqtt_buff.index], p3+1, data_len);	//copyÊý¾Ý
 				mqtt_buff.index += data_len;
 			}
 			USART_OUT(USART1, "AA:");

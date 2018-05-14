@@ -200,6 +200,72 @@ uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t ti
 }
 
 
+uint8_t* gprs_send_at1(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+{
+	uint8_t res = 1;
+	uint8_t buff[512] = {0};
+	
+	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
+	while (res)
+	{	
+		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));
+		
+		usart2_rx_status = 0;
+		USART_OUT(USART2, cmd);		
+//		timer_delay_1ms(waittime);				//AT指令延时
+
+		while(waittime--)
+		{
+			timer_delay_1ms(1);
+			usart2_rx_status = 1;	//数据未处理 不在接收数据
+			USART_OUT(USART1, usart2_rx_buff.pdata);
+			if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
+			{
+				res = 0;
+				gprs_status = 0;
+			}
+			
+			if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
+			{
+				res = 0;				//监测到正确的应答数据
+				usart2_rx_status = 0;	//数据处理完 开始接收数据
+				
+				memcpy(buff, usart2_rx_buff.pdata, 512);
+				
+				memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
+				
+				return buff;
+			}
+		}
+//		usart2_rx_status = 1;	//数据未处理 不在接收数据
+//		USART_OUT(USART1, usart2_rx_buff.pdata);
+//		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
+//		{
+//			res = 0;
+//			gprs_status = 0;
+//			
+//		}
+//		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
+//		{
+//			res = 0;				//监测到正确的应答数据
+//			usart2_rx_status = 0;	//数据处理完 开始接收数据
+//			
+//			memcpy(buff, usart2_rx_buff.pdata, 512);
+//			
+//			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
+//			
+//			return buff;
+//		}
+			
+		if (timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
+		{
+			res = 0;
+			usart2_rx_status = 0;	//数据处理完 开始接收数据
+			return NULL;
+		}
+	}	
+}
+
 
 
 /*
@@ -436,7 +502,7 @@ void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connec
 				
 			case 11:
 				sprintf((char*)buff, "%s%s", "bell/", dev_config_info.dev_id);
-				mqtt_rc = mqtt_subscribe_topic(buff, 2, mqtt_publish_msgid);
+				mqtt_rc = mqtt_subscribe_topic(buff, 0, mqtt_publish_msgid);
 				if(1 == mqtt_rc)
 				{
 					gprs_status++;
