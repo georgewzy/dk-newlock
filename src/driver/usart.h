@@ -31,7 +31,8 @@
 
 typedef struct
 {
-	uint16_t index;	
+	uint16_t index;
+	uint16_t len;
 	uint8_t	 pdata[USART_BUFF_LENGHT];	
 } usart_buff_t;
 

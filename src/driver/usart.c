@@ -41,6 +41,8 @@ usart_buff_t usart1_rx_buff = SerialBuffDefault();
 usart_buff_t usart2_rx_buff = SerialBuffDefault();
 usart_buff_t usart3_rx_buff = SerialBuffDefault();
 usart_buff_t mqtt_buff = SerialBuffDefault();
+usart_buff_t at_rx_buff = SerialBuffDefault();
+
 
 //u8 usart1_buff[USART_BUFF_LENGHT] = {0};
 //u8 usart2_buff[USART_BUFF_LENGHT] = {0};
@@ -106,9 +108,6 @@ void usart_gpio_init(void)
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_USART2);
 
 }
-
-
-
 
 
 
@@ -265,8 +264,8 @@ void USART1_IRQHandler(void)
   	{ 
      	USART_ITConfig(USART1, USART_IT_TXE, DISABLE);					   
   	}		
-
 }
+
 
 void usart1_recv_data(void)
 {
@@ -308,7 +307,7 @@ void USART2_IRQHandler(void)
 //		if(usart2_rx_status == 0)
 		{
 			ch = USART_ReceiveData(USART2);	 
-			USART_SendData(USART1, ch);
+//			USART_SendData(USART1, ch);
 			if (usart2_rx_buff.index < USART_BUFF_LENGHT)
 			{			
 				usart2_rx_buff.pdata[usart2_rx_buff.index++] = ch;
@@ -320,14 +319,27 @@ void USART2_IRQHandler(void)
 		}
 	}
 	
-//	if(USART_GetITStatus(USART2, USART_IT_TXE) != RESET)                  
-//  	{ 
-//     	USART_ITConfig(USART2, USART_IT_TXE, DISABLE);					   
-//  	}	
- 	
+	if(USART_GetITStatus(USART2, USART_IT_TXE) != RESET)                  
+  	{ 
+     	USART_ITConfig(USART2, USART_IT_TXE, DISABLE);					   
+  	}	
 }
 
-  
+/*
+*********************************************************************************************************
+*                                          usart2_recv_data()
+*
+* Description : Create application kernel objects tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : AppTaskStart()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/  
 void usart2_recv_data(void)
 {		
 	char *p1 = NULL;
@@ -336,7 +348,7 @@ void usart2_recv_data(void)
 	uint8_t pick_str[50] = {0};
 	int data_len = 0,i =0;
 	
-	if(timer_is_timeout_1ms(timer_uart2, 5) == 0)	//20ms没接收到数据认为接收数据完成		
+	if(timer_is_timeout_1ms(timer_uart2, 10) == 0)	//20ms没接收到数据认为接收数据完成		
 	{
 		p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
 		if(p1 != NULL)
@@ -346,7 +358,6 @@ void usart2_recv_data(void)
 			{
 				data_len = atoi((char*)pick_str);
 			}
-			
 			p3 = strstr((const char*)usart2_rx_buff.pdata, ":");
 
 //			memset(&mqtt_buff, 0, sizeof(mqtt_buff));
@@ -354,20 +365,24 @@ void usart2_recv_data(void)
 			if(mqtt_buff.index+data_len < USART_BUFF_LENGHT)
 			{
 				memcpy(&mqtt_buff.pdata[mqtt_buff.index], p3+1, data_len);	//copy数据
+//				memcpy(&mqtt_buff.pdata+data_len, p3+1, data_len);	//copy数据
 				mqtt_buff.index += data_len;
+				mqtt_buff.len += data_len;
 			}
 			USART_OUT(USART1, "AA:");
 			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
-		}		
+		}
+		else
+		{
+			memset(&at_rx_buff, 0, sizeof(at_rx_buff));
+			memcpy(&at_rx_buff.pdata, usart2_rx_buff.pdata, usart2_rx_buff.index);	
+			at_rx_buff.index = usart2_rx_buff.index;
+			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
+		}	
 		
 		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
 	}	
 }
-
-
-
-
-
 
 
 /*

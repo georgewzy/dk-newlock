@@ -31,25 +31,37 @@
 
 
 
-extern usart_buff_t  usart1_rx_buff;
-extern usart_buff_t  usart2_rx_buff;
+extern usart_buff_t usart1_rx_buff;
+extern usart_buff_t usart2_rx_buff;
+extern usart_buff_t at_rx_buff;
 extern unsigned short mqtt_publish_msgid;
 extern uint8_t usart2_rx_status;
 
 extern DEV_CONFIG_INFO  dev_config_info;
 
-uint8_t mcu_reset_cnt = 0;
-uint8_t gprs_reset_cnt = 0;
+uint8_t mcu_reset_cnt = 0;	//系统重启计数器
+uint8_t gprs_reset_cnt = 0;	//GPRS重启计数器
 uint8_t gprs_err_cnt = 0; 	//GPRS错误计数器
 uint8_t gprs_status = 0;	//GPRS的状态
 
 
 
-uint8_t gprs_send_at_flag = 0;	
-uint8_t gprs_rx_flag = 0;
 
-
-
+/*
+*********************************************************************************************************
+*                                          gprs_gpio_init()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
 void gprs_gpio_init(void)
 {
 	GPIO_InitTypeDef gpio_init_structure;
@@ -156,7 +168,7 @@ uint8_t *gprs_check_cmd(uint8_t *src_str, uint8_t *p_str)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+uint8_t* gprs_send_at2(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
 {
 	uint8_t res = 1;
 	uint8_t buff[512] = {0};
@@ -165,7 +177,7 @@ uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t ti
 	while (res)
 	{	
 		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));
-		
+			
 		usart2_rx_status = 0;
 		USART_OUT(USART2, cmd);		
 		timer_delay_1ms(waittime);				//AT指令延时
@@ -175,16 +187,14 @@ uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t ti
 		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
 		{
 			res = 0;
-			gprs_status = 0;
-			
+			gprs_status = 0;	
 		}
 		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
 		{
 			res = 0;				//监测到正确的应答数据
 			usart2_rx_status = 0;	//数据处理完 开始接收数据
 			
-			memcpy(buff, usart2_rx_buff.pdata, 512);
-			
+			memcpy(buff, usart2_rx_buff.pdata, 512);		
 			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
 			
 			return buff;
@@ -198,70 +208,102 @@ uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t ti
 		}
 	}	
 }
-
-
-uint8_t* gprs_send_at1(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+/*
+*********************************************************************************************************
+*                                          gprs_send_at()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
 {
-	uint8_t res = 1;
+	uint8_t res = 0;
 	uint8_t buff[512] = {0};
 	
-	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
+	usart2_recv_data();
+	if(usart2_rx_buff.index == 0)	//等待缓冲区数据处理完
+	{
+		USART_OUT(USART1, "GPRS000000000\r\n");
+		res = 1;
+		timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at	
+		USART_OUT(USART2, cmd);			
+	}
+
 	while (res)
 	{	
-		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));
-		
-		usart2_rx_status = 0;
-		USART_OUT(USART2, cmd);		
-//		timer_delay_1ms(waittime);				//AT指令延时
-
-		while(waittime--)
+		memset(&at_rx_buff, 0, sizeof(at_rx_buff));
+		while(at_rx_buff.index == 0)
 		{
-			timer_delay_1ms(1);
-			usart2_rx_status = 1;	//数据未处理 不在接收数据
-			USART_OUT(USART1, usart2_rx_buff.pdata);
-			if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
+			usart2_recv_data();
+
+			if(timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
 			{
 				res = 0;
-				gprs_status = 0;
-			}
-			
-			if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
-			{
-				res = 0;				//监测到正确的应答数据
-				usart2_rx_status = 0;	//数据处理完 开始接收数据
-				
-				memcpy(buff, usart2_rx_buff.pdata, 512);
-				
-				memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
-				
-				return buff;
+				return NULL;
 			}
 		}
-//		usart2_rx_status = 1;	//数据未处理 不在接收数据
-//		USART_OUT(USART1, usart2_rx_buff.pdata);
-//		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
-//		{
-//			res = 0;
-//			gprs_status = 0;
-//			
-//		}
-//		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
-//		{
-//			res = 0;				//监测到正确的应答数据
-//			usart2_rx_status = 0;	//数据处理完 开始接收数据
-//			
-//			memcpy(buff, usart2_rx_buff.pdata, 512);
-//			
-//			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
-//			
-//			return buff;
-//		}
-			
-		if (timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
+
+		USART_OUT(USART1, at_rx_buff.pdata);
+		if(strstr((const char*)at_rx_buff.pdata, "+CME ERROR: 9"))
 		{
 			res = 0;
-			usart2_rx_status = 0;	//数据处理完 开始接收数据
-			return NULL;
+			gprs_status = 0;	
+		}
+		if (strstr((const char*)at_rx_buff.pdata, (const char*)ack))	
+		{
+			res = 0;				//监测到正确的应答数据
+			memcpy(buff, at_rx_buff.pdata, 512);						
+			return buff;
+		}
+	}	
+}
+
+
+uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+{
+	uint8_t res = 0;
+	uint8_t buff[512] = {0};
+	
+	if(usart2_rx_buff.index == 0)	//等待缓冲区数据处理完
+	{
+		USART_OUT(USART1, "GPRS_SEND\r\n");
+		res = 1;
+		timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at	
+		USART_OUT(USART2, cmd);			
+	}
+	while (res)
+	{	
+		memset(&at_rx_buff, 0, sizeof(at_rx_buff));
+		while(at_rx_buff.index == 0)
+		{
+			usart2_recv_data();
+
+			if(timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
+			{
+				res = 0;
+				return NULL;
+			}
+		}
+
+		USART_OUT(USART1, at_rx_buff.pdata);
+		if(strstr((const char*)at_rx_buff.pdata, "+CME ERROR: 9"))
+		{
+			res = 0;
+			gprs_status = 0;	
+		}
+		if (strstr((const char*)at_rx_buff.pdata, (const char*)ack))	
+		{
+			res = 0;				//监测到正确的应答数据
+			memcpy(buff, at_rx_buff.pdata, 512);						
+			return buff;
 		}
 	}	
 }
@@ -270,7 +312,7 @@ uint8_t* gprs_send_at1(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 
 /*
 *********************************************************************************************************
-*                                          gprs_init_task_fun()
+*                                          gprs_init_task()
 *
 * Description : GPRS初始化任务函数.
 *
@@ -568,12 +610,26 @@ void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connec
 	} // while end	
 }
 
-
+/*
+*********************************************************************************************************
+*                                          gprs_sleep()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
 int gprs_sleep(void)
 {
 	uint8_t *ret;
 	int rc = 0;
-	ret = gprs_send_at("AT+CSCLK=1\r\n", "OK", 100, 1000);
+	ret = gprs_send_at3("AT+CSCLK=1\r\n", "OK", 100, 1000);
 	if(ret != NULL)
 	{
 		rc = 1;
@@ -586,6 +642,21 @@ int gprs_sleep(void)
 	return rc;
 }
 
+/*
+*********************************************************************************************************
+*                                          gprs_wakeup()
+*
+* Description : Create application tasks.
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : gprs_init_task_fun()
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
 int gprs_wakeup(uint8_t mode)
 {
 	uint8_t *ret;
@@ -593,8 +664,8 @@ int gprs_wakeup(uint8_t mode)
 	if(mode == 0)
 	{
 		USART_OUT(USART2, "\r\n");	
-		timer_delay_1ms(5);
-		ret = gprs_send_at("AT+CSCLK=0\r\n", "OK", 50, 1000);
+		timer_delay_1ms(3);
+		ret = gprs_send_at2("AT+CSCLK=0\r\n", "OK", 50, 2000);
 		if(ret != NULL)
 		{
 			timer_delay_1ms(2);

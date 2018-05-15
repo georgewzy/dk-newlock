@@ -74,11 +74,11 @@ uint8_t *p2;
 
 
 
-uint8_t protocol_buff[512] = {0};
+uint8_t protocol_buff[512] = {0};		
 
 
 
-uint8_t mqtt_keep_alive_flag = 0;
+uint8_t mqtt_keep_alive_resend_flag = 0;		//MQTT 保持在线
 uint8_t mqtt_keep_alive_err_cnt = 0;
 
 
@@ -189,7 +189,7 @@ int main(void)
 		lock_open_deal_1(&list_send);	//开锁处理
 		lock_close_deal_1(&list_send);	//关锁处理	
 		dev_to_srv_batt_voltage(&list_send, BATT_VOLTAGE);	//电池电压信息
-		heartbeat1(HEARTBEAT);	//心跳
+		heartbeat_qos0(HEARTBEAT);	//心跳
 		
 		
 		lock_hand_close();	//手动关锁

@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+".\out\main.o"
+".\out\config.o"
+".\out\printf.o"
+".\out\usart1.o"
+".\out\usart4.o"
+".\out\gu906.o"
+".\out\sys.o"
+".\out\delay.o"
+".\out\stm32f10x_gpio.o"
+".\out\stm32f10x_usart.o"
+".\out\stm32f10x_rcc.o"
+".\out\misc.o"
+".\out\stm32f10x_adc.o"
+".\out\stm32f10x_bkp.o"
+".\out\stm32f10x_flash.o"
+".\out\stm32f10x_fsmc.o"
+".\out\stm32f10x_pwr.o"
+".\out\stm32f10x_rtc.o"
+".\out\stm32f10x_tim.o"
+".\out\core_cm3.o"
+".\out\startup_stm32f10x_hd.o"
+".\out\system_stm32f10x.o"
+--library_type=microlib --strict --scatter ".\Out\gprs.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\List\gprs.map" -o .\Out\gprs.axf
