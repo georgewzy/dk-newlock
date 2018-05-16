@@ -50,3 +50,4 @@
 .\objects\gprs.o: ..\driver\timer.h
 .\objects\gprs.o: ..\app\main.h
 .\objects\gprs.o: ..\system\list.h
+.\objects\gprs.o: ..\app\protocol.h

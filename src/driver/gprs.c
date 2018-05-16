@@ -28,6 +28,7 @@
 #include "transport.h"
 #include "main.h"
 #include "list.h"
+#include "protocol.h"
 
 
 
@@ -35,7 +36,7 @@ extern usart_buff_t usart1_rx_buff;
 extern usart_buff_t usart2_rx_buff;
 extern usart_buff_t at_rx_buff;
 extern unsigned short mqtt_publish_msgid;
-extern uint8_t usart2_rx_status;
+extern uint8_t usart2_rx_status;	//usart2接收状态
 
 extern DEV_CONFIG_INFO  dev_config_info;
 
@@ -85,7 +86,7 @@ void gprs_gpio_init(void)
 	gpio_init_structure.GPIO_Mode = GPIO_Mode_OUT; 
 //	gpio_init_structure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   	GPIO_Init(GPIOA, &gpio_init_structure);
-	
+	GPIO_SetBits(GPIOA, GPIO_Pin_11);
 }
 
 
@@ -168,22 +169,104 @@ uint8_t *gprs_check_cmd(uint8_t *src_str, uint8_t *p_str)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-uint8_t* gprs_send_at2(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+uint8_t* gprs_sned_at1(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
 {
 	uint8_t res = 1;
 	uint8_t buff[512] = {0};
 	
 	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
 	while (res)
-	{	
-		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));
+	{		
+		if(usart2_rx_buff.index == 0)
+		{
+			USART_OUT(USART2, cmd);		
+			timer_delay_1ms(waittime);				//AT指令延时
+		}
+		else
+		{
+			usart2_recv_data();
+		}
+
+		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
+		{
+			res = 0;
+			gprs_status = 0;	
+		}
+		
+		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
+		{
+			res = 0;				//监测到正确的应答数据
+			usart2_rx_status = 0;	//数据处理完 开始接收数据
 			
-		usart2_rx_status = 0;
+			memcpy(buff, usart2_rx_buff.pdata, 512);		
+			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
+			
+			return buff;
+		}
+			
+		if (timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
+		{
+			res = 0;
+			usart2_rx_status = 0;	//数据处理完 开始接收数据
+			return NULL;
+		}
+	}	
+}
+
+uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+{
+	uint8_t res = 1;
+	uint8_t buff[512] = {0};
+	
+	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
+	while (res)
+	{		
+		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));
+
+		if(usart2_rx_buff.index == 0)
+		{
+			
+		}
 		USART_OUT(USART2, cmd);		
 		timer_delay_1ms(waittime);				//AT指令延时
+		usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
+		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
+		{
+			res = 0;
+			gprs_status = 0;	
+		}
+		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
+		{
+			res = 0;				//监测到正确的应答数据				
+			memcpy(buff, usart2_rx_buff.pdata, 512);		
+			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
+			
+			return buff;
+		}
+			
+		if (timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
+		{
+			res = 0;
+			usart2_rx_status = 0;	//数据处理完 开始接收数据
+			return NULL;
+		}
+	}	
+}
+
+uint8_t* gprs_wakeup_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+{
+	uint8_t res = 1;
+	uint8_t buff[512] = {0};
 	
-		usart2_rx_status = 1;	//数据未处理 不在接收数据
-		USART_OUT(USART1, usart2_rx_buff.pdata);
+	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
+	while (res)
+	{		
+		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));
+
+		
+		USART_OUT(USART2, cmd);		
+		timer_delay_1ms(waittime);				//AT指令延时
+
 		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
 		{
 			res = 0;
@@ -223,62 +306,24 @@ uint8_t* gprs_send_at2(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 * Note(s)     : none.
 *********************************************************************************************************
 */
-uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
-{
-	uint8_t res = 0;
-	uint8_t buff[512] = {0};
-	
-	usart2_recv_data();
-	if(usart2_rx_buff.index == 0)	//等待缓冲区数据处理完
-	{
-		USART_OUT(USART1, "GPRS000000000\r\n");
-		res = 1;
-		timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at	
-		USART_OUT(USART2, cmd);			
-	}
-
-	while (res)
-	{	
-		memset(&at_rx_buff, 0, sizeof(at_rx_buff));
-		while(at_rx_buff.index == 0)
-		{
-			usart2_recv_data();
-
-			if(timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
-			{
-				res = 0;
-				return NULL;
-			}
-		}
-
-		USART_OUT(USART1, at_rx_buff.pdata);
-		if(strstr((const char*)at_rx_buff.pdata, "+CME ERROR: 9"))
-		{
-			res = 0;
-			gprs_status = 0;	
-		}
-		if (strstr((const char*)at_rx_buff.pdata, (const char*)ack))	
-		{
-			res = 0;				//监测到正确的应答数据
-			memcpy(buff, at_rx_buff.pdata, 512);						
-			return buff;
-		}
-	}	
-}
-
-
 uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
 {
 	uint8_t res = 0;
 	uint8_t buff[512] = {0};
 	
-	if(usart2_rx_buff.index == 0)	//等待缓冲区数据处理完
+	while(1)
 	{
-		USART_OUT(USART1, "GPRS_SEND\r\n");
-		res = 1;
-		timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at	
-		USART_OUT(USART2, cmd);			
+		usart2_recv_data();
+		if(usart2_rx_buff.index == 0)	//等待缓冲区数据处理完
+		{
+			USART_OUT(USART1, "GPRS000000000\r\n");
+			res = 1;
+			timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at	
+			USART_OUT(USART2, cmd);	
+			break;
+		}
 	}
+	
 	while (res)
 	{	
 		memset(&at_rx_buff, 0, sizeof(at_rx_buff));
@@ -293,7 +338,6 @@ uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 			}
 		}
 
-		USART_OUT(USART1, at_rx_buff.pdata);
 		if(strstr((const char*)at_rx_buff.pdata, "+CME ERROR: 9"))
 		{
 			res = 0;
@@ -307,6 +351,7 @@ uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 		}
 	}	
 }
+
 
 
 
@@ -443,18 +488,18 @@ void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connec
 				{
 					if((strstr((const char*)ret, (const char*)"+CREG: 0,1") != NULL) 
 						|| (strstr((const char*)ret, (const char*)"+CREG: 0,5") != NULL))
+					{
+						gprs_status++;
+						gprs_err_cnt = 0;
+					}
+					else
+					{
+						gprs_err_cnt++;
+						if (gprs_err_cnt > 500)
 						{
-							gprs_status++;
-							gprs_err_cnt = 0;
+							gprs_status = 0;
 						}
-						else
-						{
-							gprs_err_cnt++;
-							if (gprs_err_cnt > 120)
-							{
-								gprs_status = 0;
-							}
-						}
+					}
 				}
 				else
 				{
@@ -582,7 +627,8 @@ void gprs_init_task(list_node ** list, GPRS_CONFIG *gprs_info, MQTTPacket_connec
 			break;
 				
 			case 13:
-				dev_first_power_on(list);
+//				dev_first_power_on(list);
+				dev_to_srv_lock_status(list);
 				gprs_status = 255;
 			break;
 			
@@ -629,9 +675,11 @@ int gprs_sleep(void)
 {
 	uint8_t *ret;
 	int rc = 0;
-	ret = gprs_send_at3("AT+CSCLK=1\r\n", "OK", 100, 1000);
+	ret = gprs_send_at("AT+CSCLK=1\r\n", "OK", 100, 1000);
 	if(ret != NULL)
 	{
+		//DTR
+		GPIO_SetBits(GPIOA, GPIO_Pin_11);
 		rc = 1;
 	}
 	else
@@ -664,11 +712,12 @@ int gprs_wakeup(uint8_t mode)
 	if(mode == 0)
 	{
 		USART_OUT(USART2, "\r\n");	
-		timer_delay_1ms(3);
-		ret = gprs_send_at2("AT+CSCLK=0\r\n", "OK", 50, 2000);
+		timer_delay_1ms(1);
+		ret = gprs_wakeup_at("AT+CSCLK=0\r\n", "OK", 50, 2000);
 		if(ret != NULL)
 		{
-			timer_delay_1ms(2);
+			GPIO_ResetBits(GPIOA, GPIO_Pin_11);
+			timer_delay_1ms(10);
 			rc = 1;
 		}
 		else
@@ -680,6 +729,7 @@ int gprs_wakeup(uint8_t mode)
 	{
 		//DTR
 		GPIO_ResetBits(GPIOA, GPIO_Pin_11);
+		timer_delay_1ms(500);
 		rc = 1;
 	}
 	
@@ -687,7 +737,17 @@ int gprs_wakeup(uint8_t mode)
 }
 
 
+int gprs_wakeup_dtr(void)
+{
+	int rc = 0;
 
+	//DTR
+	GPIO_ResetBits(GPIOA, GPIO_Pin_11);
+	timer_delay_1ms(10);
+	rc = 1;
+
+	return rc;
+}
 
 
 

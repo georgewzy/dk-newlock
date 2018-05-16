@@ -31,6 +31,7 @@ typedef struct
 
 void protocol_analyze1(list_node **list);
 void dev_to_srv_batt_voltage(list_node **list, uint32_t ms);
+void dev_to_srv_lock_status(list_node **list);
 void dev_first_power_on(list_node **list);
 void heartbeat(list_node **list, uint32_t ms);
 void heartbeat_qos0(uint32_t ms);

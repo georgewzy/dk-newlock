@@ -312,10 +312,10 @@ void USART2_IRQHandler(void)
 			{			
 				usart2_rx_buff.pdata[usart2_rx_buff.index++] = ch;
 			}
-//			else
-//			{
-//				memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
-//			}
+			else
+			{
+				memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
+			}
 		}
 	}
 	
@@ -350,36 +350,36 @@ void usart2_recv_data(void)
 	
 	if(timer_is_timeout_1ms(timer_uart2, 10) == 0)	//20ms没接收到数据认为接收数据完成		
 	{
-		p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
-		if(p1 != NULL)
+		if(usart2_rx_buff.index > 0)
 		{
-			p2 = str_picked(p1, ",", ":", (char*)pick_str);	//取出数据长度
-			if(p2 != NULL)
+			p1 = strstr((const char*)usart2_rx_buff.pdata, "+IPD");
+			if(p1 != NULL)
 			{
-				data_len = atoi((char*)pick_str);
-			}
-			p3 = strstr((const char*)usart2_rx_buff.pdata, ":");
+				p2 = str_picked(p1, ",", ":", (char*)pick_str);	//取出数据长度
+				if(p2 != NULL)
+				{
+					data_len = atoi((char*)pick_str);
+				}
+				p3 = strstr((const char*)usart2_rx_buff.pdata, ":");
 
-//			memset(&mqtt_buff, 0, sizeof(mqtt_buff));
-//			mqtt_buff_cnt = 0;
-			if(mqtt_buff.index+data_len < USART_BUFF_LENGHT)
-			{
-				memcpy(&mqtt_buff.pdata[mqtt_buff.index], p3+1, data_len);	//copy数据
-//				memcpy(&mqtt_buff.pdata+data_len, p3+1, data_len);	//copy数据
-				mqtt_buff.index += data_len;
-				mqtt_buff.len += data_len;
+				if(mqtt_buff.index+data_len < USART_BUFF_LENGHT)
+				{
+					memcpy(&mqtt_buff.pdata[mqtt_buff.index], p3+1, data_len);	//copy数据
+					mqtt_buff.index += data_len;
+					mqtt_buff.len += data_len;
+				}
+				USART_OUT(USART1, "AA:");
+				usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
 			}
-			USART_OUT(USART1, "AA:");
-			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
+//			else
+//			{
+//				memset(&at_rx_buff, 0, sizeof(at_rx_buff));
+//				memcpy(&at_rx_buff.pdata, usart2_rx_buff.pdata, usart2_rx_buff.index);	
+//				at_rx_buff.index = usart2_rx_buff.index;
+//				USART_OUT(USART1, "CC:");
+//				usart_send_data(USART1, at_rx_buff.pdata, at_rx_buff.index);
+//			}	
 		}
-		else
-		{
-			memset(&at_rx_buff, 0, sizeof(at_rx_buff));
-			memcpy(&at_rx_buff.pdata, usart2_rx_buff.pdata, usart2_rx_buff.index);	
-			at_rx_buff.index = usart2_rx_buff.index;
-			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
-		}	
-		
 		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//清理缓冲区
 	}	
 }

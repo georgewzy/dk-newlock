@@ -17,7 +17,6 @@
 
 
 
-//extern uint8_t lock_id[17];
 extern uint8_t receiveText[24];
 extern uint8_t expressText[128];  
 extern uint8_t cipherText[128];
@@ -163,8 +162,7 @@ void protocol_analyze1(list_node **list)
 					if(*expressText == 0x31)
 					{
 		//				timer_is_timeout_1ms(timer_open_lock, 0);
-						
-						
+												
 						lock_shake_flag = 1;
 						lock_status = 1;
 						lock_open_time_flag = 0;
@@ -272,6 +270,57 @@ void dev_first_power_on(list_node **list)
 	}	
 }
 
+
+
+
+void dev_to_srv_lock_status(list_node **list)
+{
+	int mqtt_pub = 0;
+	uint8_t heartbeat_buff[2] = {0};
+	uint8_t topic_buff[100] = {0};
+	
+	memset(topic_buff, 0, 100);
+	memset(expressText, 0, 128);
+	memset(cipherText, 0, 128);
+	
+	if(button_scan(LOCK_ON) == 0)	//¿ªËø×´Ì¬
+	{	
+		sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
+		sprintf(expressText,"{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"1",'"',"ok",'"',"0");
+		AES_Encrypt((char*)expressText, cipherText, aesKey);
+		
+		mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
+		if(mqtt_pub == 1)
+		{
+			USART_OUT(USART1, "dev_power_on_lock_status1 ok\r\n");
+		}
+		else
+		{
+			USART_OUT(USART1, "dev_power_on_lock_status1 error\r\n");
+		}
+	}
+	else	//¹ØËø×´Ì¬
+	{
+		sprintf((char*)topic_buff, "%s%s", "lockback/", (char*)dev_config_info.dev_id);
+		sprintf((char*)expressText, "{%c%s%c:%s,%c%s%c:%s}",'"',"cmd",'"',"2",'"',"ok",'"',"1");
+		AES_Encrypt((char*)expressText, (char*)cipherText, (char*)aesKey);
+	
+		mqtt_pub = mqtt_publish_qos2(list, topic_buff, cipherText, 44, 2, mqtt_publish_msgid);
+		if(mqtt_pub == 1)
+		{
+			USART_OUT(USART1, "dev_power_on_lock_status2 ok\r\n");
+		}
+		else
+		{
+			USART_OUT(USART1, "dev_power_on_lock_status2 error\r\n");
+		}
+	}
+	
+	
+}
+
+
+/*
 void heartbeat(list_node **list, uint32_t ms)
 {
 	int mqtt_pub = 0;
@@ -297,6 +346,8 @@ void heartbeat(list_node **list, uint32_t ms)
 		}
 	}
 }
+*/
+
 
 
 void heartbeat_qos0(uint32_t ms)
