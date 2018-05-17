@@ -307,7 +307,7 @@ uint8_t* gprs_send_at2(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
 	while (res)
 	{		
-		if(usart2_rx_buff.index == 0)	//等待数据接收完
+		if(usart2_rx_buff.index == 0)	//等待数据接收完 步骤2
 		{
 			usart2_rx_finish_flag = 1;
 			USART_OUT(USART2, cmd);		
@@ -318,8 +318,7 @@ uint8_t* gprs_send_at2(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 		{
 			if(usart2_rx_buff.index > 0)
 			{
-				usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
-				
+				usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);	
 				if (timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
 				{
 					res = 0;
@@ -328,7 +327,8 @@ uint8_t* gprs_send_at2(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 				}
 			}
 		}
-		if(usart2_rx_finish_flag == 0)	//接收数据
+		
+		if(usart2_rx_finish_flag == 0)	//接收数据步骤1
 		{
 			usart2_recv_data();
 		}
@@ -404,6 +404,7 @@ uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 			res = 0;
 			gprs_status = 0;	
 		}
+		
 		if (strstr((const char*)at_rx_buff.pdata, (const char*)ack))	
 		{
 			res = 0;				//监测到正确的应答数据
