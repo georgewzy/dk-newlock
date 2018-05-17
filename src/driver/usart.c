@@ -371,14 +371,14 @@ void usart2_recv_data(void)
 				USART_OUT(USART1, "AA:");
 				usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
 			}
-//			else
-//			{
-//				memset(&at_rx_buff, 0, sizeof(at_rx_buff));
-//				memcpy(&at_rx_buff.pdata, usart2_rx_buff.pdata, usart2_rx_buff.index);	
-//				at_rx_buff.index = usart2_rx_buff.index;
-//				USART_OUT(USART1, "CC:");
-//				usart_send_data(USART1, at_rx_buff.pdata, at_rx_buff.index);
-//			}	
+			else
+			{
+				memset(&at_rx_buff, 0, sizeof(at_rx_buff));
+				memcpy(&at_rx_buff.pdata, usart2_rx_buff.pdata, usart2_rx_buff.index);	
+				at_rx_buff.index = usart2_rx_buff.index;
+				USART_OUT(USART1, "CC:");
+				usart_send_data(USART1, at_rx_buff.pdata, at_rx_buff.index);
+			}	
 		}
 		memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	//«Â¿Ìª∫≥Â«¯
 	}	

@@ -169,28 +169,34 @@ uint8_t *gprs_check_cmd(uint8_t *src_str, uint8_t *p_str)
 * Note(s)     : none.
 *********************************************************************************************************
 */
-uint8_t* gprs_sned_at1(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
 {
 	uint8_t res = 1;
 	uint8_t buff[512] = {0};
+	uint8_t usart2_rx_finish_flag = 0;
 	
 	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
 	while (res)
 	{		
-		if(usart2_rx_buff.index == 0)
+		if(usart2_rx_buff.index == 0)	//等待数据接收完
 		{
+			usart2_rx_finish_flag = 1;
 			USART_OUT(USART2, cmd);		
 			timer_delay_1ms(waittime);				//AT指令延时
+			usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
 		}
-		else
+		
+		if(usart2_rx_finish_flag == 0)	//接收数据
 		{
 			usart2_recv_data();
+			USART_OUT(USART1, "dddd\r\n");
 		}
-
+			
 		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
 		{
 			res = 0;
-			gprs_status = 0;	
+			gprs_status = 0;
+			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
 		}
 		
 		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
@@ -203,17 +209,17 @@ uint8_t* gprs_sned_at1(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 			
 			return buff;
 		}
-			
+		
 		if (timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
 		{
 			res = 0;
-			usart2_rx_status = 0;	//数据处理完 开始接收数据
+			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
 			return NULL;
 		}
 	}	
 }
 
-uint8_t* gprs_send_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+uint8_t* gprs_send_at1(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
 {
 	uint8_t res = 1;
 	uint8_t buff[512] = {0};
@@ -291,6 +297,60 @@ uint8_t* gprs_wakeup_at(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t 
 		}
 	}	
 }
+
+uint8_t* gprs_send_at2(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t timeout)
+{
+	uint8_t res = 1;
+	uint8_t buff[512] = {0};
+	uint8_t usart2_rx_finish_flag = 0;
+	
+	timer_is_timeout_1ms(timer_at, 0);	//开始定时器timer_at
+	while (res)
+	{		
+		if(usart2_rx_buff.index == 0)	//等待数据接收完
+		{
+			usart2_rx_finish_flag = 1;
+			USART_OUT(USART2, cmd);		
+			USART_OUT(USART1, "yyyyyyyyyy\r\n");
+		}
+		
+		if(usart2_rx_finish_flag == 1)
+		{
+			if(usart2_rx_buff.index > 0)
+			{
+				usart_send_data(USART1, usart2_rx_buff.pdata, usart2_rx_buff.index);
+				
+				if (timer_is_timeout_1ms(timer_at, timeout) == 0)	//定时器timer_at结束
+				{
+					res = 0;
+					memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
+					return NULL;
+				}
+			}
+		}
+		if(usart2_rx_finish_flag == 0)	//接收数据
+		{
+			usart2_recv_data();
+		}
+			
+		if(strstr((const char*)usart2_rx_buff.pdata, "+CME ERROR: 9"))
+		{
+			res = 0;
+			gprs_status = 0;
+			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
+		}
+		
+		if (strstr((const char*)usart2_rx_buff.pdata, (const char*)ack))	
+		{
+			res = 0;				//监测到正确的应答数据
+			usart2_rx_status = 0;	//数据处理完 开始接收数据			
+			memcpy(buff, usart2_rx_buff.pdata, 512);		
+			memset(&usart2_rx_buff, 0, sizeof(usart2_rx_buff));	
+	
+			return buff;
+		}
+	}	
+}
 /*
 *********************************************************************************************************
 *                                          gprs_send_at()
@@ -310,6 +370,7 @@ uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 {
 	uint8_t res = 0;
 	uint8_t buff[512] = {0};
+	uint8_t usart2_rx_finish_flag = 0;
 	
 	while(1)
 	{
@@ -337,7 +398,7 @@ uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 				return NULL;
 			}
 		}
-
+		
 		if(strstr((const char*)at_rx_buff.pdata, "+CME ERROR: 9"))
 		{
 			res = 0;
@@ -351,7 +412,6 @@ uint8_t* gprs_send_at3(uint8_t *cmd, uint8_t *ack, uint16_t waittime, uint16_t t
 		}
 	}	
 }
-
 
 
 
